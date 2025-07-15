@@ -231,7 +231,7 @@
       }
     ]
   },
-  {
+ {
     "id": "buy-item",
     "fields": [
       {
@@ -243,9 +243,30 @@
       },
       {
         "component": "reference",
-        "name": "youtubeVideoThumbnailDamPath",
+        "valueType": "string",
+        "name": "cols1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cols1_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "cols1_Bordertext",
         "value": "",
-        "label": "youtubeVideoThumbnailDamPath",
+        "label": "Boder Text",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "cols2_richtext",
+        "value": "",
+        "label": "Text",
         "valueType": "string"
       }
     ]
@@ -292,6 +313,85 @@
   },
   {
     "id": "carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "content_head",
+        "value": "",
+        "label": "head",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "content_headType",
+        "label": "head",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "content_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_one",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_oneAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_two",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_twoAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-carousel-item",
     "fields": [
       {
         "component": "text",
@@ -521,6 +621,65 @@
             "name": "link",
             "label": "Enter Modal path"
         }
+    ]
+  },
+   {
+    "id": "compare-item1",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "img1_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "img1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "img1_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "col2_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_imageAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+   {
+    "id": "compare-item2",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
     ]
   }
 ]
