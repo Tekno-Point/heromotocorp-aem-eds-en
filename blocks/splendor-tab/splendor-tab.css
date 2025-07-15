@@ -1,0 +1,188 @@
+@import url("../tab/tab.css");
+
+.splendor-tab {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+.tabs-list > .tabs-tab {
+    background-color: #fef8f2;
+    transform: skewX(-16deg);
+    width: 8.125rem;
+    height: 6.625rem;
+    z-index: 2;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: 900;
+}
+
+.tabs-list > .tabs-tab:hover {
+    /* background: red; */
+    background-image: linear-gradient(
+        160.69deg,
+        #b50000 22.35%,
+        #ff0000 68.47%,
+        #b50000 114.59%
+    );
+    color: white;
+    cursor: pointer;
+}
+.tabs-list > .tabs-tab > ul {
+    padding: 0px;
+    list-style: none;
+    width: 100px;
+}
+
+.tabs-list > .tabs-tab > ul > li > ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.tabs-tab > ul > li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.splendor-tab {
+    position: relative;
+}
+
+.tabs-list {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: -50px;
+    left: 165px;
+}
+
+.tabs-panel {
+    /* max-width: 1560px;
+    width: 100%; */
+
+    margin-top: 70px; /* its for check   */
+    background-color: #ededed;
+    padding: 100px 40px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tabs-panel > .tab-slide {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+    background-image: url("/icons/background-image.png");
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+.tab-slide > ul {
+    padding: 0px;
+    max-width: 635px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    list-style: none;
+}
+
+.tab-slide > ul > li {
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.tab-slide > ul > li:last-child {
+    position: absolute;
+    top: 87px;
+    right: -22px;
+}
+
+.tab-slide > ul > li > p {
+    font-weight: 900;
+}
+.tab-slide > ul > li > ul {
+    padding: 0px;
+    list-style: none;
+}
+.tab-slide > ul > li > ul > li {
+    font-family: "TSTAR-PRO-Medium";
+}
+
+.tab-slide > p > picture > img {
+    max-width: 300px;
+    width: 100%;
+}
+
+.section.splendor-tab-container {
+    margin-top: 80px;
+}
+
+.section.splendor-tab-container > .default-content-wrapper > h2 {
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    padding-bottom: 2rem;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .tabs-list > .tabs-tab {
+        max-width: 8.125rem;
+        width: 100%;
+        height: 6.625rem;
+    }
+    .tabs-list {
+        max-width: 1200px;
+        width: 100%;
+        overflow: scroll;
+        left: 0px;
+    }
+
+    .tab-slide > ul > li:last-child {
+        position: static;
+    }
+    .tab-slide > ul > li:last-child > p {
+        width: 220px;
+    }
+    .tabs-panel > .tab-slide {
+        background-image: none;
+    }
+    .tabs-panel > .tab-slide {
+        justify-content: center;
+    }
+
+    .tabs-list > .tabs-tab > ul > li > ul {
+        font-size: 18px;
+    }
+    .tab-slide > ul > li > p {
+        font-size: 18px;
+    }
+    .tab-slide > ul > li > ul > li {
+        font-size: 18px;
+    }
+    .section.splendor-tab-container > .default-content-wrapper > h2 {
+        font-size: 1.75rem;
+    }
+
+    .tab-slide > ul {
+        max-width: 683px;
+        width: 100%;
+    }
+
+    .tab-slide > ul > li {
+        max-width: 123px;
+        width: 100%;
+    }
+
+    .tabs-panel{
+padding: 100px 10px;
+    }
+}

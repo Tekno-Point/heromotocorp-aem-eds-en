@@ -136,6 +136,22 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Book Ride",
+            "value": "book-ride"
+          },
+          {
+            "name": "hero-footer",
+            "value": "hero-footer"
+          },
+          {
+            "name": "hero-footer-icon",
+            "value": "hero-footer-icon"
+          },
+          {
+            "name": "hero-footer-policy",
+            "value": "hero-footer-policy"
           }
         ]
       }
@@ -213,6 +229,298 @@
         "label": "Text",
         "valueType": "string"
       }
+    ]
+  },
+  {
+    "id": "buy-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "cols1_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "youtubeVideoThumbnailDamPath",
+        "value": "",
+        "label": "youtubeVideoThumbnailDamPath",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "why-choose-us",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Multi Select",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h3",
+            "value": "h4"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "embed",
+    "fields": [
+      {
+        "component": "text",
+        "name": "link",
+        "value": "",
+        "label": "Link",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "youtubeVideoThumbnailDamPath",
+        "value": "",
+        "label": "youtubeVideoThumbnailDamPath",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "content_head",
+        "value": "",
+        "label": "head",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "content_headType",
+        "label": "head",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "content_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_one",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_oneAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_two",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_twoAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "block-card-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "price-listing",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "api url",
+        "label": "url",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "form",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "form-url",
+        "label": "form path",
+        "value":""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "api-url",
+        "label": "api-url",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "price-listing",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id":"ride-thankyou-content",
+    "fields":[
+        {
+            "component": "reference",
+            "valueType": "string",
+            "name": "col1_loader",
+            "label": "Image",
+            "multi": false
+        },
+        {
+            "component": "text",
+            "valueType": "string",
+            "name": "col1_loaderAlt",
+            "label": "Alt",
+            "value": ""
+        },
+        {
+            "component": "reference",
+            "valueType": "string",
+            "name": "col2_thankyou",
+            "label": "Image",
+            "multi": false
+        },
+        {
+            "component": "text",
+            "valueType": "string",
+            "name": "col2_thankyouAlt",
+            "label": "Alt",
+            "value": ""
+        },
+        {
+            "component": "richtext",
+            "name": "col2_title",
+            "value": "",
+            "label": "Thank You Content",
+            "valueType": "string"
+        }
+    ]
+  },
+  {
+    "id": "thankyou-popup-item",
+    "fields":[
+        {
+            "component": "reference",
+            "valueType": "string",
+            "name": "image",
+            "label": "Image",
+            "multi": false
+        },
+        {
+            "component": "text",
+            "valueType": "string",
+            "name": "imageAlt",
+            "label": "Alt",
+            "value": ""
+        },
+        {
+            "component": "aem-content",
+            "name": "link",
+            "label": "Enter Modal path"
+        }
     ]
   }
 ]

@@ -1,0 +1,332 @@
+@import url("../swiper/swiper.css");
+
+.carousel {
+    max-width: 1440px;
+    width: 100%;
+    overflow: hidden;
+    background: #fff;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+.carousel > .swiper-wrapper {
+    max-width: 1265px;
+    width: 100%;
+    margin-top: 124px;
+    /* padding: 48px; */
+}
+.carousel > .swiper-slide {
+    max-width: 1265px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel > .swiper-wrapper > .swiper-slide > .inner-innerSub-1 {
+    max-width: 461px;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel > .swiper-wrapper > .swiper-slide > .inner-innerSub-1 > h3 {
+    width: 64%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #a5a5a5;
+}
+
+.carousel > .swiper-wrapper > .swiper-slide > .inner-innerSub-2 {
+    display: flex;
+}
+
+.carousel > .swiper-wrapper > .swiper-slide > .inner-innerSub-2>p:nth-child(2) {
+   opacity: 0.4;
+}
+.carousel
+    > .swiper-wrapper
+    > .swiper-slide
+    > .inner-innerSub-2
+    > p
+    > picture
+    > img {
+    max-width: 365px;
+    width: 100%;
+}
+
+.carousel > .btnWrapper {
+    max-width: 1265px;
+    width: 100%;
+    position: absolute;
+    top: 40px;
+}
+
+.swiper-button-prev::after {
+    font-size: 18px;
+}
+.swiper-button-next::after {
+    font-size: 18px;
+}
+
+.swiper-pagination-bullets {
+    max-width: 1265px;
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    position: relative;
+}
+
+.default-content-wrapper {
+    text-align: center;
+}
+
+/* ==== */
+.carousel .swiper {
+    width: 100%;
+    position: relative;
+}
+
+.swiper-wrapper {
+    display: flex;
+}
+
+.carousel>.swiper-wrapper>.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-button-prev {
+    left: 10px;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+.swiper-pagination-bullet {
+    margin: 4 4px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+/* 2 */
+
+.carousel.block {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.carousel.swiper {
+    position: relative;
+}
+
+.carousel>.swiper-wrapper {
+    display: flex;
+}
+
+.carousel>.swiper-wrapper>.swiper-slide {
+    max-width: 1300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    /* align-items: center; */
+    align-items: flex-start;
+}
+
+.feature-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.feature-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.feature-img img {
+    width: 100%;
+    max-width: 400px;
+}
+
+h3.swiper-pagination-bullet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0px;
+    color: #303030;
+    font-size: 21px;
+    padding-left: 38px;
+    border-left: 2px solid black;
+    background-color: white;
+    opacity: 0.9;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "TSTAR-PRO-Regular";
+    text-wrap: nowrap;
+}
+
+.swiper-pagination-bullet img {
+    width: 30px;
+    height: 30px;
+}
+
+.swiper-pagination-bullet.swiper-pagination-bullet-active {
+    opacity: 1;
+    color: #ed1c24;
+    font-family: "TSTAR-PRO-Bold";
+    font-weight: 900;
+}
+
+.swiper-pagination-bullet span {
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    background: #ed1c24;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    transform: translateY(-150%);
+    z-index: 13;
+}
+
+.swiper-button-prev {
+    left: 10px;
+    top: 67px;
+}
+
+.swiper-button-next {
+    right: 10px;
+    top: 67px;
+}
+
+.btnWrapper > .swiper-pagination {
+    max-width: 1087px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    gap: 60px;
+    justify-content: flex-start;
+    margin-left: 53px;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 2px;
+}
+
+.inner-innerSub-1 > h2 {
+    font-family: "TSTAR-PRO-Regular";
+    padding-bottom: 20px;
+    border-bottom: 1px solid #a5a5a5;
+}
+
+.swiper-pagination > h3 {
+    width: max-content;
+    padding: 7px;
+    padding-left: 31px;
+}
+
+#xsens-fi-technology {
+    max-width: 100%;
+    width: max-content !important;
+}
+
+.inner-innerSub-1 > h2 > .icon > img {
+    transform: rotate(17deg) scale(1.2);
+    transition: transform 0.3s ease;
+    width: 66%;
+}
+
+.swiper-button-prev.disabled,
+.swiper-button-next.disabled {
+    /* opacity: 0.4; */
+    background: none;
+    color: rgb(117, 115, 115);
+    pointer-events: none;
+    cursor: default;
+}
+
+.carousel-container > .default-content-wrapper > h2 {
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+.carousel-container {
+    margin-top: 64px;
+}
+
+@media (max-width: 600px) {
+    .swiper-slide {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .swiper-wrapper {
+        padding: 0px;
+    }
+
+    .btnWrapper > .swiper-pagination {
+        gap: 0px;
+        width: 80%;
+    }
+
+    .swiper-slide {
+        flex-direction: column;
+    }
+
+    .inner-innerSub-2 > p > picture > img {
+        max-width: 200px;
+        width: 100%;
+        min-height: 200px;
+        object-fit: contain;
+    }
+
+    .inner-innerSub-1 > h2 {
+        font-size: 24px;
+    }
+    /* .btnWrapper >.swiper-pagination {
+        width: 80%;
+    } */
+
+    .swiper-button-prev {
+        left: 0px;
+    }
+
+    .swiper-button-next {
+        right: 0px;
+    }
+
+    .carousel > .swiper-wrapper {
+        margin-top: 69px;
+    }
+
+    .carousel-container > .default-content-wrapper > h2 {
+        font-size: 1.75rem;
+    }
+}

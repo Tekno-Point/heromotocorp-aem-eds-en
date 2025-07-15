@@ -1,0 +1,161 @@
+@font-face {
+    font-family: "TSTAR-PRO-Normal";
+    src: url("/fonts/TSTAR-PRO-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TSTAR-PRO-Medium";
+    src: url("/fonts/TSTAR-PRO-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TSTAR-PRO-Bold";
+    src: url("/fonts/TSTAR-PRO-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TSTAR-PRO-Heavy";
+    src: url("/fonts/TSTAR-PRO-Heavy.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+
+.compare-container {
+    /* check this */
+    background-color: #ededed;
+    padding: 40px 20px;
+    margin: 0px auto;
+}
+.compare {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ededed;
+    /* padding: 40px 20px; */
+    position: relative;
+}
+
+.compare-child-1 {
+    display: flex;
+    justify-content: center;
+}
+.compare-child-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.compare-child-1-inner-1 > h3 {
+    color: #ee2326;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+}
+.compare-child-1-inner-1 > p {
+    position: absolute;
+    left: 0px;
+    top: 11%;
+}
+.compare-child-1-inner-2 > p {
+    position: absolute;
+    right: 26px;
+    top: 11%;
+}
+.compare-child-1 {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.compare-child-2 {
+    max-width: 500px;
+    width: 100%;
+}
+.compare-child-2-inner-1 > ul {
+    padding: 0px;
+    list-style: none;
+}
+.compare-child-1-inner-2 > h3 {
+    color: #009fda;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+}
+
+.compare-child-2-inner-1 > ul > li > ul {
+    display: flex;
+    gap: 40px;
+    padding: 0px;
+    list-style: none;
+}
+
+.compare-child-2-inner-1 > ul > li > ul > li {
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+}
+.compare-child-2-inner-1 > ul > li > ul > li > h4 {
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+}
+.compare-child-2-inner-1 > ul > li > ul > li:nth-child(2) > h4 {
+    /* Your styles here */
+    color: #303030;
+    font-family: "TSTAR-PRO-Bold";
+    font-weight: 700;
+}
+.compare-container > .default-content-wrapper > h2 {
+    /* check this */
+    text-align: center;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+}
+
+@media (max-width: 1000px) {
+    .compare-container > .default-content-wrapper > h2 {
+        font-size: 35px; /* check this */
+    }
+    .compare-child-1-inner-1 > p {
+        position: static;
+    }
+    .compare-child-1-inner-2 > p {
+        position: static;
+    }
+    .compare {
+        padding: 15px 10px;
+    }
+    .compare-child-1 {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 465px) {
+    .compare-container > .default-content-wrapper > h2 {
+        font-size: 25px; /* check this */
+    }
+    .compare-child-1-inner-1 > h3 {
+        font-size: 20px;
+    }
+    .compare-child-1-inner-2 > h3 {
+        font-size: 20px;
+    }
+    .compare-child-2-inner-1 > ul > li > ul > li > h4 {
+        font-size: 20px;
+    }
+
+    /* .compare-container{
+        width: 100%;
+    } */
+}
+
+
+/*change becouse now is first component */
+
+.compare-container{
+    margin-top: 50px !important;
+}

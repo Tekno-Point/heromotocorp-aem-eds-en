@@ -220,6 +220,7 @@ main img {
   display: inline-block;
   height: 24px;
   width: 24px;
+  cursor: pointer;    /* changes for me  */
 }
 
 .icon img {
@@ -254,4 +255,8 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+*{
+  font-family: "TSTAR-PRO-Medium";
 }

@@ -119,7 +119,7 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
+  const classes = ['brand', 'sections', 'tools' , 'bar'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -163,4 +163,35 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  
+ 
+  // changes  for header 
+
+
+  window.addEventListener('scroll', function () {
+  const header = document.querySelector('.nav-wrapper'); // or .header
+  if (window.scrollY > 50) {
+    header.style.transform = 'translateY(-100%)';
+  } else {
+    header.style.transform = 'translateY(0)';
+  }
+});
+
+
+const navWrapper2 = document.querySelector('.nav-wrapper');
+  const heroSection = document.querySelector('.compare-container');
+
+  window.addEventListener('scroll', () => {
+    const heroBottom = heroSection.getBoundingClientRect().bottom;
+
+    if (heroBottom <= 0) {
+      navWrapper2.style.transform = 'translateY(-100%)';
+    } else {
+      navWrapper2.style.transform = 'translateY(0)';
+    }
+  });
+
+
+
 }

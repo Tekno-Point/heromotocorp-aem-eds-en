@@ -1,0 +1,179 @@
+@import url("../cards/cards.css");
+
+
+@font-face {
+    font-family: "TSTAR-PRO-Normal";
+    src: url("/fonts/TSTAR-PRO-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TSTAR-PRO-Medium";
+    src: url("/fonts/TSTAR-PRO-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TSTAR-PRO-Bold";
+    src: url("/fonts/TSTAR-PRO-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TSTAR-PRO-Heavy";
+    src: url("/fonts/TSTAR-PRO-Heavy.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+}
+
+.buy-card {
+    max-width: 1440px;
+    width: 100%;
+    margin-top: 42px;
+    display: flex;
+    justify-content: center;
+}
+.buy-card-container > div > p {
+    font-family: "TSTAR-PRO-Heavy";
+    text-align: center;
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.buy-card > ul > li {
+    max-width: 300px;
+    width: 100%;
+    position: relative;
+}
+.buy-card > ul {
+    list-style: none;
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 20px;
+    position: relative;
+}
+.buy-card > ul > li:nth-child(2),
+.buy-card > ul > li:nth-child(4) {
+    padding-top: 80px;
+}
+
+.cards-card-body > p:first-child {
+    opacity: 0.2;
+    font-style: italic;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    font-size: 8rem;
+    position: absolute;
+    top: -121px;
+}
+.buy-card > ul > li:nth-child(2) > .cards-card-body > p:first-child,
+.buy-card > ul > li:nth-child(4) > .cards-card-body > p:first-child {
+    top: -30px;
+}
+.cards-card-body > p:nth-child(2) {
+    position: relative;
+    z-index: 1;
+}
+.cards-card-body > h4 {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-kerning: auto;
+    letter-spacing: normal;
+    line-height: 2rem;
+    font-family: "TSTAR-PRO-Bold";
+    font-weight: 700;
+}
+.cards-card-body > h4 > span {
+    clip-path: polygon(8% 1%, 53% 22%, 54% 100%, 8% 72%);
+}
+.cards-card-body > h6 {
+    font-family: "TSTAR-PRO-Medium";
+    font-weight: 400;
+    color: #303030;
+}
+
+.cards-card-body > p:nth-child(3) {
+    border-bottom: dashed 1px silver;
+    position: absolute;
+    top: 36px;
+    left: 213px;
+    width: 204px;
+    height: 154px;
+    transform: rotate(8deg);
+    border-radius: 58%;
+    color: transparent; /* Hides the text but keeps layout */
+}
+.buy-card > ul > li:nth-child(2) > .cards-card-body > p:nth-child(3) {
+    border-bottom: none;
+    border-top: dashed 1px silver;
+    left: 178px;
+    top: 82px;
+}
+
+.buy-card > ul > li:nth-child(4) > .cards-card-body > p:nth-child(3) {
+    display: none;
+}
+@media (max-width: 786px) {
+    .buy-card > ul {
+        gap: 60px;
+        flex-wrap: wrap;
+    }
+
+    .buy-card > ul > li> .cards-card-body > p:first-child{
+         top: -80px;
+        font-size: 80px;
+    }
+    
+    .buy-card > ul > li:nth-child(2) > .cards-card-body > p:first-child,
+    .buy-card > ul > li:nth-child(4) > .cards-card-body > p:first-child {
+        top: -80px;
+        font-size: 80px;
+    }
+    .buy-card > ul > li:nth-child(2),
+    .buy-card > ul > li:nth-child(4) {
+        padding-top: 0px;
+    }
+    .cards-card-body > p:nth-child(3) {
+        border-right: dashed 1px silver;
+        position: absolute;
+        top: 36px;
+        left: 42px;
+        width: 204px;
+        height: 347px;
+        transform: rotate(0deg);
+        border-radius: 88%;
+        color: transparent;
+    }
+    .buy-card > ul > li:nth-child(2) > .cards-card-body > p:nth-child(3) {
+       border-right: none;
+        border-left: dashed 1px silver;
+        left: 5px;
+        top: 41px;
+        width: 154px;
+        height: 351px;
+    }
+
+    .buy-card > ul > li:nth-child(2),
+    .buy-card > ul > li:nth-child(4) {
+        padding-left: 60px;
+    }
+    .buy-card-container > div > p {
+        font-size: 2rem;
+    }
+    .cards-card-body > h4 {
+          font-size: 1rem;
+    }
+    .cards-card-body > h6 {
+        font-size: 1rem;
+    }
+
+    .cards-card-body > p:nth-child(2)>picture>img{
+        max-width: 50%;
+        
+    }
+}
