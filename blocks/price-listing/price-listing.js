@@ -9,7 +9,7 @@ export default async function decorate(block) {
     cities: item.cities,
   }));
 
-  // 🧭 Get current location
+
   let current = await fetchStateCity();
   let selectedState = states.find(s => s.label.toUpperCase() === current.state.toUpperCase()) || states[0];
   let selectedCity = selectedState.cities.find(c => c.label.toUpperCase() === current.city.toUpperCase()) || selectedState.cities[0];
@@ -205,7 +205,6 @@ export default async function decorate(block) {
     }
   });
 
-  // ✅ Init inputs and load variants
   stateInput.value = selectedState.label;
   cityInput.value = selectedCity.label;
   renderPriceTable(selectedState.label, selectedCity.code);
