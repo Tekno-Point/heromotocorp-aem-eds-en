@@ -46,7 +46,7 @@
     background: white;
 }
 
-.price-listing .custom-select-state-city__col > .custom-autocomplete {
+.price-listing>.custom-select-state-city__col > .custom-autocomplete {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -166,6 +166,7 @@
 .price-listing > div:nth-child(1) > div {
     width: 414px;
 }
+
 
 @media (max-width: 786px) {
     .price-listing > div:nth-child(1) > div {
