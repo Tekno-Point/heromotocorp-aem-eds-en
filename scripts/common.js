@@ -88,11 +88,11 @@ export async function getUserLatLong() {
           resolve({ lat, long });
         },
         (error) => {
-          // set delhi lat log
+          resolve({ lat: 28.61, long: 77.23 });
         }
       );
     } else {
-      // set delhi lat log
+      resolve({ lat: 28.7041, long: 77.1025 });
     }
   });
 }
@@ -103,6 +103,10 @@ export async function fetchStateCityMaster() {
 }
 
 export async function fetchStateCity() {
+  const [dataMapping] = await useDataMapping()
+  if (dataMapping.current_location) {
+    return dataMapping.current_location;
+  }
   const geolocation = await getUserLatLong();
   const data = await fetchAPI(
     "GET",
@@ -120,7 +124,7 @@ export async function fetchStateCityCode() {
   const codeData =
     dataMapping.state_city_master[state.toUpperCase()][city.toUpperCase()];
   console.log(codeData);
-  return { stateCode: codeData.stateCode, cityCode: codeData.code }
+  return { stateCode: codeData?.stateCode || 'DEL', cityCode: codeData?.code || 'DELHI' }
 }
 
 export async function fetchProduct() {
@@ -197,12 +201,30 @@ async function getDataMapping() {
     let cityMaster = await fetchStateCityMaster();
     processDataMapping(cityMaster);
     let { city, state } = await fetchStateCity();
+    debugger;
+    if (city.toUpperCase() === 'NEW DELHI') {
+      city = 'DELHI';
+      state = 'DELHI';
+    }
     const code =
-      dataMapping.state_city_master[state.toUpperCase()][city.toUpperCase()];
+      dataMapping.state_city_master[state.toUpperCase()][city.toUpperCase()] || {
+        "cityCode": "DELHI",
+        "label": "DELHI",
+        "stateCode": "DEL"
+      };
     console.log(code);
     dataMapping.current_location = {
-      stateCode: code.stateCode, cityCode: code.code, city, state
+      stateCode: code?.stateCode, cityCode: code?.code, city, state
     }
+    const { data: { products: { items: [productInfo] } } } = await fetchAPI(
+      "GET",
+      prodcutAPI
+        .replace("{stateCode}", code.stateCode)
+        .replace("{cityCode}", code.cityCode)
+    );
+    const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
+    console.log(data);
+    dataMapping.sku = variantsData[0].colors[0].sku;
     sessionStorage.setItem("dataMapping", JSON.stringify(dataMapping));
     data = sessionStorage.getItem("dataMapping");
     // setSkuAndStateCity();
