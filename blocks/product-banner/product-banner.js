@@ -3,7 +3,6 @@ import { div, input, label, h4, span, img, i } from "../../scripts/dom-helpers.j
 pubsub.subscribe('fire', decorateProductBanner)
 
 export async function decorateProductBanner(block , data) {
-    debugger;
     console.log(block , data)
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
