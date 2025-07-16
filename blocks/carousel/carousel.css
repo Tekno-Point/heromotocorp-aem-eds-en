@@ -139,7 +139,7 @@
     gap: 20px;
     /* align-items: center; */
     align-items: flex-start;
-    margin-top: 110px;
+    margin-top: 100px;
 }
 
 .carousel .feature-row {
@@ -222,18 +222,21 @@
 
 .carousel .swiper-button-prev {
     left: 10px;
-    top: 46px;
+    top: 44px;
 }
 
 .carousel .swiper-button-next {
     right: 10px;
-    top: 46px;
+    top: 44px;
 }
 
 .carousel .btnWrapper > .swiper-pagination {
-    max-width: 1087px;
+    max-width: 1064px;
+    height: 19px;
     width: 100%;
-    /* overflow: hidden; */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     display: flex;
     gap: 60px;
     justify-content: flex-start;
@@ -283,6 +286,7 @@
     font-style: italic;
     text-align: center;
     padding: 30px;
+    font-size: 3rem;
 }
 
 .carousel-container {
