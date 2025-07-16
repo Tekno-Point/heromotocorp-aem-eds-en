@@ -1,0 +1,227 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.form-block-container > .form-block-wrapper {
+    padding: 0px;
+}
+
+.form-block-container > .default-content-wrapper > h1 {
+    font-size: 48px;
+    font-family: "TSTAR-PRO-Bold";
+    line-height: 3.625rem;
+    text-align: center;
+}
+
+.emi-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/*padding*/
+
+.emi-container .emi-controls {
+    flex: 1;
+    padding: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* .slider-group {
+  margin-bottom: 30px;
+} */
+
+/* Show value above label+input */
+.emi-container .value-row {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.emi-container.input-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Label and number input side by side */
+.emi-container .label-input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.emi-container .label-input-row label {
+    font-size: 18px;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+}
+
+.emi-container .label-input-row input.number-box {
+    margin-left: 20px;
+    padding: 0px 8px 0px 8px;
+    font-size: 15px;
+    width: 120px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Slider bar */
+.emi-container .slider-row {
+    display: flex;
+    align-items: center;
+}
+
+.emi-container input[type="range"] {
+    -webkit-appearance: none;
+    flex: 1;
+    height: 9px;
+    background: #a5a5a5;
+    /* accent-color: red; */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/*  changes for thumb*/
+
+/* Min/Max labels under slider */
+.emi-container .range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #555;
+    margin-top: 6px;
+}
+
+/* EMI result box */
+.emi-container .emi-output {
+    flex: 1;
+    background: #303030;
+    color: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.emi-container .emi-output .emi-title {
+    font-size: 32px;
+    font-family: "TSTAR-PRO-Bold";
+    font-weight: 700;
+    color: #fff;
+    line-height: 3rem;
+}
+
+.emi-container .emi-output .emi-value {
+    font-size: 52px;
+    margin: 16px 0;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    color: #fff;
+    line-height: 4rem;
+}
+
+.emi-container .emi-output button {
+    width: 50%;
+    background-image: linear-gradient(
+        160.69deg,
+        #b50000 22.35%,
+        #ff0000 68.47%,
+        #b50000 114.59%
+    );
+    color: white;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* image */
+
+.form-block {
+    position: relative;
+}
+
+.form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    z-index: 2;
+}
+
+@media (max-width: 786px) {
+    .form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
+        top: 360px;
+    }
+    .emi-container .emi-output {
+        padding: 40px 10px;
+        border-radius: 0px;
+    }
+    .emi-container .emi-output .emi-title {
+        font-size: 20px;
+    }
+    .emi-container .emi-output .emi-value {
+        font-size: 40px;
+    }
+    .emi-container .emi-output button {
+        width: 30%;
+        padding: 5px;
+        font-size: 15px;
+    }
+    .form-block-container > .default-content-wrapper > h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+    .emi-container {
+    margin-top: 0px;
+}
+}
+
+/* thub */
+
+.emi-container input[type="range"]::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 16px;
+    --bg-gradient-1: linear-gradient(
+        160.69deg,
+        #b50000 22.35%,
+        #ff0000 68.47%,
+        #b50000 114.59%
+    );
+
+    background-image: var(--bg-gradient-1),
+        linear-gradient(
+            to right,
+            rgba(128, 128, 128, 0.3),
+            rgba(128, 128, 128, 0.3)
+        );
+    background-repeat: no-repeat;
+    background-size: var(--progress,0%) 100%, 100% 100%;
+    background-position: left center, left center;
+}
+
+.emi-container input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    /* background: red; */
+    background: url("/icons/redbike.png"), linear-gradient(white, white);
+    background-position: center, center;
+    background-size: contain, cover;
+    background-repeat: no-repeat, no-repeat;
+    border-radius: 50%;
+    margin-top: -5px;
+    border: 2px solid #fff;
+}

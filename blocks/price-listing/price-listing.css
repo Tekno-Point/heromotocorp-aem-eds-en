@@ -46,7 +46,7 @@
     background: white;
 }
 
-.price-listing .custom-select-state-city__col > .custom-autocomplete {
+.price-listing>.custom-select-state-city__col > .custom-autocomplete {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -155,11 +155,24 @@
     cursor: pointer;
 }
 
-/* images */
+.price-listing > div:nth-child(2) > div > ul > li:nth-child(1)>.price-listing>.custom-select-state-city>.custom-select-state-city__col>.custom-autocomplete>.input-wrapper{
+    position: relative;
+}
+
+.price-listing>.custom-select-state-city__col > .custom-autocomplete>.custom-dropdown-list{
+    position: absolute;
+    display: block;
+    z-index: 999;
+    background: white;
+    max-height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
 
 .price-listing > div:nth-child(1) > div {
     width: 414px;
 }
+
 
 @media (max-width: 786px) {
     .price-listing > div:nth-child(1) > div {
