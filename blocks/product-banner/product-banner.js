@@ -2,9 +2,10 @@ import { fetchProduct, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, input, label, h4, span, img, i } from "../../scripts/dom-helpers.js";
 pubsub.subscribe('fire', decorateProductBanner)
 
-export async function decorateProductBanner(block , data) {
-    debugger;
-    console.log(block , data)
+export async function decorateProductBanner(block, data) {
+    // debugger;
+    block?.querySelector(".middle-sec")?.remove();
+    console.log(block, data)
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     const [dataMapping, setDataMapping] = await useDataMapping();
@@ -124,7 +125,7 @@ export async function decorateProductBanner(block , data) {
         div({ class: "color-wrapp" })
     );
 
-    block.append(div(variantsDOM, imageDom, colorsDiv));
+    block.append(div({ class: "middle-sec" }, variantsDOM, imageDom, colorsDiv));
 
     renderColors(initialVariantGroup.colors, initialColor.label);
 }
