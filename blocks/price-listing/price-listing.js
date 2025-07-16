@@ -1,4 +1,4 @@
-import { fetchStateCityMaster, fetchProduct } from "../../scripts/common.js";
+import { fetchStateCityMaster, fetchStateCity, fetchProduct } from "../../scripts/common.js";
 import { div, label, fieldset, p } from "../../scripts/dom-helpers.js";
 
 export default async function decorate(block) {
@@ -9,8 +9,10 @@ export default async function decorate(block) {
     cities: item.cities,
   }));
 
-  let selectedState = states[0];
-  let selectedCity = selectedState.cities[0];
+  // 🧭 Get current location
+  let current = await fetchStateCity();
+  let selectedState = states.find(s => s.label.toUpperCase() === current.state.toUpperCase()) || states[0];
+  let selectedCity = selectedState.cities.find(c => c.label.toUpperCase() === current.city.toUpperCase()) || selectedState.cities[0];
 
   const stateWrapper = div({ class: 'input-wrapper' });
   const stateInput = document.createElement('input');
@@ -167,7 +169,6 @@ export default async function decorate(block) {
     });
   }
 
-  // Input filtering events
   stateInput.addEventListener('input', () => {
     populateList(stateInput, stateList, states, (selected) => {
       selectedState = selected;
@@ -185,7 +186,6 @@ export default async function decorate(block) {
     });
   });
 
-  // ✅ FIXED: Only clear input, NOT selection or price
   clearState.addEventListener('click', () => {
     stateInput.value = '';
     stateList.style.display = 'none';
@@ -205,7 +205,7 @@ export default async function decorate(block) {
     }
   });
 
-  // Init default selection & render
+  // ✅ Init inputs and load variants
   stateInput.value = selectedState.label;
   cityInput.value = selectedCity.label;
   renderPriceTable(selectedState.label, selectedCity.code);
