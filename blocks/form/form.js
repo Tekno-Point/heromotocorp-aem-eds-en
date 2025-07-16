@@ -283,7 +283,6 @@ export default async function decorate(block) {
   });
 
   block.querySelector(".resendOTP-btn").addEventListener("click", function () {
-    debugger;
     console.log("Hi Send otp");
     try {
       fetchOTP("8169850484");
