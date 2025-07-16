@@ -114,6 +114,10 @@
           {
             "name": "secondary",
             "value": "secondary"
+          },
+          {
+            "name": "hero-banner",
+            "value": "hero-banner"
           }
         ]
       }
