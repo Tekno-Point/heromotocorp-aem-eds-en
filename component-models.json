@@ -114,10 +114,6 @@
           {
             "name": "secondary",
             "value": "secondary"
-          },
-          {
-            "name": "hero-banner",
-            "value": "hero-banner"
           }
         ]
       }
@@ -156,6 +152,10 @@
           {
             "name": "hero-footer-policy",
             "value": "hero-footer-policy"
+          },
+          {
+            "name": "hero-banner",
+            "value": "hero-banner"
           }
         ]
       }
