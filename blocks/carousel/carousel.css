@@ -139,7 +139,7 @@
     gap: 20px;
     /* align-items: center; */
     align-items: flex-start;
-    margin-top: 60px;
+    margin-top: 110px;
 }
 
 .carousel .feature-row {
@@ -222,24 +222,24 @@
 
 .carousel .swiper-button-prev {
     left: 10px;
-    top: 40px;
+    top: 46px;
 }
 
 .carousel .swiper-button-next {
     right: 10px;
-    top: 40px;
+    top: 46px;
 }
 
 .carousel .btnWrapper > .swiper-pagination {
     max-width: 1087px;
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     display: flex;
     gap: 60px;
     justify-content: flex-start;
     margin-left: 53px;
     gap: 1rem;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     margin-top: 2px;
 }
 
@@ -247,6 +247,7 @@
     font-family: "TSTAR-PRO-Regular";
     padding-bottom: 20px;
     border-bottom: 1px solid #a5a5a5;
+        width: max-content;
 }
 
 .carousel .swiper-pagination > h3 {

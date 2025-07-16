@@ -36,6 +36,9 @@
     display: flex;
     justify-content: center;
 }
+.buy-card-container>.default-content-wrapper>h2{
+    text-align: center;
+}
 .buy-card-container > div > p {
     font-family: "TSTAR-PRO-Heavy";
     text-align: center;
