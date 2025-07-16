@@ -131,6 +131,7 @@
     padding-bottom: 2rem;
     text-transform: uppercase;
     font-style: italic;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
