@@ -154,7 +154,13 @@
     color: #fff;
     cursor: pointer;
 }
-
+.price-listing > div:nth-child(2) > div > h1 {
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 3rem;
+}
 /* images */
 
 .price-listing > div:nth-child(1) > div {
