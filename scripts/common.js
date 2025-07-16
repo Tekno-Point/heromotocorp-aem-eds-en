@@ -103,6 +103,10 @@ export async function fetchStateCityMaster() {
 }
 
 export async function fetchStateCity() {
+  const [dataMapping] = await useDataMapping()
+  if (dataMapping.current_location) {
+    return dataMapping.current_location;
+  }
   const geolocation = await getUserLatLong();
   const data = await fetchAPI(
     "GET",
@@ -204,6 +208,15 @@ async function getDataMapping() {
     dataMapping.current_location = {
       stateCode: code.stateCode, cityCode: code.code, city, state
     }
+    const { data: { products: { items: [productInfo] } } } = await fetchAPI(
+      "GET",
+      prodcutAPI
+        .replace("{stateCode}", code.stateCode)
+        .replace("{cityCode}", code.cityCode)
+    );
+    const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
+    console.log(data);
+    dataMapping.sku = variantsData[0].colors[0].sku;
     sessionStorage.setItem("dataMapping", JSON.stringify(dataMapping));
     data = sessionStorage.getItem("dataMapping");
     // setSkuAndStateCity();
