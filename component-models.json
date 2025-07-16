@@ -215,14 +215,14 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "image",
+        "name": "col_image1",
         "label": "Image",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
+        "name": "col_2imageAlt",
         "label": "Alt",
         "value": ""
       },
@@ -236,14 +236,14 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "image",
+        "name": "col_2image",
         "label": "Image",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
+        "name": "col_2imageAlt",
         "label": "Alt",
         "value": ""
       }
