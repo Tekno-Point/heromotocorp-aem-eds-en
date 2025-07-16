@@ -231,7 +231,7 @@
       }
     ]
   },
-  {
+ {
     "id": "buy-item",
     "fields": [
       {
@@ -243,9 +243,30 @@
       },
       {
         "component": "reference",
-        "name": "youtubeVideoThumbnailDamPath",
+        "valueType": "string",
+        "name": "cols1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cols1_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "cols1_Bordertext",
         "value": "",
-        "label": "youtubeVideoThumbnailDamPath",
+        "label": "Boder Text",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "cols2_richtext",
+        "value": "",
+        "label": "Text",
         "valueType": "string"
       }
     ]
@@ -292,6 +313,85 @@
   },
   {
     "id": "carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "content_head",
+        "value": "",
+        "label": "head",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "content_headType",
+        "label": "head",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "content_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_one",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_oneAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_two",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_twoAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-carousel-item",
     "fields": [
       {
         "component": "text",
@@ -523,6 +623,221 @@
         }
     ]
   },
+   {
+    "id": "compare-item1",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "img1_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "img1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "img1_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "col2_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_imageAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+   {
+    "id": "compare-item2",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+   {
+    "id": "splendor-tab-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "col1_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+       {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "col2_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+   {
+    "id": "form-block",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Block Style",
+            "children": [
+              {
+                "name": "EMI Calculator",
+                "value": "emi-calculator"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "form-field",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Name"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "type",
+        "label": "Type",
+        "options": [
+          {
+            "name": "Heading",
+            "value": "heading"
+          },
+          {
+            "name": "Text",
+            "value": "text"
+          },
+          {
+            "name": "Range",
+            "value": "range"
+          },
+          {
+            "name": "Input",
+            "value": "input"
+          },
+          {
+            "name": "Submit",
+            "value": "submit"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Value",
+        "label": "value"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Min",
+        "label": "min"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Max",
+        "label": "Max"
+      },
+       {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
+    "id": "blogs-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  
    {
     "id": "product-dealer-cards",
     "fields": [

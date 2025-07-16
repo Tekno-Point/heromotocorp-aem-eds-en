@@ -154,20 +154,14 @@
     color: #fff;
     cursor: pointer;
 }
-
-.price-listing > div:nth-child(2) > div > ul > li:nth-child(1)>.price-listing>.custom-select-state-city>.custom-select-state-city__col>.custom-autocomplete>.input-wrapper{
-    position: relative;
+.price-listing > div:nth-child(2) > div > h1 {
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 3rem;
 }
-
-.price-listing>.custom-select-state-city__col > .custom-autocomplete>.custom-dropdown-list{
-    position: absolute;
-    display: block;
-    z-index: 999;
-    background: white;
-    max-height: 200px;
-    overflow: hidden;
-    overflow-y: scroll;
-}
+/* images */
 
 .price-listing > div:nth-child(1) > div {
     width: 414px;

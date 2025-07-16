@@ -27,9 +27,9 @@
       "form",
       "price-listing",
       "ride-thankyou",
+      "form-block",
       "product-dealer-cards",
       "product-banner",
-      "form-block",
       "thankyou-popup"
     ]
   },
@@ -80,5 +80,13 @@
   {
     "id": "thankyou-popup",
     "components": ["thankyou-popup-item"]
+  },
+   {
+    "id": "form-block",
+    "components": ["form-field"]
+  },
+  {
+    "id": "blogs-swiper",
+    "components": ["blogs-item"]
   }
 ]
