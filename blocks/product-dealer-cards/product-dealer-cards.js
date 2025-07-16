@@ -1,15 +1,15 @@
-import { fetchDealers, useDataMapping , pubsub } from '../../scripts/common.js';
+import { fetchDealers, useDataMapping, pubsub } from '../../scripts/common.js';
 import { div, p } from '../../scripts/dom-helpers.js';
 import Swiper from '../carousel/swiper.min.js';
 
-function createCustomDropdown(labelText, optionsList, onSelect, defaultValue = '') {
+function createCustomDropdown(className, labelText, optionsList, onSelect, defaultValue = '') {
     const wrapper = div({ class: 'custom-select-wrapper position-relative d-flex flex-column' });
 
     const labelEl = p({ class: 'dropdown-label mb-1' }, labelText);
     const inputEl = document.createElement('input');
     inputEl.type = 'text';
     inputEl.placeholder = `Select ${labelText}`;
-    inputEl.className = 'custom-input react-select__input';
+    inputEl.className = 'custom-input react-select__input ' + className;
     inputEl.value = defaultValue;
 
     const clearBtn = document.createElement('span');
@@ -38,7 +38,6 @@ function createCustomDropdown(labelText, optionsList, onSelect, defaultValue = '
                 dropdown.style.display = 'none';
                 clearBtn.style.display = 'block';
                 onSelect(value);
-                pubsub.publish('fire', document.querySelector('.product-banner'), {test : true})
             });
             dropdown.appendChild(li);
         });
@@ -85,27 +84,39 @@ export default async function decorate(block) {
 
     let cityDropdown;
 
-    const stateDropdown = createCustomDropdown('State', states, (newState) => {
+    const stateDropdown = createCustomDropdown('state-input', 'State', states, async (newState) => {
         if (!newState || !cityMap[newState.toUpperCase()]) return;
         activeState = newState;
         const cityList = Object.values(cityMap[activeState.toUpperCase()] || {}).map(c => c.label);
         activeCity = cityList[0];
 
-        const newCityDropdown = createCustomDropdown('City', cityList, (newCity) => {
+        const newCityDropdown = createCustomDropdown('city-input', 'City', cityList, async (newCity) => {
             activeCity = newCity;
             renderDealers(activeState, activeCity);
+            const [dataMapping, setDataMapping] = await useDataMapping();
+            dataMapping.current_location = { state: activeState, city: activeCity }
+            setDataMapping(dataMapping);
+            pubsub.publish('fire', document.querySelector('.product-banner'), { test: true })
         }, activeCity);
 
         dropdowns.replaceChild(newCityDropdown.wrapper, cityDropdown.wrapper);
         cityDropdown = newCityDropdown;
 
         renderDealers(activeState, activeCity);
+        const [dataMapping, setDataMapping] = await useDataMapping();
+        dataMapping.current_location = { state: activeState, city: activeCity }
+        setDataMapping(dataMapping);
+        pubsub.publish('fire', document.querySelector('.product-banner'), { test: true })
     }, activeState);
 
     const cityList = Object.values(cityMap[activeState.toUpperCase()] || {}).map(c => c.label);
-    cityDropdown = createCustomDropdown('City', cityList, (newCity) => {
+    cityDropdown = createCustomDropdown('city-input', 'City', cityList, async (newCity) => {
         activeCity = newCity;
         renderDealers(activeState, activeCity);
+        const [dataMapping, setDataMapping] = await useDataMapping();
+        dataMapping.current_location = { state: activeState, city: activeCity }
+        setDataMapping(dataMapping);
+        pubsub.publish('fire', document.querySelector('.product-banner'), { test: true })
     }, activeCity);
 
     const dropdowns = div({ class: 'dealer-dropdowns d-flex flex-column gap-3 mb-4 align-items-start' },
