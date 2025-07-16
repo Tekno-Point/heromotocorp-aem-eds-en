@@ -3,17 +3,23 @@
 .blogs-swiper-container {
     background-color: #ededed;
 }
-.blogs-swiper-container>.default-content-wrapper>h2{
+.blogs-swiper-container > .default-content-wrapper > h2 {
     font-style: italic;
     padding-bottom: 1.0625rem;
     text-align: center;
     font-weight: 900;
     font-size: 48px;
     font-family: "TSTAR-PRO-Heavy";
-    line-height: 1.2 ;
+    line-height: 1.2;
 }
 
 .blogs-swiper-container > .blogs-swiper-wrapper {
+    max-width: 1350px;
+    width: 100%;
+    background-color: #ededed;
+    padding: 20px;
+}
+.blogs-swiper{
     max-width: 1350px;
     width: 100%;
     background-color: #ededed;
@@ -70,6 +76,8 @@
     width: 100%;
     margin-top: 16px;
     padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .blogs-swiper .swiper-pagination-bullet {
@@ -103,7 +111,11 @@
 }
 
 /* Text: description */
-.blogs-swiper > .swiper-wrapper > .swiper-slide > div:nth-child(2) > p:nth-child(2) {
+.blogs-swiper
+    > .swiper-wrapper
+    > .swiper-slide
+    > div:nth-child(2)
+    > p:nth-child(2) {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -131,7 +143,7 @@
     margin: 0px;
     border-radius: 0px;
     font-size: 1.125rem;
-    letter-spacing:normal;
+    letter-spacing: normal;
     line-height: 1.5rem;
 }
 
@@ -142,7 +154,8 @@
 /* Responsive adjustments */
 @media screen and (max-width: 1023px) {
     .blogs-swiper .swiper-slide {
-        max-width: 100%; /* full width cards on tablets & phones */
+        max-width: 320px;
+        width: 100%; /* full width cards on tablets & phones */
         margin-right: 0; /* no gap needed when single card */
     }
 }

@@ -1,3 +1,5 @@
+
+
 import BlocksSwiper from "../swiper/swiper.min.js";
 
 export default function decorate(block) {
@@ -8,6 +10,7 @@ export default function decorate(block) {
 
   Array.from(block.children).forEach((element) => {
     element.classList.add("swiper-slide");
+    element.classList.add("blogs-card");
     swiperWrapper.appendChild(element);
   });
 
@@ -18,31 +21,34 @@ export default function decorate(block) {
   paginationEl.classList.add("swiper-pagination");
   block.appendChild(paginationEl);
 
-  // ✅ Initialize Swiper with autoplay + observer
-  BlocksSwiper(block, {
-    loop: true,
-    grabCursor: true,
-    spaceBetween: 10,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: paginationEl,
-      clickable: true,
-    },
-    observer: true,              // 👈 observe DOM changes
-    observeParents: true,        // 👈 observe parent visibility
-    breakpoints: {
-      0: {
-        slidesPerView: 1,
+  // Initialize Swiper
+  setTimeout(() => {
+    BlocksSwiper(block, {
+      // loop: true,
+      grabCursor: true,
+      spaceBetween: 20,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
       },
-      768: {
-        slidesPerView: 2,
+      pagination: {
+        el: paginationEl,
+        clickable: true,
       },
-      1024: {
-        slidesPerView: 3,
+      observer: true,
+      observeParents: true,
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
       },
-    },
-  });
+    });
+  }, 100);
 }
+
