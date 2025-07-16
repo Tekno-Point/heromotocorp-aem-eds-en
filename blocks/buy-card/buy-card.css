@@ -1,6 +1,5 @@
 @import url("../cards/cards.css");
 
-
 @font-face {
     font-family: "TSTAR-PRO-Normal";
     src: url("/fonts/TSTAR-PRO-Regular.ttf") format("truetype");
@@ -36,8 +35,11 @@
     display: flex;
     justify-content: center;
 }
-.buy-card-container>.default-content-wrapper>h2{
+.buy-card-container > .default-content-wrapper > h2 {
     text-align: center;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    font-style: italic;
 }
 .buy-card-container > div > p {
     font-family: "TSTAR-PRO-Heavy";
@@ -127,11 +129,11 @@
         flex-wrap: wrap;
     }
 
-    .buy-card > ul > li> .cards-card-body > p:first-child{
-         top: -80px;
+    .buy-card > ul > li > .cards-card-body > p:first-child {
+        top: -80px;
         font-size: 80px;
     }
-    
+
     .buy-card > ul > li:nth-child(2) > .cards-card-body > p:first-child,
     .buy-card > ul > li:nth-child(4) > .cards-card-body > p:first-child {
         top: -80px;
@@ -153,7 +155,7 @@
         color: transparent;
     }
     .buy-card > ul > li:nth-child(2) > .cards-card-body > p:nth-child(3) {
-       border-right: none;
+        border-right: none;
         border-left: dashed 1px silver;
         left: 5px;
         top: 41px;
@@ -169,14 +171,13 @@
         font-size: 2rem;
     }
     .cards-card-body > h4 {
-          font-size: 1rem;
+        font-size: 1rem;
     }
     .cards-card-body > h6 {
         font-size: 1rem;
     }
 
-    .cards-card-body > p:nth-child(2)>picture>img{
+    .cards-card-body > p:nth-child(2) > picture > img {
         max-width: 50%;
-        
     }
 }
