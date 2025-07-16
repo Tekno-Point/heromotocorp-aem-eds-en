@@ -1,12 +1,14 @@
 .hero-container .hero-wrapper {
-  max-width: unset;
+  /* max-width: unset; */
+  max-width: 1560px;
+  width: 100%;
   padding: 0;
 }
 
 .hero {
   position: relative;
   padding: 40px 24px;
-  min-height: 300px;
+  min-height: 569px;
 }
 
 .hero h1 {
