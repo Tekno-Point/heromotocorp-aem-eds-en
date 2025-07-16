@@ -1,5 +1,5 @@
-import { fetchStateCityMaster, fetchProdcut } from "../../scripts/common.js";
-import { div, label, select, option, fieldset, p } from "../../scripts/dom-helpers.js";
+import { fetchStateCityMaster, fetchProduct } from "../../scripts/common.js";
+import { div, label, fieldset, p } from "../../scripts/dom-helpers.js";
 
 export default async function decorate(block) {
   const stateCityData = await fetchStateCityMaster();
@@ -9,25 +9,54 @@ export default async function decorate(block) {
     cities: item.cities,
   }));
 
-  // --- Dropdown Elements ---
-  const stateSelect = select({ class: 'react-select__input' },
-    ...states.map(state => option({ value: state.label }, state.label))
-  );
-  const citySelect = select({ class: 'react-select__input' });
+  let selectedState = states[0];
+  let selectedCity = selectedState.cities[0];
+
+  const stateWrapper = div({ class: 'input-wrapper' });
+  const stateInput = document.createElement('input');
+  stateInput.setAttribute('placeholder', 'Select State');
+  stateInput.setAttribute('class', 'react-select__input');
+  stateInput.setAttribute('autocomplete', 'off');
+  const clearState = document.createElement('span');
+  clearState.className = 'clear-btn';
+  clearState.textContent = '×';
+  stateWrapper.appendChild(stateInput);
+  stateWrapper.appendChild(clearState);
+
+  const stateList = document.createElement('div');
+  stateList.className = 'custom-dropdown-list scrollable';
+  stateList.style.display = 'none';
+
+  const cityWrapper = div({ class: 'input-wrapper' });
+  const cityInput = document.createElement('input');
+  cityInput.setAttribute('placeholder', 'Select City');
+  cityInput.setAttribute('class', 'react-select__input');
+  cityInput.setAttribute('autocomplete', 'off');
+  const clearCity = document.createElement('span');
+  clearCity.className = 'clear-btn';
+  clearCity.textContent = '×';
+  cityWrapper.appendChild(cityInput);
+  cityWrapper.appendChild(clearCity);
+
+  const cityList = document.createElement('div');
+  cityList.className = 'custom-dropdown-list scrollable';
+  cityList.style.display = 'none';
 
   const dropdownsContainer = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city z-1 px-md-6 px-lg-6' },
       div({ class: 'custom-select-state-city__col' },
         div({ class: 'custom-autocomplete position-relative' },
           label({}, 'State'),
-          stateSelect
+          stateWrapper,
+          stateList
         )
       )
     ),
     div({ class: 'custom-select-state-city__col false' },
       div({ class: 'custom-autocomplete position-relative' },
         label({}, 'City'),
-        citySelect
+        cityWrapper,
+        cityList
       )
     )
   );
@@ -35,15 +64,13 @@ export default async function decorate(block) {
   const priceInfo = div({ class: 'price-details--info w-100 my-lg-4 px-0' });
   const fieldsetEl = fieldset({ class: 'my-lg-12 my-6 w-100' }, priceInfo);
 
-  // --- DOM Injection ---
   const headingWrapper = block.querySelector('h1')?.closest('div');
   const headingUL = headingWrapper?.querySelector('ul');
   const liList = headingUL?.querySelectorAll('li');
 
   if (liList?.length > 0) {
-    // Replace <p>ul</p> with dropdown + price table
     const firstLi = liList[0];
-    firstLi.innerHTML = ''; // remove <p>ul</p>
+    firstLi.innerHTML = '';
     firstLi.appendChild(dropdownsContainer);
     firstLi.appendChild(fieldsetEl);
   }
@@ -76,21 +103,27 @@ export default async function decorate(block) {
     }
   }
 
-  // --- Dropdown Interaction ---
-  function updateCityDropdown(stateLabel) {
-    const state = states.find((s) => s.label === stateLabel);
-    citySelect.innerHTML = '';
-    if (state?.cities) {
-      state.cities.forEach(city => {
-        citySelect.appendChild(option({ value: city.code }, city.label));
+  function populateList(input, list, data, onSelect) {
+    list.innerHTML = '';
+    const value = input.value.toLowerCase();
+    const filtered = data.filter(d => d.label.toLowerCase().includes(value));
+    filtered.forEach(item => {
+      const divEl = document.createElement('div');
+      divEl.textContent = item.label;
+      divEl.className = 'dropdown-item';
+      divEl.addEventListener('click', () => {
+        input.value = item.label;
+        list.style.display = 'none';
+        onSelect(item);
       });
-    }
+      list.appendChild(divEl);
+    });
+    list.style.display = filtered.length ? 'block' : 'none';
   }
 
   async function renderPriceTable(stateLabel, cityCode) {
     priceInfo.innerHTML = '';
 
-    // Table header
     const headerRow = div({ class: 'row' },
       div({ class: 'col-6' },
         div({ class: 'price-details-col pb-6 pb-sm-12' },
@@ -105,13 +138,12 @@ export default async function decorate(block) {
     );
     priceInfo.appendChild(headerRow);
 
-    // API data
     const state = states.find(s => s.label === stateLabel);
     if (!state) return;
     const city = state.cities.find(c => c.code === cityCode);
     if (!city) return;
 
-    const productData = await fetchProdcut(state.label, city.code);
+    const productData = await fetchProduct(state.label, city.code);
     const variants = productData?.data?.products?.items?.[0]?.variant_to_colors || [];
 
     variants.forEach(v => {
@@ -135,23 +167,46 @@ export default async function decorate(block) {
     });
   }
 
-  // --- Listeners ---
-  stateSelect.addEventListener('change', () => {
-    updateCityDropdown(stateSelect.value);
-    if (citySelect.options.length > 0) {
-      renderPriceTable(stateSelect.value, citySelect.value);
-    } else {
-      priceInfo.innerHTML = '';
+  // Input filtering events
+  stateInput.addEventListener('input', () => {
+    populateList(stateInput, stateList, states, (selected) => {
+      selectedState = selected;
+      selectedCity = selected.cities[0];
+      cityInput.disabled = false;
+      cityInput.value = selectedCity.label;
+      renderPriceTable(selectedState.label, selectedCity.code);
+    });
+  });
+
+  cityInput.addEventListener('input', () => {
+    populateList(cityInput, cityList, selectedState.cities, (selected) => {
+      selectedCity = selected;
+      renderPriceTable(selectedState.label, selectedCity.code);
+    });
+  });
+
+  // ✅ FIXED: Only clear input, NOT selection or price
+  clearState.addEventListener('click', () => {
+    stateInput.value = '';
+    stateList.style.display = 'none';
+  });
+
+  clearCity.addEventListener('click', () => {
+    cityInput.value = '';
+    cityList.style.display = 'none';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!stateInput.contains(e.target) && !stateList.contains(e.target)) {
+      stateList.style.display = 'none';
+    }
+    if (!cityInput.contains(e.target) && !cityList.contains(e.target)) {
+      cityList.style.display = 'none';
     }
   });
 
-  citySelect.addEventListener('change', () => {
-    renderPriceTable(stateSelect.value, citySelect.value);
-  });
-
-  // --- Init ---
-  updateCityDropdown(stateSelect.value);
-  if (citySelect.options.length > 0) {
-    renderPriceTable(stateSelect.value, citySelect.value);
-  }
+  // Init default selection & render
+  stateInput.value = selectedState.label;
+  cityInput.value = selectedCity.label;
+  renderPriceTable(selectedState.label, selectedCity.code);
 }

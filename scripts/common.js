@@ -1,18 +1,49 @@
+const endpoint = "https://www.heromotocorp.com";
+
 const geoLocationAPI = `https://apis.mappls.com/advancedmaps/v1/5b8424bdaf84cda4fccf61d669d85f5a/rev_geocode?lat={lat}&lng={long}`;
-const stateCityAPI = `https://www.heromotocorp.com/content/hero-commerce/in/en/products/product-page/practical/jcr:content.state-and-city.json`;
-const prodcutAPI = `https://www.heromotocorp.com/content/hero-commerce/in/en/products/product-page/practical/jcr:content.product.practical.splendor-plus.{stateCode}.{cityCode}.json`;
-const sendOTPAPI = `https://www.heromotocorp.com/content/hero-commerce/in/en/products/product-page/executive/jcr:content.send-msg.json`;
-const dataMapping = {
+const stateCityAPI = `${endpoint}/content/hero-commerce/in/en/products/product-page/practical/jcr:content.state-and-city.json`;
+const prodcutAPI = `${endpoint}/content/hero-commerce/in/en/products/product-page/practical/jcr:content.product.practical.splendor-plus.{stateCode}.{cityCode}.json`;
+const sendOTPAPI = `${endpoint}/content/hero-commerce/in/en/products/product-page/executive/jcr:content.send-msg.json`;
+const dealerAPI = 'https://www.heromotocorp.com/content/hero-commerce/in/en/products/product-page/practical/jcr:content.dealers.{sku}.{stateCode}.{cityCode}.json';
+function PubSub() {
+  this.events = {};
+}
+
+PubSub.prototype.subscribe = function (eventName, callback) {
+  if (!this.events[eventName]) {
+    this.events[eventName] = [];
+  }
+  this.events[eventName].push(callback);
+};
+
+PubSub.prototype.publish = function (eventName, data) {
+  if (!this.events[eventName]) return;
+
+  this.events[eventName].forEach(function (callback) {
+    callback(data);
+  });
+};
+
+// Create a global pubsub instance
+export var pubsub = new PubSub();
+
+
+export let dataMapping = {
   state_city_master: {},
 };
 import { getMetadata } from "./aem.js";
-
+const apiProxy = {};
 export async function fetchAPI(
   method,
   url,
   payload = { headerJSON: {}, requestJSON: {} }
 ) {
   return new Promise(async function (resolve, reject) {
+    const key = url + method;
+    if (apiProxy[key]) {
+      resolve(apiProxy[key]);
+      return apiProxy[key]
+    }
     const { headerJSON, requestJSON } = payload;
 
     const headers = new Headers();
@@ -40,6 +71,7 @@ export async function fetchAPI(
     if (resp.ok) {
       const data = await resp.json();
       resolve(data);
+      apiProxy[key] = data;
     } else {
       resolve({ error: resp.text() });
     }
@@ -56,18 +88,20 @@ export async function getUserLatLong() {
           resolve({ lat, long });
         },
         (error) => {
-          // resolve({ state_city_master.default.state, state_city_master.default.city });
+          // set delhi lat log
         }
       );
     } else {
-      // resolve({ "Delhi", "Delhi"});
+      // set delhi lat log
     }
   });
 }
+
 export async function fetchStateCityMaster() {
   const data = await fetchAPI("GET", stateCityAPI);
   return data;
 }
+
 export async function fetchStateCity() {
   const geolocation = await getUserLatLong();
   const data = await fetchAPI(
@@ -79,22 +113,38 @@ export async function fetchStateCity() {
   const { state, city } = data.results[0];
   return { state, city };
 }
-export async function fetchProdcut() {
+
+export async function fetchStateCityCode() {
   const { state, city } = await fetchStateCity();
   const dataMapping = await getDataMapping();
   const codeData =
     dataMapping.state_city_master[state.toUpperCase()][city.toUpperCase()];
   console.log(codeData);
+  return { stateCode: codeData.stateCode, cityCode: codeData.code }
+}
 
+export async function fetchProduct() {
+  const { stateCode, cityCode } = await fetchStateCityCode();
   const data = await fetchAPI(
     "GET",
     prodcutAPI
-      .replace("{stateCode}", codeData.stateCode)
-      .replace("{cityCode}", codeData.code)
+      .replace("{stateCode}", stateCode)
+      .replace("{cityCode}", cityCode)
   );
   console.log(data);
   return data;
 }
+
+export async function fetchDealers(sku, stateCode, cityCode) {
+  const url = dealerAPI
+    .replace('{sku}', sku)
+    .replace('{stateCode}', stateCode)
+    .replace('{cityCode}', cityCode);
+
+  const data = await fetchAPI("GET", url);
+  return data;
+}
+
 
 function processDataMapping(data) {
   dataMapping.state_city_master = {};
@@ -114,17 +164,54 @@ function processDataMapping(data) {
   sessionStorage.setItem("dataMapping", JSON.stringify(dataMapping));
 }
 
-export async function getDataMapping() {
+export async function useDataMapping() {
+  const data = await getDataMapping();
+  function setDataMapping(newData) {
+    sessionStorage.setItem("dataMapping", JSON.stringify(newData));
+  }
+  return [data, setDataMapping]
+
+}
+
+async function setSkuAndStateCity() {
+  let getProducts = await fetchProduct();
+  let selectedCityState = await fetchStateCity()
+  dataMapping.sku = getProducts.data.products.items[0].variant_to_colors[0].colors[0].sku;
+  dataMapping.products = {}
+  dataMapping.products.variant = {};
+
+  dataMapping.products.variant = getProducts.data.products.items[0].variant_to_colors;
+  dataMapping.currentlocation = {};
+  dataMapping.currentlocation.state = selectedCityState.state.toUpperCase();
+  dataMapping.currentlocation.city = selectedCityState.city.toUpperCase();
+  dataMapping.currentlocation.stateCode = dataMapping.state_city_master[dataMapping.currentlocation.state][dataMapping.currentlocation.city].stateCode;
+
+  updateDataMapping(dataMapping);
+}
+
+// processDataMapping()
+
+async function getDataMapping() {
+  // debugger
   let data = sessionStorage.getItem("dataMapping");
   if (!data) {
-    const data = await fetchStateCityMaster();
-    processDataMapping(data);
+    let cityMaster = await fetchStateCityMaster();
+    processDataMapping(cityMaster);
+    let { city, state } = await fetchStateCity();
+    const code =
+      dataMapping.state_city_master[state.toUpperCase()][city.toUpperCase()];
+    console.log(code);
+    dataMapping.current_location = {
+      stateCode: code.stateCode, cityCode: code.code, city, state
+    }
     sessionStorage.setItem("dataMapping", JSON.stringify(dataMapping));
     data = sessionStorage.getItem("dataMapping");
+    // setSkuAndStateCity();
   }
   data = JSON.parse(data);
   return data;
 }
+
 
 
 function getRandomId() {
@@ -140,6 +227,7 @@ function generateRandomId() {
   sessionStorage.setItem("booktestridekey", id);
   return getRandomId();
 }
+
 export async function fetchOTP(phoneNum) {
   const reqID = generateRandomId();
   const vehicleName = getMetadata("vehicle-name");
@@ -154,7 +242,9 @@ export async function fetchOTP(phoneNum) {
   });
   console.log(data);
 }
-fetchOTP("8169850484");
+
+//OTP value should be dynamic and should be passed.
+//fetchOTP("8169850484");
 export function verifyOtp(phoneNum, otp) {
   return (
     otp ===
@@ -164,6 +254,7 @@ export function verifyOtp(phoneNum, otp) {
   );
 }
 
+//Verify OTP at frontend
 function hashCode(s) {
   var h = 0,
     l = s.length,
@@ -172,8 +263,4 @@ function hashCode(s) {
   return h;
 }
 
-// const dm = await getDataMapping();
-// console.log(dm);
-// await fetchStateCity();
-// const { state, city } = await fetchStateCity();
-// await fetchProdcut()
+
