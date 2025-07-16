@@ -189,7 +189,7 @@ footer .footer p {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .hero-footer-policy > .default-content-wrapper > p {
