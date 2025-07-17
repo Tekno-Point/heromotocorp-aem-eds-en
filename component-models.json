@@ -893,7 +893,7 @@
     "id": "schema-tag",
     "fields": [
       {
-        "component": "richtext",
+        "component": "text",
         "valueType": "string",
         "name": "schema-object",
         "label": "Schema Object"
