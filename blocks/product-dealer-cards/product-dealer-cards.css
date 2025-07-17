@@ -208,4 +208,7 @@
     .dealer-card {
         font-size: 15px;
     }
+    .dealer-card > div{
+      font-size: 15px;
+    }
 }
