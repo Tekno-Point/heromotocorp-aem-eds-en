@@ -2,8 +2,9 @@
     background-color: #ededed;
 }
 
-.price-listing {
+.block.price-listing {
     display: flex;
+    flex-direction: row;
     gap: 30px;
     padding: 47px 0px 20px 0px;
 }
@@ -59,7 +60,35 @@
     justify-content: space-between;
 }
 
+<<<<<<< HEAD
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>.price-details--info>.row>.col-6 {
+=======
+
+.price-listing
+    > div:nth-child(2)
+    > div
+    > ul
+    > li:nth-child(1)
+    > fieldset
+    > .price-details--info
+    > .row>div p{
+        font-size: 16px;
+    }
+
+    .price-listing > div:nth-child(2) > div >p{
+        font-size: 16px;
+    }
+
+.price-listing
+    > div:nth-child(2)
+    > div
+    > ul
+    > li:nth-child(1)
+    > fieldset
+    > .price-details--info
+    > .row
+    > .col-6 {
+>>>>>>> fc43cfce4ff2fcaf271f122938f69686e30264e2
     width: 45%;
 }
 
@@ -119,9 +148,15 @@
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>span {
     color: silver;
+<<<<<<< HEAD
     /* margin-left: 70px; */
 
     /* position: relative; */
+=======
+    margin-left: 70px;
+    position: relative;
+    cursor: pointer;
+>>>>>>> fc43cfce4ff2fcaf271f122938f69686e30264e2
 }
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>span img {
@@ -150,6 +185,7 @@
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(2)>div {
     display: flex;
+    align-items: center;
     gap: 37px;
 }
 
@@ -166,6 +202,7 @@
     color: #d30000;
     background-color: #fff;
     cursor: pointer;
+   padding: 8px;
 }
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(2)>div>a:nth-child(2) {
@@ -183,12 +220,22 @@
     text-transform: uppercase;
     font-style: italic;
     font-size: 3rem;
+        padding-bottom: 3rem;
 }
 
 .price-listing {
     min-height: 599px;
 }
 
+<<<<<<< HEAD
+=======
+.price-listing > div:nth-child(2) > div > ul > li:nth-child(1) > fieldset>div {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+>>>>>>> fc43cfce4ff2fcaf271f122938f69686e30264e2
 /* images */
 
 .price-listing>div:nth-child(1)>div {
@@ -248,4 +295,8 @@
         font-size: 18px;
         color: rgb(51, 51, 51);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fc43cfce4ff2fcaf271f122938f69686e30264e2

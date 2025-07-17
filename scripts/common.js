@@ -196,7 +196,6 @@ async function setSkuAndStateCity() {
 // processDataMapping()
 
 async function getDataMapping() {
-  // debugger
   let data = sessionStorage.getItem("dataMapping");
   if (!data) {
     let cityMaster = await fetchStateCityMaster();

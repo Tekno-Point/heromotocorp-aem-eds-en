@@ -9,21 +9,34 @@ let accumulated = 0;
 const pixelsPerDegree = 1.5;
 
 export async function decorateProductBanner(block, data) {
-
-
+    let heading;
+    let bottomSection;
+    if (!block.querySelector("h2.heading")) {
+        const props = Array.from(block.children).map((ele) => ele.children);
+        heading = props[0][0].querySelector("h2");
+        heading.classList.add("heading")
+        bottomSection = props[1][0];
+        bottomSection.classList.add("bottom-sec")
+    }
+    else {
+        heading = block.querySelector("h2.heading")
+        bottomSection = block.querySelector(".bottom-sec")
+    }
     block?.querySelector(".middle-sec")?.remove();
     console.log(block, data)
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     const [dataMapping, setDataMapping] = await useDataMapping();
-
+    // debugger
+    dataMapping.banner_price = variantsData[0].variant_price;
+    setDataMapping(dataMapping);
     const getVariantDetailsBySku = sku =>
         allVariantsDetails.find(variant => variant[sku])?.[sku];
 
     const updateMainImage = sku => {
         // debugger;
         const media = getVariantDetailsBySku(sku);
-        const imgEl = block.querySelector('.product-overview__360View .rotate');
+        const imgEl = block.querySelector('.product-banner__360View .rotate');
         if (media?.product?.media_gallery?.length && imgEl) {
             imgEl.src = media.product.media_gallery[0].url;
         }
@@ -54,7 +67,7 @@ export async function decorateProductBanner(block, data) {
             },
                 span(colorLabel),
                 img({
-                    class: "ms-7",
+                    class: "swatch-color",
                     loading: "lazy",
                     src: `https://www.heromotocorp.com${color_swatch_url}`,
                     alt: colorLabel,
@@ -72,8 +85,8 @@ export async function decorateProductBanner(block, data) {
 
     const handleVariantChange = e => {
         const selectedValueIndex = e.target.value;
-        block.querySelectorAll('.form-control').forEach(el => el.classList.remove('active'));
-        e.target.closest('.form-control').classList.add('active');
+        block.querySelectorAll('.product-form-control').forEach(el => el.classList.remove('active'));
+        e.target.closest('.product-form-control').classList.add('active');
 
         const selectedGroup = variantsData.find(v => v.value_index == selectedValueIndex);
         if (selectedGroup) {
@@ -86,14 +99,14 @@ export async function decorateProductBanner(block, data) {
         }
     };
 
-    const variantsDOM = div({ class: "product-overview__variantWrapper d-flex justify-content-lg-center order-2 order-lg-0" },
+    const variantsDOM = div({ class: "product-banner__variantWrapper" },
         div({ class: "variants-wrap" },
             h4({ class: "text" }, "Variants"),
             div({ class: "radio-wrap" },
                 ...variantsData.map(({ value_index, label: variantLabel, variant_price }) => {
                     const isActive = initialVariantGroup.value_index === value_index;
                     const radioProps = {
-                        class: "position-absolute",
+                        class: "input-radio",
                         type: "radio",
                         id: value_index,
                         name: "variants",
@@ -102,11 +115,11 @@ export async function decorateProductBanner(block, data) {
                     };
                     if (isActive) radioProps.checked = true;
 
-                    return div({ class: `form-control p-1 ${isActive ? "active" : ''}` },
-                        div({ class: "mb-12 body text-uppercase weight-heavy" },
+                    return div({ class: `product-form-control  ${isActive ? "active" : ''}` },
+                        div({ class: "price-txt-wrap " },
                             input(radioProps),
-                            label({ for: value_index, class: "d-flex pe-lg-10" }, span(variantLabel)),
-                            div({ class: "ps-11 mt-2" }, span(`₹ ${variant_price.toLocaleString('en-IN')}`))
+                            label({ for: value_index, class: "" }, span(variantLabel)),
+                            div({ class: "price-sec" }, span(`₹ ${variant_price.toLocaleString('en-IN')}`))
                         )
                     );
                 })
@@ -116,12 +129,17 @@ export async function decorateProductBanner(block, data) {
 
     const { product: { media_gallery: [firstImage] } } = getVariantDetailsBySku(initialColor.sku);
 
-    const imageDom = div({ class: "product-overview__360View" },
+    const imageDom = div({ class: "product-banner__360View" },
         div({ class: "hero-360 w-100" },
             div({ class: "rotate-images" }, img({ class: "hero-icon left", src: "/images/rotate-left.png" }), img({ class: "hero-icon right", src: "/images/rotate-right.png" })),
             div({ class: "hero-360" },
                 div({ class: "spritespin-stage" },
-                    img({ class: "rotate", src: firstImage.url })
+                    img({
+                        class: "rotate", src: firstImage.url,
+                        width: "500",
+                        height: "500",
+                        style: "transform: translate3d(0,0,0);"
+                    })
                 )
             ),
             div({ class: "hero-360__" }),
@@ -132,12 +150,15 @@ export async function decorateProductBanner(block, data) {
         h4({ class: "mb-8 weight" }, "Colours"),
         div({ class: "color-wrapp" })
     );
+    block.innerHTML = '';
+    block.append(heading);
 
     block.append(div({ class: "middle-sec" }, variantsDOM, imageDom, colorsDiv));
+    block.append(bottomSection);
 
     renderColors(initialVariantGroup.colors, initialColor.label);
 
-    const mainImage = block.querySelector(".product-overview__360View .rotate");
+    const mainImage = block.querySelector(".product-banner__360View .rotate");
     mainImage.addEventListener("mousedown", (e) => {
         const media = getVariantDetailsBySku(dataMapping.sku);
         rotateImg(e, "act", media.product.media_gallery, mainImage, false);

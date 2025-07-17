@@ -14,7 +14,6 @@ function generateRandomId() {
 
 
 export function sendotp(){
-    debugger;
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 

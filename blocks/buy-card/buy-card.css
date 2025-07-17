@@ -27,11 +27,13 @@
     font-weight: 900;
     font-style: normal;
 }
-
+section .buy-card-container>.buy-card-wrapper{
+    margin-top: 70px;
+}
 .buy-card {
     max-width: 1440px;
     width: 100%;
-    margin-top: 42px;
+    margin-top: 74px;
     display: flex;
     justify-content: center;
 }
@@ -101,6 +103,8 @@
     font-family: "TSTAR-PRO-Medium";
     font-weight: 400;
     color: #303030;
+    font-size: 18px;
+    padding-top: 5px;
 }
 
 .cards-card-body > p:nth-child(3) {
