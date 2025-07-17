@@ -888,5 +888,16 @@
         "value": ""
       }
     ]
+  },
+  {
+    "id": "schema-tag",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "schema-object",
+        "label": "Schema Object"
+      }
+    ]
   }
 ]
