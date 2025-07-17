@@ -31,6 +31,10 @@
 }
 
 @media(max-width: 1023px) {
+    body>.tray-container.open {
+        transform: translateY(-10%);
+    }
+
     .tray-container.open .tray-wrapper .tray-control {
         top: -54px
     }
@@ -42,6 +46,7 @@
 }
 
 .tray-container.disappear {
+    bottom: 0;
     -webkit-transform: translateY(calc(100% + 54px));
     transform: translateY(calc(100% + 54px));
 }
@@ -51,9 +56,19 @@
 }
 
 @media(max-width: 1023px) {
-    .tray-container.disappear {
+
+    body>.tray-container,
+    body>.tray-container.disappear {
+        display: block;
+    }
+
+    body>.tray-container.disappear {
         -webkit-transform: translateY(calc(100% + 122px));
         transform: translateY(calc(100% + 122px))
+    }
+
+    body>.tray-container.disappear.compared {
+        transform: translateY(calc(100% - 37px));
     }
 }
 
@@ -136,7 +151,8 @@
 @media(max-width: 767px) {
     .tray-container .tray-wrapper .tray-control .tray-name {
         font-size: 1rem;
-        max-width: 4.5rem
+        max-width: 4.5rem;
+        white-space: normal;
     }
 }
 
@@ -265,6 +281,10 @@
     cursor: not-allowed
 }
 
+.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta:disabled:hover {
+    background-color: transparent;
+}
+
 .tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta .add-cta-count {
     font-size: 4rem;
     line-height: 100%;
@@ -275,7 +295,8 @@
 
 .tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta .add-cta-label {
     font-size: 1rem;
-    line-height: 120%
+    line-height: 120%;
+    white-space: normal;
 }
 
 .tray-container .tray-wrapper .tray-cta-container {

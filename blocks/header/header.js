@@ -2,6 +2,7 @@ import { getMetadata } from '../../scripts/aem.js';
 import initCompare from './compare.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { appendXF } from './xf.js';
+import { onVehicleAdd, onVehicleRmove } from './compare-components.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -201,23 +202,14 @@ export default async function decorate(block) {
   /* init Compare */
   const addVehicleCheckbox = block.querySelector('.add-vehicle-checkbox');
   const traySecion = document.querySelector('.tray-container');
-  const comparedVehicles = JSON.parse(sessionStorage.getItem('comparedVehicles')) || [];
   
-  if (comparedVehicles && comparedVehicles.length) {
-    traySecion.classList.add('compared');
-  }
-
   addVehicleCheckbox.addEventListener('change', (e) => {
     traySecion.classList.toggle('disappear');
-    debugger;
 
-
-    const sku = e.target.value;
-    if(e.target.checked && !comparedVehicles.includes(sku)) {
-      const newComparedVehicles = [...comparedVehicles, sku];
-      sessionStorage.setItem('comparedVehicles', JSON.stringify(newComparedVehicles));
+    if(e.target.checked) {
+      onVehicleAdd(e);
     } else {
-      
+      onVehicleRmove(e);
     }
 
     if (e.target.dataset.vehiclesRendered) {

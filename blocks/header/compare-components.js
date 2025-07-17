@@ -3,6 +3,7 @@ import { fetchCategory } from './getCategory.js';
 
 const RED_CHEVRON = '/icons/icon-chevron-red.svg';
 const WHITE_CROSS_ICON = '/icons/icon-cross-white.svg';
+const WHITE_CHEVRON = '/icons/icon-chevron-white.svg';
 
 let vehiclesList = [];
 let comparedCardsContainer;
@@ -119,7 +120,7 @@ const trayCard = (vehicle, cardValue) => {
     )
 }
 const toggleTray = () => {
-    traySection.classList.toggle('disappear');    
+    traySection.classList.toggle('disappear');
 }
 
 const traySection = section({ class: 'tray-container disappear open' },
@@ -128,9 +129,9 @@ const traySection = section({ class: 'tray-container disappear open' },
             div({ class: 'tray-toggle-cta' },
                 img({
                     alt: 'Toggle Tray',
-                    src: '/etc.clientlibs/hero-aem-website/clientlibs/clientlib-homepage/resources/images/icon-chevron-white.svg',
+                    src: WHITE_CHEVRON,
                     height: '100%',
-                    width: '100%',
+                    width: '70%',
                 })
             ),
             div({ class: 'tray-name' }, 'COMPARE ITEMS'),
@@ -233,7 +234,6 @@ const onVehicleAdd = (e) => {
     sessionStorage.setItem('comparedVehicles', JSON.stringify(vehicles));
 
     renderTrayCards();
-    drawerSection.classList.toggle('open');
 }
 
 const onVehicleRmove = (e) => {
@@ -259,7 +259,13 @@ const onVehicleRmove = (e) => {
 }
 
 const createVehicleButton = (label, sku, cc, imageDetail) => {
-    return button({ class: 'select-vehicle', 'data-bike-id': sku, onclick: onVehicleAdd },
+    return button({
+        class: 'select-vehicle', 'data-bike-id': sku,
+        onclick: (e) => {
+            onVehicleAdd(e);
+            drawerSection.classList.toggle('open');
+        }
+    },
         img({
             alt: imageDetail.label,
             class: 'vehicle-image',
@@ -277,10 +283,10 @@ const createVehicleButton = (label, sku, cc, imageDetail) => {
 
 const toggleAccordion = ({ currentTarget }) => {
     const toogleButton = currentTarget;
-    // toogleButton.classList.toggle('active-acc');
+    toogleButton.classList.toggle('active-acc');
 
-    // const content = toogleButton.closest('.drawer-accordion-wrapper').querySelector('.drawer-accordion-content');
-    // content.classList.toggle('collapsed');
+    const content = toogleButton.closest('.drawer-accordion-wrapper').querySelector('.drawer-accordion-content');
+    content.classList.toggle('collapsed');
 }
 
 const createAccordion = (label, vehicles) => {
@@ -300,6 +306,11 @@ const createAccordion = (label, vehicles) => {
 
 }
 
+const compareButton = traySection.querySelector('.tray-compare-cta');
+compareButton.addEventListener('click', () => {
+    console.log(sessionStorage.getItem('comparedVehicles'), 'compare clicked');
+});
+
 const renderTrayCards = () => {
     const cardCountLabel = traySection.querySelector('.card-count');
     let sessionVehilces = sessionStorage.getItem('comparedVehicles');
@@ -308,8 +319,13 @@ const renderTrayCards = () => {
     if (!sessionVehilces.length) {
         comparedCardsContainer.replaceChildren(...getTrayAddButtons());
         cardCountLabel.textContent = 0;
+        compareButton.disabled = true;
+        traySection.classList.remove('compared');
         return;
     }
+
+    traySection.classList.add('compared');
+    compareButton.disabled = false;
 
     const sesssionVehLength = sessionVehilces.length;
 
@@ -335,4 +351,4 @@ const renderTrayCards = () => {
 
 renderTrayCards();
 
-export { traySection, drawerSection };
+export { traySection, drawerSection, onVehicleAdd, onVehicleRmove };
