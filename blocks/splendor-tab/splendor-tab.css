@@ -88,7 +88,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 27px;
     list-style: none;
 }
 
@@ -152,6 +152,7 @@
 
     .tab-slide > ul > li:last-child {
         position: static;
+        max-width: 100%;
     }
     .tab-slide > ul > li:last-child > p {
         width: 220px;
@@ -189,4 +190,11 @@
     .tabs-panel{
 padding: 100px 10px;
     }
+
+}
+
+@media (max-width : 322px){
+    .tab-slide > ul{
+    gap: 4px;
+  }
 }
