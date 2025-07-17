@@ -1,6 +1,6 @@
 import { fetchProduct, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, input, label, h4, span, img, i } from "../../scripts/dom-helpers.js";
-pubsub.subscribe('fire', decorateProductBanner)
+pubsub.subscribe('product-banner-event', decorateProductBanner)
 
 let isDragging = false;
 let startX = 0;
@@ -185,6 +185,8 @@ export async function decorateProductBanner(block, data) {
         }
         );
     }
+    pubsub.publish('price-listing-event');
+    pubsub.publish('product-dealer-cards-event');
 }
 
 
