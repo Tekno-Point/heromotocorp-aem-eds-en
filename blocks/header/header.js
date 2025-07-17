@@ -110,8 +110,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  */
 export default async function decorate(block) {
   // load nav as fragment
-  await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
-  return block;
+  
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
@@ -194,7 +193,6 @@ const navWrapper2 = document.querySelector('.nav-wrapper');
       navWrapper2.style.transform = 'translateY(0)';
     }
   });
-
-
-  
+  await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
+  return block;  
 }
