@@ -2,8 +2,15 @@ import { fetchProduct, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, input, label, h4, span, img, i } from "../../scripts/dom-helpers.js";
 pubsub.subscribe('fire', decorateProductBanner)
 
+let isDragging = false;
+let startX = 0;
+let currentFrame = 0;
+let accumulated = 0;
+const pixelsPerDegree = 1.5;
+
 export async function decorateProductBanner(block, data) {
-    // debugger;
+
+
     block?.querySelector(".middle-sec")?.remove();
     console.log(block, data)
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
@@ -14,6 +21,7 @@ export async function decorateProductBanner(block, data) {
         allVariantsDetails.find(variant => variant[sku])?.[sku];
 
     const updateMainImage = sku => {
+        debugger;
         const media = getVariantDetailsBySku(sku);
         const imgEl = block.querySelector('.product-overview__360View .rotate');
         if (media?.product?.media_gallery?.length && imgEl) {
@@ -110,7 +118,7 @@ export async function decorateProductBanner(block, data) {
 
     const imageDom = div({ class: "product-overview__360View" },
         div({ class: "hero-360 w-100" },
-            div({ class: "hero-360__" }, i({ class: "hero-icon" }), i({ class: "hero-icon right" })),
+            div({ class: "rotate-images" }, img({ class: "hero-icon left", src: "/images/rotate-left.png" }), img({ class: "hero-icon right", src: "/images/rotate-right.png" })),
             div({ class: "hero-360" },
                 div({ class: "spritespin-stage" },
                     img({ class: "rotate", src: firstImage.url })
@@ -128,8 +136,125 @@ export async function decorateProductBanner(block, data) {
     block.append(div({ class: "middle-sec" }, variantsDOM, imageDom, colorsDiv));
 
     renderColors(initialVariantGroup.colors, initialColor.label);
+
+    const mainImage = block.querySelector(".product-overview__360View .rotate");
+    mainImage.addEventListener("mousedown", (e) => {
+        const media = getVariantDetailsBySku(dataMapping.sku);
+        rotateImg(e, "act", media.product.media_gallery, mainImage, false);
+    });
+    mainImage.addEventListener("touchstart", (e) => {
+        const media = getVariantDetailsBySku(dataMapping.sku);
+        rotateImg(e.touches[0], "activeIndex", media.product.media_gallery, mainImage, true);
+    });
+
+    // Add icon click rotation
+    const leftIcon = block.querySelector('.hero-icon.left');
+    const rightIcon = block.querySelector('.hero-icon.right');
+
+    if (leftIcon && rightIcon) {
+        leftIcon.addEventListener('click', () => {
+            const media = getVariantDetailsBySku(dataMapping.sku);
+            const rotateUrls = media.product.media_gallery;
+            rotateFrame(rotateUrls, mainImage, -1)
+        });
+        rightIcon.addEventListener('click', () => {
+            const media = getVariantDetailsBySku(dataMapping.sku);
+            const rotateUrls = media.product.media_gallery;
+            rotateFrame(rotateUrls, mainImage, 1)
+        }
+        );
+    }
 }
+
 
 export default async function decorate(block) {
     decorateProductBanner(block);
 }
+
+const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {
+    isDragging = true;
+    startX = event.clientX;
+
+    const imgRotateUrls = rotateUrlString;
+    const totalFrames = imgRotateUrls.length;
+    const degreesPerFrame = 360 / totalFrames;
+    const pixelsPerFrame = degreesPerFrame * pixelsPerDegree;
+
+    document.body.style.userSelect = 'none';
+
+    const onMove = (e) => {
+        if (!isDragging) return;
+        const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+        const deltaX = clientX - startX;
+        accumulated += deltaX;
+        startX = clientX;
+
+        const frameShift = Math.floor(accumulated / pixelsPerFrame);
+        if (frameShift !== 0) {
+            accumulated -= frameShift * pixelsPerFrame;
+            currentFrame = (currentFrame + frameShift + totalFrames) % totalFrames;
+            imgEl.src = imgRotateUrls[currentFrame].url;
+        }
+    };
+
+    const onEnd = () => {
+        isDragging = false;
+        document.body.style.userSelect = ''; // re-enable selection
+        window.removeEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+        window.removeEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+    };
+
+    window.addEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+    window.addEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+};
+
+// Helper to shift frame on icon click
+const rotateFrame = (rotateUrlString, imgEl, direction = 1) => {
+    const imgRotateUrls = rotateUrlString;
+    const totalFrames = imgRotateUrls.length;
+    currentFrame = (currentFrame + direction + totalFrames) % totalFrames;
+    imgEl.src = imgRotateUrls[currentFrame].url;
+};
+
+
+
+/* const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {
+    isDragging = true;
+    startX = event.clientX;
+
+    // const rotateUrlString = isMobile
+    //     ? arrayImagesDet[activeIndex].mob_img_urls
+    //     : arrayImagesDet[activeIndex].desk_img_urls;
+
+    const imgRotateUrls = rotateUrlString;
+    const totalFrames = imgRotateUrls.length;
+    const degreesPerFrame = 360 / totalFrames;
+    const pixelsPerFrame = degreesPerFrame * pixelsPerDegree;
+
+    const onMove = (e) => {
+        if (!isDragging) return;
+        const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+        const deltaX = clientX - startX;
+        accumulated += deltaX;
+        startX = clientX;
+
+        const frameShift = Math.floor(accumulated / pixelsPerFrame);
+        if (frameShift !== 0) {
+            accumulated -= frameShift * pixelsPerFrame;
+            currentFrame = (currentFrame + frameShift + totalFrames) % totalFrames;
+            // debugger;
+            imgEl.src = imgRotateUrls[currentFrame].url;
+        }
+    };
+
+    const onEnd = () => {
+        isDragging = false;
+        window.removeEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+        window.removeEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+    };
+
+    window.addEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+    window.addEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+
+} */
+
