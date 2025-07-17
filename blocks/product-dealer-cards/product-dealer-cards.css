@@ -114,3 +114,14 @@
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   padding: 24px;
 }
+
+
+.product-dealer-cards-container>.product-dealer-cards-wrapper{
+  max-width: 1350px;
+  width: 100%;
+}
+
+.product-dealer-cards>.swiper{
+  max-width: 1365px;
+  width: 100%;
+}
