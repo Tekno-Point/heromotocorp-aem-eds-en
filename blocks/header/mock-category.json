@@ -1,0 +1,989 @@
+{
+    "products": {
+        "total_count": 29,
+        "page_info": {
+            "current_page": 1,
+            "page_size": 40,
+            "total_pages": 1
+        },
+        "items": [
+            {
+                "name": "HOG Membership",
+                "id": 2743,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "0.1",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "eshop-membership",
+                        "level": 2
+                    }
+                ],
+                "sku": "hog-membership",
+                "url_key": "hog-membership",
+                "image": {
+                    "url": "https://admin.heromotocorp.com/media/catalog/product/placeholder/default/no-img_5.jpg",
+                    "label": "HOG Membership"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 2500,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Full membership",
+                "id": 2698,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "0.1",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "eshop-membership",
+                        "level": 2
+                    }
+                ],
+                "sku": "full-membership",
+                "url_key": "full-membership",
+                "image": {
+                    "url": "https://admin.heromotocorp.com/media/catalog/product/placeholder/default/no-img_5.jpg",
+                    "label": "Full membership"
+                },
+                "__typename": "SimpleProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 5000,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Full Life Membership",
+                "id": 2695,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "0.1",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "eshop-membership",
+                        "level": 2
+                    }
+                ],
+                "sku": "full-life-membership",
+                "url_key": "full-life-membership",
+                "image": {
+                    "url": "https://admin.heromotocorp.com/media/catalog/product/placeholder/default/no-img_5.jpg",
+                    "label": "Full Life Membership"
+                },
+                "__typename": "SimpleProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 50000,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Associate Membership",
+                "id": 2689,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "0.1",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "eshop-membership",
+                        "level": 2
+                    }
+                ],
+                "sku": "associate-membership",
+                "url_key": "associate-membership",
+                "image": {
+                    "url": "https://admin.heromotocorp.com/media/catalog/product/placeholder/default/no-img_5.jpg",
+                    "label": "Associate Membership"
+                },
+                "__typename": "SimpleProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 2500,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Associate Life Membership",
+                "id": 2692,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "0.1",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "eshop-membership",
+                        "level": 2
+                    }
+                ],
+                "sku": "associate-life-membership",
+                "url_key": "associate-life-membership",
+                "image": {
+                    "url": "https://admin.heromotocorp.com/media/catalog/product/placeholder/default/no-img_5.jpg",
+                    "label": "Associate Life Membership"
+                },
+                "__typename": "SimpleProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 25000,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "GLAMOUR",
+                "id": 1704,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "125",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/executive",
+                        "level": 3
+                    }
+                ],
+                "sku": "glamour",
+                "url_key": "glamour",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/executive/glamour/HGLAADRSCFIBBK/360/1.png",
+                    "label": "GLAMOUR"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 83598,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XPULSE 210",
+                "id": 2301,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "210",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/premia",
+                        "level": 3
+                    }
+                ],
+                "sku": "xpulse-210",
+                "url_key": "xpulse-210",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/performance/xpulse-210/HXPLBTDSSFIALS/360/1.png",
+                    "label": "XPULSE 210"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 175800,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XTREME 250R",
+                "id": 2298,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "250",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/premia",
+                        "level": 3
+                    }
+                ],
+                "sku": "xtreme-250r",
+                "url_key": "xtreme-250r",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/premia/xtreme-250r/HX25ACDSCFIFSR/360/1.png",
+                    "label": "XTREME 250R"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 179900,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "SPLENDOR+ XTEC 2.0",
+                "id": 2200,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "97.2",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/practical",
+                        "level": 3
+                    }
+                ],
+                "sku": "splendor-plus-xtec-2-0",
+                "url_key": "splendor-plus-xtec-2-0",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/practical/splendor-plus-xtec-2-0/HSPPLDRSCFIBHG/360/1.png",
+                    "label": "SPLENDOR+ XTEC 2.0"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 83751,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XOOM 125",
+                "id": 2361,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "125",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "scooters",
+                        "level": 2
+                    }
+                ],
+                "sku": "xoom-125",
+                "url_key": "xoom-125",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/scooters/xoom-125/HXOMADSSCFIMNL/360/1.png",
+                    "label": "XOOM 125"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 86900,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "KARIZMA XMR",
+                "id": 2182,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "210",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/premia",
+                        "level": 3
+                    }
+                ],
+                "sku": "karizma-xmr",
+                "url_key": "karizma-xmr",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/premia/karizma-xmr/HKZMADSSCFIIYL/360/1.png",
+                    "label": "KARIZMA XMR"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 181400,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "Harley-Davidson X440",
+                "id": 2167,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "440",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/premia",
+                        "level": 3
+                    }
+                ],
+                "sku": "harley-x440",
+                "url_key": "harley-x440",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/premia/harley-x440/HX44ATDSCFIDBL/360/1.png",
+                    "label": "Harley-Davidson X440"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 239500,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "MAVRICK 440",
+                "id": 2149,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "440",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/premia",
+                        "level": 3
+                    }
+                ],
+                "sku": "mavrick-440",
+                "url_key": "mavrick-440",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/premia/mavrick-440/HM44ACDSCFIMGG/360/1.png",
+                    "label": "MAVRICK 440"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 199500,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XTREME 125R",
+                "id": 2109,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "125",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/performance",
+                        "level": 3
+                    }
+                ],
+                "sku": "xtreme-125r",
+                "url_key": "xtreme-125r",
+                "image": {
+                    "url": "https://heromotocorp.com/content/dam/hero-commerce/in/en/products/performance/xtreme-125r/HXTRACSSCFICTB/360/1.png",
+                    "label": "XTREME 125R"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 96425,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XTREME 160R 4V",
+                "id": 2072,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "163.2 ",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/performance",
+                        "level": 3
+                    }
+                ],
+                "sku": "xtreme-160r-4v",
+                "url_key": "xtreme-160r-4v",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/performance/xtreme-160r-4v/HXTMACDSCFIMBS/360/1.png",
+                    "label": "XTREME 160R 4V"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 139000,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XPULSE 200 4V",
+                "id": 2071,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "199.6",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/performance",
+                        "level": 3
+                    }
+                ],
+                "sku": "xpulse-200-4v",
+                "url_key": "xpulse-200-4v",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/performance/xpulse-200-4v/HXPLGDDSSFITBK/360/1.png",
+                    "label": "XPULSE 200 4V"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 147391,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "SPLENDOR+ XTEC",
+                "id": 2070,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "97.2",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/practical",
+                        "level": 3
+                    }
+                ],
+                "sku": "splendor-plus-xtec",
+                "url_key": "splendor-plus-xtec",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/practical/splendor-plus-xtec/HSPUMTSSCFIFWT/360/1.png",
+                    "label": "SPLENDOR+ XTEC"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 83251,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XOOM 160",
+                "id": 2328,
+                "newly_launched": 0,
+                "rfm_enable": 0,
+                "type_of_cc": "160",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "scooters",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    }
+                ],
+                "sku": "xoom-160",
+                "url_key": "xoom-160",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/scooters/xoom-160/HXOOADSSCFIMRG/360/1.png",
+                    "label": "XOOM 160"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 148500,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "SUPER SPLENDOR XTEC",
+                "id": 1811,
+                "newly_launched": 1,
+                "rfm_enable": 1,
+                "type_of_cc": "124.7",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/executive",
+                        "level": 3
+                    }
+                ],
+                "sku": "super-splendor-xtec",
+                "url_key": "super-splendor-xtec",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/executive/super-splendor-xtec/HSPSADRSCFIBRD/360/1.png",
+                    "label": "SUPER SPLENDOR XTEC"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 88628,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "DESTINI 125",
+                "id": 2239,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "124.7",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "scooters",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    }
+                ],
+                "sku": "new-destini-125",
+                "url_key": "new-destini-125",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/scooters/new-destini-125/HDESEDSZCFIPBE/360/1.png",
+                    "label": "DESTINI 125"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 80450,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "HF DELUXE",
+                "id": 1312,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "97.2",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/practical",
+                        "level": 3
+                    }
+                ],
+                "sku": "hf-deluxe",
+                "url_key": "hf-deluxe",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/practical/hf-deluxe/HDLHEIRSCFIBKG/360/1.png",
+                    "label": "HF DELUXE"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 59998,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "PLEASURE+ XTEC",
+                "id": 2069,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "110.9",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "scooters",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    }
+                ],
+                "sku": "pleasure-plus-xtec",
+                "url_key": "pleasure-plus-xtec",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/scooters/pleasure-plus-xtec/HPLNCDRZCFIPBE/360/1.png",
+                    "label": "PLEASURE+ XTEC"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 71763,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "PASSION +",
+                "id": 1879,
+                "newly_launched": 1,
+                "rfm_enable": 1,
+                "type_of_cc": "97.2",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/executive",
+                        "level": 3
+                    }
+                ],
+                "sku": "passion-plus",
+                "url_key": "passion-plus",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/executive/passion-plus/HPPLYIRSCFIBHG/360/1.png",
+                    "label": "PASSION +"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 82451,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "GLAMOUR XTEC",
+                "id": 1491,
+                "newly_launched": 1,
+                "rfm_enable": 0,
+                "type_of_cc": "124.7",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/executive",
+                        "level": 3
+                    }
+                ],
+                "sku": "glamour-xtec",
+                "url_key": "glamour-xtec",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/executive/glamour-xtec/HGLMFDSSCFIMNB/360/1.png",
+                    "label": "GLAMOUR XTEC"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 90498,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "SPLENDOR +",
+                "id": 1379,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "97.2",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/practical",
+                        "level": 3
+                    }
+                ],
+                "sku": "splendor-plus",
+                "url_key": "splendor-plus",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/practical/splendor-plus/HSPUNIRSCFIMAG/360/1.png",
+                    "label": "SPLENDOR +"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 79426,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "HF 100",
+                "id": 1471,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "97.2",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/practical",
+                        "level": 3
+                    }
+                ],
+                "sku": "hf-100",
+                "url_key": "hf-100",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/practical/hf-100/HHNDJDRKCFIRBK/360/1.png",
+                    "label": "HF 100"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 59018,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "DESTINI PRIME",
+                "id": 2011,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "124.6",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "scooters",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    }
+                ],
+                "sku": "destini-prime",
+                "url_key": "destini-prime",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/scooters/destini-prime/HDESPDRLMFIPSW/360/1.png",
+                    "label": "DESTINI PRIME"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 71999,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XOOM",
+                "id": 1807,
+                "newly_launched": 1,
+                "rfm_enable": 1,
+                "type_of_cc": "110.9",
+                "premia": 0,
+                "categories": [
+                    {
+                        "url_path": "scooters",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "two-wheelers",
+                        "level": 2
+                    }
+                ],
+                "sku": "xoom",
+                "url_key": "xoom",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/scooters/xoom/HXOMYDSZCFIMAO/360/1.png",
+                    "label": "XOOM"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 71484,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            },
+            {
+                "name": "XTREME 160R",
+                "id": 2073,
+                "newly_launched": 0,
+                "rfm_enable": 1,
+                "type_of_cc": "163.2 ",
+                "premia": 1,
+                "categories": [
+                    {
+                        "url_path": "motorcycles",
+                        "level": 2
+                    },
+                    {
+                        "url_path": "motorcycles/performance",
+                        "level": 3
+                    }
+                ],
+                "sku": "xtreme-160r",
+                "url_key": "xtreme-160r",
+                "image": {
+                    "url": "https://www.heromotocorp.com/content/dam/hero-commerce/in/en/products/performance/xtreme-160r/HXTRMDSSCFIMGR/360/1.png",
+                    "label": "XTREME 160R"
+                },
+                "__typename": "ConfigurableProduct",
+                "price_range": {
+                    "minimum_price": {
+                        "regular_price": {
+                            "value": 111611,
+                            "currency": "INR"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

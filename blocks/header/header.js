@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../../scripts/scripts.js';
+import { loadFragment } from '../../blocks/fragment/fragment.js';
+import initCompare from './compare.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -119,7 +120,7 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools' , 'bar'];
+  const classes = ['brand', 'sections', 'tools', 'bar'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -165,21 +166,22 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
 
- 
+
   // changes  for header 
 
 
   window.addEventListener('scroll', function () {
-  const header = document.querySelector('.nav-wrapper'); // or .header
-  if (window.scrollY > 50) {
-    header.style.transform = 'translateY(-100%)';
-  } else {
-    header.style.transform = 'translateY(0)';
-  }
-});
+    const header = document.querySelector('.nav-wrapper'); // or .header
+    if (window.scrollY > 50) {
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+  });
 
+  initCompare();
 
-const navWrapper2 = document.querySelector('.nav-wrapper');
+  const navWrapper2 = document.querySelector('.nav-wrapper');
   const heroSection = document.querySelector('.compare-container');
 
   window.addEventListener('scroll', () => {
@@ -192,6 +194,5 @@ const navWrapper2 = document.querySelector('.nav-wrapper');
     }
   });
 
-
-  
 }
+
