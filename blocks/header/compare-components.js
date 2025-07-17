@@ -5,9 +5,9 @@ const RED_CHEVRON = '/icons/icon-chevron-red.svg';
 const WHITE_CROSS_ICON = '/icons/icon-cross-white.svg';
 
 let vehiclesList = [];
-let sessionVehilces = JSON.parse(sessionStorage.getItem('compareVehicles')) || [];
 let comparedCardsContainer;
-let vehiclePriceData = JSON.parse(sessionStorage.getItem('vehiclePriceData'));
+let vehiclePriceData = sessionStorage.getItem('vehiclePriceData');
+vehiclePriceData = (vehiclePriceData && vehiclePriceData != 'undefined') ? JSON.parse(vehiclePriceData) : []; // Default to empty array if null or undefined
 
 const getSkuItem = (sku) => {
     const vehicles = vehiclePriceData.products.items;
@@ -27,16 +27,14 @@ const toggleDrawer = ({ target }) => {
     drawerSection.classList.toggle('open');
 }
 
-const initVehicleRender = async (e) => {
-    const currentTarget = e.currentTarget;
-    toggleDrawer(e);
-    if (currentTarget.dataset.vehiclesRendered) {
-        return;
-    }
+const initVehicleRender = async () => {
+    traySection.removeEventListener('mouseover', initVehicleRender);
 
     const { vehiclePriceData, vehiclesObj } = await fetchCategory();
     vehiclesList = vehiclePriceData.products.items;
-    sessionStorage.setItem('vehiclePriceData', JSON.stringify(vehiclePriceData));
+    if (vehiclesList) {
+        sessionStorage.setItem('vehiclePriceData', JSON.stringify(vehiclePriceData));
+    }
 
     const { motorcycles, scooters } = vehiclesObj;
 
@@ -49,14 +47,11 @@ const initVehicleRender = async (e) => {
     const premiumAccordion = createAccordion('Premium', motorcycles['premium']);
     const motorcyclesDrawer = drawerSection.querySelector('#motorcycles-drawer');
     motorcyclesDrawer.append(hunccAccordion, one25ccAccordion, premiumAccordion);
-
-    currentTarget.dataset.vehiclesRendered = true;
-
 }
 
 const cards = [
     div({ class: 'tray-card-box' },
-        button({ class: 'tray-add-cta', value: '1', onclick: initVehicleRender },
+        button({ class: 'tray-add-cta', value: '1', onclick: toggleDrawer },
             div({ class: 'add-cta-count' }, '01'),
             div({ class: 'add-cta-label' }, 'Add at least two vehicle to compare')
         )
@@ -92,11 +87,6 @@ const getTrayAddButtons = (index) => {
     return buttons;
 };
 
-const clearSessionVehicles = () => {
-    sessionStorage.removeItem('compareVehicles');
-    renderTrayCards();
-}
-
 const trayCard = (vehicle, cardValue) => {
     let price = vehicle.price_range.minimum_price.regular_price.value;
 
@@ -119,19 +109,22 @@ const trayCard = (vehicle, cardValue) => {
                     span({}, '₹' + price + '*')
                 )
             ),
-            button({ class: 'tray-remove-cta', value: cardValue, onclick: onVehicleRmove},
+            button({ class: 'tray-remove-cta', value: cardValue, 'data-bike-id': vehicle.sku, onclick: onVehicleRmove },
                 img({
                     alt: 'Remove Vehicle',
-                    src:  WHITE_CROSS_ICON
+                    src: WHITE_CROSS_ICON
                 })
             )
         )
     )
 }
+const toggleTray = () => {
+    traySection.classList.toggle('disappear');    
+}
 
 const traySection = section({ class: 'tray-container disappear open' },
     div({ class: 'tray-wrapper' },
-        button({ class: 'tray-control' },
+        button({ class: 'tray-control', onclick: toggleTray },
             div({ class: 'tray-toggle-cta' },
                 img({
                     alt: 'Toggle Tray',
@@ -158,6 +151,14 @@ const traySection = section({ class: 'tray-container disappear open' },
         )
     )
 );
+
+traySection.addEventListener('mouseover', initVehicleRender);
+
+function clearSessionVehicles() {
+    traySection.classList.toggle('disappear')
+    sessionStorage.removeItem('comparedVehicles');
+    renderTrayCards();
+}
 
 comparedCardsContainer = traySection.querySelector('#compared-cards');
 
@@ -208,9 +209,13 @@ const drawerSection = section({ class: 'drawer-container opaque', onclick: toggl
 );
 
 const onVehicleAdd = (e) => {
-    const comparedVehicle = sessionStorage.getItem('compareVehicles');
+    let comparedVehicle = sessionStorage.getItem('comparedVehicles');
 
-    const selectedVehicleSku = e.currentTarget.dataset.bikeId;
+    if (comparedVehicle == 'undefined' || !comparedVehicle) {
+        comparedVehicle = null
+    }
+
+    const selectedVehicleSku = e.currentTarget.dataset.bikeId || e.currentTarget.value;
 
     let vehicles = [];
 
@@ -225,16 +230,20 @@ const onVehicleAdd = (e) => {
     const vehicle = getSkuItem(selectedVehicleSku);
     console.log(vehicle, 'selected-sku');
 
-    sessionStorage.setItem('compareVehicles', JSON.stringify(vehicles));
+    sessionStorage.setItem('comparedVehicles', JSON.stringify(vehicles));
 
     renderTrayCards();
     drawerSection.classList.toggle('open');
 }
 
 const onVehicleRmove = (e) => {
-    const comparedVehicle = sessionStorage.getItem('compareVehicles');
+    let comparedVehicle = sessionStorage.getItem('comparedVehicles');
 
-    const selectedVehicle = e.currentTarget.dataset.bikeId;
+    if (comparedVehicle == 'undefined' || !comparedVehicle) {
+        comparedVehicle = null
+    }
+
+    const selectedVehicle = e.currentTarget.dataset.bikeId || e.cardCountLabel.value;
 
     let vehicles = [];
 
@@ -244,7 +253,7 @@ const onVehicleRmove = (e) => {
 
     vehicles.splice(vehicles.indexOf(selectedVehicle), 1);
 
-    sessionStorage.setItem('compareVehicles', JSON.stringify(vehicles));
+    sessionStorage.setItem('comparedVehicles', JSON.stringify(vehicles));
 
     renderTrayCards();
 }
@@ -268,10 +277,10 @@ const createVehicleButton = (label, sku, cc, imageDetail) => {
 
 const toggleAccordion = ({ currentTarget }) => {
     const toogleButton = currentTarget;
-    toogleButton.classList.toggle('active-acc');
+    // toogleButton.classList.toggle('active-acc');
 
-    const content = toogleButton.closest('.drawer-accordion-wrapper').querySelector('.drawer-accordion-content');
-    content.classList.toggle('collapsed');
+    // const content = toogleButton.closest('.drawer-accordion-wrapper').querySelector('.drawer-accordion-content');
+    // content.classList.toggle('collapsed');
 }
 
 const createAccordion = (label, vehicles) => {
@@ -293,10 +302,12 @@ const createAccordion = (label, vehicles) => {
 
 const renderTrayCards = () => {
     const cardCountLabel = traySection.querySelector('.card-count');
-    const sessionVehilces = JSON.parse(sessionStorage.getItem('compareVehicles')) || [];
+    let sessionVehilces = sessionStorage.getItem('comparedVehicles');
+    sessionVehilces = (sessionVehilces && sessionVehilces != 'undefined') ? JSON.parse(sessionVehilces) : []; // Default to empty array if null or undefined
 
     if (!sessionVehilces.length) {
         comparedCardsContainer.replaceChildren(...getTrayAddButtons());
+        cardCountLabel.textContent = 0;
         return;
     }
 

@@ -32,7 +32,7 @@
 
 @media(max-width: 1023px) {
     .tray-container.open .tray-wrapper .tray-control {
-        top:-54px
+        top: -54px
     }
 }
 
@@ -46,9 +46,13 @@
     transform: translateY(calc(100% + 54px));
 }
 
+.tray-container.disappear.compared {
+    transform: translateY(calc(100%));
+}
+
 @media(max-width: 1023px) {
     .tray-container.disappear {
-        -webkit-transform:translateY(calc(100% + 122px));
+        -webkit-transform: translateY(calc(100% + 122px));
         transform: translateY(calc(100% + 122px))
     }
 }
@@ -69,13 +73,13 @@
 
 @media(min-width: 1024px)and (max-width: 1199px) {
     .tray-container .tray-wrapper {
-        padding:2rem 2.83vw
+        padding: 2rem 2.83vw
     }
 }
 
 @media(max-width: 767px) {
     .tray-container .tray-wrapper {
-        padding:1.5rem 1rem
+        padding: 1.5rem 1rem
     }
 }
 
@@ -94,7 +98,7 @@
 
 @media(max-width: 1023px) {
     .tray-container .tray-wrapper .tray-control {
-        top:-122px
+        top: -122px
     }
 }
 
@@ -131,7 +135,7 @@
 
 @media(max-width: 767px) {
     .tray-container .tray-wrapper .tray-control .tray-name {
-        font-size:1rem;
+        font-size: 1rem;
         max-width: 4.5rem
     }
 }
@@ -149,13 +153,13 @@
 
 @media(max-width: 767px) {
     .tray-container .tray-wrapper .tray-control .tray-count .card-max-dsk {
-        display:none
+        display: none
     }
 }
 
 @media(min-width: 768px) {
     .tray-container .tray-wrapper .tray-control .tray-count .card-max-mob {
-        display:none
+        display: none
     }
 }
 
@@ -168,7 +172,7 @@
 
 @media(max-width: 1023px) {
     .tray-container .tray-wrapper .tray-card-container {
-        -webkit-box-orient:vertical;
+        -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
@@ -183,7 +187,7 @@
 
 @media(max-width: 767px) {
     .tray-container .tray-wrapper .tray-card-container .tray-card-box:nth-child(3) {
-        display:none
+        display: none
     }
 }
 
@@ -205,7 +209,7 @@
 
 @media(min-width: 1024px)and (max-width: 1279px) {
     .tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-card-wrapper {
-        -webkit-column-gap:.875rem;
+        -webkit-column-gap: .875rem;
         -moz-column-gap: .875rem;
         column-gap: .875rem
     }
@@ -314,7 +318,7 @@
 
 @media(max-width: 767px) {
     .tray-container .tray-wrapper .tray-cta-container .tray-compare-cta {
-        padding:.625rem 2.125rem
+        padding: .625rem 2.125rem
     }
 }
 
@@ -352,7 +356,7 @@
 
 @media(max-width: 767px) {
     .drawer-container {
-        -webkit-transform:translateY(100%);
+        -webkit-transform: translateY(100%);
         transform: translateY(100%);
         -webkit-box-pack: unset;
         -ms-flex-pack: unset;
@@ -369,7 +373,7 @@
 }
 
 .drawer-container.opaque {
-    background-color: rgba(0,0,0,.5)
+    background-color: rgba(0, 0, 0, .5)
 }
 
 .drawer-container button {
@@ -397,13 +401,15 @@
 
 @media(max-width: 767px) {
     .drawer-container .drawer-wrapper {
-        width:100%;
+        width: 100%;
         height: 85%;
         padding: 2rem 1rem
     }
 }
 
-.drawer-container .drawer-wrapper .homepage-redesign-dropdown-menu,.drawer-container .drawer-wrapper .mobile-menu,.drawer-container .drawer-wrapper .our-range-fragment {
+.drawer-container .drawer-wrapper .homepage-redesign-dropdown-menu,
+.drawer-container .drawer-wrapper .mobile-menu,
+.drawer-container .drawer-wrapper .our-range-fragment {
     display: none
 }
 
@@ -416,7 +422,7 @@
 
 @media(max-width: 767px) {
     .drawer-container .drawer-wrapper .drawer-heading {
-        font-size:1.25rem
+        font-size: 1.25rem
     }
 }
 
@@ -456,7 +462,7 @@
 
 @media(max-width: 767px) {
     .drawer-container .drawer-wrapper .drawer-tabs label {
-        font-size:1rem
+        font-size: 1rem
     }
 }
 
@@ -517,7 +523,7 @@
 
 @media(max-width: 767px) {
     .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-icon {
-        width:1rem;
+        width: 1rem;
         height: .625rem
     }
 }
@@ -539,7 +545,7 @@
 
 @media(max-width: 767px) {
     .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label {
-        font-size:1rem
+        font-size: 1rem
     }
 }
 
@@ -576,7 +582,7 @@
 
 @media(max-width: 767px) {
     .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle {
-        -webkit-column-gap:4rem;
+        -webkit-column-gap: 4rem;
         -moz-column-gap: 4rem;
         column-gap: 4rem
     }
@@ -589,7 +595,7 @@
 
 @media(max-width: 767px) {
     .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-image {
-        width:92px;
+        width: 92px;
         height: 58px
     }
 }
@@ -611,7 +617,7 @@
 
 @media(max-width: 767px) {
     .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-label {
-        font-size:1.25rem
+        font-size: 1.25rem
     }
 }
 
@@ -631,7 +637,7 @@
 
 @media(max-width: 767px) {
     .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-engine {
-        font-size:.75rem
+        font-size: .75rem
     }
 }
 
@@ -642,4 +648,12 @@
     transition: -webkit-transform .35s;
     transition: transform .35s;
     transition: transform .35s, -webkit-transform .35s
+}
+
+.drawer-content-motorcycles .homepage-placeholder-div {
+    display: block;
+}
+
+.drawer-content-scooters .homepage-placeholder-div {
+    display: block;
 }

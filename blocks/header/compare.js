@@ -1,4 +1,4 @@
-import {traySection, drawerSection} from './compare-components.js';
+import { traySection, drawerSection } from './compare-components.js';
 
 const compareTray = () => {
   document.body.appendChild(traySection);
@@ -10,8 +10,8 @@ const compareDrawer = () => {
 
 
 const initCompare = () => {
-    compareTray();
-    compareDrawer();
+  compareTray();
+  compareDrawer();
 }
 
 export default initCompare;

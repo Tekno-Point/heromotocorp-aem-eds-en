@@ -111,7 +111,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  */
 export default async function decorate(block) {
   // load nav as fragment
-  
+
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
@@ -197,6 +197,37 @@ export default async function decorate(block) {
   });
 
   await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
-  return block;  
+
+  /* init Compare */
+  const addVehicleCheckbox = block.querySelector('.add-vehicle-checkbox');
+  const traySecion = document.querySelector('.tray-container');
+  const comparedVehicles = JSON.parse(sessionStorage.getItem('comparedVehicles')) || [];
+  
+  if (comparedVehicles && comparedVehicles.length) {
+    traySecion.classList.add('compared');
+  }
+
+  addVehicleCheckbox.addEventListener('change', (e) => {
+    traySecion.classList.toggle('disappear');
+    debugger;
+
+
+    const sku = e.target.value;
+    if(e.target.checked && !comparedVehicles.includes(sku)) {
+      const newComparedVehicles = [...comparedVehicles, sku];
+      sessionStorage.setItem('comparedVehicles', JSON.stringify(newComparedVehicles));
+    } else {
+      
+    }
+
+    if (e.target.dataset.vehiclesRendered) {
+      return;
+    }
+
+    initCompare();
+    e.target.dataset.vehiclesRendered = true;
+  });
+
+  return block;
 }
 
