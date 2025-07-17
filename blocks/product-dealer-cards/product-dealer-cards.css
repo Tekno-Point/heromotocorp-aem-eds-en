@@ -1,4 +1,4 @@
-.cards > ul {
+.product-dealer-cards .cards > ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -7,20 +7,20 @@
     grid-gap: 24px;
 }
 
-.cards > ul > li {
+.product-dealer-cards .cards > ul > li {
     border: 1px solid #dadada;
     background-color: var(--background-color);
 }
 
-.cards .cards-card-body {
+.product-dealer-cards .cards .cards-card-body {
     margin: 16px;
 }
 
-.cards .cards-card-image {
+.product-dealer-cards .cards .cards-card-image {
     line-height: 0;
 }
 
-.cards > ul > li img {
+.product-dealer-cards .cards > ul > li img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
@@ -28,13 +28,13 @@
 /* ============================= */
 /* DROPDOWN STYLING */
 /* ============================= */
-.custom-select-wrapper {
+.product-dealer-cards .custom-select-wrapper {
     width: 100%;
     max-width: 320px;
     position: relative;
 }
 
-.custom-select-wrapper .dropdown-label {
+.product-dealer-cards .custom-select-wrapper .dropdown-label {
     font-weight: 700;
     font-size: 18px;
     color: #333;
@@ -43,7 +43,7 @@
     padding-bottom: 4px;
 }
 
-.custom-select-wrapper .custom-input {
+.product-dealer-cards .custom-select-wrapper .custom-input {
     width: 100%;
     padding: 10px 40px 10px 12px;
     font-size: 14px;
@@ -61,7 +61,7 @@
     color: rgb(51, 51, 51);
 }
 
-.custom-select-wrapper .clear-btn {
+.product-dealer-cards .custom-select-wrapper .clear-btn {
     position: absolute;
     right: 12px;
     top: 38px;
@@ -72,7 +72,7 @@
     z-index: 2;
 }
 
-.dropdown-options {
+.product-dealer-cards .dropdown-options {
     position: absolute;
     top: calc(100% + 4px);
     left: 0;
@@ -88,7 +88,7 @@
     margin: 0;
 }
 
-.dropdown-option {
+.product-dealer-cards .dropdown-option {
     list-style: none;
     padding: 10px 14px;
     font-size: 18px;
@@ -98,11 +98,11 @@
     transition: background 0.2s ease-in-out;
 }
 
-.dropdown-option:hover {
+.product-dealer-cards .dropdown-option:hover {
     background-color: #f5f5f5;
 }
 
-.dealer-dropdowns {
+.product-dealer-cards .dealer-dropdowns {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -110,7 +110,7 @@
     justify-content: center;
 }
 
-.dealer-card-wrapper {
+.product-dealer-cards .dealer-card-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
@@ -118,7 +118,7 @@
 }
 
 /* Dealer card style (resembling your reference) */
-.dealer-card {
+.product-dealer-cards .dealer-card {
     max-width: 400px;
     width: 100%;
     min-height: 292px;
@@ -132,17 +132,18 @@
     padding: 16px;
 }
 
-.dealer-card > div {
+.product-dealer-cards .dealer-card > div {
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     font-size: 24px;
 }
-.dealer-card > p:nth-of-type(1),
-.dealer-card > p:nth-of-type(2) {
+.product-dealer-cards .dealer-card > p:nth-of-type(1),
+.product-dealer-cards .dealer-card > p:nth-of-type(2) {
     cursor: pointer;
     font-family: "TSTAR-PRO-Regular";
     font-weight: 600;
     font-size: 16px;
+    word-break: break-word;
 }
 
 .product-dealer-cards-container > .product-dealer-cards-wrapper {
@@ -150,7 +151,6 @@
     width: 100%;
     padding: 5px;
 }
-
 .product-dealer-cards-container {
     background-color: #ededed;
 }
@@ -165,7 +165,7 @@
     padding: 20px;
 }
 
-.product-dealer-cards-container > .default-content-wrapper {
+.product-dealer-cards-container > .default-content-wrapper >h2{
     text-align: center;
     font-style: italic;
     padding-bottom: 1.0625rem;
@@ -174,6 +174,10 @@
     font-size: 48px;
     font-family: "TSTAR-PRO-Heavy";
     line-height: 1.2;
+}
+
+.product-dealer-cards .dealer-card>.dealer-address{
+  font-size: 15px;
 }
 
 /* .product-dealer-cards > .swiper>.swiper-wrapper{
@@ -201,15 +205,12 @@
     background-color: red;
 }
 
-.dealer-card > p:nth-child(5) {
-    word-break: break-word;
-}
 
 @media (max-width: 400px) {
-    .dealer-card {
+   .product-dealer-cards .dealer-card {
         font-size: 15px;
     }
-    .dealer-card > div {
+    .product-dealer-cards .dealer-card > div {
         font-size: 15px;
     }
 }
