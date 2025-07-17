@@ -32,7 +32,7 @@
     padding: 40px 20px;
     margin: 0px auto;
 }
-.compare {
+.block.compare  {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -81,6 +81,10 @@
     padding: 0px;
     list-style: none;
 }
+
+.compare-child-2-inner-1 > ul >li{
+    padding-top: 2.25rem;
+}
 .compare-child-1-inner-2 > h3 {
     color: #009fda;
     font-family: "TSTAR-PRO-Heavy";
@@ -102,6 +106,7 @@
 .compare-child-2-inner-1 > ul > li > ul > li > h4 {
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
+    font-size: 24px;
 }
 .compare-child-2-inner-1 > ul > li > ul > li:nth-child(2) > h4 {
     /* Your styles here */
@@ -114,6 +119,9 @@
     text-align: center;
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
+    padding-bottom: 32px;
+        font-size: 24px;
+    padding-top: 10px;
 }
 
 @media (max-width: 1000px) {

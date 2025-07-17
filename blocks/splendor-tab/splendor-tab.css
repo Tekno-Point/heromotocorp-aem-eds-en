@@ -107,6 +107,7 @@
 
 .tab-slide > ul > li > p {
     font-weight: 900;
+    font-size: 18px;
 }
 .tab-slide > ul > li > ul {
     padding: 0px;
@@ -114,6 +115,8 @@
 }
 .tab-slide > ul > li > ul > li {
     font-family: "TSTAR-PRO-Medium";
+        font-size: 24px;
+    padding-top: 10px;
 }
 
 .tab-slide > p > picture > img {

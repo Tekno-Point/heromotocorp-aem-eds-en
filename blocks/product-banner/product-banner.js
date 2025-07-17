@@ -1,6 +1,6 @@
 import { fetchProduct, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, input, label, h4, span, img, i } from "../../scripts/dom-helpers.js";
-pubsub.subscribe('fire', decorateProductBanner)
+pubsub.subscribe('product-banner-event', decorateProductBanner)
 
 let isDragging = false;
 let startX = 0;
@@ -27,7 +27,9 @@ export async function decorateProductBanner(block, data) {
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     const [dataMapping, setDataMapping] = await useDataMapping();
-
+    // debugger
+    dataMapping.banner_price = variantsData[0].variant_price;
+    setDataMapping(dataMapping);
     const getVariantDetailsBySku = sku =>
         allVariantsDetails.find(variant => variant[sku])?.[sku];
 
@@ -183,6 +185,8 @@ export async function decorateProductBanner(block, data) {
         }
         );
     }
+    pubsub.publish('price-listing-event');
+    pubsub.publish('product-dealer-cards-event');
 }
 
 
