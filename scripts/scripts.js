@@ -121,11 +121,11 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
-
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadFonts();
+  await loadHeader(doc.querySelector('header'));
+  await loadFooter(doc.querySelector('footer'));
+  await loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  await loadFonts();
+  document.querySelector('.header.block').style.display = 'block';
 }
 
 /**
@@ -142,54 +142,6 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
-}
-
-// --- Global Data Mapping Loader ---
-if (!window.dataMappingPromise) {
-  window.dataMappingPromise = (async function loadDataMapping() {
-    // Try sessionStorage first
-    let dataMapping = null;
-    try {
-      const cached = sessionStorage.getItem('dataMapping');
-      if (cached) {
-        dataMapping = JSON.parse(cached);
-      }
-    } catch (e) {}
-    if (!dataMapping) {
-      // Fallback: fetch and build dataMapping
-      try {
-        // Inline fetchAPI and fetchStateCityMaster logic from common.js
-        const stateCityAPI = 'https://www.heromotocorp.com/content/hero-commerce/in/en/products/product-page/practical/jcr:content.state-and-city.json';
-        const resp = await fetch(stateCityAPI);
-        if (!resp.ok) throw new Error('API error');
-        const data = await resp.json();
-        dataMapping = { state_city_master: {} };
-        dataMapping.state_city_master.state = [];
-        data.data.stateCity.filter(item => {
-          if (!dataMapping.state_city_master[item.label]) {
-            dataMapping.state_city_master.state.push(item.label);
-            dataMapping.state_city_master[item.label] = {};
-          }
-          item.cities.forEach(city => {
-            dataMapping.state_city_master[item.label][city.code] = {
-              ...city,
-              stateCode: item.code
-            };
-          });
-        });
-        // Build reverse mapping for easier access in blocks
-        dataMapping.state_city_master_rev = { state: dataMapping.state_city_master.state };
-        dataMapping.state_city_master.state.forEach(state => {
-          dataMapping.state_city_master_rev[state] = dataMapping.state_city_master[state];
-        });
-        sessionStorage.setItem('dataMapping', JSON.stringify(dataMapping));
-      } catch (e) {
-        dataMapping = null;
-      }
-    }
-    window.dataMapping = dataMapping;
-    return dataMapping;
-  })();
 }
 
 loadPage();

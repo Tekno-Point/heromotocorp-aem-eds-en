@@ -2,8 +2,28 @@ import { fetchProduct, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, input, label, h4, span, img, i } from "../../scripts/dom-helpers.js";
 pubsub.subscribe('fire', decorateProductBanner)
 
-export async function decorateProductBanner(block , data) {
-    console.log(block , data)
+let isDragging = false;
+let startX = 0;
+let currentFrame = 0;
+let accumulated = 0;
+const pixelsPerDegree = 1.5;
+
+export async function decorateProductBanner(block, data) {
+    let heading;
+    let bottomSection;
+    if (!block.querySelector("h2.heading")) {
+        const props = Array.from(block.children).map((ele) => ele.children);
+        heading = props[0][0].querySelector("h2");
+        heading.classList.add("heading")
+        bottomSection = props[1][0];
+        bottomSection.classList.add("bottom-sec")
+    }
+    else {
+        heading = block.querySelector("h2.heading")
+        bottomSection = block.querySelector(".bottom-sec")
+    }
+    block?.querySelector(".middle-sec")?.remove();
+    console.log(block, data)
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     const [dataMapping, setDataMapping] = await useDataMapping();
@@ -12,8 +32,9 @@ export async function decorateProductBanner(block , data) {
         allVariantsDetails.find(variant => variant[sku])?.[sku];
 
     const updateMainImage = sku => {
+        // debugger;
         const media = getVariantDetailsBySku(sku);
-        const imgEl = block.querySelector('.product-overview__360View .rotate');
+        const imgEl = block.querySelector('.product-banner__360View .rotate');
         if (media?.product?.media_gallery?.length && imgEl) {
             imgEl.src = media.product.media_gallery[0].url;
         }
@@ -44,7 +65,7 @@ export async function decorateProductBanner(block , data) {
             },
                 span(colorLabel),
                 img({
-                    class: "ms-7",
+                    class: "swatch-color",
                     loading: "lazy",
                     src: `https://www.heromotocorp.com${color_swatch_url}`,
                     alt: colorLabel,
@@ -62,8 +83,8 @@ export async function decorateProductBanner(block , data) {
 
     const handleVariantChange = e => {
         const selectedValueIndex = e.target.value;
-        block.querySelectorAll('.form-control').forEach(el => el.classList.remove('active'));
-        e.target.closest('.form-control').classList.add('active');
+        block.querySelectorAll('.product-form-control').forEach(el => el.classList.remove('active'));
+        e.target.closest('.product-form-control').classList.add('active');
 
         const selectedGroup = variantsData.find(v => v.value_index == selectedValueIndex);
         if (selectedGroup) {
@@ -76,14 +97,14 @@ export async function decorateProductBanner(block , data) {
         }
     };
 
-    const variantsDOM = div({ class: "product-overview__variantWrapper d-flex justify-content-lg-center order-2 order-lg-0" },
+    const variantsDOM = div({ class: "product-banner__variantWrapper" },
         div({ class: "variants-wrap" },
             h4({ class: "text" }, "Variants"),
             div({ class: "radio-wrap" },
                 ...variantsData.map(({ value_index, label: variantLabel, variant_price }) => {
                     const isActive = initialVariantGroup.value_index === value_index;
                     const radioProps = {
-                        class: "position-absolute",
+                        class: "input-radio",
                         type: "radio",
                         id: value_index,
                         name: "variants",
@@ -92,11 +113,11 @@ export async function decorateProductBanner(block , data) {
                     };
                     if (isActive) radioProps.checked = true;
 
-                    return div({ class: `form-control p-1 ${isActive ? "active" : ''}` },
-                        div({ class: "mb-12 body text-uppercase weight-heavy" },
+                    return div({ class: `product-form-control  ${isActive ? "active" : ''}` },
+                        div({ class: "price-txt-wrap " },
                             input(radioProps),
-                            label({ for: value_index, class: "d-flex pe-lg-10" }, span(variantLabel)),
-                            div({ class: "ps-11 mt-2" }, span(`₹ ${variant_price.toLocaleString('en-IN')}`))
+                            label({ for: value_index, class: "" }, span(variantLabel)),
+                            div({ class: "price-sec" }, span(`₹ ${variant_price.toLocaleString('en-IN')}`))
                         )
                     );
                 })
@@ -106,12 +127,17 @@ export async function decorateProductBanner(block , data) {
 
     const { product: { media_gallery: [firstImage] } } = getVariantDetailsBySku(initialColor.sku);
 
-    const imageDom = div({ class: "product-overview__360View" },
+    const imageDom = div({ class: "product-banner__360View" },
         div({ class: "hero-360 w-100" },
-            div({ class: "hero-360__" }, i({ class: "hero-icon" }), i({ class: "hero-icon right" })),
+            div({ class: "rotate-images" }, img({ class: "hero-icon left", src: "/images/rotate-left.png" }), img({ class: "hero-icon right", src: "/images/rotate-right.png" })),
             div({ class: "hero-360" },
                 div({ class: "spritespin-stage" },
-                    img({ class: "rotate", src: firstImage.url })
+                    img({
+                        class: "rotate", src: firstImage.url,
+                        width: "500",
+                        height: "500",
+                        style: "transform: translate3d(0,0,0);"
+                    })
                 )
             ),
             div({ class: "hero-360__" }),
@@ -122,12 +148,132 @@ export async function decorateProductBanner(block , data) {
         h4({ class: "mb-8 weight" }, "Colours"),
         div({ class: "color-wrapp" })
     );
+    block.innerHTML = '';
+    block.append(heading);
 
-    block.append(div(variantsDOM, imageDom, colorsDiv));
+    block.append(div({ class: "middle-sec" }, variantsDOM, imageDom, colorsDiv));
+    block.append(bottomSection);
 
     renderColors(initialVariantGroup.colors, initialColor.label);
+
+    const mainImage = block.querySelector(".product-banner__360View .rotate");
+    mainImage.addEventListener("mousedown", (e) => {
+        const media = getVariantDetailsBySku(dataMapping.sku);
+        rotateImg(e, "act", media.product.media_gallery, mainImage, false);
+    });
+    mainImage.addEventListener("touchstart", (e) => {
+        const media = getVariantDetailsBySku(dataMapping.sku);
+        rotateImg(e.touches[0], "activeIndex", media.product.media_gallery, mainImage, true);
+    });
+
+    // Add icon click rotation
+    const leftIcon = block.querySelector('.hero-icon.left');
+    const rightIcon = block.querySelector('.hero-icon.right');
+
+    if (leftIcon && rightIcon) {
+        leftIcon.addEventListener('click', () => {
+            const media = getVariantDetailsBySku(dataMapping.sku);
+            const rotateUrls = media.product.media_gallery;
+            rotateFrame(rotateUrls, mainImage, -1)
+        });
+        rightIcon.addEventListener('click', () => {
+            const media = getVariantDetailsBySku(dataMapping.sku);
+            const rotateUrls = media.product.media_gallery;
+            rotateFrame(rotateUrls, mainImage, 1)
+        }
+        );
+    }
 }
+
 
 export default async function decorate(block) {
     decorateProductBanner(block);
 }
+
+const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {
+    isDragging = true;
+    startX = event.clientX;
+
+    const imgRotateUrls = rotateUrlString;
+    const totalFrames = imgRotateUrls.length;
+    const degreesPerFrame = 360 / totalFrames;
+    const pixelsPerFrame = degreesPerFrame * pixelsPerDegree;
+
+    document.body.style.userSelect = 'none';
+
+    const onMove = (e) => {
+        if (!isDragging) return;
+        const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+        const deltaX = clientX - startX;
+        accumulated += deltaX;
+        startX = clientX;
+
+        const frameShift = Math.floor(accumulated / pixelsPerFrame);
+        if (frameShift !== 0) {
+            accumulated -= frameShift * pixelsPerFrame;
+            currentFrame = (currentFrame + frameShift + totalFrames) % totalFrames;
+            imgEl.src = imgRotateUrls[currentFrame].url;
+        }
+    };
+
+    const onEnd = () => {
+        isDragging = false;
+        document.body.style.userSelect = ''; // re-enable selection
+        window.removeEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+        window.removeEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+    };
+
+    window.addEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+    window.addEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+};
+
+// Helper to shift frame on icon click
+const rotateFrame = (rotateUrlString, imgEl, direction = 1) => {
+    const imgRotateUrls = rotateUrlString;
+    const totalFrames = imgRotateUrls.length;
+    currentFrame = (currentFrame + direction + totalFrames) % totalFrames;
+    imgEl.src = imgRotateUrls[currentFrame].url;
+};
+
+
+
+/* const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {
+    isDragging = true;
+    startX = event.clientX;
+
+    // const rotateUrlString = isMobile
+    //     ? arrayImagesDet[activeIndex].mob_img_urls
+    //     : arrayImagesDet[activeIndex].desk_img_urls;
+
+    const imgRotateUrls = rotateUrlString;
+    const totalFrames = imgRotateUrls.length;
+    const degreesPerFrame = 360 / totalFrames;
+    const pixelsPerFrame = degreesPerFrame * pixelsPerDegree;
+
+    const onMove = (e) => {
+        if (!isDragging) return;
+        const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+        const deltaX = clientX - startX;
+        accumulated += deltaX;
+        startX = clientX;
+
+        const frameShift = Math.floor(accumulated / pixelsPerFrame);
+        if (frameShift !== 0) {
+            accumulated -= frameShift * pixelsPerFrame;
+            currentFrame = (currentFrame + frameShift + totalFrames) % totalFrames;
+            // debugger;
+            imgEl.src = imgRotateUrls[currentFrame].url;
+        }
+    };
+
+    const onEnd = () => {
+        isDragging = false;
+        window.removeEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+        window.removeEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+    };
+
+    window.addEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
+    window.addEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
+
+} */
+

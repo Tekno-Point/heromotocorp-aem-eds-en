@@ -4,6 +4,9 @@
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
+.header.block{
+    display: none;
+}
 /* header and nav layout */
 header .nav-wrapper {
     background-color: var(--background-color);

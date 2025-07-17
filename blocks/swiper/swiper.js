@@ -11,7 +11,6 @@ export default function decorate(block) {
     element.classList.add("swiper-slide")
     swapperWapper.append(element);
   })
-  debugger;
   block.append(swapperWapper)
   // swiper-pagination
   

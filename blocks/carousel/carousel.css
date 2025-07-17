@@ -139,7 +139,7 @@
     gap: 20px;
     /* align-items: center; */
     align-items: flex-start;
-    margin-top: 110px;
+    margin-top: 100px;
 }
 
 .carousel .feature-row {
@@ -222,18 +222,21 @@
 
 .carousel .swiper-button-prev {
     left: 10px;
-    top: 46px;
+    top: 44px;
 }
 
 .carousel .swiper-button-next {
     right: 10px;
-    top: 46px;
+    top: 44px;
 }
 
 .carousel .btnWrapper > .swiper-pagination {
-    max-width: 1087px;
+    max-width: 1064px;
+    height: 19px;
     width: 100%;
-    /* overflow: hidden; */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     display: flex;
     gap: 60px;
     justify-content: flex-start;
@@ -247,7 +250,7 @@
     font-family: "TSTAR-PRO-Regular";
     padding-bottom: 20px;
     border-bottom: 1px solid #a5a5a5;
-        width: max-content;
+    width: max-content;
 }
 
 .carousel .swiper-pagination > h3 {
@@ -283,6 +286,7 @@
     font-style: italic;
     text-align: center;
     padding: 30px;
+    font-size: 3rem;
 }
 
 .carousel-container {
@@ -318,10 +322,9 @@
     .inner-innerSub-1 > h2 {
         font-size: 24px;
     }
-    /* .btnWrapper >.swiper-pagination {
-        width: 80%;
-    } */
-
+    .carousel .swiper-wrapper > .swiper-slide {
+        margin-top: 60px;
+    }
     .swiper-button-prev {
         left: 0px;
     }
@@ -336,5 +339,11 @@
 
     .carousel-container > .default-content-wrapper > h2 {
         font-size: 1.75rem;
+    }
+    .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>div{
+        font-size: 14px;
+    }
+    .price-listing>div:nth-child(2)>div>p {
+      font-size: 14px;
     }
 }

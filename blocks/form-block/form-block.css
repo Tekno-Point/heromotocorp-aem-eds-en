@@ -7,8 +7,8 @@
 .form-block-container > .form-block-wrapper {
     padding: 0px;
 }
-.form-block-container{
-    padding-top: 90px;
+.form-block-container {
+   padding-top: 2px;
 }
 
 .form-block-container > .default-content-wrapper > h1 {
@@ -187,10 +187,11 @@
     .form-block-container > .default-content-wrapper > h1 {
         font-size: 20px;
         text-align: center;
+        font-size: 31px;
     }
     .emi-container {
-    margin-top: 0px;
-}
+        margin-top: 0px;
+    }
 }
 
 /* thub */
@@ -212,7 +213,7 @@
             rgba(128, 128, 128, 0.3)
         );
     background-repeat: no-repeat;
-    background-size: var(--progress,0%) 100%, 100% 100%;
+    background-size: var(--progress, 0%) 100%, 100% 100%;
     background-position: left center, left center;
 }
 
@@ -228,4 +229,11 @@
     border-radius: 50%;
     margin-top: -5px;
     border: 2px solid #fff;
+}
+
+@media (max-width: 322px) {
+    .form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
+        top: 445px;
+        width: 200px;
+    }
 }
