@@ -164,6 +164,7 @@
     color: silver;
     margin-left: 70px;
     position: relative;
+    cursor: pointer;
 }
 
 .price-listing
@@ -313,7 +314,4 @@
         font-size: 18px;
         color: rgb(51, 51, 51);
     }
-    .price-listing{
-        min-height: ;   
-     }
 }
