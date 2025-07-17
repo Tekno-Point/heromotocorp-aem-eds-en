@@ -1,7 +1,7 @@
 import { fetchDealers, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, p } from "../../scripts/dom-helpers.js";
 import Swiper from "../carousel/swiper.min.js";
-
+pubsub.subscribe('product-dealer-cards-event', decorateProductDealerCards);
 function createCustomDropdown(
   className,
   labelText,
@@ -81,7 +81,7 @@ function createCustomDropdown(
   return { wrapper, inputEl };
 }
 
-export default async function decorate(block) {
+export async function decorateProductDealerCards(block = document.querySelector('.product-dealer-cards')) {
   const [dataMapping] = await useDataMapping();
 
   const sku = dataMapping?.sku;
@@ -95,10 +95,10 @@ export default async function decorate(block) {
       : states[0];
   let activeCity =
     current.city &&
-    cityMap[activeState.toUpperCase()] &&
-    Object.values(cityMap[activeState.toUpperCase()]).some(
-      (c) => c.label.toUpperCase() === current.city.toUpperCase()
-    )
+      cityMap[activeState.toUpperCase()] &&
+      Object.values(cityMap[activeState.toUpperCase()]).some(
+        (c) => c.label.toUpperCase() === current.city.toUpperCase()
+      )
       ? current.city
       : Object.values(cityMap[activeState.toUpperCase()])[0]?.label;
 
@@ -129,7 +129,7 @@ export default async function decorate(block) {
             city: activeCity,
           };
           setDataMapping(dataMapping);
-          pubsub.publish("fire", document.querySelector(".product-banner"), {
+          pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
             test: true,
           });
         },
@@ -143,7 +143,7 @@ export default async function decorate(block) {
       const [dataMapping, setDataMapping] = await useDataMapping();
       dataMapping.current_location = { state: activeState, city: activeCity };
       setDataMapping(dataMapping);
-      pubsub.publish("fire", document.querySelector(".product-banner"), {
+      pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
         test: true,
       });
     },
@@ -163,7 +163,7 @@ export default async function decorate(block) {
       const [dataMapping, setDataMapping] = await useDataMapping();
       dataMapping.current_location = { state: activeState, city: activeCity };
       setDataMapping(dataMapping);
-      pubsub.publish("fire", document.querySelector(".product-banner"), {
+      pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
         test: true,
       });
     },
@@ -222,9 +222,9 @@ export default async function decorate(block) {
               "dealer-card",
           },
           div({ class: "dealer-name" }, dealer.name),
-           p({ class: 'dealer-phone' }, `${dealer.phone}`),
-            p({ class: 'dealer-email' }, `${dealer.email}`),
-            p({ class: 'dealer-address' }, `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`),
+          p({ class: 'dealer-phone' }, `${dealer.phone}`),
+          p({ class: 'dealer-email' }, `${dealer.email}`),
+          p({ class: 'dealer-address' }, `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`),
         )
       );
       swiperWrapper.appendChild(card);
@@ -260,4 +260,8 @@ export default async function decorate(block) {
     });
   }
   renderDealers(activeState, activeCity);
+}
+
+export default function decorate(block) {
+  decorateProductDealerCards(block)
 }

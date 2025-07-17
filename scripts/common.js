@@ -201,6 +201,7 @@ async function getDataMapping() {
     let cityMaster = await fetchStateCityMaster();
     processDataMapping(cityMaster);
     let { city, state } = await fetchStateCity();
+    // debugger;
     if (city.toUpperCase() === 'NEW DELHI') {
       city = 'DELHI';
       state = 'DELHI';
