@@ -160,10 +160,10 @@
     > span {
     color: silver;
     margin-left: 70px;
-    position: relative;
+    /* position: relative; */
     cursor: pointer;
 }
-.price-listing
+/* .price-listing
     .custom-select-state-city__col
     > .custom-autocomplete
     > .input-wrapper
@@ -180,7 +180,7 @@
     border-radius: 0 1px 0 0;
     border-width: 3px 3px 0 0;
     color: silver;
-}
+} */
 /* btn */
 .price-listing > div:nth-child(2) > div > ul > li:nth-child(2) > div {
     display: flex;
