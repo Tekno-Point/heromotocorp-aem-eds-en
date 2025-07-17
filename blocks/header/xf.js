@@ -9,7 +9,7 @@ export async function getFetchAPI(url) {
 }
 
 export async function appendXF(block, xfPath) {
-    block.style.display = 'none';
+  // block.style.display = 'none';
   const resp = await getFetchAPI(xfPath);
   if (resp.ok) {
     let str = await resp.text();
@@ -57,7 +57,7 @@ export async function appendXF(block, xfPath) {
         }
       }
     });
-    block.style.display = 'block';
+    // block.style.display = 'block';
     
     // setTimeout(() => {
     //     // $.noConflict();
@@ -69,5 +69,6 @@ export async function appendXF(block, xfPath) {
     // }
     // window.isLast = true;
   }
+  
   return block;
 }
