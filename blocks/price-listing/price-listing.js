@@ -83,13 +83,13 @@ export default async function decorate(block) {
     if (innerUL) {
       const labels = [...innerUL.querySelectorAll('li')].map(li => li.textContent?.trim());
       const wrapper = document.createElement('div');
-      wrapper.className = 'price-listing__row-col--button align-items-center d-flex';
+      wrapper.className = ' ';
 
       if (labels[0]) {
         const btn1 = document.createElement('a');
         btn1.href = '/content/hero-commerce/in/en/pre-approved-offers.html';
         btn1.textContent = labels[0];
-        btn1.className = 'avail-finance-button-size button button--secondary weight-heavy bg-white text-error border-error text-uppercase d-flex border rounded-2 cta-text py-4 px-12 d-inline-flex justify-content-center flex-row text-center align-items-center';
+        btn1.className = 'avail-finance-button-size';
         wrapper.appendChild(btn1);
       }
 
@@ -97,7 +97,7 @@ export default async function decorate(block) {
         const btn2 = document.createElement('a');
         btn2.href = 'https://www.heromotocorp.com/en-in/buy-now/practical/splendor-plus.html';
         btn2.textContent = labels[1];
-        btn2.className = 'buynow-button-size button button--primary weight-heavy cta-text d-flex flex-row justify-content-center align-items-center text-uppercase rounded-2 py-4 px-12 py-sm-5 px-sm-16 text-white gradient-1 border-0';
+        btn2.className = 'buynow-button-size button';
         wrapper.appendChild(btn2);
       }
 

@@ -2,8 +2,9 @@
     background-color: #ededed;
 }
 
-.price-listing {
+.block.price-listing {
     display: flex;
+    flex-direction: row;
     gap: 30px;
     padding: 47px 0px 20px 0px;
 }
@@ -189,6 +190,7 @@
 
 .price-listing > div:nth-child(2) > div > ul > li:nth-child(2) > div {
     display: flex;
+    align-items: center;
     gap: 37px;
 }
 
@@ -211,6 +213,7 @@
     color: #d30000;
     background-color: #fff;
     cursor: pointer;
+   padding: 8px;
 }
 
 .price-listing
@@ -236,11 +239,19 @@
     text-transform: uppercase;
     font-style: italic;
     font-size: 3rem;
+        padding-bottom: 3rem;
 }
 
 .price-listing{
     min-height: 599px;
 }
+
+.price-listing > div:nth-child(2) > div > ul > li:nth-child(1) > fieldset>div {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
 /* images */
 
 .price-listing > div:nth-child(1) > div {
