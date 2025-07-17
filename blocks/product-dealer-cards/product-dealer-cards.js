@@ -255,7 +255,7 @@ export default async function decorate(block) {
       observeParents: true,
       breakpoints: {
         0: {
-          slidesPerView: 1.5,
+          slidesPerView: 1.2,
         },
         768: {
           slidesPerView: 2,
