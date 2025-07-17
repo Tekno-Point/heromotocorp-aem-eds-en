@@ -8,6 +8,9 @@
     margin-top: 55px;
 }
 
+.section.product-banner-container .product-banner-wrapper .product-banner.block{
+    display: block;
+}
 
 .section.product-banner-container .product-banner-wrapper .product-banner.block>.middle-sec {
     display: flex;
