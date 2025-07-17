@@ -5,7 +5,7 @@
 }
 
 
-.section.product-banner-container .product-banner-wrapper .product-banner.block>div {
+.section.product-banner-container .product-banner-wrapper .product-banner.block>.middle-sec {
     display: flex;
 }
 
@@ -60,4 +60,20 @@
 input.position-absolute {
     visibility: hidden;
     position: absolute;
+}
+
+
+/* Second sec */
+
+
+.section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-overview__variantWrapper {}
+
+.section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-overview__360View .rotate-images {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-overview__360View img.hero-icon {
+    width: 30px;
+    height: 30px;
 }

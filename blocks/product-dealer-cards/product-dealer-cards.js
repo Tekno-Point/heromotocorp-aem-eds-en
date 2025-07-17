@@ -19,7 +19,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
 
     const dropdown = document.createElement('ul');
     dropdown.className = 'dropdown-options position-absolute bg-white border rounded shadow-sm z-3 mt-1';
-    dropdown.style.cssText = 'max-height: 180px; overflow-y: auto; width:100%; display: none;';
+    dropdown.style.cssText = 'max-height: 180px; overflow-y: auto; max-width:100%; display: none;';
 
     wrapper.appendChild(labelEl);
     wrapper.appendChild(inputEl);
