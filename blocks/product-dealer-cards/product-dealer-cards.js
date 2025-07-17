@@ -215,7 +215,7 @@ export default async function decorate(block) {
 
     dealers.forEach((dealer) => {
       const card = div(
-        { class:slidesPerView},
+        { class: slidesPerView },
         div(
           {
             class:
@@ -236,17 +236,21 @@ export default async function decorate(block) {
       );
       swiperWrapper.appendChild(card);
     });
-     Swiper = new Swiper(swiperEl, {
+
+    const paginationEl = document.createElement("div");
+    paginationEl.classList.add("swiper-pagination");
+    swiperEl.appendChild(paginationEl);
+    Swiper = new Swiper(swiperEl, {
       grabCursor: true,
       spaceBetween: 20,
       autoplay: {
         delay: 3000,
         disableOnInteraction: false,
       },
-    //   pagination: {
-    //     el: paginationEl,
-    //     clickable: true,
-    //   },
+      pagination: {
+        el: paginationEl,
+        clickable: true,
+      },
       observer: true,
       observeParents: true,
       breakpoints: {
