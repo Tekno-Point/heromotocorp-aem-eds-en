@@ -1,14 +1,13 @@
 import { fetchStateCityMaster, fetchStateCity, fetchProduct } from "../../scripts/common.js";
 import { div, label, fieldset, p } from "../../scripts/dom-helpers.js";
 
-export default async function decorate(block) {
+ async function decoratePriceListing(block) {
   const stateCityData = await fetchStateCityMaster();
   const states = stateCityData.data.stateCity.map(item => ({
     code: item.code,
     label: item.label,
     cities: item.cities,
   }));
-
 
   let current = await fetchStateCity();
   let selectedState = states.find(s => s.label.toUpperCase() === current.state.toUpperCase()) || states[0];
@@ -22,8 +21,10 @@ export default async function decorate(block) {
   const clearState = document.createElement('span');
   clearState.className = 'clear-btn';
   clearState.textContent = '×';
-  stateWrapper.appendChild(stateInput);
-  stateWrapper.appendChild(clearState);
+  const dropdownStateBtn = document.createElement('span');
+  dropdownStateBtn.className = 'dropdown-btn';
+  dropdownStateBtn.innerHTML = `<img src="/icons/chevron_down.svg" width="16" height="16" alt="Dropdown" />`;
+  stateWrapper.append(stateInput, clearState, dropdownStateBtn);
 
   const stateList = document.createElement('div');
   stateList.className = 'custom-dropdown-list scrollable';
@@ -37,8 +38,10 @@ export default async function decorate(block) {
   const clearCity = document.createElement('span');
   clearCity.className = 'clear-btn';
   clearCity.textContent = '×';
-  cityWrapper.appendChild(cityInput);
-  cityWrapper.appendChild(clearCity);
+  const dropdownCityBtn = document.createElement('span');
+  dropdownCityBtn.className = 'dropdown-btn';
+  dropdownCityBtn.innerHTML = `<img src="/icons/chevron_down.svg" width="16" height="16" alt="Dropdown" />`;
+  cityWrapper.append(cityInput, clearCity, dropdownCityBtn);
 
   const cityList = document.createElement('div');
   cityList.className = 'custom-dropdown-list scrollable';
@@ -105,10 +108,34 @@ export default async function decorate(block) {
     }
   }
 
+  // function populateList(input, list, data, onSelect) {
+  //   list.innerHTML = '';
+  //   const value = input.value.toLowerCase();
+  //   const filtered = data.filter(d => d.label.toLowerCase().includes(value));
+  //   filtered.forEach(item => {
+  //     const divEl = document.createElement('div');
+  //     divEl.textContent = item.label;
+  //     divEl.className = 'dropdown-item';
+  //     divEl.addEventListener('click', () => {
+  //       input.value = item.label;
+  //       list.style.display = 'none';
+  //       onSelect(item);
+  //     });
+  //     list.appendChild(divEl);
+  //   });
+  //   list.style.display = filtered.length ? 'block' : 'none';
+  // }
   function populateList(input, list, data, onSelect) {
-    list.innerHTML = '';
-    const value = input.value.toLowerCase();
-    const filtered = data.filter(d => d.label.toLowerCase().includes(value));
+  list.innerHTML = '';
+  const value = input.value.toLowerCase();
+  const filtered = data.filter(d => d.label.toLowerCase().includes(value));
+
+  if (filtered.length === 0) {
+    const noResult = document.createElement('div');
+    noResult.textContent = 'No results found';
+    noResult.className = 'dropdown-item no-results';
+    list.appendChild(noResult);
+  } else {
     filtered.forEach(item => {
       const divEl = document.createElement('div');
       divEl.textContent = item.label;
@@ -120,8 +147,11 @@ export default async function decorate(block) {
       });
       list.appendChild(divEl);
     });
-    list.style.display = filtered.length ? 'block' : 'none';
   }
+
+  list.style.display = 'block';
+}
+
 
   async function renderPriceTable(stateLabel, cityCode) {
     priceInfo.innerHTML = '';
@@ -196,16 +226,67 @@ export default async function decorate(block) {
     cityList.style.display = 'none';
   });
 
+dropdownStateBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isVisible = stateList.style.display === 'block';
+  if (!isVisible) {
+    populateList(stateInput, stateList, states, (selected) => {
+      selectedState = selected;
+      selectedCity = selected.cities[0];
+      cityInput.disabled = false;
+      cityInput.value = selectedCity.label;
+      renderPriceTable(selectedState.label, selectedCity.code);
+    });
+  } else {
+    stateList.style.display = 'none';
+  }
+  stateInput.focus();
+});
+
+
+dropdownCityBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const isVisible = cityList.style.display === 'block';
+  if (!isVisible) {
+    populateList(cityInput, cityList, selectedState.cities, (selected) => {
+      selectedCity = selected;
+      renderPriceTable(selectedState.label, selectedCity.code);
+    });
+  } else {
+    cityList.style.display = 'none';
+  }
+  cityInput.focus();
+});
+
+stateInput.addEventListener('focus', () => {
+  populateList(stateInput, stateList, states, (selected) => {
+    selectedState = selected;
+    selectedCity = selected.cities[0];
+    cityInput.disabled = false;
+    cityInput.value = selectedCity.label;
+    renderPriceTable(selectedState.label, selectedCity.code);
+  });
+});
+
+cityInput.addEventListener('focus', () => {
+  populateList(cityInput, cityList, selectedState.cities, (selected) => {
+    selectedCity = selected;
+    renderPriceTable(selectedState.label, selectedCity.code);
+  });
+});
+
+
   document.addEventListener('click', (e) => {
-    if (!stateInput.contains(e.target) && !stateList.contains(e.target)) {
-      stateList.style.display = 'none';
-    }
-    if (!cityInput.contains(e.target) && !cityList.contains(e.target)) {
-      cityList.style.display = 'none';
-    }
+    if (!stateWrapper.contains(e.target)) stateList.style.display = 'none';
+    if (!cityWrapper.contains(e.target)) cityList.style.display = 'none';
   });
 
   stateInput.value = selectedState.label;
   cityInput.value = selectedCity.label;
   renderPriceTable(selectedState.label, selectedCity.code);
+}
+
+
+export default async function decorate(block) {
+  decoratePriceListing(block)
 }

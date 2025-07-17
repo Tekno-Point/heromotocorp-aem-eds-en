@@ -21,7 +21,7 @@ export async function decorateProductBanner(block, data) {
         allVariantsDetails.find(variant => variant[sku])?.[sku];
 
     const updateMainImage = sku => {
-        debugger;
+        // debugger;
         const media = getVariantDetailsBySku(sku);
         const imgEl = block.querySelector('.product-overview__360View .rotate');
         if (media?.product?.media_gallery?.length && imgEl) {
