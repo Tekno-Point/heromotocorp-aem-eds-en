@@ -222,16 +222,9 @@ export default async function decorate(block) {
               "dealer-card col-12 col-md-6 col-lg-4 mb-4 p-4 border rounded shadow-sm bg-white",
           },
           div({ class: "dealer-name h5 mb-2 weight-bold" }, dealer.name),
-          p(
-            { class: "dealer-address body2 mb-1" },
-            `${dealer.address_line_1} ${dealer.address_line_2}`
-          ),
-          p(
-            { class: "dealer-location body2 mb-1" },
-            `${dealer.city}, ${dealer.state} - ${dealer.zip_code}`
-          ),
-          p({ class: "dealer-phone body2 mb-1" }, `${dealer.phone}`),
-          p({ class: "dealer-email body2" }, `${dealer.email}`)
+           p({ class: 'dealer-phone body2 mb-1' }, `${dealer.phone}`),
+            p({ class: 'dealer-email body2' }, `${dealer.email}`),
+            p({ class: 'dealer-address body2 mb-1' }, `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`),
         )
       );
       swiperWrapper.appendChild(card);
