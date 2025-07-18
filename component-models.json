@@ -152,6 +152,10 @@
           {
             "name": "hero-footer-policy",
             "value": "hero-footer-policy"
+          },
+          {
+            "name": "Banner Price Section",
+            "value": "banner-price"
           }
         ]
       }
