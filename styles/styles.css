@@ -54,12 +54,12 @@
     src: local("Arial");
 }
 
-@media (width >= 900px) {
-    :root {
-        /* body sizes */
-        --body-font-size-m: 18px;
-        --body-font-size-s: 16px;
-        --body-font-size-xs: 14px;
+@media (width >=900px) {
+  :root {
+    /* body sizes */
+    --body-font-size-m: 18px;
+    --body-font-size-s: 16px;
+    --body-font-size-xs: 14px;
 
         /* heading sizes */
         --heading-font-size-xxl: 45px;
@@ -114,22 +114,27 @@ h6 {
 }
 
 h1 {
-    font-size: var(--heading-font-size-xxl);
+  font-size: var(--heading-font-size-xxl);
 }
+
 h2 {
-    font-size: var(--heading-font-size-xl);
+  font-size: var(--heading-font-size-xl);
 }
+
 h3 {
-    font-size: var(--heading-font-size-l);
+  font-size: var(--heading-font-size-l);
 }
+
 h4 {
-    font-size: var(--heading-font-size-m);
+  font-size: var(--heading-font-size-m);
 }
+
 h5 {
-    font-size: var(--heading-font-size-s);
+  font-size: var(--heading-font-size-s);
 }
+
 h6 {
-    font-size: var(--heading-font-size-xs);
+  font-size: var(--heading-font-size-xs);
 }
 
 p,
@@ -155,8 +160,8 @@ pre {
     white-space: pre;
 }
 
-main > div {
-    margin: 40px 16px;
+main>div {
+  margin: 40px 16px;
 }
 
 input,
@@ -230,10 +235,11 @@ main img {
 }
 
 .icon {
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-    cursor: pointer; /* changes for me  */
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  /* changes for me  */
 }
 
 .icon img {
@@ -241,25 +247,49 @@ main img {
     width: 100%;
 }
 
+.hero-icon {
+  font-family: "hero-icon-font" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 24px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+}
+
+.heroicon-wheel:before {
+  content: "";
+}
+
 /* sections */
-main > .section {
-    margin: 40px 0;
+main>.section {
+  margin: 40px 0;
 }
 
-main > .section > div {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 24px;
+main>.section>div {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 24px;
 }
 
-main > .section:first-of-type {
-    margin-top: 0;
+main>.section:first-of-type {
+  margin-top: 0;
 }
 
-@media (width >= 900px) {
-    main > .section > div {
-        padding: 0 32px;
-    }
+@media (width >=900px) {
+  main>.section>div {
+    padding: 0 32px;
+  }
 }
 
 /* section metadata */
