@@ -57,8 +57,11 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   wrapper.appendChild(dropdown);
 
   let isDropdownOpen = false;
+  let disabled = false; // 🔹 Added flag to track disabled state
 
   function updateOptions(query = "") {
+    if (disabled) return; // 🔹 Do nothing if disabled
+
     dropdown.innerHTML = "";
     const currentValue = inputEl.value.trim().toLowerCase();
 
@@ -97,30 +100,34 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   }
 
   inputEl.addEventListener("input", () => {
+    if (disabled) return; // 🔹 Prevent input when disabled
     clearBtn.style.display = inputEl.value ? "block" : "none";
     updateOptions(inputEl.value);
   });
 
   inputEl.addEventListener("focus", () => {
-    updateOptions(); // Always show full list on focus
-    inputEl.select(); // Optional: highlights current value
+    if (disabled) return; // 🔹 Prevent focus actions when disabled
+    updateOptions();
+    inputEl.select();
   });
 
   clearBtn.addEventListener("click", () => {
+    if (disabled) return; // 🔹 Prevent clear when disabled
     inputEl.value = "";
     clearBtn.style.display = "block";
-    dropdown.style.display = "block";
+    updateOptions();
     isDropdownOpen = false;
     onSelect("");
   });
 
   arrowBtn.addEventListener("click", (e) => {
     e.stopPropagation();
+    if (disabled) return; // 🔹 Prevent dropdown toggle when disabled
     if (isDropdownOpen) {
       dropdown.style.display = "none";
       isDropdownOpen = false;
     } else {
-      updateOptions(); // Show full list on arrow click
+      updateOptions();
       inputEl.focus();
     }
   });
@@ -132,11 +139,17 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
     }
   });
 
-  return { wrapper, inputEl };
+  return {
+    wrapper,
+    inputEl,
+    setDisabled: (state) => {
+      disabled = state;
+      inputEl.disabled = state;
+      inputEl.style.backgroundColor = state ? "#eee" : "#fff";
+      dropdown.style.display = "none";
+    }
+  };
 }
-
-
-
 export async function decorateProductDealerCards(block = document.querySelector('.product-dealer-cards')) {
   const [dataMapping] = await useDataMapping();
 
