@@ -9,7 +9,7 @@ let accumulated = 0;
 const pixelsPerDegree = 1.5;
 export async function updatePriceAndLocation() {
     const [dataMapping] = await useDataMapping()
-    const li = document.querySelector('.highlight').querySelector('ul li ul li')
+    const li = document.querySelector('.banner-price').querySelector('ul li ul li')
     const [priceEl, locationEl] = li.querySelectorAll('strong');
     priceEl.textContent = `₹ ${dataMapping.banner_price}`;
     locationEl.textContent = `, ${dataMapping.current_location.city}`;

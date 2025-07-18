@@ -1,5 +1,5 @@
 import { div, section, input, label, button, img, p, span, sup, i } from '../../scripts/dom-helpers.js';
-import { fetchCategory } from './getCategory.js';
+import { fetchCategory } from '../../scripts/common.js';
 
 const RED_CHEVRON = '/icons/icon-chevron-red.svg';
 const WHITE_CROSS_ICON = '/icons/icon-cross-white.svg';
