@@ -236,10 +236,10 @@ export async function decorateProductDealerCards(block = document.querySelector(
     Swiper = new Swiper(swiperEl, {
       grabCursor: true,
       spaceBetween: 20,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-      },
+      // autoplay: {
+      //   delay: 3000,
+      //   disableOnInteraction: false,
+      // },
       pagination: {
         el: paginationEl,
         clickable: true,
