@@ -140,7 +140,6 @@
     margin-left: 5px;
 }
 
-
 @media (max-width: 900px) {
     .highlight>.default-content-wrapper>ul:first-child {
         flex-wrap: wrap;
