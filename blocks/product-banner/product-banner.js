@@ -7,7 +7,13 @@ let startX = 0;
 let currentFrame = 0;
 let accumulated = 0;
 const pixelsPerDegree = 1.5;
-
+export async function updatePriceAndLocation() {
+    const [dataMapping] = await useDataMapping()
+    const li = document.querySelector('.highlight').querySelector('ul li ul li')
+    const [priceEl, locationEl] = li.querySelectorAll('strong');
+    priceEl.textContent = `₹ ${dataMapping.banner_price}`;
+    locationEl.textContent = `, ${dataMapping.current_location.city}`;
+}
 export async function decorateProductBanner(block, data) {
     let heading;
     let bottomSection;
@@ -27,14 +33,12 @@ export async function decorateProductBanner(block, data) {
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     const [dataMapping, setDataMapping] = await useDataMapping();
-    // debugger
     dataMapping.banner_price = variantsData[0].variant_price;
     setDataMapping(dataMapping);
     const getVariantDetailsBySku = sku =>
         allVariantsDetails.find(variant => variant[sku])?.[sku];
 
     const updateMainImage = sku => {
-        // debugger;
         const media = getVariantDetailsBySku(sku);
         const imgEl = block.querySelector('.product-banner__360View .rotate');
         if (media?.product?.media_gallery?.length && imgEl) {
@@ -187,6 +191,7 @@ export async function decorateProductBanner(block, data) {
     }
     pubsub.publish('price-listing-event');
     pubsub.publish('product-dealer-cards-event');
+    updatePriceAndLocation();
 }
 
 

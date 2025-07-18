@@ -17,7 +17,7 @@ function sampleRUM(checkpoint, data) {
   try {
     window.hlx = window.hlx || {};
     if (!window.hlx.rum) {
-      sampleRUM.enhance = () => {};
+      sampleRUM.enhance = () => { };
       const param = new URLSearchParams(window.location.search).get('rum');
       const weight = (param === 'on' && 1)
         || (window.SAMPLE_PAGEVIEWS_AT_RATE === 'high' && 10)
@@ -450,14 +450,21 @@ function decorateIcon(span, prefix = '', alt = '') {
   const iconName = Array.from(span.classList)
     .find((c) => c.startsWith('icon-'))
     .substring(5);
-  const img = document.createElement('img');
-  img.dataset.iconName = iconName;
-  img.src = `${window.hlx.codeBasePath}${prefix}/icons/${iconName}.svg`;
-  img.alt = alt;
-  img.loading = 'lazy';
-  img.width = 16;
-  img.height = 16;
-  span.append(img);
+  let heroIcon = span.classList[1].split("-").includes("moon");
+  if (heroIcon) {
+    let heroIconName = span?.classList[1]?.slice(10, span.classList[1].length);
+    span.classList.add("icon", "hero-icon", heroIconName.trim());
+  }
+  else {
+    const img = document.createElement('img');
+    img.dataset.iconName = iconName;
+    img.src = `${window.hlx.codeBasePath}${prefix}/icons/${iconName}.svg`;
+    img.alt = alt;
+    img.loading = 'lazy';
+    img.width = 16;
+    img.height = 16;
+    span.append(img);
+  }
 }
 
 /**
