@@ -221,6 +221,23 @@ export default async function decorate(block) {
     }
   });
 
+  if (document.querySelector('.header .section.nav-bar ul li ')) {
+    document
+      .querySelectorAll('.header .section.nav-bar ul li ')
+      .forEach((link) => {
+        // debugger;
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          // const targetId = scrollMap[link.getAttribute("href")];
+          const targetId = e.target.closest("li").querySelector("a").textContent.trim().toLowerCase()?.split(" ").join("-");
+          const target = document.querySelector(
+            `.section[data-id="${targetId}"]`
+          );
+          target?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+  }
+
   await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
 
   /* init Compare */
