@@ -124,20 +124,22 @@
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper {
     border-bottom: 0.125rem solid silver;
     border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>.clear-btn {
     color: silver;
-    margin-left: 70px;
     position: relative;
     cursor: pointer;
+    margin-right: 27px;
 }
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>span::after {
     content: "";
     display: inline-block;
     position: absolute;
-    top: 7px;
+    top: 8px;
     right: -20px;
     transform: rotate(135deg);
     width: 6px;
@@ -146,6 +148,10 @@
     border-radius: 0 1px 0 0;
     border-width: 3px 3px 0 0;
     color: silver;
+}
+
+.section .price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item{
+    padding: 5px 0;
 }
 
 /* btn */
