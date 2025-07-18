@@ -111,7 +111,9 @@ header nav[aria-expanded="true"] {
 .nav-bar > .default-content-wrapper > ul:nth-child(2) {
     padding-left: 170px;
 }
-
+.nav-bar > .default-content-wrapper > ul:nth-child(2)li:hover{
+color: red;
+}
 .header-main .top-bar-main {
     gap: 20px !important;
 }

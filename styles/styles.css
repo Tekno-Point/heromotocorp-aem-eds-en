@@ -268,35 +268,62 @@ main img {
 }
 
 .heroicon-wheel:before {
-  content: "";
+  content: "\E9C9";
 }
 .heroicon-engine:before {
   content: "";
 }
 /* heroicon-engine */
 
-.heroicon-engine:before {
-  content: "";
-}
 
 .heroicon-suspension:before {
-  content: "";
+  content: "\E9B2";
 }
 
 .heroicon-chassis:before {
-  content: "";
+  content: "\E92F";
 }
 
 .heroicon-disbrake:before {
-  content: "";
+  content: "\E945";
 }
 
 .heroicon-electrical:before {
-  content: "";
+  content: "\E94C";
 }
-.heroicon-heroicon-reorder {
-  content: "";
+.icon-moon-heroicon-reorder:before {
+  content: "\E99E";
 }
+
+/*header*/
+
+.icon-moon-heroicon-open-eye:before {
+  content: "\E996";
+}
+
+.icon-moon-heroicon-bike:before {
+  content: "\E915";
+}
+
+.icon-moon-heroicon-bike:before {
+  content: "\E915";
+}
+.icon-moon-heroicon-wallet-money:before {
+  content: "\E9C6 ";
+}
+.icon-moon-heroicon-exchange:before {
+  content: "\E964 ";
+}
+.icon-moon-heroicon-settings:before {
+  content: "\E9AD ";
+}
+.icon-moon-heroicon-delear-locator:before {
+  content: "\E942";
+}
+
+
+
+
 
 
 /* sections */
