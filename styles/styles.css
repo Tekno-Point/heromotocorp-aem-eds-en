@@ -21,7 +21,8 @@
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --heading-font-family: roboto-condensed, roboto-condensed-fallback,
+    sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -44,16 +45,16 @@
 @font-face {
   font-family: roboto-condensed-fallback;
   size-adjust: 88.82%;
-  src: local('Arial');
+  src: local("Arial");
 }
 
 @font-face {
   font-family: roboto-fallback;
   size-adjust: 99.529%;
-  src: local('Arial');
+  src: local("Arial");
 }
 
-@media (width >= 900px) {
+@media (width >=900px) {
   :root {
     /* body sizes */
     --body-font-size-m: 18px;
@@ -112,12 +113,29 @@ h6 {
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+}
 
 p,
 dl,
@@ -142,7 +160,7 @@ pre {
   white-space: pre;
 }
 
-main > div {
+main>div {
   margin: 40px 16px;
 }
 
@@ -220,6 +238,8 @@ main img {
   display: inline-block;
   height: 24px;
   width: 24px;
+  cursor: pointer;
+  /* changes for me  */
 }
 
 .icon img {
@@ -227,23 +247,102 @@ main img {
   width: 100%;
 }
 
+.hero-icon {
+  font-family: "hero-icon-font" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 24px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+}
+
+.heroicon-wheel:before {
+  content: "\E9C9";
+}
+.heroicon-engine:before {
+  content: "";
+}
+/* heroicon-engine */
+
+
+.heroicon-suspension:before {
+  content: "\E9B2";
+}
+
+.heroicon-chassis:before {
+  content: "\E92F";
+}
+
+.heroicon-disbrake:before {
+  content: "\E945";
+}
+
+.heroicon-electrical:before {
+  content: "\E94C";
+}
+.icon-moon-heroicon-reorder:before {
+  content: "\E99E";
+}
+
+/*header*/
+
+.icon-moon-heroicon-open-eye:before {
+  content: "\E996";
+}
+
+.icon-moon-heroicon-bike:before {
+  content: "\E915";
+}
+
+.icon-moon-heroicon-bike:before {
+  content: "\E915";
+}
+.icon-moon-heroicon-wallet-money:before {
+  content: "\E9C6 ";
+}
+.icon-moon-heroicon-exchange:before {
+  content: "\E964 ";
+}
+.icon-moon-heroicon-settings:before {
+  content: "\E9AD ";
+}
+.icon-moon-heroicon-delear-locator:before {
+  content: "\E942";
+}
+
+
+
+
+
+
 /* sections */
-main > .section {
+main>.section {
   margin: 40px 0;
 }
 
-main > .section > div {
+main>.section>div {
   max-width: 1200px;
   margin: auto;
   padding: 0 24px;
 }
 
-main > .section:first-of-type {
+main>.section:first-of-type {
   margin-top: 0;
 }
 
-@media (width >= 900px) {
-  main > .section > div {
+@media (width >=900px) {
+  main>.section>div {
     padding: 0 32px;
   }
 }
@@ -254,4 +353,12 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+* {
+  font-family: "TSTAR-PRO-Medium";
+}
+
+.section .block {
+  display: block;
 }
