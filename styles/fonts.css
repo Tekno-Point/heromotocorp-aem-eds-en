@@ -69,3 +69,11 @@
   font-display: swap;
   src: url('../fonts/TRANSDUCER-Bold.otf') format('woff2');
 }
+
+@font-face {
+    font-family: "hero-icon-font";
+    src: url('../fonts/hero-icon-font.ttf') ;
+    font-weight: normal;
+    font-style: normal;
+    font-display: block
+}

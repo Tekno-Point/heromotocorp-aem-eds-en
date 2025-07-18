@@ -190,10 +190,32 @@ export default async function decorate(block) {
   window.addEventListener('scroll', () => {
     const heroBottom = heroSection.getBoundingClientRect().bottom;
 
+
+    const navBar = document.querySelector('.nav-bar');
+const secondUl = navBar?.querySelectorAll('ul')[1];
+
+if (secondUl) {
+  console.log('Second <ul> found:', secondUl);
+} else {
+  console.warn('Second <ul> not found');
+}
+
+const image = document.querySelector('.nav-bar img:not(p img)');
+
+
+
+
+
+
     if (heroBottom <= 0) {
       navWrapper2.style.transform = 'translateY(-100%)';
+      document.getElementsByClassName("header-main")[0].style.display = "none",
+        secondUl.style.display = "flex"
     } else {
       navWrapper2.style.transform = 'translateY(0)';
+      document.getElementsByClassName("header-main")[0].style.display = "block",
+    
+      secondUl.style.display = "none"
     }
   });
 

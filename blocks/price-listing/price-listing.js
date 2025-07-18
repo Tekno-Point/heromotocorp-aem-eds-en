@@ -13,12 +13,12 @@ pubsub.subscribe('price-listing-event', updatePriceListing);
 function createDropdownInput(placeholder) {
   const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' });
   const clearBtn = span({ class: 'clear-btn' }, '×');
-  const dropdownBtn = span({ class: 'dropdown-btn' },
-    img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
-  );
-  const wrapper = div({ class: 'input-wrapper' }, input, clearBtn, dropdownBtn);
+  // const dropdownBtn = span({ class: 'dropdown-btn' },
+  //   img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
+  // );
+  const wrapper = div({ class: 'input-wrapper' }, input, clearBtn/*, dropdownBtn*/);
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
-  return { wrapper, input, clearBtn, dropdownBtn, list };
+  return { wrapper, input, clearBtn/*, dropdownBtn*/, list };
 }
 
 function populateList(input, list, data, onSelect) {
@@ -46,8 +46,8 @@ async function decoratePriceListing() {
   let selectedState = states.find(s => s.label.toUpperCase() === current.state.toUpperCase()) || states[0];
   let selectedCity = selectedState.cities.find(c => c.label.toUpperCase() === current.city.toUpperCase()) || selectedState.cities[0];
 
-  const { wrapper: sw, input: si, clearBtn: sc, dropdownBtn: sd, list: sl } = createDropdownInput('Select State');
-  const { wrapper: cw, input: ci, clearBtn: cc, dropdownBtn: cd, list: cl } = createDropdownInput('Select City');
+  const { wrapper: sw, input: si, clearBtn: sc/*, dropdownBtn: sd*/, list: sl } = createDropdownInput('Select State');
+  const { wrapper: cw, input: ci, clearBtn: cc/*, dropdownBtn: cd*/, list: cl } = createDropdownInput('Select City');
 
   const dropdowns = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city z-1 px-md-6 px-lg-6' },
@@ -126,12 +126,12 @@ async function decoratePriceListing() {
   }
 
   si.addEventListener('input', () => populateList(si, sl, states, onStateSelect));
-  sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
+  // sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
   sc.addEventListener('click', () => { si.value = ''; sl.style.display = 'none'; });
 
   ci.disabled = !selectedState;
   ci.addEventListener('input', () => populateList(ci, cl, selectedState.cities, onCitySelect));
-  cd.addEventListener('click', e => { e.stopPropagation(); cl.style.display !== 'block' ? populateList(ci, cl, selectedState.cities, onCitySelect) : cl.style.display = 'none'; ci.focus(); });
+  // cd.addEventListener('click', e => { e.stopPropagation(); cl.style.display !== 'block' ? populateList(ci, cl, selectedState.cities, onCitySelect) : cl.style.display = 'none'; ci.focus(); });
   cc.addEventListener('click', () => { ci.value = ''; cl.style.display = 'none'; });
 
   si.addEventListener('focus', () => populateList(si, sl, states, onStateSelect));

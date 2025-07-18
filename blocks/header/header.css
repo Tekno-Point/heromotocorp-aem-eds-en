@@ -445,3 +445,11 @@ header nav .nav-tools {
     body.appear{
         width: 100%;
     }
+
+
+.nav-sections.section{
+    display: none !important;
+}
+     .nav-tools.section{
+display: none;
+    }

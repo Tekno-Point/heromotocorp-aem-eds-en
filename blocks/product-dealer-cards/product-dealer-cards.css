@@ -145,7 +145,7 @@
     cursor: pointer;
     font-family: "TSTAR-PRO-Regular";
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     word-break: break-word;
 }
 
@@ -154,9 +154,9 @@
     width: 100%;
     padding: 5px;
 }
-.product-dealer-cards-container {
+/* .product-dealer-cards-container {
     background-color: #ededed;
-}
+} */
 
 .product-dealer-cards > .swiper {
     max-width: 1365px;
@@ -166,7 +166,10 @@
 
 .product-dealer-cards-container {
     padding: 20px;
+     background-color: #ededed;
+    /* margin: 0px; */
 }
+
 
 .product-dealer-cards-container > .default-content-wrapper > h2 {
     text-align: center;
@@ -179,9 +182,11 @@
     line-height: 1.2;
 }
 
+
 .product-dealer-cards .dealer-card > .dealer-address {
     font-size: 15px;
 }
+
 
 /* .product-dealer-cards > .swiper>.swiper-wrapper{
   justify-content: center;
@@ -219,4 +224,10 @@
     .product-dealer-cards-container > .default-content-wrapper > h2 {
         font-size: 16px;
     }
+}
+
+
+
+.product-dealer-cards-container.section {
+    margin: 0px;
 }
