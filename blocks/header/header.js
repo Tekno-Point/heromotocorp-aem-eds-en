@@ -198,24 +198,23 @@ if (secondUl) {
 }
 
 const img = document.querySelector('.nav-bar p');
-console.log(img);
 
 
-
-
+  const navBarWrapper = document.querySelector('.nav-bar > .default-content-wrapper');
 
     if (heroBottom <= 0) {
       navWrapper2.style.transform = 'translateY(-100%)';
       document.getElementsByClassName("header-main")[0].style.display = "none",
         secondUl.style.display = "flex";
         img.style.display = "block";
-        navBar.style.height = "90px"
+        navBarWrapper.style.height = "84px"
     } else {
       navWrapper2.style.transform = 'translateY(0)';
       document.getElementsByClassName("header-main")[0].style.display = "block",
     
       secondUl.style.display = "none"
       img.style.display = "none";
+      navBarWrapper.style.height = "40px"
     }
   });
   await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
