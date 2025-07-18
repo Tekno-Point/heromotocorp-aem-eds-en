@@ -185,7 +185,7 @@ export default async function decorate(block) {
   initCompare();
 
   const navWrapper2 = document.querySelector('.nav-wrapper');
-  const heroSection = document.querySelector('.compare-container');
+  const heroSection = document.querySelector('.hero-banner');
 
   window.addEventListener('scroll', () => {
     const heroBottom = heroSection.getBoundingClientRect().bottom;
