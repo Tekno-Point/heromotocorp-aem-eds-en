@@ -323,6 +323,44 @@ main img {
 
 
 
+/*tab*/
+
+.icon-moon-heroicon-speedometer::before{
+ content: "\E9B0";
+}
+.icon-moon-heroicon-start::before{
+ content: "\EA28";
+}
+
+.icon-moon-heroicon-suspension::before{
+ content: "\E9B2";
+}
+
+.icon-moon-heroicon-seat::before{
+  content: "\EA25";
+} 
+
+.icon-moon-heroicon-side-stand::before{
+ content: "\EA27";
+}
+
+.icon-moon-heroicon-fuel::before{
+ content: "\EA1C";
+}
+
+.icon-moon-heroicon-tyre::before{
+ content: "\E9BD";
+} 
+.icon-moon-heroicon-safety::before{
+ content: "\E9A4";
+} 
+.icon-moon-heroicon-disbrake::before{
+ content: "\E945";
+} 
+
+
+
+
 
 
 

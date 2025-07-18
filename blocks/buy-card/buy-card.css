@@ -95,7 +95,8 @@ section .buy-card-container>.buy-card-wrapper{
     letter-spacing: normal;
     line-height: 2rem;
     font-family: "TSTAR-PRO-Bold";
-    font-weight: 700;
+    font-weight: 900;
+    color: #484848;
 }
 .cards-card-body > h4 > span {
     clip-path: polygon(8% 1%, 53% 22%, 54% 100%, 8% 72%);
@@ -198,7 +199,7 @@ section .buy-card-container>.buy-card-wrapper{
 
 @media (max-width : 325px){
     .cards-card-body > p:nth-child(3){
-                left: 67px;
+        
     }
 }
 
