@@ -191,6 +191,7 @@
     }
     .emi-container {
         margin-top: 0px;
+        flex-direction: column;
     }
 }
 
@@ -231,9 +232,17 @@
     border: 2px solid #fff;
 }
 
+
+@media (max-width: 426px) {
+    .form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
+        top: 398px;
+        width: 200px;
+    }
+}
+
 @media (max-width: 322px) {
     .form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
-        top: 445px;
+        top: 472px;
         width: 200px;
     }
 }

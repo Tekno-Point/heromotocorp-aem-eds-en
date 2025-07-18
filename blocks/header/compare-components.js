@@ -1,5 +1,5 @@
 import { div, section, input, label, button, img, p, span, sup, i } from '../../scripts/dom-helpers.js';
-import { fetchCategory } from './getCategory.js';
+import { fetchCategory } from '../../scripts/common.js';
 
 const RED_CHEVRON = '/icons/icon-chevron-red.svg';
 const WHITE_CROSS_ICON = '/icons/icon-cross-white.svg';
@@ -11,7 +11,7 @@ let vehiclePriceData = sessionStorage.getItem('vehiclePriceData');
 vehiclePriceData = (vehiclePriceData && vehiclePriceData != 'undefined') ? JSON.parse(vehiclePriceData) : []; // Default to empty array if null or undefined
 
 const getSkuItem = (sku) => {
-    const vehicles = vehiclePriceData.products.items;
+    const vehicles = vehiclePriceData.data.products.items;
     const vehicle = vehicles.find((vehicle) => vehicle.sku === sku);
     if (vehicle) {
         return vehicle;
@@ -29,10 +29,10 @@ const toggleDrawer = ({ target }) => {
 }
 
 const initVehicleRender = async () => {
-    traySection.removeEventListener('mouseover', initVehicleRender);
+    document.removeEventListener('mouseover', initVehicleRender);
 
     const { vehiclePriceData, vehiclesObj } = await fetchCategory();
-    vehiclesList = vehiclePriceData.products.items;
+    vehiclesList = vehiclePriceData.data.products.items;
     if (vehiclesList) {
         sessionStorage.setItem('vehiclePriceData', JSON.stringify(vehiclePriceData));
     }
@@ -153,7 +153,7 @@ const traySection = section({ class: 'tray-container disappear open' },
     )
 );
 
-traySection.addEventListener('mouseover', initVehicleRender);
+document.addEventListener('mouseover', initVehicleRender);
 
 function clearSessionVehicles() {
     traySection.classList.toggle('disappear')

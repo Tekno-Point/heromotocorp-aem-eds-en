@@ -20,16 +20,60 @@ function createDropdownInput(placeholder) {
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
   return { wrapper, input, clearBtn/*, dropdownBtn*/, list };
 }
+// function populateList(input, list, data, onSelect) {
+//   list.innerHTML = '';
+//   const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
+//   if (!filtered.length) {
+//     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
+//   } else {
+//     filtered.forEach(item => {
+//       const itemEl = div({ class: 'dropdown-item' }, item.label);
+//       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
+//       list.appendChild(itemEl);
+//     });
+//   }
+//   list.style.display = 'block';
+// }
+
+// function populateList(input, list, data, onSelect) {
+//   list.innerHTML = '';
+//   const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
+//   if (!filtered.length) {
+//     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
+//   } else {
+//     data.forEach(item => {
+//       const itemEl = div({ class: 'dropdown-item' }, item.label);
+//       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
+//       list.appendChild(itemEl);
+//     });
+//   }
+//   list.style.display = 'block';
+// }
 
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
-  const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
+  const typedValue = input.value.trim().toLowerCase();
+  const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
+
+  const currentValue = input.value.trim().toLowerCase();
+
   if (!filtered.length) {
     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
   } else {
-    filtered.forEach(item => {
-      const itemEl = div({ class: 'dropdown-item' }, item.label);
-      itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
+    data.forEach(item => {
+      const isSelected = item.label.toLowerCase() === currentValue;
+      const itemEl = div(
+        {
+          class: `dropdown-item${isSelected ? ' selected' : ''}`,
+          style: isSelected ? 'background-color: #f1f1f1; font-weight: bold;' : ''
+        },
+        item.label
+      );
+      itemEl.addEventListener('click', () => {
+        input.value = item.label;
+        list.style.display = 'none';
+        onSelect(item);
+      });
       list.appendChild(itemEl);
     });
   }
@@ -127,7 +171,16 @@ async function decoratePriceListing() {
 let isStateOpen = false;
 let isCityOpen = false;
 
-  si.addEventListener('input', () => populateList(si, sl, states, onStateSelect));
+si.addEventListener('focus', () => {
+si.select(); // optional: highlights text
+  populateList({ value: '' }, sl, states, onStateSelect);
+});
+ci.addEventListener('focus', () => {
+  ci.select(); // optional: highlights text
+  populateList({ value: '' }, cl, selectedState.cities, onCitySelect);
+});
+
+
   // sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
   sw.addEventListener('click', e => (e.stopPropagation(), isStateOpen ? (sl.style.display = 'none', isStateOpen = false) : (populateList(si, sl, states, onStateSelect), si.focus(), sl.style.display = 'block', isStateOpen = true)));  sc.addEventListener('click', () => { si.value = ''; sl.style.display = 'none'; });
 
@@ -136,9 +189,6 @@ let isCityOpen = false;
   cw.addEventListener('click', e => (e.stopPropagation(), !selectedState ? null : isCityOpen ? (cl.style.display = 'none', isCityOpen = false) : (populateList(ci, cl, selectedState.cities, onCitySelect), ci.focus(), cl.style.display = 'block', isCityOpen = true)));  
   // cd.addEventListener('click', e => { e.stopPropagation(); cl.style.display !== 'block' ? populateList(ci, cl, selectedState.cities, onCitySelect) : cl.style.display = 'none'; ci.focus(); });
   cc.addEventListener('click', () => { ci.value = ''; cl.style.display = 'none'; });
-
-  si.addEventListener('focus', () => populateList(si, sl, states, onStateSelect));
-  ci.addEventListener('focus', () => populateList(ci, cl, selectedState.cities, onCitySelect));
 
   document.addEventListener('click', e => {
     !sw.contains(e.target) && (sl.style.display = 'none');

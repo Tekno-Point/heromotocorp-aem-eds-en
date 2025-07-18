@@ -2,84 +2,140 @@ import { fetchDealers, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, p } from "../../scripts/dom-helpers.js";
 import Swiper from "../carousel/swiper.min.js";
 pubsub.subscribe('product-dealer-cards-event', decorateProductDealerCards);
-function createCustomDropdown(
-  className,
-  labelText,
-  optionsList,
-  onSelect,
-  defaultValue = ""
-) {
-  const wrapper = div({
-    class: "custom-select-wrapper",
-  });
+
+function createCustomDropdown(className, labelText, optionsList, onSelect, defaultValue = "") {
+  const wrapper = div({ class: "custom-select-wrapper position-relative" });
 
   const labelEl = p({ class: "dropdown-label mb-1" }, labelText);
+
+  const inputWrapper = document.createElement("div");
+  inputWrapper.className = "input-wrapper";
+  inputWrapper.style.position = "relative";
+
   const inputEl = document.createElement("input");
   inputEl.type = "text";
   inputEl.placeholder = `Select ${labelText}`;
-  inputEl.className = "custom-input react-select__input " + className;
+  inputEl.className = `custom-input react-select__input ${className}`;
   inputEl.value = defaultValue;
+  inputEl.autocomplete = "off";
+  inputEl.style.width = "100%";
 
   const clearBtn = document.createElement("span");
   clearBtn.textContent = "×";
   clearBtn.className = "clear-btn";
-  clearBtn.style.cssText =
-    "position:absolute; right:8px; top:8px; cursor:pointer; display:none;";
+  clearBtn.style.cssText = `
+    color: silver;
+    position: absolute;
+    top: -8px;
+    right: 27px;
+    cursor: pointer;
+    display: ${defaultValue ? 'block' : 'none'};
+    z-index: 4;
+  `;
+
+  const arrowBtn = document.createElement("span");
+  arrowBtn.className = "dropdown-arrow";
+  arrowBtn.style.cssText = `
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+  `;
 
   const dropdown = document.createElement("ul");
-  dropdown.className =
-    "dropdown-options position-absolute bg-white border rounded shadow-sm z-3 mt-1";
-  dropdown.style.cssText =
-    "max-height: 180px; overflow-y: auto; max-width:100%; display: none;";
+  dropdown.className = "dropdown-options position-absolute bg-white border rounded shadow-sm z-3 mt-1";
+  dropdown.style.cssText = "max-height: 180px; overflow-y: auto; max-width:100%; display: none;";
+
+  inputWrapper.appendChild(inputEl);
+  inputWrapper.appendChild(clearBtn);
+  inputWrapper.appendChild(arrowBtn);
 
   wrapper.appendChild(labelEl);
-  wrapper.appendChild(inputEl);
-  wrapper.appendChild(clearBtn);
+  wrapper.appendChild(inputWrapper);
   wrapper.appendChild(dropdown);
 
-  function updateOptions(filter = "") {
+  let isDropdownOpen = false;
+
+  function updateOptions(query = "") {
     dropdown.innerHTML = "";
-    const filtered = optionsList.filter((opt) =>
-      opt.toLowerCase().includes(filter.toLowerCase())
-    );
-    filtered.forEach((value) => {
+    const currentValue = inputEl.value.trim().toLowerCase();
+
+    const filtered = query.trim()
+      ? optionsList.filter(opt => opt.toLowerCase().includes(query.toLowerCase()))
+      : optionsList;
+
+    if (!filtered.length) {
       const li = document.createElement("li");
-      li.textContent = value;
-      li.className = "dropdown-option px-3 py-2 hover-bg";
-      li.addEventListener("click", () => {
-        inputEl.value = value;
-        dropdown.style.display = "none";
-        clearBtn.style.display = "block";
-        onSelect(value);
-      });
+      li.textContent = "No results found";
+      li.className = "dropdown-option px-3 py-2 text-muted";
       dropdown.appendChild(li);
-    });
-    dropdown.style.display = filtered.length ? "block" : "none";
+    } else {
+      filtered.forEach(value => {
+        const isSelected = value.toLowerCase() === currentValue;
+        const li = document.createElement("li");
+        li.textContent = value;
+        li.className = `dropdown-option px-3 py-2 hover-bg${isSelected ? ' selected' : ''}`;
+        if (isSelected) {
+          li.style.backgroundColor = '#f1f1f1';
+          li.style.fontWeight = 'bold';
+        }
+        li.addEventListener("click", () => {
+          inputEl.value = value;
+          dropdown.style.display = "none";
+          isDropdownOpen = false;
+          clearBtn.style.display = "block";
+          onSelect(value);
+        });
+        dropdown.appendChild(li);
+      });
+    }
+
+    dropdown.style.display = "block";
+    isDropdownOpen = true;
   }
 
   inputEl.addEventListener("input", () => {
+    clearBtn.style.display = inputEl.value ? "block" : "none";
     updateOptions(inputEl.value);
   });
 
   inputEl.addEventListener("focus", () => {
-    updateOptions(inputEl.value);
+    updateOptions(); // Always show full list on focus
+    inputEl.select(); // Optional: highlights current value
   });
 
   clearBtn.addEventListener("click", () => {
     inputEl.value = "";
     clearBtn.style.display = "none";
-    updateOptions("");
+    dropdown.style.display = "none";
+    isDropdownOpen = false;
     onSelect("");
+  });
+
+  arrowBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (isDropdownOpen) {
+      dropdown.style.display = "none";
+      isDropdownOpen = false;
+    } else {
+      updateOptions(); // Show full list on arrow click
+      inputEl.focus();
+    }
   });
 
   document.addEventListener("click", (e) => {
     if (!wrapper.contains(e.target)) {
       dropdown.style.display = "none";
+      isDropdownOpen = false;
     }
   });
 
   return { wrapper, inputEl };
 }
+
+
 
 export async function decorateProductDealerCards(block = document.querySelector('.product-dealer-cards')) {
   const [dataMapping] = await useDataMapping();

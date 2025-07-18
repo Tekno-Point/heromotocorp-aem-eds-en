@@ -35,7 +35,8 @@ section .buy-card-container>.buy-card-wrapper{
     width: 100%;
     margin-top: 74px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    padding: 10px 40px;
 }
 .buy-card-container > .default-content-wrapper > h2 {
     text-align: center;
@@ -188,4 +189,24 @@ section .buy-card-container>.buy-card-wrapper{
     .buy-card-container > .default-content-wrapper > h2 {
         font-size: 28px;
     }
+    .buy-card{
+       padding: 62px 2px;
+    }
+}
+
+
+
+@media (max-width : 325px){
+    .cards-card-body > p:nth-child(3){
+                left: 67px;
+    }
+}
+
+
+/*bug fixs */
+
+
+.buy-card-container>.buy-card-wrapper{
+    max-width: 1366px;
+    width: 100%;
 }
