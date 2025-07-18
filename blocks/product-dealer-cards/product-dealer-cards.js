@@ -108,8 +108,8 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
 
   clearBtn.addEventListener("click", () => {
     inputEl.value = "";
-    clearBtn.style.display = "none";
-    dropdown.style.display = "none";
+    clearBtn.style.display = "block";
+    dropdown.style.display = "block";
     isDropdownOpen = false;
     onSelect("");
   });
@@ -200,6 +200,8 @@ export async function decorateProductDealerCards(block = document.querySelector(
       dropdowns.replaceChild(newCityDropdown.wrapper, cityDropdown.wrapper);
       cityDropdown = newCityDropdown;
 
+      cityDropdown.inputEl.disabled = false;
+
       renderDealers(activeState, activeCity);
       const [dataMapping, setDataMapping] = await useDataMapping();
       dataMapping.current_location = { state: activeState, city: activeCity };
@@ -237,6 +239,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
     },
     activeCity
   );
+  cityDropdown.inputEl.disabled = true;
 
   const dropdowns = div(
     {
