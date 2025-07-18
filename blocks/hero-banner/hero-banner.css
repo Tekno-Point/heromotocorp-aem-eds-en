@@ -1,10 +1,15 @@
 .innerSub2 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  text-align: center;
-    background: linear-gradient(114.58deg, #201F1F 4.19%, #454141 51.21%, #000000 98.23%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    text-align: center;
+    background: linear-gradient(
+        114.58deg,
+        #201f1f 4.19%,
+        #454141 51.21%,
+        #000000 98.23%
+    );
     color: #ffffff;
     gap: 12px;
     width: 100%;
@@ -14,7 +19,6 @@
     align-items: center;
     gap: 8px; /* adjust spacing as needed */
     padding-left: 35px;
-    
 }
 .innerSub2 a {
     margin-right: -8px;
@@ -22,7 +26,10 @@
     color: white;
 }
 
-.innerSub1{
+.hero-container .section {
+    margin: 0px;
+}
+.innerSub1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,7 +51,7 @@
     transition: none;
     cursor: pointer;
 }
-.innerSub1 p:last-child{
+.innerSub1 p:last-child {
     display: flex;
     gap: 12px;
 }
@@ -55,12 +62,17 @@
 }
 
 .innerSub1 a:last-child {
-    background: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
+    background: linear-gradient(
+        160.69deg,
+        #b50000 22.35%,
+        #ff0000 68.47%,
+        #b50000 114.59%
+    );
     color: #fff;
     border: none;
 }
 .innerSub1 :is(ul, li) {
-  /* max-width: 57%; */
+    /* max-width: 57%; */
     display: inline;
     padding: 0;
     margin: 0;
@@ -72,88 +84,92 @@
     font-weight: 400;
     font-size: 0.95rem;
     opacity: 0.85;
-    margin-left: 0
+    margin-left: 0;
 }
 .innerSub1 ul > li > ul > li {
     color: #ee2326;
     font-weight: 800;
     font-size: 1.8rem;
     margin-left: 12px;
-
-} 
-main>.banner-image{
+}
+main > .banner-image {
     margin: 0;
 }
 main > .section.hero-banner-container {
-  margin: 0;
+    margin: 0;
 }
-.section>.default-content-wrapper{
+.section > .default-content-wrapper {
     max-width: 1560px;
     padding: 0;
     width: 100%;
 }
-.default-content-wrapper p{
+.default-content-wrapper p {
     margin: 0px;
 }
-.default-content-wrapper p picture{
+.default-content-wrapper p picture {
     line-height: 0;
     height: 100%;
     display: block;
 }
 main > .banner-image img {
-  width: 100%;
+    width: 100%;
 }
-.section>.hero-banner-wrapper{
+.section > .hero-banner-wrapper {
     max-width: 1560px;
     width: 100%;
     padding: 0px;
 }
 
-
 @media (max-width: 425px) {
-  .innerSub1 {
-    display: grid;
-    background-color: #000000;
-    color: white;
-    font-size: 1rem;
-    padding: 16px;
-    /* gap: 12px; */
-  }
+    .innerSub1 {
+        display: grid;
+        background-color: #000000;
+        color: white;
+        font-size: 1rem;
+        padding: 16px;
+        /* gap: 12px; */
+    }
 
-  .innerSub1 a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 24px !important;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius: 0.25rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: none;
-  }
+    .innerSub1 a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 24px !important;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: none;
+    }
 
-  .innerSub1 a:first-child {
-    background: #fff;
-    color: #b50000;
-  }
+    .innerSub1 a:first-child {
+        background: #fff;
+        color: #b50000;
+    }
 
-  .innerSub1 a:last-child {
-    background: linear-gradient(
-      160.69deg,
-      #b50000 22.35%,
-      #ff0000 68.47%,
-      #b50000 114.59%
-    );
-    color: #fff;
-    border: none;
-  }
+    .innerSub1 a:last-child {
+        background: linear-gradient(
+            160.69deg,
+            #b50000 22.35%,
+            #ff0000 68.47%,
+            #b50000 114.59%
+        );
+        color: #fff;
+        border: none;
+    }
 
-  .innerSub1 ul > li > ul > li{
-    font-size: 1.5rem;
-  }
-  .innerSub1 :is(ul, li) {
-    max-width: 57%;
-  }
+    .innerSub1 ul > li > ul > li {
+        font-size: 1.5rem;
+    }
+    .innerSub1 :is(ul, li) {
+        max-width: 57%;
+    }
 }
 
+@media (max-width: 768px) {
+    .hero .block {
+        margin: 31px 0px 0px 0px;
+        padding: 0px;
+    }
+}
