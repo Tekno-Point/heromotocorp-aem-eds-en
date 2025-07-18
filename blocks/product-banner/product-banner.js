@@ -27,14 +27,12 @@ export async function decorateProductBanner(block, data) {
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     const [dataMapping, setDataMapping] = await useDataMapping();
-    // debugger
     dataMapping.banner_price = variantsData[0].variant_price;
     setDataMapping(dataMapping);
     const getVariantDetailsBySku = sku =>
         allVariantsDetails.find(variant => variant[sku])?.[sku];
 
     const updateMainImage = sku => {
-        // debugger;
         const media = getVariantDetailsBySku(sku);
         const imgEl = block.querySelector('.product-banner__360View .rotate');
         if (media?.product?.media_gallery?.length && imgEl) {
