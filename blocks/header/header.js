@@ -1,6 +1,8 @@
 import { getMetadata } from '../../scripts/aem.js';
+import initCompare from './compare.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { appendXF } from './xf.js';
+import { onVehicleAdd, onVehicleRmove } from './compare-components.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -110,7 +112,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  */
 export default async function decorate(block) {
   // load nav as fragment
-  
+
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
@@ -121,7 +123,7 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools' , 'bar'];
+  const classes = ['brand', 'sections', 'tools', 'bar'];
   classes.forEach((c, i) => {
     const section = nav.children[i];
     if (section) section.classList.add(`nav-${c}`);
@@ -167,22 +169,23 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
 
- 
+
   // changes  for header 
 
 
   window.addEventListener('scroll', function () {
-  const header = document.querySelector('.nav-wrapper'); // or .header
-  if (window.scrollY > 50) {
-    header.style.transform = 'translateY(-100%)';
-  } else {
-    header.style.transform = 'translateY(0)';
-  }
-});
+    const header = document.querySelector('.nav-wrapper'); // or .header
+    if (window.scrollY > 50) {
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+  });
 
+  initCompare();
 
-const navWrapper2 = document.querySelector('.nav-wrapper');
-  const heroSection = document.querySelector('.hero-container');
+  const navWrapper2 = document.querySelector('.nav-wrapper');
+  const heroSection = document.querySelector('.hero-banner');
 
   window.addEventListener('scroll', () => {
     const heroBottom = heroSection.getBoundingClientRect().bottom;
@@ -197,24 +200,50 @@ if (secondUl) {
   console.warn('Second <ul> not found');
 }
 
-const image = document.querySelector('.nav-bar img:not(p img)');
+const img = document.querySelector('.nav-bar p');
 
 
-
-
-
+  const navBarWrapper = document.querySelector('.nav-bar > .default-content-wrapper');
 
     if (heroBottom <= 0) {
       navWrapper2.style.transform = 'translateY(-100%)';
       document.getElementsByClassName("header-main")[0].style.display = "none",
-        secondUl.style.display = "flex"
+        secondUl.style.display = "flex";
+        img.style.display = "block";
+        navBarWrapper.style.height = "84px"
     } else {
       navWrapper2.style.transform = 'translateY(0)';
       document.getElementsByClassName("header-main")[0].style.display = "block",
     
       secondUl.style.display = "none"
+      img.style.display = "none";
+      navBarWrapper.style.height = "40px"
     }
   });
+
   await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
-  return block;  
+
+  /* init Compare */
+  const addVehicleCheckbox = block.querySelector('.add-vehicle-checkbox');
+  const traySecion = document.querySelector('.tray-container');
+  
+  addVehicleCheckbox.addEventListener('change', (e) => {
+    traySecion.classList.toggle('disappear');
+
+    if(e.target.checked) {
+      onVehicleAdd(e);
+    } else {
+      onVehicleRmove(e);
+    }
+
+    if (e.target.dataset.vehiclesRendered) {
+      return;
+    }
+
+    initCompare();
+    e.target.dataset.vehiclesRendered = true;
+  });
+
+  return block;
 }
+

@@ -231,3 +231,7 @@
 .product-dealer-cards-container.section {
     margin: 0px;
 }
+
+.product-dealer-cards>.dealer-card-wrapperr>.swiper-wrapper{
+justify-content: space-evenly;
+}

@@ -109,6 +109,19 @@
     font-size: 1.5rem;
     line-height: 2rem;
 }
+.blogs-swiper > .swiper-wrapper > .swiper-slide > div:nth-child(2) > h4{
+     display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    font-family: "TSTAR-PRO-Heavy";
+    color: #303030;
+    margin-bottom: 8px;
+    min-height: 4rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
 
 /* Text: description */
 .blogs-swiper
