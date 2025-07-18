@@ -196,18 +196,18 @@
     }
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box {
+.tray-container .tray-wrapper .tray-card-container .compare-card {
     width: 100%;
     background-color: #4d4d4d
 }
 
 @media(max-width: 767px) {
-    .tray-container .tray-wrapper .tray-card-container .tray-card-box:nth-child(3) {
+    .tray-container .tray-wrapper .tray-card-container .compare-card:nth-child(3) {
         display: none
     }
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-card-wrapper {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-card-wrapper {
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -224,19 +224,19 @@
 }
 
 @media(min-width: 1024px)and (max-width: 1279px) {
-    .tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-card-wrapper {
+    .tray-container .tray-wrapper .tray-card-container .compare-card .tray-card-wrapper {
         -webkit-column-gap: .875rem;
         -moz-column-gap: .875rem;
         column-gap: .875rem
     }
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-card-wrapper>img {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-card-wrapper>img {
     width: 7.25rem;
     height: 4.75rem
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-card-wrapper .tray-card-details .card-details-label {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-card-wrapper .tray-card-details .card-details-label {
     font-size: 1.25rem;
     line-height: 100%;
     font-weight: 500;
@@ -246,7 +246,7 @@
     padding-right: 1.25rem
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-card-wrapper .tray-card-details .card-details-amount {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-card-wrapper .tray-card-details .card-details-amount {
     font-size: .75rem;
     line-height: 120%;
     font-weight: 500;
@@ -255,13 +255,13 @@
     margin: .5rem 0
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-card-wrapper .tray-remove-cta {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-card-wrapper .tray-remove-cta {
     position: absolute;
     top: .5rem;
     right: .5rem
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-add-cta {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -277,15 +277,15 @@
     width: 100%
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta:disabled {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-add-cta:disabled {
     cursor: not-allowed
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta:disabled:hover {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-add-cta:disabled:hover {
     background-color: transparent;
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta .add-cta-count {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-add-cta .add-cta-count {
     font-size: 4rem;
     line-height: 100%;
     font-weight: 500;
@@ -293,7 +293,7 @@
     font-style: italic
 }
 
-.tray-container .tray-wrapper .tray-card-container .tray-card-box .tray-add-cta .add-cta-label {
+.tray-container .tray-wrapper .tray-card-container .compare-card .tray-add-cta .add-cta-label {
     font-size: 1rem;
     line-height: 120%;
     white-space: normal;
