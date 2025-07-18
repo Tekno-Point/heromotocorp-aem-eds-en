@@ -2,12 +2,12 @@ import { fetchDealers, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, p } from "../../scripts/dom-helpers.js";
 import Swiper from "../carousel/swiper.min.js";
 pubsub.subscribe('product-dealer-cards-event', decorateProductDealerCards);
+
 function createCustomDropdown(className, labelText, optionsList, onSelect, defaultValue = "") {
   const wrapper = div({ class: "custom-select-wrapper position-relative" });
 
   const labelEl = p({ class: "dropdown-label mb-1" }, labelText);
 
-  // Create input wrapper
   const inputWrapper = document.createElement("div");
   inputWrapper.className = "input-wrapper";
   inputWrapper.style.position = "relative";
@@ -60,20 +60,27 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
 
   function updateOptions(query = "") {
     dropdown.innerHTML = "";
-    const filtered = !query.trim()
-      ? optionsList
-      : optionsList.filter(opt => opt.toLowerCase().includes(query.toLowerCase()));
+    const currentValue = inputEl.value.trim().toLowerCase();
 
-    if (filtered.length === 0) {
+    const filtered = query.trim()
+      ? optionsList.filter(opt => opt.toLowerCase().includes(query.toLowerCase()))
+      : optionsList;
+
+    if (!filtered.length) {
       const li = document.createElement("li");
       li.textContent = "No results found";
       li.className = "dropdown-option px-3 py-2 text-muted";
       dropdown.appendChild(li);
     } else {
       filtered.forEach(value => {
+        const isSelected = value.toLowerCase() === currentValue;
         const li = document.createElement("li");
         li.textContent = value;
-        li.className = "dropdown-option px-3 py-2 hover-bg";
+        li.className = `dropdown-option px-3 py-2 hover-bg${isSelected ? ' selected' : ''}`;
+        if (isSelected) {
+          li.style.backgroundColor = '#f1f1f1';
+          li.style.fontWeight = 'bold';
+        }
         li.addEventListener("click", () => {
           inputEl.value = value;
           dropdown.style.display = "none";
@@ -95,7 +102,8 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   });
 
   inputEl.addEventListener("focus", () => {
-    updateOptions(inputEl.value);
+    updateOptions(); // Always show full list on focus
+    inputEl.select(); // Optional: highlights current value
   });
 
   clearBtn.addEventListener("click", () => {
@@ -112,7 +120,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
       dropdown.style.display = "none";
       isDropdownOpen = false;
     } else {
-      updateOptions(""); // show full list
+      updateOptions(); // Show full list on arrow click
       inputEl.focus();
     }
   });
@@ -126,6 +134,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
 
   return { wrapper, inputEl };
 }
+
 
 
 export async function decorateProductDealerCards(block = document.querySelector('.product-dealer-cards')) {
