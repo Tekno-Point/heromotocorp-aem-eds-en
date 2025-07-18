@@ -124,15 +124,16 @@ async function decoratePriceListing() {
       test: true,
     });
   }
+let isStateOpen = false;
+let isCityOpen = false;
 
   si.addEventListener('input', () => populateList(si, sl, states, onStateSelect));
   // sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
-  sw.addEventListener('click',(e)=>{e.stopPropagation(); populateList(si,sl,states,onStateSelect); si.focus();})
-  sc.addEventListener('click', () => { si.value = ''; sl.style.display = 'none'; });
+  sw.addEventListener('click', e => (e.stopPropagation(), isStateOpen ? (sl.style.display = 'none', isStateOpen = false) : (populateList(si, sl, states, onStateSelect), si.focus(), sl.style.display = 'block', isStateOpen = true)));  sc.addEventListener('click', () => { si.value = ''; sl.style.display = 'none'; });
 
   ci.disabled = !selectedState;
   ci.addEventListener('input', () => populateList(ci, cl, selectedState.cities, onCitySelect));
-  cw.addEventListener('click',(e)=>{e.stopPropagation(); if(!selectedState) return; populateList(ci,cl,selectedState.cities,onCitySelect); ci.focus()})
+  cw.addEventListener('click', e => (e.stopPropagation(), !selectedState ? null : isCityOpen ? (cl.style.display = 'none', isCityOpen = false) : (populateList(ci, cl, selectedState.cities, onCitySelect), ci.focus(), cl.style.display = 'block', isCityOpen = true)));  
   // cd.addEventListener('click', e => { e.stopPropagation(); cl.style.display !== 'block' ? populateList(ci, cl, selectedState.cities, onCitySelect) : cl.style.display = 'none'; ci.focus(); });
   cc.addEventListener('click', () => { ci.value = ''; cl.style.display = 'none'; });
 
