@@ -215,7 +215,7 @@ export default async function decorate(block) {
       navWrapper2.style.transform = 'translateY(0)';
       document.getElementsByClassName("header-main")[0].style.display = "block",
 
-        secondUl.style.display = "none"
+      secondUl.style.display = "none"
       img.style.display = "none";
       navBarWrapper.style.height = "40px"
     }
@@ -225,10 +225,8 @@ export default async function decorate(block) {
     document
       .querySelectorAll('.header .section.nav-bar ul li ')
       .forEach((link) => {
-        // debugger;
         link.addEventListener("click", (e) => {
           e.preventDefault();
-          // const targetId = scrollMap[link.getAttribute("href")];
           const targetId = e.target.closest("li").querySelector("a").textContent.trim().toLowerCase()?.split(" ").join("-");
           const target = document.querySelector(
             `.section[data-id="${targetId}"]`

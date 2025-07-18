@@ -20,6 +20,20 @@ function createDropdownInput(placeholder) {
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
   return { wrapper, input, clearBtn/*, dropdownBtn*/, list };
 }
+// function populateList(input, list, data, onSelect) {
+//   list.innerHTML = '';
+//   const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
+//   if (!filtered.length) {
+//     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
+//   } else {
+//     filtered.forEach(item => {
+//       const itemEl = div({ class: 'dropdown-item' }, item.label);
+//       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
+//       list.appendChild(itemEl);
+//     });
+//   }
+//   list.style.display = 'block';
+// }
 
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
@@ -27,7 +41,7 @@ function populateList(input, list, data, onSelect) {
   if (!filtered.length) {
     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
   } else {
-    filtered.forEach(item => {
+    data.forEach(item => {
       const itemEl = div({ class: 'dropdown-item' }, item.label);
       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
       list.appendChild(itemEl);

@@ -96,6 +96,9 @@ header nav[aria-expanded="true"] {
     gap: 20px;
     margin-right: 17px;
 }
+.nav-bar >.default-content-wrapper>ul:nth-child(3){
+    display: none;
+}
 .nav-bar > .default-content-wrapper > ul > li {
     display: flex;
     gap: 4px;
@@ -104,6 +107,9 @@ header nav[aria-expanded="true"] {
     font-family: "TSTAR-PRO-Medium";
     font-size: 15px;
 }
+.nav-bar > .default-content-wrapper > ul > li:hover{
+    color: red;
+}
 .nav-bar > .default-content-wrapper > ul > li > a:hover {
     text-decoration: none;
     color: red;
@@ -111,9 +117,7 @@ header nav[aria-expanded="true"] {
 .nav-bar > .default-content-wrapper > ul:nth-child(2) {
     padding-left: 170px;
 }
-.nav-bar > .default-content-wrapper > ul:nth-child(2)li:hover{
-color: red;
-}
+
 .header-main .top-bar-main {
     gap: 20px !important;
 }
@@ -196,6 +200,7 @@ color: red;
 header nav p {
     margin: 0;
     line-height: 1;
+    display: none;
 }
 
 header nav a:any-link {
@@ -451,4 +456,8 @@ body.appear {
 }
 .nav-tools.section {
     display: none;
+}
+
+.nav-bar>.default-content-wrapper>p>img{
+    display: none !important;
 }
