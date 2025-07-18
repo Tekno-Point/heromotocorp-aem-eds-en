@@ -90,6 +90,7 @@ header nav[aria-expanded="true"] {
     white-space: nowrap;
 }
 
+
 .nav-bar > .default-content-wrapper > ul {
     display: flex;
     list-style: none;
@@ -120,6 +121,10 @@ header nav[aria-expanded="true"] {
 
 .header-main .top-bar-main {
     gap: 20px !important;
+}
+
+.homepage-redesign-dropdown-menu .hp-dropdown-content .column.column3 .bike-details .bike-details-col-2 p{
+    display: block;
 }
 
 @media (max-width: 900px) {

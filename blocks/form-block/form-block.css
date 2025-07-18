@@ -191,6 +191,7 @@
     }
     .emi-container {
         margin-top: 0px;
+        flex-direction: column;
     }
 }
 
