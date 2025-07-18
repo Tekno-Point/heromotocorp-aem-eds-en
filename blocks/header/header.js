@@ -215,7 +215,7 @@ export default async function decorate(block) {
       navWrapper2.style.transform = 'translateY(0)';
       document.getElementsByClassName("header-main")[0].style.display = "block",
 
-        secondUl.style.display = "none"
+      secondUl.style.display = "none"
       img.style.display = "none";
       navBarWrapper.style.height = "40px"
     }
