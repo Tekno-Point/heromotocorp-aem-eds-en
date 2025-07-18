@@ -16,6 +16,7 @@
 .section.product-banner-container .product-banner-wrapper .product-banner.block>.middle-sec {
     display: flex;
     justify-content: space-between;
+    min-height: 325px;
 }
 
 .section.product-banner-container .colors-container {
@@ -154,6 +155,9 @@
 .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__360View {
     max-width: 710px;
     width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__360View .hero-360 .spritespin-stage img {
@@ -248,7 +252,12 @@
 
     .section.product-banner-container .product-banner-wrapper .product-banner.block>.middle-sec {
         flex-direction: column;
-        padding-top: 356px;
+        /* padding-top: 356px; */
+    }
+
+    .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__360View{
+        position: unset;
+        transform: unset;
     }
 
     .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__variantWrapper {
@@ -270,11 +279,11 @@
         text-align: left;
     }
 
-    .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__360View .hero-360.w-100 {
+    /* .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__360View .hero-360.w-100 {
         position: absolute;
         top: 100px;
         left: 0;
-    }
+    } */
 
     .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .colors-container .color-wrapp {
         display: flex;
