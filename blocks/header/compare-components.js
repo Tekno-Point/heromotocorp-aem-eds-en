@@ -51,19 +51,19 @@ const initVehicleRender = async () => {
 }
 
 const cards = [
-    div({ class: 'tray-card-box' },
+    div({ class: 'compare-card' },
         button({ class: 'tray-add-cta', value: '1', onclick: toggleDrawer },
             div({ class: 'add-cta-count' }, '01'),
             div({ class: 'add-cta-label' }, 'Add at least two vehicle to compare')
         )
     ),
-    div({ class: 'tray-card-box' },
+    div({ class: 'compare-card' },
         button({ class: 'tray-add-cta', value: '2', disabled: 'disabled', onclick: toggleDrawer },
             div({ class: 'add-cta-count' }, '02'),
             div({ class: 'add-cta-label' }, 'Add at least one more vehicle to compare')
         )
     ),
-    div({ class: 'tray-card-box' },
+    div({ class: 'compare-card' },
         button({ class: 'tray-add-cta', value: '3', disabled: 'disabled', onclick: toggleDrawer },
             div({ class: 'add-cta-count' }, '03'),
             div({ class: 'add-cta-label' }, 'Up to 3 vehicles can be compared at a time')
@@ -95,7 +95,7 @@ const trayCard = (vehicle, cardValue) => {
         price = price.toLocaleString('en-IN');
     }
 
-    return div({ class: 'tray-card-box' },
+    return div({ class: 'compare-card' },
         div(
             { class: 'tray-card-wrapper', 'data-bike-id': vehicle.sku },
             img({
@@ -243,7 +243,7 @@ const onVehicleRmove = (e) => {
         comparedVehicle = null
     }
 
-    const selectedVehicle = e.currentTarget.dataset.bikeId || e.cardCountLabel.value;
+    const selectedVehicle = e.currentTarget.dataset.bikeId || e.currentTarget.value;
 
     let vehicles = [];
 

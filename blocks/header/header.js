@@ -215,7 +215,7 @@ export default async function decorate(block) {
       navWrapper2.style.transform = 'translateY(0)';
       document.getElementsByClassName("header-main")[0].style.display = "block",
 
-      secondUl.style.display = "none"
+        secondUl.style.display = "none"
       img.style.display = "none";
       navBarWrapper.style.height = "40px"
     }
@@ -245,8 +245,12 @@ export default async function decorate(block) {
   addVehicleCheckboxs.forEach(addVehicleCheckbox => {
     addVehicleCheckbox.addEventListener('change', (e) => {
       traySecion.classList.toggle('disappear');
-
-      if (e.target.checked) {
+      if (e.target.dataset.checked) {
+        e.target.dataset.checked = false;
+      } else {
+        e.target.dataset.checked = true;
+      }
+      if (e.target.dataset.checked) {
         onVehicleAdd(e);
       } else {
         onVehicleRmove(e);
@@ -260,7 +264,7 @@ export default async function decorate(block) {
       e.target.dataset.vehiclesRendered = true;
     });
   })
-  
+
   return block;
 }
 
