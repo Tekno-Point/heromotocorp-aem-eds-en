@@ -25,9 +25,7 @@
     aspect-ratio: 4 / 3;
     object-fit: cover;
 }
-/* ============================= */
-/* DROPDOWN STYLING */
-/* ============================= */
+
 .product-dealer-cards .custom-select-wrapper {
     width: 100%;
     max-width: 320px;
