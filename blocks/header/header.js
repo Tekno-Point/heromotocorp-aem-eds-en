@@ -192,45 +192,62 @@ export default async function decorate(block) {
 
 
     const navBar = document.querySelector('.nav-bar');
-const secondUl = navBar?.querySelectorAll('ul')[1];
+    const secondUl = navBar?.querySelectorAll('ul')[1];
 
-if (secondUl) {
-  console.log('Second <ul> found:', secondUl);
-} else {
-  console.warn('Second <ul> not found');
-}
+    if (secondUl) {
+      console.log('Second <ul> found:', secondUl);
+    } else {
+      console.warn('Second <ul> not found');
+    }
 
-const img = document.querySelector('.nav-bar p');
+    const img = document.querySelector('.nav-bar p');
 
 
-  const navBarWrapper = document.querySelector('.nav-bar > .default-content-wrapper');
+    const navBarWrapper = document.querySelector('.nav-bar > .default-content-wrapper');
 
     if (heroBottom <= 0) {
       navWrapper2.style.transform = 'translateY(-100%)';
       document.getElementsByClassName("header-main")[0].style.display = "none",
         secondUl.style.display = "flex";
-        img.style.display = "block";
-        navBarWrapper.style.height = "84px"
+      img.style.display = "block";
+      navBarWrapper.style.height = "84px"
     } else {
       navWrapper2.style.transform = 'translateY(0)';
       document.getElementsByClassName("header-main")[0].style.display = "block",
-    
-      secondUl.style.display = "none"
+
+        secondUl.style.display = "none"
       img.style.display = "none";
       navBarWrapper.style.height = "40px"
     }
   });
+
+  if (document.querySelector('.header .section.nav-bar ul li ')) {
+    document
+      .querySelectorAll('.header .section.nav-bar ul li ')
+      .forEach((link) => {
+        // debugger;
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          // const targetId = scrollMap[link.getAttribute("href")];
+          const targetId = e.target.closest("li").querySelector("a").textContent.trim().toLowerCase()?.split(" ").join("-");
+          const target = document.querySelector(
+            `.section[data-id="${targetId}"]`
+          );
+          target?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+  }
 
   await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
 
   /* init Compare */
   const addVehicleCheckbox = block.querySelector('.add-vehicle-checkbox');
   const traySecion = document.querySelector('.tray-container');
-  
+
   addVehicleCheckbox.addEventListener('change', (e) => {
     traySecion.classList.toggle('disappear');
 
-    if(e.target.checked) {
+    if (e.target.checked) {
       onVehicleAdd(e);
     } else {
       onVehicleRmove(e);
