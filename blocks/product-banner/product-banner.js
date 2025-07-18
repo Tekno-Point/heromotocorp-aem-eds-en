@@ -7,7 +7,13 @@ let startX = 0;
 let currentFrame = 0;
 let accumulated = 0;
 const pixelsPerDegree = 1.5;
-
+export async function updatePriceAndLocation() {
+    const [dataMapping] = await useDataMapping()
+    const li = document.querySelector('.highlight').querySelector('ul li ul li')
+    const [priceEl, locationEl] = li.querySelectorAll('strong');
+    priceEl.textContent = `₹ ${dataMapping.banner_price}`;
+    locationEl.textContent = `, ${dataMapping.current_location.city}`;
+}
 export async function decorateProductBanner(block, data) {
     let heading;
     let bottomSection;
@@ -185,6 +191,7 @@ export async function decorateProductBanner(block, data) {
     }
     pubsub.publish('price-listing-event');
     pubsub.publish('product-dealer-cards-event');
+    updatePriceAndLocation();
 }
 
 
