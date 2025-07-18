@@ -1,211 +1,173 @@
-import { fetchStateCityMaster, fetchStateCity, fetchProduct } from "../../scripts/common.js";
-import { div, label, fieldset, p } from "../../scripts/dom-helpers.js";
+import {
+  fetchStateCityMaster,
+  fetchStateCity,
+  fetchProduct,
+  useDataMapping,
+  pubsub
+} from "../../scripts/common.js";
+import {
+  div, label, fieldset, p, a, span, input as inputEl, img
+} from "../../scripts/dom-helpers.js";
 
-export default async function decorate(block) {
-  const stateCityData = await fetchStateCityMaster();
-  const states = stateCityData.data.stateCity.map(item => ({
-    code: item.code,
-    label: item.label,
-    cities: item.cities,
-  }));
+pubsub.subscribe('price-listing-event', updatePriceListing);
+function createDropdownInput(placeholder) {
+  const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' });
+  const clearBtn = span({ class: 'clear-btn' }, '×');
+  const dropdownBtn = span({ class: 'dropdown-btn' },
+    img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
+  );
+  const wrapper = div({ class: 'input-wrapper' }, input, clearBtn, dropdownBtn);
+  const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
+  return { wrapper, input, clearBtn, dropdownBtn, list };
+}
 
+function populateList(input, list, data, onSelect) {
+  list.innerHTML = '';
+  const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
+  if (!filtered.length) {
+    list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
+  } else {
+    filtered.forEach(item => {
+      const itemEl = div({ class: 'dropdown-item' }, item.label);
+      itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
+      list.appendChild(itemEl);
+    });
+  }
+  list.style.display = 'block';
+}
 
-  let current = await fetchStateCity();
+async function decoratePriceListing() {
+  // const raw = await fetchStateCityMaster();
+  const [dataMapping] = await useDataMapping();
+  const mapped = dataMapping.state_city_master;
+  const states = mapped.state.map(label => ({ label, cities: Object.values(mapped[label]) }));
+
+  const current = dataMapping.current_location;
   let selectedState = states.find(s => s.label.toUpperCase() === current.state.toUpperCase()) || states[0];
   let selectedCity = selectedState.cities.find(c => c.label.toUpperCase() === current.city.toUpperCase()) || selectedState.cities[0];
 
-  const stateWrapper = div({ class: 'input-wrapper' });
-  const stateInput = document.createElement('input');
-  stateInput.setAttribute('placeholder', 'Select State');
-  stateInput.setAttribute('class', 'react-select__input');
-  stateInput.setAttribute('autocomplete', 'off');
-  const clearState = document.createElement('span');
-  clearState.className = 'clear-btn';
-  clearState.textContent = '×';
-  stateWrapper.appendChild(stateInput);
-  stateWrapper.appendChild(clearState);
+  const { wrapper: sw, input: si, clearBtn: sc, dropdownBtn: sd, list: sl } = createDropdownInput('Select State');
+  const { wrapper: cw, input: ci, clearBtn: cc, dropdownBtn: cd, list: cl } = createDropdownInput('Select City');
 
-  const stateList = document.createElement('div');
-  stateList.className = 'custom-dropdown-list scrollable';
-  stateList.style.display = 'none';
-
-  const cityWrapper = div({ class: 'input-wrapper' });
-  const cityInput = document.createElement('input');
-  cityInput.setAttribute('placeholder', 'Select City');
-  cityInput.setAttribute('class', 'react-select__input');
-  cityInput.setAttribute('autocomplete', 'off');
-  const clearCity = document.createElement('span');
-  clearCity.className = 'clear-btn';
-  clearCity.textContent = '×';
-  cityWrapper.appendChild(cityInput);
-  cityWrapper.appendChild(clearCity);
-
-  const cityList = document.createElement('div');
-  cityList.className = 'custom-dropdown-list scrollable';
-  cityList.style.display = 'none';
-
-  const dropdownsContainer = div({ class: 'price-listing__row-col--container row' },
+  const dropdowns = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city z-1 px-md-6 px-lg-6' },
       div({ class: 'custom-select-state-city__col' },
-        div({ class: 'custom-autocomplete position-relative' },
-          label({}, 'State'),
-          stateWrapper,
-          stateList
-        )
+        div({ class: 'custom-autocomplete position-relative' }, label({}, 'State'), sw, sl)
       )
     ),
     div({ class: 'custom-select-state-city__col false' },
-      div({ class: 'custom-autocomplete position-relative' },
-        label({}, 'City'),
-        cityWrapper,
-        cityList
-      )
+      div({ class: 'custom-autocomplete position-relative' }, label({}, 'City'), cw, cl)
     )
   );
 
   const priceInfo = div({ class: 'price-details--info w-100 my-lg-4 px-0' });
   const fieldsetEl = fieldset({ class: 'my-lg-12 my-6 w-100' }, priceInfo);
 
-  const headingWrapper = block.querySelector('h1')?.closest('div');
-  const headingUL = headingWrapper?.querySelector('ul');
-  const liList = headingUL?.querySelectorAll('li');
-
-  if (liList?.length > 0) {
-    const firstLi = liList[0];
-    firstLi.innerHTML = '';
-    firstLi.appendChild(dropdownsContainer);
-    firstLi.appendChild(fieldsetEl);
-  }
-
-  if (liList?.length > 1) {
-    const secondLi = liList[1];
-    const innerUL = secondLi.querySelector('ul');
-    if (innerUL) {
-      const labels = [...innerUL.querySelectorAll('li')].map(li => li.textContent?.trim());
-      const wrapper = document.createElement('div');
-      wrapper.className = 'price-listing__row-col--button align-items-center d-flex';
-
-      if (labels[0]) {
-        const btn1 = document.createElement('a');
-        btn1.href = '/content/hero-commerce/in/en/pre-approved-offers.html';
-        btn1.textContent = labels[0];
-        btn1.className = 'avail-finance-button-size button button--secondary weight-heavy bg-white text-error border-error text-uppercase d-flex border rounded-2 cta-text py-4 px-12 d-inline-flex justify-content-center flex-row text-center align-items-center';
-        wrapper.appendChild(btn1);
-      }
-
-      if (labels[1]) {
-        const btn2 = document.createElement('a');
-        btn2.href = 'https://www.heromotocorp.com/en-in/buy-now/practical/splendor-plus.html';
-        btn2.textContent = labels[1];
-        btn2.className = 'buynow-button-size button button--primary weight-heavy cta-text d-flex flex-row justify-content-center align-items-center text-uppercase rounded-2 py-4 px-12 py-sm-5 px-sm-16 text-white gradient-1 border-0';
-        wrapper.appendChild(btn2);
-      }
-
-      innerUL.replaceWith(wrapper);
-    }
-  }
-
-  function populateList(input, list, data, onSelect) {
-    list.innerHTML = '';
-    const value = input.value.toLowerCase();
-    const filtered = data.filter(d => d.label.toLowerCase().includes(value));
-    filtered.forEach(item => {
-      const divEl = document.createElement('div');
-      divEl.textContent = item.label;
-      divEl.className = 'dropdown-item';
-      divEl.addEventListener('click', () => {
-        input.value = item.label;
-        list.style.display = 'none';
-        onSelect(item);
-      });
-      list.appendChild(divEl);
-    });
-    list.style.display = filtered.length ? 'block' : 'none';
-  }
-
-  async function renderPriceTable(stateLabel, cityCode) {
+  async function renderPriceTable(state, cityCode) {
     priceInfo.innerHTML = '';
-
-    const headerRow = div({ class: 'row' },
-      div({ class: 'col-6' },
-        div({ class: 'price-details-col pb-6 pb-sm-12' },
-          div({ class: 'price-details-col__text h4 weight-heavy' }, 'Variant')
-        )
-      ),
-      div({ class: 'col-6' },
-        div({ class: 'price-details-col pb-6 pb-sm-12 ps-6 pe-0' },
-          div({ class: 'price-details-col__text h4 weight-heavy' }, 'Ex-Showroom Price')
+    priceInfo.append(
+      div({ class: 'row' },
+        div({ class: 'col-6' },
+          div({ class: 'price-details-col pb-6 pb-sm-12' }, div({ class: 'price-details-col__text h4 weight-heavy' }, 'Variant'))
+        ),
+        div({ class: 'col-6' },
+          div({ class: 'price-details-col pb-6 pb-sm-12 ps-6 pe-0' }, div({ class: 'price-details-col__text h4 weight-heavy' }, 'Ex-Showroom Price'))
         )
       )
     );
-    priceInfo.appendChild(headerRow);
-
-    const state = states.find(s => s.label === stateLabel);
-    if (!state) return;
-    const city = state.cities.find(c => c.code === cityCode);
-    if (!city) return;
-
-    const productData = await fetchProduct(state.label, city.code);
-    const variants = productData?.data?.products?.items?.[0]?.variant_to_colors || [];
-
+    const prod = await fetchProduct(state, cityCode);
+    const variants = prod.data.products.items?.[0]?.variant_to_colors || [];
     variants.forEach(v => {
-      const row = div({ class: 'row' },
-        div({ class: 'col-6' },
-          div({ class: 'price-details-col pb-6 pb-sm-12' },
-            div({ class: 'price-details-col__text' },
-              p({ class: 'body2 weight-medium' }, v.label)
+      priceInfo.append(
+        div({ class: 'row' },
+          div({ class: 'col-6' },
+            div({ class: 'price-details-col pb-6 pb-sm-12' },
+              div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, v.label))
             )
-          )
-        ),
-        div({ class: 'col-6' },
-          div({ class: 'price-details-col pb-6 pb-sm-12 ps-6 pe-6' },
-            div({ class: 'price-details-col__text' },
-              p({ class: 'body2 weight-medium' }, `₹ ${v.variant_price}`)
+          ),
+          div({ class: 'col-6' },
+            div({ class: 'price-details-col pb-6 pb-sm-12 ps-6 pe-6' },
+              div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, `₹ ${v.variant_price}`))
             )
           )
         )
       );
-      priceInfo.appendChild(row);
     });
   }
 
-  stateInput.addEventListener('input', () => {
-    populateList(stateInput, stateList, states, (selected) => {
-      selectedState = selected;
-      selectedCity = selected.cities[0];
-      cityInput.disabled = false;
-      cityInput.value = selectedCity.label;
-      renderPriceTable(selectedState.label, selectedCity.code);
+  // ==== events ====
+  async function onStateSelect(s) {
+    selectedState = s; selectedCity = s.cities[0];
+    ci.disabled = false;
+    ci.value = selectedCity.label;
+    renderPriceTable(s.label, selectedCity.code);
+    const [dataMapping, setDataMapping] = await useDataMapping();
+    dataMapping.current_location = {
+      state: s.label,
+      city: selectedCity.code,
+    };
+    setDataMapping(dataMapping);
+    pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
+      test: true,
     });
-  });
-
-  cityInput.addEventListener('input', () => {
-    populateList(cityInput, cityList, selectedState.cities, (selected) => {
-      selectedCity = selected;
-      renderPriceTable(selectedState.label, selectedCity.code);
+  }
+  async function onCitySelect(c) {
+    selectedCity = c;
+    renderPriceTable(selectedState.label, c.code);
+    const [dataMapping, setDataMapping] = await useDataMapping();
+    dataMapping.current_location = {
+      state: selectedState.label,
+      city: selectedCity.code,
+    };
+    setDataMapping(dataMapping);
+    pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
+      test: true,
     });
+  }
+
+  si.addEventListener('input', () => populateList(si, sl, states, onStateSelect));
+  sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
+  sc.addEventListener('click', () => { si.value = ''; sl.style.display = 'none'; });
+
+  ci.disabled = !selectedState;
+  ci.addEventListener('input', () => populateList(ci, cl, selectedState.cities, onCitySelect));
+  cd.addEventListener('click', e => { e.stopPropagation(); cl.style.display !== 'block' ? populateList(ci, cl, selectedState.cities, onCitySelect) : cl.style.display = 'none'; ci.focus(); });
+  cc.addEventListener('click', () => { ci.value = ''; cl.style.display = 'none'; });
+
+  si.addEventListener('focus', () => populateList(si, sl, states, onStateSelect));
+  ci.addEventListener('focus', () => populateList(ci, cl, selectedState.cities, onCitySelect));
+
+  document.addEventListener('click', e => {
+    !sw.contains(e.target) && (sl.style.display = 'none');
+    !cw.contains(e.target) && (cl.style.display = 'none');
   });
 
-  clearState.addEventListener('click', () => {
-    stateInput.value = '';
-    stateList.style.display = 'none';
-  });
-
-  clearCity.addEventListener('click', () => {
-    cityInput.value = '';
-    cityList.style.display = 'none';
-  });
-
-  document.addEventListener('click', (e) => {
-    if (!stateInput.contains(e.target) && !stateList.contains(e.target)) {
-      stateList.style.display = 'none';
-    }
-    if (!cityInput.contains(e.target) && !cityList.contains(e.target)) {
-      cityList.style.display = 'none';
-    }
-  });
-
-  stateInput.value = selectedState.label;
-  cityInput.value = selectedCity.label;
+  si.value = selectedState.label;
+  ci.value = selectedCity.label;
   renderPriceTable(selectedState.label, selectedCity.code);
+  return { dropdowns, fieldsetEl }
+}
+
+export async function updatePriceListing() {
+  const block = document.querySelector('.price-listing.block');
+  const { dropdowns, fieldsetEl } = await decoratePriceListing();
+  const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
+  const liList = headingUL?.querySelectorAll('li') || [];
+  if (liList[0]) liList[0].replaceChildren(dropdowns, fieldsetEl);
+}
+export default async function decorate(block) {
+  const { dropdowns, fieldsetEl } = await decoratePriceListing();
+  const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
+  const liList = headingUL?.querySelectorAll('li') || [];
+  if (liList[0]) liList[0].replaceChildren(dropdowns, fieldsetEl);
+  if (liList[1]) {
+    const innerUL = liList[1].querySelector('ul');
+    if (innerUL) {
+      const labels = [...innerUL.querySelectorAll('li')].map(li => li.textContent.trim());
+      const wrap = div();
+      if (labels[0]) wrap.append(a({ href: '/content/hero-commerce/in/en/pre-approved-offers.html', class: 'avail-finance-button-size' }, labels[0]));
+      if (labels[1]) wrap.append(a({ href: 'https://www.heromotocorp.com/.../splendor-plus.html', class: 'buynow-button-size button' }, labels[1]));
+      innerUL.replaceWith(wrap);
+    }
+  }
 }

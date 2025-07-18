@@ -252,6 +252,10 @@
     border-bottom: 1px solid #a5a5a5;
     width: max-content;
 }
+.carousel .inner-innerSub-1 > p{
+    font-size: 18px;
+    padding-top: 10px;
+}
 
 .carousel .swiper-pagination > h3 {
     width: max-content;

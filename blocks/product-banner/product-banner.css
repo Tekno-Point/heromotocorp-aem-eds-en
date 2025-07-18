@@ -1,11 +1,12 @@
 .section.product-banner-container {
     background: #ededed;
+    margin: unset;
 }
 
 .section.product-banner-container .product-banner-wrapper {
     max-width: 96%;
     padding: 0 5rem;
-    margin-top: 55px;
+    /* margin-top: 55px; */
 }
 
 .section.product-banner-container .product-banner-wrapper .product-banner.block {
