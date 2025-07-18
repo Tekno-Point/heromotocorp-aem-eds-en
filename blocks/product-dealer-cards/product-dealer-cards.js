@@ -178,17 +178,22 @@ export async function decorateProductDealerCards(block = document.querySelector(
         cityList,
         async (newCity) => {
           activeCity = newCity;
-          renderDealers(activeState, activeCity);
+
           const [dataMapping, setDataMapping] = await useDataMapping();
-          dataMapping.current_location = {
-            state: activeState,
-            city: activeCity,
-          };
+          dataMapping.current_location = { state: activeState, city: activeCity };
           setDataMapping(dataMapping);
+
+          if (!newCity) {
+            return;
+          }
+
+          renderDealers(activeState, activeCity);
+
           pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
             test: true,
           });
-        },
+        }
+        ,
         activeCity
       );
 
@@ -215,10 +220,17 @@ export async function decorateProductDealerCards(block = document.querySelector(
     cityList,
     async (newCity) => {
       activeCity = newCity;
-      renderDealers(activeState, activeCity);
+
       const [dataMapping, setDataMapping] = await useDataMapping();
       dataMapping.current_location = { state: activeState, city: activeCity };
       setDataMapping(dataMapping);
+
+      if (!newCity) {
+        return;
+      }
+
+      renderDealers(activeState, activeCity);
+
       pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
         test: true,
       });
