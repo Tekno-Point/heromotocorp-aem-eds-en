@@ -241,26 +241,28 @@ export default async function decorate(block) {
   await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
 
   /* init Compare */
-  const addVehicleCheckbox = block.querySelector('.add-vehicle-checkbox');
+  const addVehicleCheckboxs = block.querySelectorAll('.add-to-compare  .add-vehicle-checkbox');
   const traySecion = document.querySelector('.tray-container');
 
-  addVehicleCheckbox.addEventListener('change', (e) => {
-    traySecion.classList.toggle('disappear');
+  addVehicleCheckboxs.forEach(addVehicleCheckbox => {
+    addVehicleCheckbox.addEventListener('change', (e) => {
+      traySecion.classList.toggle('disappear');
 
-    if (e.target.checked) {
-      onVehicleAdd(e);
-    } else {
-      onVehicleRmove(e);
-    }
+      if (e.target.checked) {
+        onVehicleAdd(e);
+      } else {
+        onVehicleRmove(e);
+      }
 
-    if (e.target.dataset.vehiclesRendered) {
-      return;
-    }
+      if (e.target.dataset.vehiclesRendered) {
+        return;
+      }
 
-    initCompare();
-    e.target.dataset.vehiclesRendered = true;
-  });
-
+      initCompare();
+      e.target.dataset.vehiclesRendered = true;
+    });
+  })
+  
   return block;
 }
 
