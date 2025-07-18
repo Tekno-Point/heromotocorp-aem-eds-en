@@ -27,10 +27,11 @@
     line-height: 2rem;
 }
 
-.highlight>.default-content-wrapper>ul:first-child >li:first-child>strong {
+.highlight>.default-content-wrapper>ul:first-child >li:first-child>ul>li>strong:first-child {
     font-family: "TSTAR-PRO-Heavy";
-    font-weight: 900;
+    color: #ee2326;
     font-size: 2rem;
+    font-weight: 900;
     -webkit-font-kerning: auto;
     font-kerning: auto;
     letter-spacing: normal;
@@ -104,10 +105,9 @@
     font-family: "TSTAR-PRO-Regular";
 
     @media screen and (max-width: 900px) {
-        padding: 0 16px;
+        padding: 10px 16px;
     }
 }
-
 
 .highlight>.default-content-wrapper>ul:nth-child(2)>li>a {
     font-weight: 900;
@@ -142,7 +142,11 @@
 
 
 @media (max-width: 900px) {
-    .highlight>.default-content-wrapper>ul {
+    .highlight>.default-content-wrapper>ul:first-child {
+        flex-wrap: wrap;
+    }
 
+    .highlight>.default-content-wrapper>ul:first-child >li:first-child {
+        width: 100%;
     }
 }
