@@ -22,7 +22,8 @@
 .emi-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    /* gap: 30px; */
+    padding: 10px;
     margin-top: 40px;
 }
 
@@ -162,7 +163,7 @@
 .form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
     position: absolute;
     top: 30px;
-    right: 0px;
+    right: 10px;
     z-index: 2;
 }
 
@@ -172,7 +173,7 @@
     }
     .emi-container .emi-output {
         padding: 40px 10px;
-        border-radius: 0px;
+        border-radius: 10px;
     }
     .emi-container .emi-output .emi-title {
         font-size: 20px;
@@ -193,6 +194,7 @@
     .emi-container {
         margin-top: 0px;
         flex-direction: column;
+        gap: 12px
     }
 }
 
@@ -233,17 +235,36 @@
     border: 2px solid #fff;
 }
 
+.section.form-block-container>.form-block-wrapper{
+    max-width: 1286px;
+    width: 100%;
+}
 
 @media (max-width: 426px) {
     .form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
-        top: 398px;
+        top: 364px;
         width: 200px;
     }
+
+    .emi-container .emi-controls{
+        padding: 0px;
+        gap: 25px;
+    }
+    
 }
 
 @media (max-width: 322px) {
     .form-block > div:nth-child(4) > div:nth-child(6) > picture > img {
-        top: 472px;
+        top: 366px;
         width: 200px;
+        right: 0px;
+    }
+        .emi-container .emi-output button {
+        width: 30%;
+        padding: 7px;
+        font-size: 12px;
+    }
+    .emi-container{
+        padding: 0px;
     }
 }

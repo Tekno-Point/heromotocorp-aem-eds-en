@@ -14,13 +14,13 @@
 }
 
 .blogs-swiper-container > .blogs-swiper-wrapper {
-    max-width: 1350px;
+    max-width: 1368px;
     width: 100%;
     background-color: #ededed;
-    padding: 20px;
+    padding: 0px;
 }
 .blogs-swiper{
-    max-width: 1350px;
+    max-width: 1368px;
     width: 100%;
     background-color: #ededed;
     /* padding: 20px; */
@@ -41,7 +41,7 @@
 
 /* Each slide as a card */
 .blogs-swiper .swiper-slide {
-    max-width: 441px;
+    max-width: 449px;
     width: 100%;
     box-sizing: border-box;
     background: #fff;
@@ -71,13 +71,16 @@
 
 /* Swiper pagination below the cards */
 .blogs-swiper .swiper-pagination {
-    position: static; /* place pagination normally below slides */
+   justify-content: center;
+    position: static;
     text-align: center;
     width: 100%;
     margin-top: 16px;
     padding-bottom: 20px;
-    display: flex;
-    justify-content: center;
+    display: flex
+;
+    flex-wrap: wrap;
+    gap: 6px;
 }
 
 .blogs-swiper .swiper-pagination-bullet {
@@ -170,9 +173,23 @@
 
 /* Responsive adjustments */
 @media screen and (max-width: 1023px) {
-    .blogs-swiper .swiper-slide {
-        max-width: 320px;
-        width: 100%; /* full width cards on tablets & phones */
-        margin-right: 0; /* no gap needed when single card */
+
+       .blogs-swiper .swiper-slide { 
+        max-width: 370px;
+        width: 100%; 
+        margin-right: 0; 
+    } 
+    .section.blogs-swiper-container>.blogs-swiper-wrapper>.blogs-swiper{
+        padding: 10px 30px ;
     }
 }
+
+
+@media screen and (max-width: 322px) {
+   
+    .section.blogs-swiper-container>.blogs-swiper-wrapper>.blogs-swiper{
+        padding: 10px 17px ;
+    }
+}
+
+
