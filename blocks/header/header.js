@@ -208,14 +208,17 @@ export default async function decorate(block) {
     if (heroBottom <= 0) {
       navWrapper2.style.transform = 'translateY(-100%)';
       document.getElementsByClassName("header-main")[0].style.display = "none",
+
         secondUl.style.display = "flex";
       img.style.display = "block";
-      navBarWrapper.style.height = "84px"
+      navBarWrapper.style.height = "72px";
+      navBarWrapper.style.padding = '20px 10px 0';
+      // navBarWrapper.style.top = "0"
     } else {
       navWrapper2.style.transform = 'translateY(0)';
       document.getElementsByClassName("header-main")[0].style.display = "block",
-
-      secondUl.style.display = "none"
+      navBarWrapper.style.padding = 'unset';
+        secondUl.style.display = "none"
       img.style.display = "none";
       navBarWrapper.style.height = "40px"
     }
@@ -260,7 +263,7 @@ export default async function decorate(block) {
       e.target.dataset.vehiclesRendered = true;
     });
   })
-  
+
   return block;
 }
 

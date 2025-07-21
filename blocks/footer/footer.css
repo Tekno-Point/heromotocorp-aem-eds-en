@@ -3,6 +3,10 @@ footer {
     font-size: var(--body-font-size-xs);
 }
 
+.footer-wrapper{
+    background-color: black !important;
+}
+
 footer .footer > div {
     margin: auto;
     max-width: 1200px;
