@@ -103,6 +103,10 @@ body.modal-open {
 }
 
 
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .modal-content {
+  all: unset;
+}
+
 
 .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
 .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
@@ -136,6 +140,16 @@ body.modal-open {
 
 .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .section.share-modal-sec .default-content-wrapper a {
   all: unset;
+}
+
+@media (width<767px) {
+
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
+    bottom: 148px;
+    top: unset;
+    right: calc((100% - 244px) / 2);
+  }
 }
 
 /* share Modal css end */
