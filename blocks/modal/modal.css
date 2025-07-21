@@ -102,4 +102,52 @@ body.modal-open {
   left: 0;
 }
 
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .modal-content {
+  all: unset;
+}
+
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
+  display: block;
+  position: absolute;
+  top: 63px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  right: calc((100% - 1246px) / 2);
+  margin: unset;
+  left: unset;
+
+}
+
+.modal dialog::backdrop {
+  display: none;
+}
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .close-button {
+  display: none;
+}
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .section.share-modal-sec .default-content-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .section.share-modal-sec .default-content-wrapper a {
+  all: unset;
+}
+
+@media (width<767px) {
+
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
+    bottom: 181px;
+    top: unset;
+    right: calc((100% - 306px) / 2);
+  }
+}
+
 /* share Modal css end */
