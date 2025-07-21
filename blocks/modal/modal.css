@@ -144,9 +144,10 @@ body.modal-open {
 
   .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
   .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
-    bottom: 181px;
+    bottom: 73px;
     top: unset;
-    right: calc((100% - 306px) / 2);
+    right: calc((100% - 294px) / 2);
+
   }
 }
 

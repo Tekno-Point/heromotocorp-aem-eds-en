@@ -44,6 +44,7 @@
 .cards-card-image {
     max-width: 590.28px;
     height: 369.88px;
+    height: 410px;
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -60,7 +61,7 @@
 }
 
 .cards-card-image > picture > img:hover {
-    transform: scale(1.2); /* Zoom in 1.2x */
+    transform: scale(1.1); /* Zoom in 1.2x */
 }
 
 @media (max-width: 600px) {
@@ -72,6 +73,7 @@
 
     .cards-card-image {
         -webkit-transform: skewX(0deg);
+        height: 336px;
     }
     .cards-card-image > picture > img:hover {
         transform: none; /* Zoom in 1.2x */
