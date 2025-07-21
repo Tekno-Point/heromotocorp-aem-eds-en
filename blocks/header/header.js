@@ -3,6 +3,7 @@ import initCompare from './compare.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { appendXF } from './xf.js';
 import { onVehicleAdd, onVehicleRmove } from './compare-components.js';
+import { endpoint } from '../../scripts/common.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -239,7 +240,7 @@ export default async function decorate(block) {
       });
   }
 
-  await appendXF(block, 'https://stage.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
+  await appendXF(block, endpoint + '/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html')
 
   /* init Compare */
   const addVehicleCheckboxs = block.querySelectorAll('.add-to-compare  .add-vehicle-checkbox');
