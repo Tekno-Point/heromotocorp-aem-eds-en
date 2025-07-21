@@ -191,6 +191,7 @@
 
 .carousel .swiper-pagination-bullet.swiper-pagination-bullet-active {
     opacity: 1;
+    width: 146px;
     color: rgb(238, 35, 38);
     font-family: "TSTAR-PRO-Bold";
     font-weight: 900;
@@ -400,7 +401,8 @@
     }
 
     .carousel .btnWrapper > .swiper-pagination {
-        margin-left: 20px;
+        margin-left:  51px;;
+                width: 210px;
     }
     .carousel h3.swiper-pagination-bullet {
         font-size: 18px;
