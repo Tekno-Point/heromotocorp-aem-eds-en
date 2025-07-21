@@ -287,7 +287,7 @@ function hashCode(s) {
 
 /* compare vehicle */
 const fetchCategory = async () => {
-  const response = await fetch('https://www.heromotocorp.com/content/hero-aem-website/in/en-in/homepage/jcr:content.products-by-category.json');
+  const response = await fetch(`${endpoint}/content/hero-aem-website/in/en-in/homepage/jcr:content.products-by-category.json`);
   const vehiclePriceData = await response.json();
   console.log(vehiclePriceData);
   const vehiclesObj = vehicleTypeFilter(vehiclePriceData.data.products.items);
