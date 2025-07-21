@@ -5,6 +5,7 @@
     "/content/hmcl/hero-splinder-page/form/state:/hero-splinder-page/form/state.json",
     "/content/hmcl/hero-splinder-page/form/city:/hero-splinder-page/form/city.json",
     "/content/hmcl/configuration:/.helix/config.json",
+    "/content/hmcl/headers:/.helix/headers.json",
     "/content/hmcl/metadata:/metadata.json"
   ],
   "includes": [
