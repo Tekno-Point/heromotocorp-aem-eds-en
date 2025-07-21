@@ -48,7 +48,7 @@ function populateList(input, list, data, onSelect) {
         list.style.display = 'none';
         onSelect(item);
       });
-      if (isSelected) selectedEl = itemEl; 
+      if (isSelected) selectedEl = itemEl;
       list.appendChild(itemEl);
     });
   }
@@ -75,8 +75,6 @@ async function decoratePriceListing() {
 
   const { wrapper: sw, input: si, clearBtn: sc/*, dropdownBtn: sd*/, arrowBtn: sa, list: sl } = createDropdownInput('Enter State');
   const { wrapper: cw, input: ci, clearBtn: cc/*, dropdownBtn: cd*/, arrowBtn: ca, list: cl } = createDropdownInput('Enter City');
-
-  ci.disabled = true; // ⛔ disable city until state is selected
 
   const dropdowns = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city' },
@@ -128,7 +126,7 @@ async function decoratePriceListing() {
   async function onStateSelect(s) {
     selectedState = s; selectedCity = s.cities[0];
     ci.disabled = false;
-    ci.value = selectedCity.label;
+    // ci.value = selectedCity.label;
     renderPriceTable(s.label, selectedCity.code);
     const [dataMapping, setDataMapping] = await useDataMapping();
     dataMapping.current_location = {
@@ -157,17 +155,29 @@ async function decoratePriceListing() {
   let isCityOpen = false;
 
   si.addEventListener('focus', () => {
-    si.select(); // optional: highlights text
-    populateList({ value: '' }, sl, states, onStateSelect);
+    si.select();
+    populateList({ value: si.value }, sl, states, onStateSelect);
   });
+
   ci.addEventListener('focus', () => {
     ci.select(); // optional: highlights text
-    populateList({ value: '' }, cl, selectedState.cities, onCitySelect);
+    populateList(ci, cl, selectedState.cities, onCitySelect);
   });
 
 
   // sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
-  sw.addEventListener('click', e => (e.stopPropagation(), isStateOpen ? (sl.style.display = 'none', isStateOpen = false) : (populateList(si, sl, states, onStateSelect), si.focus(), sl.style.display = 'block', isStateOpen = true)));
+  sw.addEventListener('click', e => {
+    e.stopPropagation();
+    if (isStateOpen) {
+      sl.style.display = 'none';
+      isStateOpen = false;
+    } else {
+      populateList({ value: si.value }, sl, states, onStateSelect);
+      si.focus();
+      sl.style.display = 'block';
+      isStateOpen = true;
+    }
+  });
   sc.addEventListener('click', () => {
     si.value = '';
     sl.style.display = 'none';
