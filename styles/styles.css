@@ -270,9 +270,11 @@ main img {
 .heroicon-wheel:before {
   content: "\E9C9";
 }
+
 .heroicon-engine:before {
   content: "";
 }
+
 /* heroicon-engine */
 
 
@@ -291,9 +293,38 @@ main img {
 .heroicon-electrical:before {
   content: "\E94C";
 }
+
 .icon-moon-heroicon-reorder:before {
   content: "\E99E";
 }
+
+/*  */
+.heroicon-download:before {
+  content: "\e948";
+  color: black;
+}
+
+.heroicon-share:before {
+  content: "\e9ae";
+  color: black;
+  font-size: 36px;
+  width: 42px;
+  height: 42px; 
+
+}
+
+.heroicon-whatsapp:before{
+  content:"\e9c8"
+}
+
+.heroicon-email:before{
+  content:"\e9cd"
+}
+
+.heroicon-facebook:before{
+  content:"\e965"
+}
+/*  */
 
 /*header*/
 
@@ -308,18 +339,60 @@ main img {
 .icon-moon-heroicon-bike:before {
   content: "\E915";
 }
+
 .icon-moon-heroicon-wallet-money:before {
   content: "\E9C6 ";
 }
+
 .icon-moon-heroicon-exchange:before {
   content: "\E964 ";
 }
+
 .icon-moon-heroicon-settings:before {
   content: "\E9AD ";
 }
+
 .icon-moon-heroicon-delear-locator:before {
   content: "\E942";
 }
+
+
+
+/*tab*/
+
+.icon-moon-heroicon-speedometer::before{
+ content: "\E9B0";
+}
+.icon-moon-heroicon-start::before{
+ content: "\EA28";
+}
+
+.icon-moon-heroicon-suspension::before{
+ content: "\E9B2";
+}
+
+.icon-moon-heroicon-seat::before{
+  content: "\EA25";
+} 
+
+.icon-moon-heroicon-side-stand::before{
+ content: "\EA27";
+}
+
+.icon-moon-heroicon-fuel::before{
+ content: "\EA1C";
+}
+
+.icon-moon-heroicon-tyre::before{
+ content: "\E9BD";
+} 
+.icon-moon-heroicon-safety::before{
+ content: "\E9A4";
+} 
+.icon-moon-heroicon-disbrake::before{
+ content: "\E945";
+} 
+
 
 
 

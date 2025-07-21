@@ -5,11 +5,12 @@
     padding: 0;
 }
 
+
 .hero{
     position: relative;
     padding: 40px 24px;
     min-height: 569px;
-    margin-top: 40px;
+    margin: 40px 0px 0px 0px; 
 }
 
 .hero h1 {
@@ -37,6 +38,8 @@
     display: none;
 }
 
+
+
 @media (width >= 900px) {
     .hero {
         padding: 40px 32px;
@@ -56,4 +59,10 @@
         padding: 40px 24px;
         min-height: 300px;
     }
+    .section.hero-banner>.hero-wrapper>.hero{
+    margin: 16px 0px 0px 0px;
+}
+.section.hero-banner{
+    margin: 0px;
+} 
 }
