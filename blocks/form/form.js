@@ -1,5 +1,6 @@
 import createField from "./form-fields.js";
 import { div, ul, li, p } from "../../scripts/dom-helpers.js";
+import { fetchOTP, useDataMapping } from "../../scripts/common.js";
 
 async function createForm(formHref, submitHref) {
   const { pathname } = new URL(formHref);
@@ -86,6 +87,7 @@ async function handleSubmit(form) {
 }
 
 export default async function decorate(block) {
+  const [dataMapping] = await useDataMapping()
   const links = [...block.querySelectorAll("a")].map((a) => a.href);
   const formLink = links.find(
     (link) => link.startsWith(window.location.origin) && link.endsWith(".json")
@@ -98,8 +100,8 @@ export default async function decorate(block) {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const valid = form.checkValidity();
-    if (valid) {
+    const valid = checkValidity();
+    if (!valid.includes(false)) {
       handleSubmit(form);
     } else {
       const firstInvalidEl = form.querySelector(":invalid:not(fieldset)");
@@ -146,8 +148,9 @@ export default async function decorate(block) {
     );
   };
 
-  state_inp.addEventListener("focus", function () {
+  state_inp.addEventListener("focus",async function () {
     // Avoid adding it again
+    const [dataMapping , setDataMapping] = await useDataMapping();
     if (!state_field.querySelector(".state")) {
       const states = dataMapping.state_city_master.state;
       state_field.appendChild(
@@ -366,33 +369,36 @@ export default async function decorate(block) {
   });
 
   // Submit Click
-  submitBtn.addEventListener("click", function () {
-    const allInp = block.querySelectorAll(".book-ride input");
-    allInp.forEach((inp) => {
+  // submitBtn.addEventListener("click", )
+  function checkValidity() {
+    const allInp = block.querySelectorAll("input[type='tel'],input[type='text'],input[type='email']");
+    return [...allInp].map((inp) => {
       const fieldWrapper = inp.closest(".field-wrapper");
       const error = fieldWrapper.querySelector(".error-msg");
       const inpVal = inp.value;
       const inpName = inp.name;
-      if (error) {
-        error.remove();
-      }
       if (inpVal == "") {
         fieldWrapper.append(errorField("Field is required"));
+        return true
       } else if (inpName == "name" && !nameRegex.test(inpVal)) {
         fieldWrapper.append(errorField("Please enter a valid name"));
+        return true
       } else if (inpName == "mobile" && !mobRegex.test(inpVal)) {
         fieldWrapper.append(errorField("Please enter a valid mobile no."));
+        return true
       } else if (inpName == "email" && !emailRegex.test(inpVal)) {
         fieldWrapper.append(errorField("Please enter a valid email"));
+        return true
       } else {
         if (error) {
           error.remove();
         }
+        return true
       }
     });
 
-    if (!block.querySelector(".error-msg")) {
-      alert("Form Valid...You can call Submit API here");
-    }
-  });
+    // if (!block.querySelector(".error-msg")) {
+    //   alert("Form Valid...You can call Submit API here");
+    // }
+  };
 }

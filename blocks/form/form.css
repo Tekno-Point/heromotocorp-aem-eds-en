@@ -407,7 +407,7 @@ input::placeholder {
     min-width: unset;
 }
 
-.section.book-ride .form form .field-wrapper:not(.heading-wrapper, .plaintext-wrapper, .submit-wrapper) {
+.section.book-ride .form form .field-wrapper:not(.heading-wrapper, .plaintext-wrapper, .submit-wrapper, .button-wrapper) {
     position: relative;
 }
 
@@ -464,6 +464,19 @@ input::placeholder {
     transform: translateY(-50%);
     width: max-content;
     min-width: unset;
+    cursor: pointer;
+}
+
+.section.book-ride .form form fieldset .sendOTP-btn label,
+.section.book-ride .form form fieldset .resendOTP-btn label {
+    display: block;
+    border-bottom: 2px solid #fff;
+    cursor: pointer;
+}
+
+.section.book-ride .form form fieldset .sendOTP-btn input,
+.section.book-ride .form form fieldset .resendOTP-btn input {
+    display: none;
 }
 
 .section.book-ride .form form fieldset .sendOTP-btn .button,
