@@ -178,6 +178,7 @@ border-radius: 10px;
 .modal.book-ride>dialog>.modal-content{
 background-color: #ee2326;
 border: none;
+padding: 0px;
 /* border-radius: 10px; */
 }
 
@@ -185,6 +186,8 @@ border: none;
   border: 1px solid #ee2326 ;
   margin: 0px;
     padding: 0px;
+    top: 11px;
+    right: 46px;
 }
 
 /* .modal.book-ride>dialog>.close-button1::before{
@@ -199,8 +202,12 @@ border: none;
 
 .modal.book-ride>dialog>.close-button>span{
 color: white;
-font-weight: 900;
+font-weight: 400;
 border: none;
+}
+.modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form{
+  padding: 0px ;
+  margin: 0px 0px 25px 0px;
 }
 
 
