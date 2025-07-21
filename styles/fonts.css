@@ -61,6 +61,7 @@
   font-family: "TSTAR-PRO-Bold";
   font-style: "Bold";
   font-display: swap;
+  font-weight: 700;
   src: url('../fonts/TSTAR-PRO-Bold.ttf') format('woff2');
 }
 @font-face {

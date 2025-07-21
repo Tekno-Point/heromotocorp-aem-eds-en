@@ -54,8 +54,8 @@
     > p
     > picture
     > img {
-    max-width: 365px;
-    width: 100%;
+    width: 363.55px;
+    max-width: 363px;
 }
 
 .carousel > .btnWrapper {
@@ -165,22 +165,22 @@
 
 .carousel h3.swiper-pagination-bullet {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    gap: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 0px;
     color: #303030;
-    font-size: 21px;
+    font-size: 24px;
     padding-left: 38px;
-    border-left: 2px solid black;
+    border-left: 2px solid #b9b2b2;
     background-color: white;
     opacity: 0.9;
     font-weight: 700;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "TSTAR-PRO-Regular";
+    font-family: "TSTAR-PRO-Medium";
     text-wrap: nowrap;
 }
 
@@ -191,9 +191,13 @@
 
 .carousel .swiper-pagination-bullet.swiper-pagination-bullet-active {
     opacity: 1;
-    color: #ed1c24;
+    /* width: 146px; */
+    color: rgb(238, 35, 38);
     font-family: "TSTAR-PRO-Bold";
     font-weight: 900;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .carousel .swiper-pagination-bullet span {
@@ -232,7 +236,7 @@
 
 .carousel .btnWrapper > .swiper-pagination {
     max-width: 1064px;
-    height: 19px;
+    height: 24px;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -240,7 +244,7 @@
     display: flex;
     gap: 60px;
     justify-content: flex-start;
-    margin-left: 53px;
+    margin-left: 82px;
     gap: 1rem;
     /* margin-bottom: 10px; */
     margin-top: 2px;
@@ -251,10 +255,13 @@
     padding-bottom: 20px;
     border-bottom: 1px solid #a5a5a5;
     width: max-content;
+    color: #303030;
 }
-.carousel .inner-innerSub-1 > p{
+.carousel .inner-innerSub-1 > p {
     font-size: 18px;
     padding-top: 10px;
+    color: #303030;
+    font-family: "TSTAR-PRO-Medium";
 }
 
 .carousel .swiper-pagination > h3 {
@@ -291,10 +298,26 @@
     text-align: center;
     padding: 30px;
     font-size: 3rem;
+    color: #303030;
 }
 
 .carousel-container {
     margin-top: 64px;
+}
+
+.carousel
+    > .swiper-wrapper
+    > .swiper-slide
+    > .inner-innerSub-2
+    > p:nth-child(2)
+    > picture
+    > img {
+    max-width: 413px;
+    width: 413px;
+}
+
+.carousel-container > .carousel-wrapper {
+    max-width: 1286px;
 }
 
 @media (max-width: 600px) {
@@ -344,10 +367,52 @@
     .carousel-container > .default-content-wrapper > h2 {
         font-size: 1.75rem;
     }
-    .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>div{
+    .price-listing
+        > div:nth-child(2)
+        > div
+        > ul
+        > li:nth-child(1)
+        > fieldset
+        > div {
         font-size: 14px;
     }
-    .price-listing>div:nth-child(2)>div>p {
-      font-size: 14px;
+    .price-listing > div:nth-child(2) > div > p {
+        font-size: 14px;
+    }
+    .carousel
+        > .swiper-wrapper
+        > .swiper-slide
+        > .inner-innerSub-2
+        > p
+        > picture
+        > img {
+       max-width: 131px;
+        height: 111px;
+    }
+    .carousel
+        > .swiper-wrapper
+        > .swiper-slide
+        > .inner-innerSub-2
+        > p:nth-child(2)
+        > picture
+        > img {
+        max-width: 156px;
+        height: 165px;
+    }
+
+    .carousel .btnWrapper > .swiper-pagination {
+        margin-left: 51px;
+        width: 210px;
+    }
+    .carousel h3.swiper-pagination-bullet {
+        font-size: 18px;
+    }
+    .carousel .inner-innerSub-1 > h2 {
+        width: 100%;
+        font-family: "TSTAR-PRO-Regular";
+        padding-bottom: 20px;
+        border-bottom: 1px solid #a5a5a5;
+        /* width: max-content; */
+        color: #303030;
     }
 }

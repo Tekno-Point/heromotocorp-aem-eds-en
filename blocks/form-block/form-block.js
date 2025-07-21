@@ -14,22 +14,19 @@ export default function decorate(block) {
 
   [amountWrap, interestWrap, durationWrap].forEach((wrap) => wrap.innerHTML = '');
 
-  // Create sliders
   const amountSlider = input({ type: 'range', min: amountMin, max: amountMax, step: 1000, value: amountMin });
   const rateSlider = input({ type: 'range', min: rateMin, max: rateMax, step: 0.1, value: rateMin });
   const monthsSlider = input({ type: 'range', min: monthsMin, max: monthsMax, step: 1, value: monthsMin });
 
-  // Create display values and inputs
   const amountVal = p({ class: 'input-value' }, `₹ ${amountMin.toLocaleString('en-IN')}`);
-  const amountInput = input({ type: 'number', value: amountMin, class: 'number-box' });
+  const amountInput = input({ type: 'text', value: amountMin.toLocaleString('en-IN'), class: 'number-box' });
 
   const rateVal = p({ class: 'input-value' }, `${rateMin.toFixed(2)}%`);
-  const rateInput = input({ type: 'number', value: rateMin, class: 'number-box', step: 0.1 });
+  const rateInput = input({ type: 'text', value: `${rateMin.toFixed(2)}%`, class: 'number-box' });
 
   const monthsVal = p({ class: 'input-value' }, `${monthsMin} months`);
   const monthsInput = input({ type: 'number', value: monthsMin, class: 'number-box' });
 
-  // Only add value-row for Amount group
   function createSliderGroup(labelText, valP, inputEl, slider, minLabel, maxLabel) {
     const labelInputRow = div({ class: 'label-input-row' },
       label({}, labelText),
@@ -37,11 +34,11 @@ export default function decorate(block) {
     );
 
     const sliderElements = [
-      labelText === 'Amount Needed (₹)' ? div({ class: 'value-row' }, valP) : null,
+      div({ class: 'value-row' }, valP),
       labelInputRow,
       div({ class: 'slider-row' }, slider),
       div({ class: 'range-labels' }, p({}, minLabel), p({}, maxLabel)),
-    ].filter(Boolean); // removes null entries
+    ];
 
     return div({ class: 'slider-group' }, ...sliderElements);
   }
@@ -62,14 +59,12 @@ export default function decorate(block) {
   const wrapper = div({ class: 'emi-container' }, controls, emiOutput);
   block.append(wrapper);
 
-  // EMI calculation formula
   function calculateEMI(P, r, n) {
     const monthlyRate = r / 12 / 100;
     const emi = P * monthlyRate * Math.pow(1 + monthlyRate, n) / (Math.pow(1 + monthlyRate, n) - 1);
     return Math.round(emi);
   }
 
-  // UI update logic
   function updateUI() {
     const amount = parseFloat(amountSlider.value);
     const rate = parseFloat(rateSlider.value);
@@ -79,62 +74,79 @@ export default function decorate(block) {
     rateVal.textContent = `${rate.toFixed(2)}%`;
     monthsVal.textContent = `${months} months`;
 
-    amountInput.value = amount;
-    rateInput.value = rate;
+    amountInput.value = amount.toLocaleString('en-IN');
+    rateInput.value = `${rate.toFixed(2)}%`;
     monthsInput.value = months;
 
     const emi = calculateEMI(amount, rate, months);
     emiValue.textContent = `₹ ${emi.toLocaleString('en-IN')}`;
   }
 
-  // Clamp utility to keep values in range
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
 
-  // Sync: slider → input → EMI
-  amountSlider.addEventListener('input', updateUI);
-  rateSlider.addEventListener('input', updateUI);
-  monthsSlider.addEventListener('input', updateUI);
+  function formatIndianNumberWithCursor(inputEl) {
+    const raw = inputEl.value.replace(/,/g, '').replace(/[^\d]/g, '');
+    const val = parseInt(raw);
+    if (!isNaN(val)) {
+      inputEl.value = val.toLocaleString('en-IN');
+    }
+  }
 
-  // Sync: input → slider → EMI (live typing)
-  amountInput.addEventListener('input', () => {
-    const value = clamp(parseFloat(amountInput.value) || 0, amountMin, amountMax);
-    amountInput.value = value;
-    amountSlider.value = value;
+  function handleNumberInput(inputEl, sliderEl, min, max, isFloat = false, useCommas = false, suffix = '') {
+    inputEl.addEventListener('input', () => {
+      if (useCommas) formatIndianNumberWithCursor(inputEl);
+    });
+
+    inputEl.addEventListener('blur', () => {
+      let raw = inputEl.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+      let val = isFloat ? parseFloat(raw) : parseInt(raw);
+
+      if (isNaN(val)) val = min;
+      val = clamp(val, min, max);
+      sliderEl.value = val;
+
+      if (useCommas) {
+        inputEl.value = val.toLocaleString('en-IN') + suffix;
+      } else {
+        inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
+      }
+
+      updateUI();
+      updateFill(sliderEl);
+    });
+  }
+
+  amountSlider.addEventListener('input', () => {
     updateUI();
+    updateFill(amountSlider);
   });
 
-  rateInput.addEventListener('input', () => {
-    const value = clamp(parseFloat(rateInput.value) || 0, rateMin, rateMax);
-    rateInput.value = value;
-    rateSlider.value = value;
+  rateSlider.addEventListener('input', () => {
     updateUI();
+    updateFill(rateSlider);
   });
 
-  monthsInput.addEventListener('input', () => {
-    const value = clamp(parseInt(monthsInput.value) || 0, monthsMin, monthsMax);
-    monthsInput.value = value;
-    monthsSlider.value = value;
+  monthsSlider.addEventListener('input', () => {
     updateUI();
+    updateFill(monthsSlider);
   });
 
-  // Initial render
-  updateUI();
+  handleNumberInput(amountInput, amountSlider, amountMin, amountMax, false, true);
+  handleNumberInput(rateInput, rateSlider, rateMin, rateMax, true, false, '%');
+  handleNumberInput(monthsInput, monthsSlider, monthsMin, monthsMax);
 
-// Slider filling function
   function updateFill(range) {
-  const min = range.min;
-  const max = range.max;
-  const val = range.value;
-  const getPercentage = ((val - min) / (max - min)) * 100;
-  range.style.setProperty('--progress', `${getPercentage}%`);
-};
+    const min = range.min;
+    const max = range.max;
+    const val = range.value;
+    const percent = ((val - min) / (max - min)) * 100;
+    range.style.setProperty('--progress', `${percent}%`);
+  }
 
-const rangeInput = block.querySelectorAll('.slider-row input')
-rangeInput.forEach((inp)=>{
-    inp.addEventListener('input', function () {
-        updateFill(inp)
-    })
-})
+  updateUI();
+  updateFill(amountSlider);
+  updateFill(rateSlider);
+  updateFill(monthsSlider);
 }
