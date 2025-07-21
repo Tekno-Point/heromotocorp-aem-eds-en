@@ -1,35 +1,11 @@
-@font-face {
-    font-family: "TSTAR-PRO-Normal";
-    src: url("/fonts/TSTAR-PRO-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "TSTAR-PRO-Medium";
-    src: url("/fonts/TSTAR-PRO-Medium.ttf") format("truetype");
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "TSTAR-PRO-Bold";
-    src: url("/fonts/TSTAR-PRO-Bold.ttf") format("truetype");
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "TSTAR-PRO-Heavy";
-    src: url("/fonts/TSTAR-PRO-Heavy.ttf") format("truetype");
-    font-weight: 900;
-    font-style: normal;
+.section.compare-container>.compare-wrapper{
+    padding: 20px 0px;
 }
 
 .compare-container {
     /* check this */
     background-color: #ededed;
-    padding: 40px 20px;
+    padding: 40px 0px;
     margin: 0px auto;
 }
 .block.compare  {
@@ -38,7 +14,7 @@
     justify-content: center;
     align-items: center;
     background-color: #ededed;
-    /* padding: 40px 20px; */
+    padding: 0px;
     position: relative;
 }
 
@@ -53,7 +29,7 @@
     align-items: center;
 }
 .compare-child-1-inner-1 > h3 {
-    color: #ee2326;
+    color: rgb(338 35 38);
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
 }
@@ -138,7 +114,7 @@
         padding: 15px 10px;
     }
     .compare-child-1 {
-        gap: 10px;
+       gap: 73px;
     }
 }
 

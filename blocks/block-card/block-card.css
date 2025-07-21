@@ -6,6 +6,7 @@
 
 .block-card-container > .block-card-wrapper {
     max-width: 100%;
+    padding: 0px;
 }
 .block-card > ul > li {
     max-width: 490px;
@@ -41,8 +42,8 @@
 }
 
 .cards-card-image {
-    max-width: 490px;
-    height: 307px;
+    max-width: 590.28px;
+    height: 369.88px;
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -66,6 +67,7 @@
     .block-card > ul {
         flex-direction: column;
         padding: 0px 0px 0px 0px;
+        gap: 0px;
     }
 
     .cards-card-image {
@@ -81,5 +83,12 @@
 
     .block-card-container > .block-card-wrapper {
         padding: 0px;
+    }
+}
+
+
+@media(max-width : 476px){
+    .section.block-card-container>.block-card-wrapper>.block-card {
+        margin: 0px;
     }
 }

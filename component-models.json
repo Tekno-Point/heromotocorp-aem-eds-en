@@ -342,7 +342,7 @@
     "id": "carousel-item",
     "fields": [
       {
-        "component": "text",
+        "component": "richtext",
         "name": "content_head",
         "value": "",
         "label": "head",
