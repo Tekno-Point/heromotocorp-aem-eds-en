@@ -96,7 +96,7 @@ async function decoratePriceListing() {
   ci.disabled = true; // ⛔ disable city until state is selected
 
   const dropdowns = div({ class: 'price-listing__row-col--container row' },
-    div({ class: 'custom-select-state-city z-1 px-md-6 px-lg-6' },
+    div({ class: 'custom-select-state-city' },
       div({ class: 'custom-select-state-city__col' },
         div({ class: 'custom-autocomplete position-relative' }, label({}, 'State'), sw, sl)
       )
@@ -106,7 +106,7 @@ async function decoratePriceListing() {
     )
   );
 
-  const priceInfo = div({ class: 'price-details--info w-100 my-lg-4 px-0' });
+  const priceInfo = div({ class: 'price-details--info' });
   const fieldsetEl = fieldset({ class: 'my-lg-12 my-6 w-100' }, priceInfo);
 
   async function renderPriceTable(state, cityCode) {
@@ -114,10 +114,10 @@ async function decoratePriceListing() {
     priceInfo.append(
       div({ class: 'row' },
         div({ class: 'col-6' },
-          div({ class: 'price-details-col pb-6 pb-sm-12' }, div({ class: 'price-details-col__text h4 weight-heavy' }, 'Variant'))
+          div({ class: 'price-details-col' }, div({ class: 'price-details-col__text h4 weight-heavy' }, 'Variant'))
         ),
         div({ class: 'col-6' },
-          div({ class: 'price-details-col pb-6 pb-sm-12 ps-6 pe-0' }, div({ class: 'price-details-col__text h4 weight-heavy' }, 'Ex-Showroom Price'))
+          div({ class: 'price-details-col' }, div({ class: 'price-details-col__text h4 weight-heavy' }, 'Ex-Showroom Price'))
         )
       )
     );
@@ -127,12 +127,12 @@ async function decoratePriceListing() {
       priceInfo.append(
         div({ class: 'row' },
           div({ class: 'col-6' },
-            div({ class: 'price-details-col pb-6 pb-sm-12' },
+            div({ class: 'price-details-col' },
               div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, v.label))
             )
           ),
           div({ class: 'col-6' },
-            div({ class: 'price-details-col pb-6 pb-sm-12 ps-6 pe-6' },
+            div({ class: 'price-details-col' },
               div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, `₹ ${v.variant_price}`))
             )
           )
