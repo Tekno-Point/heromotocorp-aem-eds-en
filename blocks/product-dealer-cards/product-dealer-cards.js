@@ -19,6 +19,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   inputEl.value = defaultValue;
   inputEl.autocomplete = "off";
   inputEl.style.width = "100%";
+  inputEl.style.color = "black";
 
   const clearBtn = document.createElement("span");
   clearBtn.textContent = "×";
@@ -57,8 +58,11 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   wrapper.appendChild(dropdown);
 
   let isDropdownOpen = false;
+  let disabled = false; // 🔹 Added flag to track disabled state
 
   function updateOptions(query = "") {
+    if (disabled) return; // 🔹 Do nothing if disabled
+
     dropdown.innerHTML = "";
     const currentValue = inputEl.value.trim().toLowerCase();
 
@@ -97,30 +101,34 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   }
 
   inputEl.addEventListener("input", () => {
+    if (disabled) return; // 🔹 Prevent input when disabled
     clearBtn.style.display = inputEl.value ? "block" : "none";
     updateOptions(inputEl.value);
   });
 
   inputEl.addEventListener("focus", () => {
-    updateOptions(); // Always show full list on focus
-    inputEl.select(); // Optional: highlights current value
+    if (disabled) return; // 🔹 Prevent focus actions when disabled
+    updateOptions();
+    inputEl.select();
   });
 
   clearBtn.addEventListener("click", () => {
+    if (disabled) return; // 🔹 Prevent clear when disabled
     inputEl.value = "";
-    clearBtn.style.display = "none";
-    dropdown.style.display = "none";
+    clearBtn.style.display = "block";
+    updateOptions();
     isDropdownOpen = false;
     onSelect("");
   });
 
   arrowBtn.addEventListener("click", (e) => {
     e.stopPropagation();
+    if (disabled) return; // 🔹 Prevent dropdown toggle when disabled
     if (isDropdownOpen) {
       dropdown.style.display = "none";
       isDropdownOpen = false;
     } else {
-      updateOptions(); // Show full list on arrow click
+      updateOptions();
       inputEl.focus();
     }
   });
@@ -132,10 +140,19 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
     }
   });
 
-  return { wrapper, inputEl };
+  return {
+    wrapper,
+    inputEl,
+    setDisabled: (state) => {
+      disabled = state;
+      inputEl.disabled = state;
+      dropdown.style.display = "none";
+    },
+    setOptions: (newOptions) => {
+      optionsList = newOptions;
+    }
+  };
 }
-
-
 
 export async function decorateProductDealerCards(block = document.querySelector('.product-dealer-cards')) {
   const [dataMapping] = await useDataMapping();
@@ -165,40 +182,27 @@ export async function decorateProductDealerCards(block = document.querySelector(
     "State",
     states,
     async (newState) => {
-      if (!newState || !cityMap[newState.toUpperCase()]) return;
       activeState = newState;
-      const cityList = Object.values(
-        cityMap[activeState.toUpperCase()] || {}
-      ).map((c) => c.label);
+
+      if (!newState || !cityMap[newState.toUpperCase()]) {
+        cityDropdown.setOptions([]);
+        cityDropdown.inputEl.value = "";
+        cityDropdown.setDisabled(true); // ✅ Disable city if no state
+        return;
+      }
+
+      const cityList = Object.values(cityMap[newState.toUpperCase()] || {}).map((c) => c.label);
       activeCity = cityList[0];
 
-      const newCityDropdown = createCustomDropdown(
-        "city-input",
-        "City",
-        cityList,
-        async (newCity) => {
-          activeCity = newCity;
-          renderDealers(activeState, activeCity);
-          const [dataMapping, setDataMapping] = await useDataMapping();
-          dataMapping.current_location = {
-            state: activeState,
-            city: activeCity,
-          };
-          setDataMapping(dataMapping);
-          pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
-            test: true,
-          });
-        },
-        activeCity
-      );
+      cityDropdown.setOptions(cityList);
+      cityDropdown.inputEl.value = activeCity;
+      cityDropdown.setDisabled(false);
 
-      dropdowns.replaceChild(newCityDropdown.wrapper, cityDropdown.wrapper);
-      cityDropdown = newCityDropdown;
-
-      renderDealers(activeState, activeCity);
       const [dataMapping, setDataMapping] = await useDataMapping();
       dataMapping.current_location = { state: activeState, city: activeCity };
       setDataMapping(dataMapping);
+
+      renderDealers(activeState, activeCity);
       pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
         test: true,
       });
@@ -215,16 +219,32 @@ export async function decorateProductDealerCards(block = document.querySelector(
     cityList,
     async (newCity) => {
       activeCity = newCity;
-      renderDealers(activeState, activeCity);
+
       const [dataMapping, setDataMapping] = await useDataMapping();
       dataMapping.current_location = { state: activeState, city: activeCity };
       setDataMapping(dataMapping);
+
+      if (!newCity) {
+        return;
+      }
+
+      renderDealers(activeState, activeCity);
+
       pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
         test: true,
       });
     },
     activeCity
   );
+
+  cityDropdown.setDisabled(true);
+
+  // ✅ Re-enable city dropdown if a valid state is pre-selected
+  if (activeState && cityMap[activeState.toUpperCase()]) {
+    const cityList = Object.values(cityMap[activeState.toUpperCase()] || {}).map((c) => c.label);
+    cityDropdown.setOptions(cityList);
+    cityDropdown.setDisabled(false);
+  }
 
   const dropdowns = div(
     {
@@ -274,8 +294,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
         { class: slidesPerView },
         div(
           {
-            class:
-              "dealer-card",
+            class: "dealer-card",
           },
           div({ class: "dealer-name" }, dealer.name),
           p({ class: 'dealer-phone' }, `${dealer.phone}`),
@@ -292,10 +311,6 @@ export async function decorateProductDealerCards(block = document.querySelector(
     Swiper = new Swiper(swiperEl, {
       grabCursor: true,
       spaceBetween: 20,
-      // autoplay: {
-      //   delay: 3000,
-      //   disableOnInteraction: false,
-      // },
       pagination: {
         el: paginationEl,
         clickable: true,
@@ -315,6 +330,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
       },
     });
   }
+
   renderDealers(activeState, activeCity);
 }
 

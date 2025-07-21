@@ -1,6 +1,13 @@
+main > .banner-price {
+    padding: 0;
+    margin: 0;
+}
+
 .banner-price>.default-content-wrapper {
     max-width: 100%;
+    margin: 0;
     padding-inline: 0;
+    padding-block: 0;
 }
 
 .banner-price>.default-content-wrapper>ul:first-child {

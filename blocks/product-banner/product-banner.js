@@ -28,8 +28,16 @@ export async function decorateProductBanner(block, data) {
         heading = block.querySelector("h2.heading")
         bottomSection = block.querySelector(".bottom-sec")
     }
+
     block?.querySelector(".middle-sec")?.remove();
-    console.log(block, data)
+
+    block.innerHTML = '';
+    block.append(heading);
+
+    block.append(div({ class: "middle-sec" }, div({ class: "loading" }, span('Loading...'))));
+    // block.append(div({ class: "middle-sec" }, imageDom, variantsDOM, colorsDiv));
+    block.append(bottomSection);
+
     const { data: { products: { items: [productInfo] } } } = await fetchProduct();
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     const [dataMapping, setDataMapping] = await useDataMapping();
@@ -51,6 +59,10 @@ export async function decorateProductBanner(block, data) {
             option.classList.toggle('active', option.querySelector('span').textContent === colorLabel)
         );
     };
+
+
+    // renderColors(initialVariantGroup.colors, initialColor.label);
+
 
     const renderColors = (colors, selectedLabel) => {
         const container = block.querySelector('.colors-container .color-wrapp');
@@ -154,11 +166,14 @@ export async function decorateProductBanner(block, data) {
         h4({ class: "mb-8 weight" }, "Colours"),
         div({ class: "color-wrapp" })
     );
-    block.innerHTML = '';
-    block.append(heading);
+    // block.innerHTML = '';
+    // block.append(heading);
 
-    block.append(div({ class: "middle-sec" }, variantsDOM, imageDom, colorsDiv));
-    block.append(bottomSection);
+    // block.querySelector(".middle-sec").innerHTML = ''
+    block.querySelector(".middle-sec").replaceChildren(imageDom, variantsDOM, colorsDiv)
+
+    // block.append(div({ class: "middle-sec" }, imageDom, variantsDOM, colorsDiv));
+    // block.append(bottomSection);
 
     renderColors(initialVariantGroup.colors, initialColor.label);
 
@@ -242,47 +257,4 @@ const rotateFrame = (rotateUrlString, imgEl, direction = 1) => {
     const totalFrames = imgRotateUrls.length;
     currentFrame = (currentFrame + direction + totalFrames) % totalFrames;
     imgEl.src = imgRotateUrls[currentFrame].url;
-};
-
-
-
-/* const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {
-    isDragging = true;
-    startX = event.clientX;
-
-    // const rotateUrlString = isMobile
-    //     ? arrayImagesDet[activeIndex].mob_img_urls
-    //     : arrayImagesDet[activeIndex].desk_img_urls;
-
-    const imgRotateUrls = rotateUrlString;
-    const totalFrames = imgRotateUrls.length;
-    const degreesPerFrame = 360 / totalFrames;
-    const pixelsPerFrame = degreesPerFrame * pixelsPerDegree;
-
-    const onMove = (e) => {
-        if (!isDragging) return;
-        const clientX = isTouch ? e.touches[0].clientX : e.clientX;
-        const deltaX = clientX - startX;
-        accumulated += deltaX;
-        startX = clientX;
-
-        const frameShift = Math.floor(accumulated / pixelsPerFrame);
-        if (frameShift !== 0) {
-            accumulated -= frameShift * pixelsPerFrame;
-            currentFrame = (currentFrame + frameShift + totalFrames) % totalFrames;
-            // debugger;
-            imgEl.src = imgRotateUrls[currentFrame].url;
-        }
-    };
-
-    const onEnd = () => {
-        isDragging = false;
-        window.removeEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
-        window.removeEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
-    };
-
-    window.addEventListener(isTouch ? 'touchmove' : 'mousemove', onMove);
-    window.addEventListener(isTouch ? 'touchend' : 'mouseup', onEnd);
-
-} */
-
+}

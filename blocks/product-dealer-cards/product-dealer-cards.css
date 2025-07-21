@@ -1,4 +1,4 @@
-.product-dealer-cards .cards > ul {
+.product-dealer-cards .cards>ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -7,7 +7,7 @@
     grid-gap: 24px;
 }
 
-.product-dealer-cards .cards > ul > li {
+.product-dealer-cards .cards>ul>li {
     border: 1px solid #dadada;
     background-color: var(--background-color);
 }
@@ -20,7 +20,7 @@
     line-height: 0;
 }
 
-.product-dealer-cards .cards > ul > li img {
+.product-dealer-cards .cards>ul>li img {
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
@@ -115,28 +115,27 @@
     justify-content: center;
 }
 
-.product-dealer-cards .input-wrapper > .clear-btn {
-  color: silver;
-  position: relative;
-  cursor: pointer;
-  margin-right: 27px;
-      top: -13px;
-  
+.product-dealer-cards .input-wrapper>.clear-btn {
+    color: silver;
+    position: relative;
+    cursor: pointer;
+    margin-right: 27px;
+    top: -13px;
 }
 
-.product-dealer-cards .input-wrapper > .dropdown-arrow::after {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: -9px;
-  right: 26px;
-  transform: rotate(135deg);
-  width: 6px;
-  height: 6px;
-  border: 2px solid currentcolor;
-  border-radius: 0 1px 0 0;
-  border-width: 3px 3px 0 0;
-  color: silver;
+.product-dealer-cards .input-wrapper>.dropdown-arrow::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: -9px;
+    right: 26px;
+    transform: rotate(135deg);
+    width: 6px;
+    height: 6px;
+    border: 2px solid currentcolor;
+    border-radius: 0 1px 0 0;
+    border-width: 3px 3px 0 0;
+    color: silver;
 }
 
 
@@ -158,13 +157,14 @@
     gap: 15px;
 }
 
-.product-dealer-cards .dealer-card > div {
+.product-dealer-cards .dealer-card>div {
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     font-size: 24px;
 }
-.product-dealer-cards .dealer-card > p:nth-of-type(1),
-.product-dealer-cards .dealer-card > p:nth-of-type(2) {
+
+.product-dealer-cards .dealer-card>p:nth-of-type(1),
+.product-dealer-cards .dealer-card>p:nth-of-type(2) {
     cursor: pointer;
     font-family: "TSTAR-PRO-Regular";
     font-weight: 600;
@@ -172,16 +172,13 @@
     word-break: break-word;
 }
 
-.product-dealer-cards-container > .product-dealer-cards-wrapper {
+.product-dealer-cards-container>.product-dealer-cards-wrapper {
     max-width: 1350px;
     width: 100%;
     padding: 5px;
 }
-/* .product-dealer-cards-container {
-    background-color: #ededed;
-} */
 
-.product-dealer-cards > .swiper {
+.product-dealer-cards>.swiper {
     max-width: 1365px;
     min-height: 388px;
     width: 100%;
@@ -189,12 +186,11 @@
 
 .product-dealer-cards-container {
     padding: 20px;
-     background-color: #ededed;
+    background-color: #ededed;
     /* margin: 0px; */
 }
 
-
-.product-dealer-cards-container > .default-content-wrapper > h2 {
+.product-dealer-cards-container>.default-content-wrapper>h2 {
     text-align: center;
     font-style: italic;
     padding-bottom: 1.0625rem;
@@ -205,20 +201,11 @@
     line-height: 1.2;
 }
 
-
-.product-dealer-cards .dealer-card > .dealer-address {
+.product-dealer-cards .dealer-card>.dealer-address {
     font-size: 15px;
 }
 
-
-/* .product-dealer-cards > .swiper>.swiper-wrapper{
-  justify-content: center;
-} */
-
-.product-dealer-cards
-    > .dealer-card-wrapperr
-    > .swiper-pagination
-    > .swiper-pagination-bullet {
+.product-dealer-cards>.dealer-card-wrapperr>.swiper-pagination>.swiper-pagination-bullet {
     width: 2rem;
     height: 0.375rem;
     border-radius: 0;
@@ -229,10 +216,7 @@
     cursor: pointer;
 }
 
-.product-dealer-cards
-    > .dealer-card-wrapperr
-    > .swiper-pagination
-    > .swiper-pagination-bullet-active {
+.product-dealer-cards>.dealer-card-wrapperr>.swiper-pagination>.swiper-pagination-bullet-active {
     background-color: red;
 }
 
@@ -240,18 +224,21 @@
     .product-dealer-cards .dealer-card {
         font-size: 15px;
     }
-    .product-dealer-cards .dealer-card > div {
+
+    .product-dealer-cards .dealer-card>div {
         font-size: 15px;
     }
 
-    .product-dealer-cards-container > .default-content-wrapper > h2 {
+    .product-dealer-cards-container>.default-content-wrapper>h2 {
         font-size: 16px;
     }
 }
-
-
 
 .product-dealer-cards-container.section {
     margin: 0px;
 }
 
+.custom-input::placeholder{
+    color: black;
+    font-family: 'TSTAR-PRO-Heavy';
+}

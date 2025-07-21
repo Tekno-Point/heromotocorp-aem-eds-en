@@ -161,6 +161,10 @@
           {
             "name": "Banner Price Section",
             "value": "banner-price"
+          },
+          {
+            "name": "Share Modal",
+            "value": "share-modal-sec"
           }
         ]
       }
@@ -338,7 +342,7 @@
     "id": "carousel-item",
     "fields": [
       {
-        "component": "text",
+        "component": "richtext",
         "name": "content_head",
         "value": "",
         "label": "head",
