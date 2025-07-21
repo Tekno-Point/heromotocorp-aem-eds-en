@@ -1,4 +1,4 @@
-export const endpoint = "https://dev1.heromotocorp.com";
+export const endpoint = "https://www.heromotocorp.com";
 console.log(endpoint);
 
 const geoLocationAPI = `${endpoint}/advancedmaps/v1/5b8424bdaf84cda4fccf61d669d85f5a/rev_geocode?lat={lat}&lng={long}`;
