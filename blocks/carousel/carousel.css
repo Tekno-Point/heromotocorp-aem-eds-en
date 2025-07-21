@@ -235,7 +235,8 @@
 }
 
 .carousel .btnWrapper > .swiper-pagination {
-    max-width: 1064px;
+        max-width: 1129px;
+
     height: 24px;
     width: 100%;
     justify-content: center;
@@ -244,7 +245,7 @@
     display: flex;
     gap: 60px;
     justify-content: flex-start;
-    margin-left: 82px;
+    margin-left: 39px;
     gap: 1rem;
     /* margin-bottom: 10px; */
     margin-top: 2px;
