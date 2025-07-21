@@ -161,6 +161,10 @@
           {
             "name": "Banner Price Section",
             "value": "banner-price"
+          },
+          {
+            "name": "Share Modal",
+            "value": "share-modal-sec"
           }
         ]
       }
