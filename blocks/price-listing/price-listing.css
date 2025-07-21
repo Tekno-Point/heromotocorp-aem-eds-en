@@ -238,7 +238,9 @@
   max-height: 200px;       /* or whatever fits your design */
   overflow-y: auto;        /* enables scroll */
 }
-
+.section.price-listing-container{
+    margin: 0px;
+}
 @media (max-width: 786px) {
     .price-listing>div:nth-child(1)>div {
         display: none;
