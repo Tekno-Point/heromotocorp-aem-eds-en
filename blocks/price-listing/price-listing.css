@@ -120,6 +120,7 @@
     outline: none;
     color: rgb(51, 51, 51);
     width: 82%;
+    background-color: white;
 }
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper {
@@ -209,6 +210,19 @@
 /* images */
 .price-listing>div:nth-child(1)>div {
     width: 414px;
+}
+
+.price-listing .custom-select-state-city__col>.custom-autocomplete>label{
+    font-family: 'TSTAR-PRO-Heavy';
+}
+
+.price-listing .custom-dropdown-list>.dropdown-item{
+    font-family: 'TSTAR-PRO-Heavy';
+}
+
+.react-select__input::placeholder{
+    font-family: 'TSTAR-PRO-Heavy';
+    color: black;
 }
 
 @media (max-width: 786px) {

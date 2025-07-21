@@ -90,8 +90,10 @@ async function decoratePriceListing() {
   let selectedState = states.find(s => s.label.toUpperCase() === current.state.toUpperCase()) || states[0];
   let selectedCity = selectedState.cities.find(c => c.label.toUpperCase() === current.city.toUpperCase()) || selectedState.cities[0];
 
-  const { wrapper: sw, input: si, clearBtn: sc/*, dropdownBtn: sd*/,arrowBtn:sa, list: sl } = createDropdownInput('Select State');
-  const { wrapper: cw, input: ci, clearBtn: cc/*, dropdownBtn: cd*/,arrowBtn:ca, list: cl } = createDropdownInput('Select City');
+  const { wrapper: sw, input: si, clearBtn: sc/*, dropdownBtn: sd*/, arrowBtn: sa, list: sl } = createDropdownInput('Enter State');
+  const { wrapper: cw, input: ci, clearBtn: cc/*, dropdownBtn: cd*/, arrowBtn: ca, list: cl } = createDropdownInput('Enter City');
+
+  ci.disabled = true; // ⛔ disable city until state is selected
 
   const dropdowns = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city z-1 px-md-6 px-lg-6' },
@@ -168,25 +170,45 @@ async function decoratePriceListing() {
       test: true,
     });
   }
-let isStateOpen = false;
-let isCityOpen = false;
+  let isStateOpen = false;
+  let isCityOpen = false;
 
-si.addEventListener('focus', () => {
-si.select(); // optional: highlights text
-  populateList({ value: '' }, sl, states, onStateSelect);
-});
-ci.addEventListener('focus', () => {
-  ci.select(); // optional: highlights text
-  populateList({ value: '' }, cl, selectedState.cities, onCitySelect);
-});
+  si.addEventListener('focus', () => {
+    si.select(); // optional: highlights text
+    populateList({ value: '' }, sl, states, onStateSelect);
+  });
+  ci.addEventListener('focus', () => {
+    ci.select(); // optional: highlights text
+    populateList({ value: '' }, cl, selectedState.cities, onCitySelect);
+  });
 
 
   // sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
-  sw.addEventListener('click', e => (e.stopPropagation(), isStateOpen ? (sl.style.display = 'none', isStateOpen = false) : (populateList(si, sl, states, onStateSelect), si.focus(), sl.style.display = 'block', isStateOpen = true)));  sc.addEventListener('click', () => { si.value = ''; sl.style.display = 'none'; });
+  sw.addEventListener('click', e => (e.stopPropagation(), isStateOpen ? (sl.style.display = 'none', isStateOpen = false) : (populateList(si, sl, states, onStateSelect), si.focus(), sl.style.display = 'block', isStateOpen = true)));
+  sc.addEventListener('click', () => {
+    si.value = '';
+    sl.style.display = 'none';
+    ci.value = '';
+    ci.disabled = true;
+    cl.style.display = 'none';
+  });
 
-  ci.disabled = !selectedState;
+
+  // ci.disabled = !selectedState;
   ci.addEventListener('input', () => populateList(ci, cl, selectedState.cities, onCitySelect));
-  cw.addEventListener('click', e => (e.stopPropagation(), !selectedState ? null : isCityOpen ? (cl.style.display = 'none', isCityOpen = false) : (populateList(ci, cl, selectedState.cities, onCitySelect), ci.focus(), cl.style.display = 'block', isCityOpen = true)));  
+  cw.addEventListener('click', e => {
+    e.stopPropagation();
+    if (ci.disabled) return; 
+    if (isCityOpen) {
+      cl.style.display = 'none';
+      isCityOpen = false;
+    } else {
+      populateList(ci, cl, selectedState.cities, onCitySelect);
+      ci.focus();
+      cl.style.display = 'block';
+      isCityOpen = true;
+    }
+  });
   // cd.addEventListener('click', e => { e.stopPropagation(); cl.style.display !== 'block' ? populateList(ci, cl, selectedState.cities, onCitySelect) : cl.style.display = 'none'; ci.focus(); });
   cc.addEventListener('click', () => { ci.value = ''; cl.style.display = 'none'; });
 
