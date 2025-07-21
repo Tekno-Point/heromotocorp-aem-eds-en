@@ -116,10 +116,9 @@ function autolinkModals(element) {
     const origin = e.target.closest('a');
 
     if (origin && origin.href && origin.href.includes('/modals/')) {
-      let shareModal = e.target.closest(".section.share-modal-sec")
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal(origin.href, shareModal);
+      openModal(origin.href);
     }
   });
 }

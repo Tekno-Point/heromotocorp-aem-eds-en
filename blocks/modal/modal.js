@@ -9,7 +9,7 @@ import {
   Other blocks can also use the createModal() and openModal() functions.
 */
 
-export async function createModal(contentNodes, isShareModal) {
+export async function createModal(contentNodes) {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
   const dialog = document.createElement('dialog');
   const dialogContent = document.createElement('div');
@@ -26,15 +26,7 @@ export async function createModal(contentNodes, isShareModal) {
   dialog.prepend(closeButton);
 
   const block = buildBlock('modal', '');
-
-  if (!isShareModal) {
-    document.querySelector('main').append(block);
-  }
-  else {
-    let tabBlock = isShareModal?.querySelector(".splendor-tab.block");
-    tabBlock?.append(block);
-  }
-
+  document.querySelector('main').append(block);
   decorateBlock(block);
   await loadBlock(block);
 
@@ -68,12 +60,12 @@ export async function createModal(contentNodes, isShareModal) {
   };
 }
 
-export async function openModal(fragmentUrl, isShareModal) {
+export async function openModal(fragmentUrl) {
   const path = fragmentUrl.startsWith('http')
     ? new URL(fragmentUrl, window.location).pathname
     : fragmentUrl;
 
   const fragment = await loadFragment(path);
-  const { showModal } = await createModal(fragment.childNodes, isShareModal);
+  const { showModal } = await createModal(fragment.childNodes);
   showModal();
 }

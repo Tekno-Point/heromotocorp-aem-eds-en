@@ -82,3 +82,24 @@ body.modal-open {
 .modal dialog .section {
   padding: 0;
 }
+
+/*  share Modal css*/
+
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog::backdrop {
+  display: none;
+
+}
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog {
+  all: unset;
+  width: 60px;
+  height: 60px;
+  max-width: unset;
+  max-height: unset;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* share Modal css end */
