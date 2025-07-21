@@ -146,6 +146,19 @@
     color: rgb(48 48 48);
 }
 
+/* .section.splendor-tab-container  */
+
+
+.section.splendor-tab-container  .splendor-tab-wrapper .splendor-tab.block{
+    position: relative;
+}
+
+.section.splendor-tab-container  .splendor-tab-wrapper .splendor-tab.block .tabs-panel .tab-slide ul >li p:has(a span){
+    display: flex;
+    /* justify-content: space-around; */
+    gap: 15px;
+}
+
 @media (max-width: 768px) {
     .splendor-tab .tabs-list > .tabs-tab {
         max-width: 5.125rem;
