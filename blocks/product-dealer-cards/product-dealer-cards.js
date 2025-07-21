@@ -19,6 +19,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   inputEl.value = defaultValue;
   inputEl.autocomplete = "off";
   inputEl.style.width = "100%";
+  inputEl.style.color = "black";
 
   const clearBtn = document.createElement("span");
   clearBtn.textContent = "×";
@@ -145,7 +146,6 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
     setDisabled: (state) => {
       disabled = state;
       inputEl.disabled = state;
-      inputEl.style.backgroundColor = state ? "#eee" : "#fff";
       dropdown.style.display = "none";
     },
     setOptions: (newOptions) => {
