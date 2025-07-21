@@ -26,13 +26,15 @@ export async function createModal(contentNodes, isShareModal) {
   dialog.prepend(closeButton);
 
   const block = buildBlock('modal', '');
+  block.append(dialog)
 
   if (!isShareModal) {
     document.querySelector('main').append(block);
   }
   else {
     let tabBlock = isShareModal?.querySelector(".splendor-tab.block");
-    tabBlock?.append(block);
+    tabBlock?.append(dialog);
+    return 1;
   }
 
   decorateBlock(block);
@@ -74,6 +76,7 @@ export async function openModal(fragmentUrl, isShareModal) {
     : fragmentUrl;
 
   const fragment = await loadFragment(path);
+  debugger
   const { showModal } = await createModal(fragment.childNodes, isShareModal);
   showModal();
 }
