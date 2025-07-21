@@ -20,35 +20,8 @@ function createDropdownInput(placeholder) {
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
   return { wrapper, input, clearBtn/*, dropdownBtn*/, list };
 }
-// function populateList(input, list, data, onSelect) {
-//   list.innerHTML = '';
-//   const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
-//   if (!filtered.length) {
-//     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
-//   } else {
-//     filtered.forEach(item => {
-//       const itemEl = div({ class: 'dropdown-item' }, item.label);
-//       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
-//       list.appendChild(itemEl);
-//     });
-//   }
-//   list.style.display = 'block';
-// }
 
-// function populateList(input, list, data, onSelect) {
-//   list.innerHTML = '';
-//   const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
-//   if (!filtered.length) {
-//     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
-//   } else {
-//     data.forEach(item => {
-//       const itemEl = div({ class: 'dropdown-item' }, item.label);
-//       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
-//       list.appendChild(itemEl);
-//     });
-//   }
-//   list.style.display = 'block';
-// }
+let selectedEl = null;
 
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
@@ -56,6 +29,7 @@ function populateList(input, list, data, onSelect) {
   const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
 
   const currentValue = input.value.trim().toLowerCase();
+  let selectedEl = null; // ✅ FIXED: Now declared properly
 
   if (!filtered.length) {
     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
@@ -65,7 +39,7 @@ function populateList(input, list, data, onSelect) {
       const itemEl = div(
         {
           class: `dropdown-item${isSelected ? ' selected' : ''}`,
-          style: isSelected ? 'background-color: #f1f1f1; font-weight: bold;' : ''
+          style: isSelected ? 'background-color: #007aff; font-weight: bold;' : ''
         },
         item.label
       );
@@ -74,11 +48,20 @@ function populateList(input, list, data, onSelect) {
         list.style.display = 'none';
         onSelect(item);
       });
+      if (isSelected) selectedEl = itemEl; 
       list.appendChild(itemEl);
     });
   }
+
   list.style.display = 'block';
+
+  if (selectedEl) {
+    setTimeout(() => {
+      selectedEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, 0);
+  }
 }
+
 
 async function decoratePriceListing() {
   // const raw = await fetchStateCityMaster();
@@ -198,7 +181,7 @@ async function decoratePriceListing() {
   ci.addEventListener('input', () => populateList(ci, cl, selectedState.cities, onCitySelect));
   cw.addEventListener('click', e => {
     e.stopPropagation();
-    if (ci.disabled) return; 
+    if (ci.disabled) return;
     if (isCityOpen) {
       cl.style.display = 'none';
       isCityOpen = false;
