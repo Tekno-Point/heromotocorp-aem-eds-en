@@ -14,6 +14,7 @@ export async function createModal(contentNodes, isShareModal) {
   const dialog = document.createElement('dialog');
   const dialogContent = document.createElement('div');
   dialogContent.classList.add('modal-content');
+  // debugger;
   dialogContent.append(...contentNodes);
   dialog.append(dialogContent);
 
@@ -88,6 +89,11 @@ export async function openModal(fragmentUrl, isShareModal) {
     : fragmentUrl;
 
   const fragment = await loadFragment(path);
-  const { showModal } = await createModal(fragment.childNodes, isShareModal);
+  const classList = fragment.firstElementChild.classList;
+
+  const { block, showModal } = await createModal(fragment.childNodes, isShareModal);
+  console.log(fragment);
+  // fragment.querySelector('.section').classList
+  block.classList.add(...classList);
   showModal();
 }

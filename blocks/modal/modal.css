@@ -47,6 +47,7 @@ body.modal-open {
   height: 44px;
   margin: 0;
   border: none;
+  outline: none;
   border-radius: 0;
   padding: 0;
   background-color: transparent;
@@ -151,3 +152,91 @@ body.modal-open {
 }
 
 /* share Modal css end */
+
+
+
+
+/*modal book ride */
+
+
+.modal.book-ride{
+  background-color: black !important;
+  opacity: .7;
+}
+.modal.book-ride>dialog{
+max-width: 100%;
+width: 100%;
+background-color: #ee2326;
+border: none;
+max-width: 1366px;
+width: 100%;
+border-radius: 10px;
+    top: 23%;
+    left: 5%;
+}
+
+.modal.book-ride>dialog>.modal-content{
+background-color: #ee2326;
+border: none;
+/* border-radius: 10px; */
+}
+
+.modal.book-ride>dialog>.close-button{
+  border: 1px solid #ee2326 ;
+  margin: 0px;
+    padding: 0px;
+}
+
+/* .modal.book-ride>dialog>.close-button1::before{
+  content: " x";
+} */
+.modal.book-ride>dialog>.close-button:focus,
+.modal.book-ride>dialog>.close-button:focus-visible{
+  border:1px solid #ee2326 !important ;
+  outline: none !important;
+  line-height: 0;
+}
+
+.modal.book-ride>dialog>.close-button>span{
+color: white;
+font-weight: 900;
+border: none;
+}
+
+
+.modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form>form>#form-f1-1{
+  max-width: 100% !important;
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+@media(max-width : 767px){
+  .modal.book-ride>dialog{
+     top: 2%;
+    left: 0%;
+     width: 398px;
+     margin: 10px;
+  }
+  .modal.book-ride>dialog>.modal-content{
+    padding: 0px;
+  }
+}
+
+@media(max-width : 376px){
+   .modal.book-ride>dialog{
+      width: 350px;
+     margin: 10px;
+   }
+}
+@media(max-width : 376px){
+   .modal.book-ride>dialog{
+      width: 296px;
+     margin: 5px;
+   }
+}
