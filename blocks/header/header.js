@@ -248,8 +248,12 @@ export default async function decorate(block) {
   addVehicleCheckboxs.forEach(addVehicleCheckbox => {
     addVehicleCheckbox.addEventListener('change', (e) => {
       traySecion.classList.toggle('disappear');
-
-      if (e.target.checked) {
+      if (e.target.dataset.checked) {
+        e.target.dataset.checked = false;
+      } else {
+        e.target.dataset.checked = true;
+      }
+      if (e.target.dataset.checked) {
         onVehicleAdd(e);
       } else {
         onVehicleRmove(e);
