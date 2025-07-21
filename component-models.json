@@ -20,6 +20,18 @@
         "name": "keywords",
         "multi": true,
         "label": "Keywords"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "vehicle-name",
+        "label": "Vehicle Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "page-type",
+        "label": "Page Type"
       }
     ]
   },
@@ -750,7 +762,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "col2_image1Alt",
+        "name": "col2_imageoptAlt",
         "label": "Alt",
         "value": ""
       }
