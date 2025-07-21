@@ -108,7 +108,8 @@
 .splendor-tab .tab-slide > ul > li:last-child {
     position: absolute;
     top: 87px;
-    right: 18px;
+    /* right: 18px; */
+    right: 48px;
 }
 
 .splendor-tab .tab-slide > ul > li > p {
@@ -147,6 +148,9 @@
 }
 
 /* .section.splendor-tab-container  */
+#top-layer {
+  position: relative;
+}
 
 
 .section.splendor-tab-container  .splendor-tab-wrapper .splendor-tab.block{

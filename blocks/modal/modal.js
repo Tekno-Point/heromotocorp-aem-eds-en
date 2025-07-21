@@ -27,10 +27,23 @@ export async function createModal(contentNodes, isShareModal) {
 
   const block = buildBlock('modal', '');
 
+  function bodyClickHandler(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!e.target.closest("dialog")) {
+      isShareModal?.querySelector("dialog")?.remove();
+      document.body.removeEventListener('click', bodyClickHandler);
+    }
+  }
+
   if (!isShareModal) {
     document.querySelector('main').append(block);
   }
   else {
+    if (!isShareModal.querySelector("dialog")) {
+      document.body.addEventListener('click', bodyClickHandler, { once: true });
+    }
     let tabBlock = isShareModal?.querySelector(".splendor-tab.block");
     tabBlock?.append(dialog);
     return 1;

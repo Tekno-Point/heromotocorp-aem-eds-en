@@ -102,4 +102,40 @@ body.modal-open {
   left: 0;
 }
 
+
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
+  display: block;
+  position: absolute;
+  top: 52px;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  right: calc((100% - 1178px) / 2);
+  margin: unset;
+  left: unset;
+
+}
+
+.modal dialog::backdrop {
+  display: none;
+}
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .close-button {
+  display: none;
+}
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .section.share-modal-sec .default-content-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .section.share-modal-sec .default-content-wrapper a {
+  all: unset;
+}
+
 /* share Modal css end */
