@@ -750,7 +750,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "col2_image1Alt",
+        "name": "col2_imageoptAlt",
         "label": "Alt",
         "value": ""
       }
