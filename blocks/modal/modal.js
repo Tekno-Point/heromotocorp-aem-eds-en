@@ -26,7 +26,6 @@ export async function createModal(contentNodes, isShareModal) {
   dialog.prepend(closeButton);
 
   const block = buildBlock('modal', '');
-  block.append(dialog)
 
   if (!isShareModal) {
     document.querySelector('main').append(block);
@@ -76,7 +75,6 @@ export async function openModal(fragmentUrl, isShareModal) {
     : fragmentUrl;
 
   const fragment = await loadFragment(path);
-  debugger
   const { showModal } = await createModal(fragment.childNodes, isShareModal);
   showModal();
 }
