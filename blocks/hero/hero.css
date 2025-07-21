@@ -4,7 +4,9 @@
     width: 100%;
     padding: 0;
 }
-
+.section.hero-banner{
+    margin: 0px;
+} 
 
 .hero{
     position: relative;
@@ -31,7 +33,7 @@
 .hero img {
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .hero > div:nth-child(1) > div > p:nth-child(2) > picture > img {
@@ -62,7 +64,5 @@
     .section.hero-banner>.hero-wrapper>.hero{
     margin: 16px 0px 0px 0px;
 }
-.section.hero-banner{
-    margin: 0px;
-} 
+
 }
