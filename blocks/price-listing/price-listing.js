@@ -20,52 +20,26 @@ function createDropdownInput(placeholder) {
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
   return { wrapper, input, clearBtn/*, dropdownBtn*/, list };
 }
-// function populateList(input, list, data, onSelect) {
-//   list.innerHTML = '';
-//   const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
-//   if (!filtered.length) {
-//     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
-//   } else {
-//     filtered.forEach(item => {
-//       const itemEl = div({ class: 'dropdown-item' }, item.label);
-//       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
-//       list.appendChild(itemEl);
-//     });
-//   }
-//   list.style.display = 'block';
-// }
 
-// function populateList(input, list, data, onSelect) {
-//   list.innerHTML = '';
-//   const filtered = data.filter(d => d.label.toLowerCase().includes(input.value.trim().toLowerCase()));
-//   if (!filtered.length) {
-//     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
-//   } else {
-//     data.forEach(item => {
-//       const itemEl = div({ class: 'dropdown-item' }, item.label);
-//       itemEl.addEventListener('click', () => { input.value = item.label; list.style.display = 'none'; onSelect(item); });
-//       list.appendChild(itemEl);
-//     });
-//   }
-//   list.style.display = 'block';
-// }
+let selectedEl = null;
 
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
-  const typedValue = input.value.trim().toLowerCase();
+  const typedValue = (input.dataset.filter || '').trim().toLowerCase();
   const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
 
   const currentValue = input.value.trim().toLowerCase();
+  let selectedEl = null;
 
   if (!filtered.length) {
     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
   } else {
-    data.forEach(item => {
+    filtered.forEach(item => {
       const isSelected = item.label.toLowerCase() === currentValue;
       const itemEl = div(
         {
           class: `dropdown-item${isSelected ? ' selected' : ''}`,
-          style: isSelected ? 'background-color: #f1f1f1; font-weight: bold;' : ''
+          style: isSelected ? 'background-color: #007aff; font-weight: bold;' : ''
         },
         item.label
       );
@@ -74,11 +48,20 @@ function populateList(input, list, data, onSelect) {
         list.style.display = 'none';
         onSelect(item);
       });
+      if (isSelected) selectedEl = itemEl;
       list.appendChild(itemEl);
     });
   }
+
   list.style.display = 'block';
+
+  if (selectedEl) {
+    setTimeout(() => {
+      selectedEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }, 0);
+  }
 }
+
 
 async function decoratePriceListing() {
   // const raw = await fetchStateCityMaster();
@@ -92,8 +75,6 @@ async function decoratePriceListing() {
 
   const { wrapper: sw, input: si, clearBtn: sc/*, dropdownBtn: sd*/, arrowBtn: sa, list: sl } = createDropdownInput('Enter State');
   const { wrapper: cw, input: ci, clearBtn: cc/*, dropdownBtn: cd*/, arrowBtn: ca, list: cl } = createDropdownInput('Enter City');
-
-  ci.disabled = true; // ⛔ disable city until state is selected
 
   const dropdowns = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city' },
@@ -145,7 +126,7 @@ async function decoratePriceListing() {
   async function onStateSelect(s) {
     selectedState = s; selectedCity = s.cities[0];
     ci.disabled = false;
-    ci.value = selectedCity.label;
+    // ci.value = selectedCity.label;
     renderPriceTable(s.label, selectedCity.code);
     const [dataMapping, setDataMapping] = await useDataMapping();
     dataMapping.current_location = {
@@ -174,17 +155,36 @@ async function decoratePriceListing() {
   let isCityOpen = false;
 
   si.addEventListener('focus', () => {
-    si.select(); // optional: highlights text
-    populateList({ value: '' }, sl, states, onStateSelect);
+    si.select();
+    si.dataset.filter = '';
+    populateList(si, sl, states, onStateSelect);
   });
+  
+  si.addEventListener('input', () => {
+    si.dataset.filter = si.value;
+    populateList(si, sl, states, onStateSelect);
+  });
+
   ci.addEventListener('focus', () => {
     ci.select(); // optional: highlights text
-    populateList({ value: '' }, cl, selectedState.cities, onCitySelect);
+    ci.dataset.filter = '';
+    populateList(ci, cl, selectedState.cities, onCitySelect);
   });
 
 
   // sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
-  sw.addEventListener('click', e => (e.stopPropagation(), isStateOpen ? (sl.style.display = 'none', isStateOpen = false) : (populateList(si, sl, states, onStateSelect), si.focus(), sl.style.display = 'block', isStateOpen = true)));
+  sw.addEventListener('click', e => {
+    e.stopPropagation();
+    if (isStateOpen) {
+      sl.style.display = 'none';
+      isStateOpen = false;
+    } else {
+      populateList(si, sl, states, onStateSelect);
+      si.focus();
+      sl.style.display = 'block';
+      isStateOpen = true;
+    }
+  });
   sc.addEventListener('click', () => {
     si.value = '';
     sl.style.display = 'none';
@@ -195,10 +195,13 @@ async function decoratePriceListing() {
 
 
   // ci.disabled = !selectedState;
-  ci.addEventListener('input', () => populateList(ci, cl, selectedState.cities, onCitySelect));
+  ci.addEventListener('input', () => {
+    ci.dataset.filter = ci.value;
+    populateList(ci, cl, selectedState.cities, onCitySelect);
+  });
   cw.addEventListener('click', e => {
     e.stopPropagation();
-    if (ci.disabled) return; 
+    if (ci.disabled) return;
     if (isCityOpen) {
       cl.style.display = 'none';
       isCityOpen = false;

@@ -234,6 +234,11 @@
     font-family: 'TSTAR-PRO-Heavy';   
 }
 
+.custom-dropdown-list {
+  max-height: 200px;       /* or whatever fits your design */
+  overflow-y: auto;        /* enables scroll */
+}
+
 @media (max-width: 786px) {
     .price-listing>div:nth-child(1)>div {
         display: none;
