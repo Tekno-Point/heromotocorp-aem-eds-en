@@ -1,7 +1,21 @@
 import createField from "./form-fields.js";
 import { div, ul, li, p } from "../../scripts/dom-helpers.js";
-import { fetchOTP, useDataMapping } from "../../scripts/common.js";
+import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp } from "../../scripts/common.js";
 
+function errorField(message) {
+    return p({ class: "error-msg" }, message);
+};
+
+function showError(field, msg) {
+  const msgEl = field.querySelector('.error-msg')
+  if(!msg){
+    msgEl?.remove();
+  }else  if(msgEl){
+    msgEl.textContent = 'aa ' + msg 
+  }else{
+    field.appendChild(errorField('aa '+ msg));
+  }
+}
 async function createForm(formHref, submitHref) {
   const { pathname } = new URL(formHref);
   const resp = await fetch(pathname);
@@ -59,8 +73,18 @@ async function handleSubmit(form) {
   try {
     form.setAttribute("data-submitting", "true");
     submit.disabled = true;
-
+    const data = await fetchBookARide(
+      form.name.value,
+      form.mobile.value,
+      form.otp.value,
+      form.email.value,
+      form.state.value,
+      form.city.value,
+      getRandomId()
+    )
     // create payload
+    
+    /*
     const payload = generatePayload(form);
     const response = await fetch(form.dataset.action, {
       method: "POST",
@@ -76,7 +100,7 @@ async function handleSubmit(form) {
     } else {
       const error = await response.text();
       throw new Error(error);
-    }
+    }*/
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e);
@@ -119,9 +143,7 @@ export default async function decorate(block) {
   const city_field = city_inp.closest(".field-wrapper");
   const submitBtn = block.querySelector(".submit-btn");
 
-  const errorField = function (message) {
-    return p({ class: "error-msg" }, message);
-  };
+  
 
   // Set autoComplete - off to all input and set disable to city field on "Load"
   block
@@ -275,7 +297,7 @@ export default async function decorate(block) {
   block.querySelector(".sendOTP-btn").addEventListener("click", function () {
     console.log("Hi Send otp");
     try {
-      fetchOTP("8169850484");
+      fetchOTP(form.mobile.value);
       block.querySelector(".sendOTP-btn").classList.add("dsp-none");
       block.querySelector(".resendOTP-btn").classList.remove("dsp-none");
     } catch (error) {
@@ -302,16 +324,17 @@ export default async function decorate(block) {
   const nameInp = block.querySelector("#form-name");
   const nameField = nameInp.closest(".text-wrapper");
   nameInp.addEventListener("input", function () {
-    const nameError = nameField.querySelector(".error-msg");
-    const value = nameInp.value.trim();
-    if (nameError) {
-      nameError.remove();
-    }
-    if (value == "") {
-      nameField.appendChild(errorField("Field is required"));
-    } else if (!nameRegex.test(value)) {
-      nameField.appendChild(errorField("Please enter a valid name"));
-    }
+    checkValidity()
+    // const nameError = nameField.querySelector(".error-msg");
+    // const value = nameInp.value.trim();
+    // if (nameError) {
+    //   nameError.remove();
+    // }
+    // if (value == "") {
+    //   nameField.appendChild(errorField("Field is required"));
+    // } else if (!nameRegex.test(value)) {
+    //   nameField.appendChild(errorField("Please enter a valid name"));
+    // }
   });
 
   // Mobile validation
@@ -320,19 +343,25 @@ export default async function decorate(block) {
   const mobInp = block.querySelector("#form-mobile");
   const mobField = mobInp.closest(".tel-wrapper");
   mobInp.addEventListener("input", function () {
-    const mobError = mobField.querySelector(".error-msg");
-    const value = mobInp.value.trim();
-    if (mobError) {
-      mobError.remove();
-    }
-    if (value == "") {
-      mobField.appendChild(errorField("Field is required"));
-    } else if (value.length !== 10 && !mobRegex.test(value)) {
-      block.querySelector(".sendOTP-btn").classList.add("dsp-none");
-      mobField.appendChild(errorField("Please enter a valid mobile no."));
-    } else {
+    block.querySelector(".sendOTP-btn").classList.add("dsp-none");
+    const valid = checkValidity();
+    debugger;
+    if(valid[1]){
       block.querySelector(".sendOTP-btn").classList.remove("dsp-none");
     }
+    // const mobError = mobField.querySelector(".error-msg");
+    // const value = mobInp.value.trim();
+    // if (mobError) {
+    //   mobError.remove();
+    // }
+    // if (value == "") {
+    //   mobField.appendChild(errorField("Field is required"));
+    // } else if (value.length !== 10 && !mobRegex.test(value)) {
+    //   block.querySelector(".sendOTP-btn").classList.add("dsp-none");
+    //   mobField.appendChild(errorField("Please enter a valid mobile no."));
+    // } else {
+    //   block.querySelector(".sendOTP-btn").classList.remove("dsp-none");
+    // }
   });
 
   // Email Validation
@@ -340,16 +369,17 @@ export default async function decorate(block) {
   const emailInp = block.querySelector("#form-email");
   const emailField = emailInp.closest(".email-wrapper");
   emailInp.addEventListener("input", function () {
-    const emailError = emailField.querySelector(".error-msg");
-    const value = emailInp.value.trim();
-    if (emailError) {
-      emailError.remove();
-    }
-    if (value == "") {
-      emailField.appendChild(errorField("Field is required"));
-    } else if (!emailRegex.test(value)) {
-      emailField.appendChild(errorField("Please enter a valid email"));
-    }
+    checkValidity()
+    // const emailError = emailField.querySelector(".error-msg");
+    // const value = emailInp.value.trim();
+    // if (emailError) {
+    //   emailError.remove();
+    // }
+    // if (value == "") {
+    //   emailField.appendChild(errorField("Field is required"));
+    // } else if (!emailRegex.test(value)) {
+    //   emailField.appendChild(errorField("Please enter a valid email"));
+    // }
   });
 
   // State and city validation
@@ -378,21 +408,36 @@ export default async function decorate(block) {
       const inpVal = inp.value;
       const inpName = inp.name;
       if (inpVal == "") {
-        fieldWrapper.append(errorField("Field is required"));
-        return true
-      } else if (inpName == "name" && !nameRegex.test(inpVal)) {
-        fieldWrapper.append(errorField("Please enter a valid name"));
-        return true
-      } else if (inpName == "mobile" && !mobRegex.test(inpVal)) {
-        fieldWrapper.append(errorField("Please enter a valid mobile no."));
-        return true
-      } else if (inpName == "email" && !emailRegex.test(inpVal)) {
-        fieldWrapper.append(errorField("Please enter a valid email"));
-        return true
-      } else {
-        if (error) {
-          error.remove();
+        showError(fieldWrapper,'Field is required')
+        return false
+      } else if (inpName == "name") {
+        if(inpVal){
+          if(nameRegex.test(inpVal)){
+            showError(fieldWrapper,'')
+            return true
+          }else{
+            showError(fieldWrapper,'Invalid Name')
+            return false
+          }
+        }else{
+          showError(fieldWrapper,'The Name is required')
+          return false
         }
+      } else if (inpName == "otp" ) {
+        const isValid = verifyOtp(form.mobile.value, form.otp.value);
+        if(!isValid){
+          showError(fieldWrapper,'Incorrect OTP')
+        }          
+        showError(fieldWrapper,'')
+        return isValid;
+      } else if (inpName == "mobile" && !mobRegex.test(inpVal)) {
+        showError(fieldWrapper,'Enter correct mobile number')
+        return false
+      } else if (inpName == "email" && !emailRegex.test(inpVal)) {
+        showError(fieldWrapper,'Please enter correct email')
+        return false
+      } else {
+        showError(fieldWrapper,'')
         return true
       }
     });
