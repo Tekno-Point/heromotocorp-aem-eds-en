@@ -157,6 +157,10 @@ footer .footer p {
     object-fit: contain;
     margin-right: 10px;
     cursor: pointer;
+        background-color: #181818;
+    border: 2px solid #181818;
+    padding: 4px;
+    border-radius: 2px;
 }
 
 @media (max-width: 426px) {

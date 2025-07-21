@@ -191,7 +191,7 @@
 
 .carousel .swiper-pagination-bullet.swiper-pagination-bullet-active {
     opacity: 1;
-    width: 146px;
+    /* width: 146px; */
     color: rgb(238, 35, 38);
     font-family: "TSTAR-PRO-Bold";
     font-weight: 900;
@@ -261,7 +261,7 @@
     font-size: 18px;
     padding-top: 10px;
     color: #303030;
-  font-family: "TSTAR-PRO-Medium";
+    font-family: "TSTAR-PRO-Medium";
 }
 
 .carousel .swiper-pagination > h3 {
@@ -386,8 +386,8 @@
         > p
         > picture
         > img {
-        max-width: 156px;
-        height: 165px;
+       max-width: 131px;
+        height: 111px;
     }
     .carousel
         > .swiper-wrapper
@@ -401,10 +401,18 @@
     }
 
     .carousel .btnWrapper > .swiper-pagination {
-        margin-left:  51px;;
-                width: 210px;
+        margin-left: 51px;
+        width: 210px;
     }
     .carousel h3.swiper-pagination-bullet {
         font-size: 18px;
+    }
+    .carousel .inner-innerSub-1 > h2 {
+        width: 100%;
+        font-family: "TSTAR-PRO-Regular";
+        padding-bottom: 20px;
+        border-bottom: 1px solid #a5a5a5;
+        /* width: max-content; */
+        color: #303030;
     }
 }
