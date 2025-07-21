@@ -161,7 +161,7 @@ body.modal-open {
 
 .modal.book-ride{
   background-color: black !important;
-  opacity: .7;
+  opacity: .9;
 }
 .modal.book-ride>dialog{
 max-width: 100%;
@@ -219,7 +219,7 @@ border: none;
 @media(max-width : 767px){
   .modal.book-ride>dialog{
      top: 2%;
-    left: 0%;
+    left: 1%;
      width: 398px;
      margin: 10px;
   }
@@ -232,11 +232,13 @@ border: none;
    .modal.book-ride>dialog{
       width: 350px;
      margin: 10px;
+             top: 2%;
+        left: 1%;
    }
 }
-@media(max-width : 376px){
+@media(max-width : 321px){
    .modal.book-ride>dialog{
       width: 296px;
-     margin: 5px;
+     margin: 3%;
    }
 }
