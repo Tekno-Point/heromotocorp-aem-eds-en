@@ -165,6 +165,7 @@
 
 .carousel h3.swiper-pagination-bullet {
     display: flex;
+    height: 32px;
     flex-direction: row;
     gap: 10px;
     cursor: pointer;
@@ -193,8 +194,7 @@
     opacity: 1;
     /* width: 146px; */
     color: rgb(238, 35, 38);
-    font-family: "TSTAR-PRO-Bold";
-    font-weight: 900;
+    font-family: "TSTAR-PRO-Medium";
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -235,9 +235,8 @@
 }
 
 .carousel .btnWrapper > .swiper-pagination {
-        max-width: 1129px;
-
-    height: 24px;
+    max-width: 1129px;
+    height: 45px;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -249,6 +248,7 @@
     gap: 1rem;
     /* margin-bottom: 10px; */
     margin-top: 2px;
+    top: -43px;
 }
 
 .carousel .inner-innerSub-1 > h2 {
