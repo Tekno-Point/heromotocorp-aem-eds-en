@@ -25,16 +25,16 @@ let selectedEl = null;
 
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
-  const typedValue = input.value.trim().toLowerCase();
+  const typedValue = (input.dataset.filter || '').trim().toLowerCase();
   const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
 
   const currentValue = input.value.trim().toLowerCase();
-  let selectedEl = null; // ✅ FIXED: Now declared properly
+  let selectedEl = null;
 
   if (!filtered.length) {
     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
   } else {
-    data.forEach(item => {
+    filtered.forEach(item => {
       const isSelected = item.label.toLowerCase() === currentValue;
       const itemEl = div(
         {
@@ -156,11 +156,18 @@ async function decoratePriceListing() {
 
   si.addEventListener('focus', () => {
     si.select();
-    populateList({ value: si.value }, sl, states, onStateSelect);
+    si.dataset.filter = '';
+    populateList(si, sl, states, onStateSelect);
+  });
+  
+  si.addEventListener('input', () => {
+    si.dataset.filter = si.value;
+    populateList(si, sl, states, onStateSelect);
   });
 
   ci.addEventListener('focus', () => {
     ci.select(); // optional: highlights text
+    ci.dataset.filter = '';
     populateList(ci, cl, selectedState.cities, onCitySelect);
   });
 
@@ -172,7 +179,7 @@ async function decoratePriceListing() {
       sl.style.display = 'none';
       isStateOpen = false;
     } else {
-      populateList({ value: si.value }, sl, states, onStateSelect);
+      populateList(si, sl, states, onStateSelect);
       si.focus();
       sl.style.display = 'block';
       isStateOpen = true;
@@ -188,7 +195,10 @@ async function decoratePriceListing() {
 
 
   // ci.disabled = !selectedState;
-  ci.addEventListener('input', () => populateList(ci, cl, selectedState.cities, onCitySelect));
+  ci.addEventListener('input', () => {
+    ci.dataset.filter = ci.value;
+    populateList(ci, cl, selectedState.cities, onCitySelect);
+  });
   cw.addEventListener('click', e => {
     e.stopPropagation();
     if (ci.disabled) return;
