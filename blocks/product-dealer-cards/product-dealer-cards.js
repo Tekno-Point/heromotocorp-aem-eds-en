@@ -1,6 +1,6 @@
 import { fetchDealers, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, p, span } from "../../scripts/dom-helpers.js";
-import Swiper from "../carousel/swiper.min.js";
+import Swiper from "../swiper/swiper.min.js";
 
 pubsub.subscribe('product-dealer-cards-event', decorateProductDealerCards);
 
