@@ -1,3 +1,8 @@
+.section.price-listing-container .price-listing-wrapper{
+    max-width: 1308px;
+    padding: unset;
+}
+
 .price-listing-container {
     background-color: #EDEDED;
 }
@@ -21,20 +26,25 @@
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>div {
     display: flex;
     justify-content: space-between;
+    margin: unset;
 }
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>.price-listing__row-col--container>.custom-select-state-city {
     width: 45%;
+    /* width: 50%; */
     padding: 0.75rem;
     border-radius: 0.5rem;
     background: white;
+    position: relative;
 }
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>.price-listing__row-col--container>.custom-select-state-city__col {
     width: 45%;
+    /* width: 50%; */
     padding: 0.75rem;
     border-radius: 0.5rem;
     background: white;
+    position: relative;
 }
 
 .price-listing>.custom-select-state-city__col>.custom-autocomplete {
@@ -91,16 +101,17 @@
 
 /* Make wrapper relative */
 .price-listing .custom-autocomplete {
-    position: relative;
+    /* position: relative; */
 }
 
 /* Target the dropdown list properly */
 .price-listing .custom-autocomplete .custom-dropdown-list {
     position: absolute;
     top: 100%;
-    left: 0;
-    width: 100%;
-    max-height: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 96%;
+    max-height: 250px;
     overflow-y: auto;
     z-index: 999;
     background: white;
@@ -213,34 +224,38 @@
     width: 414px;
 }
 
-.price-listing .custom-select-state-city__col>.custom-autocomplete>label{
+.price-listing .custom-select-state-city__col>.custom-autocomplete>label {
     font-family: 'TSTAR-PRO-Heavy';
 }
 
-.price-listing .custom-dropdown-list>.dropdown-item{
+.price-listing .custom-dropdown-list>.dropdown-item {
     font-family: 'TSTAR-PRO-Heavy';
 }
 
-.price-listing .input-wrapper>.react-select__input{
+.price-listing .input-wrapper>.react-select__input {
     font-family: 'TSTAR-PRO-Heavy';
 }
 
-.react-select__input::placeholder{
+.react-select__input::placeholder {
     font-family: 'TSTAR-PRO-Heavy';
     color: black;
 }
 
-.price-listing .col-6>.price-details-col>.price-details-col__text{
-    font-family: 'TSTAR-PRO-Heavy';   
+.price-listing .col-6>.price-details-col>.price-details-col__text {
+    font-family: 'TSTAR-PRO-Heavy';
 }
 
 .custom-dropdown-list {
-  max-height: 200px;       /* or whatever fits your design */
-  overflow-y: auto;        /* enables scroll */
+    max-height: 200px;
+    /* or whatever fits your design */
+    overflow-y: auto;
+    /* enables scroll */
 }
-.section.price-listing-container{
+
+.section.price-listing-container {
     margin: 0px;
 }
+
 @media (max-width: 786px) {
     .price-listing>div:nth-child(1)>div {
         display: none;
@@ -294,8 +309,9 @@
         font-size: 18px;
         color: rgb(51, 51, 51);
     }
-    .block.price-listing{
-        gap:0px;
+
+    .block.price-listing {
+        gap: 0px;
     }
 
 }

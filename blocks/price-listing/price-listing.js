@@ -79,11 +79,11 @@ async function decoratePriceListing() {
   const dropdowns = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city' },
       div({ class: 'custom-select-state-city__col' },
-        div({ class: 'custom-autocomplete position-relative' }, label({}, 'State'), sw, sl)
+        div({ class: 'custom-autocomplete ' }, label({}, 'State'), sw, sl)
       )
     ),
     div({ class: 'custom-select-state-city__col false' },
-      div({ class: 'custom-autocomplete position-relative' }, label({}, 'City'), cw, cl)
+      div({ class: 'custom-autocomplete ' }, label({}, 'City'), cw, cl)
     )
   );
 
