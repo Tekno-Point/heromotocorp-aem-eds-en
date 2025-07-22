@@ -41,6 +41,7 @@
 
 .section .price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item:hover {
     background-color: #009fda33;
+    cursor: pointer;
 }
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>.price-listing__row-col--container>.custom-select-state-city__col {
@@ -78,7 +79,7 @@
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>.price-details--info>.row>div p {
     font-size: 16px;
-    font-weight : 500;
+    font-weight: 500;
 }
 
 .price-listing>div:nth-child(2)>div>p {
@@ -257,7 +258,9 @@
 }
 
 .price-listing .custom-dropdown-list>.dropdown-item {
-    font-family: 'TSTAR-PRO-Heavy';
+    font-family: 'TSTAR-PRO-Bold';
+    font-family: 'TSTAR-PRO-Bold';
+    font-weight: 700;
 }
 
 .price-listing .input-wrapper>.react-select__input {

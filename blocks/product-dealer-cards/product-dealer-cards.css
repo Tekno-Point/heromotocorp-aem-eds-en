@@ -50,13 +50,28 @@
     position: relative;
     background: #ededed;
     border: none;
-    border-bottom: 0.125rem solid silver;
+    /* border-bottom: 0.125rem solid silver; */
     padding: 0px;
     padding-bottom: 2px;
     font-size: 18px;
     letter-spacing: normal;
     line-height: 1.5rem;
     font-weight: bold;
+}
+
+.product-dealer-cards .custom-select-wrapper .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ededed;
+    border: none;
+    /* border: 1px solid #ccc; */
+    border-bottom: 0.125rem solid silver;
+    position: relative;
+}
+
+.price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item:hover {
+    background-color: #009fda33;
 }
 
 .product-dealer-cards .custom-select-wrapper .clear-btn {
@@ -98,6 +113,7 @@
 
 .product-dealer-cards .dropdown-option:hover {
     background-color: #f5f5f5;
+    background-color: #009fda33;
 }
 
 .product-dealer-cards .dealer-dropdownss {
@@ -119,9 +135,11 @@
     color: silver;
     position: relative;
     cursor: pointer;
-    margin-right: 27px;
+    /* margin-right: 27px; */
+    top: -16px;
     top: -16px;
     font-size: 28px;
+    height: 23px;
 }
 
 .product-dealer-cards .input-wrapper>.clear-btn:hover {
@@ -132,8 +150,8 @@
     content: "";
     display: inline-block;
     position: absolute;
-    top: -10px;
-    right: 26px;
+    top: 2px;
+    right: 0px;
     transform: rotate(135deg);
     width: 8px;
     height: 8px;
@@ -181,14 +199,14 @@
 }
 
 .product-dealer-cards .dealer-card>p:nth-of-type(1)>.wrapper,
-.product-dealer-cards .dealer-card>p:nth-of-type(2)>.wrapper{
+.product-dealer-cards .dealer-card>p:nth-of-type(2)>.wrapper {
     display: flex;
     align-items: flex-start;
     column-gap: 0.625rem;
 }
 
-.product-dealer-cards .dealer-name > .wrapper,
-.product-dealer-cards .dealer-address > .wrapper {
+.product-dealer-cards .dealer-name>.wrapper,
+.product-dealer-cards .dealer-address>.wrapper {
     display: flex;
     font-family: "TSTAR-PRO-Heavy";
     align-items: flex-start;
