@@ -330,6 +330,12 @@
     padding: unset;
 }
 
+.section .swiper-button-prev.swiper-button-disabled,
+.section .swiper-button-next.swiper-button-disabled {
+    background-color: #fff;
+    color: rgb(73, 73, 73);
+}
+
 @media (max-width: 600px) {
     .swiper-slide {
         flex-direction: column;
@@ -438,7 +444,8 @@
         /* width: max-content; */
         color: #303030;
     }
-    .section .carousel-wrapper .carousel .swiper-pagination>h3{
+
+    .section .carousel-wrapper .carousel .swiper-pagination>h3 {
         font-size: 1.125rem;
     }
 }
