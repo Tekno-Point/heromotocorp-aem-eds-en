@@ -197,8 +197,11 @@ nav .nav-link.dropdown-toggle.new-header-variation span {
             #ff0000 68.47%,
             #b50000 114.59%);
     color: white;
-    border-radius: 8px;
+    border-radius: 3px;
     font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    line-height: 18px;
+    font-size: 18px;
 }
 
 .nav-bar>.default-content-wrapper>ul:nth-child(3)>li:first-child>a {
@@ -495,4 +498,8 @@ body.appear {
 
 .nav-bar>.default-content-wrapper>p>img {
     display: none !important;
+}
+
+.nav-bar>.default-content-wrapper>ul:nth-child(3)>li:nth-child(2)>a{
+padding: 10px 32px;
 }
