@@ -11,7 +11,7 @@ export async function updatePriceAndLocation() {
     const [dataMapping] = await useDataMapping()
     const li = document.querySelector('.banner-price').querySelector('ul li ul li')
     const [priceEl, locationEl] = li.querySelectorAll('strong');
-    priceEl.textContent = `₹ ${dataMapping.banner_price}`;
+    priceEl.textContent = `₹ ${dataMapping.banner_price.toLocaleString("en-IN") }`;
     locationEl.textContent = `, ${dataMapping.current_location.city}`;
 }
 export async function decorateProductBanner(block, data) {
