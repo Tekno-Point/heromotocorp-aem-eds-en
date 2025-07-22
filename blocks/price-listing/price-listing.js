@@ -10,26 +10,28 @@ import {
 } from "../../scripts/dom-helpers.js";
 
 pubsub.subscribe('price-listing-event', updatePriceListing);
+
 function createDropdownInput(placeholder) {
   const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' });
   const clearBtn = span({ class: 'clear-btn' }, '×');
-  // const dropdownBtn = span({ class: 'dropdown-btn' },
-  //   img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
-  // );
-  const wrapper = div({ class: 'input-wrapper' }, input, clearBtn/*, dropdownBtn*/);
+  const dropdownBtn = span({ class: 'dropdown-btn' },
+    img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
+  );
+  const wrapper = div({ class: 'input-wrapper' }, input, clearBtn, dropdownBtn);
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
-  return { wrapper, input, clearBtn/*, dropdownBtn*/, list };
+  return { wrapper, input, clearBtn, dropdownBtn, list };
 }
 
 let selectedEl = null;
+let isStateOpen = false;
+let isCityOpen = false;
 
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
   const typedValue = (input.dataset.filter || '').trim().toLowerCase();
   const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
-
   const currentValue = input.value.trim().toLowerCase();
-  let selectedEl = null;
+  selectedEl = null;
 
   if (!filtered.length) {
     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
@@ -46,35 +48,40 @@ function populateList(input, list, data, onSelect) {
       itemEl.addEventListener('click', () => {
         input.value = item.label;
         list.style.display = 'none';
+        if (input.id === 'state-input') isStateOpen = false;
+        if (input.id === 'city-input') isCityOpen = false;
         onSelect(item);
       });
-      if (isSelected) selectedEl = itemEl;
       list.appendChild(itemEl);
+      if (isSelected) selectedEl = itemEl;
     });
   }
 
   list.style.display = 'block';
-
   if (selectedEl) {
-    setTimeout(() => {
-      selectedEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    }, 0);
+    setTimeout(() => selectedEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 0);
+  } else if (filtered.length > 0) {
+    const firstItemEl = list.querySelector('.dropdown-item:not(.no-results)');
+    if (firstItemEl) {
+      setTimeout(() => firstItemEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 0);
+    }
   }
 }
 
-
 async function decoratePriceListing() {
-  // const raw = await fetchStateCityMaster();
-  const [dataMapping] = await useDataMapping();
+  const [dataMapping, setDataMapping] = await useDataMapping();
   const mapped = dataMapping.state_city_master;
   const states = mapped.state.map(label => ({ label, cities: Object.values(mapped[label]) }));
 
   const current = dataMapping.current_location;
   let selectedState = states.find(s => s.label.toUpperCase() === current.state.toUpperCase()) || states[0];
-  let selectedCity = selectedState.cities.find(c => c.label.toUpperCase() === current.city.toUpperCase()) || selectedState.cities[0];
+  let selectedCity = null;
 
-  const { wrapper: sw, input: si, clearBtn: sc/*, dropdownBtn: sd*/, arrowBtn: sa, list: sl } = createDropdownInput('Enter State');
-  const { wrapper: cw, input: ci, clearBtn: cc/*, dropdownBtn: cd*/, arrowBtn: ca, list: cl } = createDropdownInput('Enter City');
+  const { wrapper: sw, input: si, clearBtn: sc, dropdownBtn: sd, list: sl } = createDropdownInput('Enter State');
+  const { wrapper: cw, input: ci, clearBtn: cc, dropdownBtn: cd, list: cl } = createDropdownInput('Enter City');
+
+  si.id = 'state-input';
+  ci.id = 'city-input';
 
   const dropdowns = div({ class: 'price-listing__row-col--container row' },
     div({ class: 'custom-select-state-city' },
@@ -104,147 +111,193 @@ async function decoratePriceListing() {
     );
     const prod = await fetchProduct(state, cityCode);
     const variants = prod.data.products.items?.[0]?.variant_to_colors || [];
-    variants.forEach(v => {
-      priceInfo.append(
-        div({ class: 'row' },
-          div({ class: 'col-6' },
-            div({ class: 'price-details-col' },
-              div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, v.label))
-            )
-          ),
-          div({ class: 'col-6' },
-            div({ class: 'price-details-col' },
-              div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, `₹ ${v.variant_price}`))
+
+    if (variants.length === 0) {
+      priceInfo.append(p({ class: 'body2 weight-medium text-center py-4' }, 'No price information available for this location.'));
+    } else {
+      variants.forEach(v => {
+        priceInfo.append(
+          div({ class: 'row' },
+            div({ class: 'col-6' },
+              div({ class: 'price-details-col' },
+                div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, v.label))
+              )
+            ),
+            div({ class: 'col-6' },
+              div({ class: 'price-details-col' },
+                div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, `₹ ${v.variant_price}`))
+              )
             )
           )
-        )
-      );
-    });
+        );
+      });
+    }
   }
-
-  // ==== events ====
-  async function onStateSelect(s) {
-    selectedState = s; selectedCity = s.cities[0];
-    ci.disabled = false;
-    // ci.value = selectedCity.label;
-    renderPriceTable(s.label, selectedCity.code);
-    const [dataMapping, setDataMapping] = await useDataMapping();
-    dataMapping.current_location = {
-      state: s.label,
-      city: selectedCity.code,
-    };
-    setDataMapping(dataMapping);
-    pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
-      test: true,
-    });
-  }
-  async function onCitySelect(c) {
-    selectedCity = c;
-    renderPriceTable(selectedState.label, c.code);
-    const [dataMapping, setDataMapping] = await useDataMapping();
-    dataMapping.current_location = {
-      state: selectedState.label,
-      city: selectedCity.code,
-    };
-    setDataMapping(dataMapping);
-    pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
-      test: true,
-    });
-  }
-  let isStateOpen = false;
-  let isCityOpen = false;
 
   si.addEventListener('focus', () => {
-    // si.select();
     si.dataset.filter = '';
     populateList(si, sl, states, onStateSelect);
+    sl.style.display = 'block';
+    isStateOpen = true;
   });
-  
+
   si.addEventListener('input', () => {
     si.dataset.filter = si.value;
     populateList(si, sl, states, onStateSelect);
+    sl.style.display = 'block';
+    isStateOpen = true;
   });
 
-  ci.addEventListener('focus', () => {
-    // ci.select(); // optional: highlights text
-    ci.dataset.filter = '';
-    populateList(ci, cl, selectedState.cities, onCitySelect);
-  });
-
-
-  // sd.addEventListener('click', e => { e.stopPropagation(); sl.style.display !== 'block' ? populateList(si, sl, states, onStateSelect) : sl.style.display = 'none'; si.focus(); });
-  sw.addEventListener('click', e => {
+  sd.addEventListener('click', e => {
     e.stopPropagation();
     if (isStateOpen) {
       sl.style.display = 'none';
       isStateOpen = false;
     } else {
+      si.dataset.filter = '';
       populateList(si, sl, states, onStateSelect);
-      si.focus();
       sl.style.display = 'block';
       isStateOpen = true;
+      si.focus();
     }
   });
+
   sc.addEventListener('click', () => {
     si.value = '';
     sl.style.display = 'none';
+    isStateOpen = false;
     ci.value = '';
     ci.disabled = true;
     cl.style.display = 'none';
+    isCityOpen = false;
   });
 
+  ci.addEventListener('focus', () => {
+    if (ci.disabled) return;
+    ci.dataset.filter = '';
+    populateList(ci, cl, selectedState.cities, onCitySelect);
+    cl.style.display = 'block';
+    isCityOpen = true;
+  });
 
-  // ci.disabled = !selectedState;
   ci.addEventListener('input', () => {
+    if (ci.disabled) return;
     ci.dataset.filter = ci.value;
     populateList(ci, cl, selectedState.cities, onCitySelect);
+    cl.style.display = 'block';
+    isCityOpen = true;
   });
-  cw.addEventListener('click', e => {
+
+  cd.addEventListener('click', e => {
     e.stopPropagation();
     if (ci.disabled) return;
     if (isCityOpen) {
       cl.style.display = 'none';
       isCityOpen = false;
     } else {
+      ci.dataset.filter = '';
       populateList(ci, cl, selectedState.cities, onCitySelect);
-      ci.focus();
       cl.style.display = 'block';
       isCityOpen = true;
+      ci.focus();
     }
   });
-  // cd.addEventListener('click', e => { e.stopPropagation(); cl.style.display !== 'block' ? populateList(ci, cl, selectedState.cities, onCitySelect) : cl.style.display = 'none'; ci.focus(); });
-  cc.addEventListener('click', () => { ci.value = ''; cl.style.display = 'none'; });
 
-  document.addEventListener('click', e => {
-    !sw.contains(e.target) && (sl.style.display = 'none');
-    !cw.contains(e.target) && (cl.style.display = 'none');
+  cc.addEventListener('click', () => {
+    ci.value = '';
+    cl.style.display = 'none';
+    isCityOpen = false;
   });
 
-  si.value = selectedState.label;
-  ci.value = selectedCity.label;
-  renderPriceTable(selectedState.label, selectedCity.code);
+  document.addEventListener('click', e => {
+    if (!sw.contains(e.target) && isStateOpen) {
+      sl.style.display = 'none';
+      isStateOpen = false;
+    }
+    if (!cw.contains(e.target) && isCityOpen) {
+      cl.style.display = 'none';
+      isCityOpen = false;
+    }
+  });
+
+  async function onStateSelect(s) {
+    selectedState = s;
+    selectedCity = null;
+    ci.disabled = false;
+    ci.value = '';
+    cl.style.display = 'none';
+    isCityOpen = false;
+
+    sl.style.display = 'none';
+    isStateOpen = false;
+
+    const [dataMapping, setCurrentDataMapping] = await useDataMapping();
+    dataMapping.current_location = { state: s.label, city: '' };
+    setCurrentDataMapping(dataMapping);
+
+    pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
+  }
+
+  async function onCitySelect(c) {
+    selectedCity = c;
+    renderPriceTable(selectedState.label, c.code);
+    cl.style.display = 'none';
+    isCityOpen = false;
+
+    const [dataMapping, setCurrentDataMapping] = await useDataMapping();
+    dataMapping.current_location = { state: selectedState.label, city: selectedCity.code };
+    setCurrentDataMapping(dataMapping);
+
+    pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
+  }
+
+  si.value = selectedState ? selectedState.label : '';
+  const initialCityFromMapping = selectedState.cities.find(c => c.code === current.city);
+  if (initialCityFromMapping) {
+    ci.value = initialCityFromMapping.label;
+    selectedCity = initialCityFromMapping;
+  } else {
+    ci.value = '';
+    selectedCity = null;
+  }
+  ci.disabled = !selectedState;
+
+  if (selectedState && selectedCity) {
+    renderPriceTable(selectedState.label, selectedCity.code);
+  }
+
   return { dropdowns, fieldsetEl }
 }
 
 export async function updatePriceListing() {
   const block = document.querySelector('.price-listing.block');
+  if (!block) return;
   const { dropdowns, fieldsetEl } = await decoratePriceListing();
   const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
   const liList = headingUL?.querySelectorAll('li') || [];
   if (liList[0]) liList[0].replaceChildren(dropdowns, fieldsetEl);
 }
+
 export default async function decorate(block) {
   const { dropdowns, fieldsetEl } = await decoratePriceListing();
   const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
   const liList = headingUL?.querySelectorAll('li') || [];
-  if (liList[0]) liList[0].replaceChildren(dropdowns, fieldsetEl);
+
+  if (liList[0]) {
+    liList[0].replaceChildren(dropdowns, fieldsetEl);
+  }
+
   if (liList[1]) {
     const innerUL = liList[1].querySelector('ul');
     if (innerUL) {
-      const labels = [...innerUL.querySelectorAll('li')].map(li => li.textContent.trim());
-      const wrap = div();
-      if (labels[0]) wrap.append(a({ href: '/content/hero-commerce/in/en/pre-approved-offers.html', class: 'avail-finance-button-size' }, labels[0]));
-      if (labels[1]) wrap.append(a({ href: 'https://www.heromotocorp.com/.../splendor-plus.html', class: 'buynow-button-size button' }, labels[1]));
+      const links = [...innerUL.querySelectorAll('li a')];
+      const wrap = document.createElement('div');
+      if (links[0]) {
+        wrap.append(a({ href: links[0].href, class: 'avail-finance-button-size' }, links[0].textContent.trim()));
+      }
+      if (links[1]) {
+        wrap.append(a({ href: links[1].href, class: 'buynow-button-size button' }, links[1].textContent.trim()));
+      }
       innerUL.replaceWith(wrap);
     }
   }
