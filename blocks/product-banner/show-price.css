@@ -1,6 +1,12 @@
-main > .banner-price {
+main>.banner-price {
     padding: 0;
     margin: 0;
+}
+
+.banner-price {
+    @media (width >=900px) {
+        height: 140px;
+    }
 }
 
 .banner-price>.default-content-wrapper {
@@ -105,7 +111,7 @@ main > .banner-price {
     line-height: 1.75rem;
     -webkit-text-fill-color: rgba(0, 0, 0, 0);
 
-    @media (max-width: 900px) { 
+    @media (max-width: 900px) {
         padding-top: 5.5px;
         padding-bottom: 5.5px;
     }
@@ -128,7 +134,7 @@ main > .banner-price {
     color: #fff;
     background: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
 
-    @media (max-width: 900px) { 
+    @media (max-width: 900px) {
         padding-top: 5.5px;
         padding-bottom: 5.5px;
     }
@@ -139,7 +145,7 @@ main > .banner-price {
     display: flex;
     align-items: center;
     background: linear-gradient(114.58deg, #201F1F 4.19%, #454141 51.21%, #000000 98.23%);
-    padding: 18px 40px;
+    padding: 8px 40px;
     font-size: 20px;
     line-height: 24px;
     color: #fff;

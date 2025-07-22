@@ -1,4 +1,4 @@
-.section.price-listing-container .price-listing-wrapper{
+.section.price-listing-container .price-listing-wrapper {
     max-width: 1308px;
     padding: unset;
 }
@@ -37,6 +37,10 @@
     border-radius: 0.5rem;
     background: white;
     position: relative;
+}
+
+.section .price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item:hover {
+    background-color: #009fda33;
 }
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>.price-listing__row-col--container>.custom-select-state-city__col {
@@ -82,6 +86,7 @@
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>.price-details--info>.row>.col-6 {
     width: 45%;
+    flex: unset;
 }
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1) {
@@ -140,6 +145,7 @@
     border-bottom: 0.125rem solid silver;
     border-radius: 4px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     padding: 0px 0px 8px 0px;
 }
@@ -148,11 +154,16 @@
     color: silver;
     position: relative;
     cursor: pointer;
-    margin-right: 27px;
+    /* margin-right: 27px; */
+}
+
+.price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>.dropdown-btn img,
+.price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>.dropdown-btn img {
+    filter: invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>span::after {
-    content: "";
+    /* content: ""; */
     display: inline-block;
     position: absolute;
     top: 8px;
