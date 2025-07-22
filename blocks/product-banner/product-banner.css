@@ -253,7 +253,7 @@
 
 .section.product-banner-container .product-banner-wrapper .product-banner.block>.bottom-sec p strong a {
     margin: 0;
-    box-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+    /* box-shadow: 0 0 8px rgba(255, 0, 0, 0.5); */
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     font-size: 1.25rem;
@@ -261,8 +261,10 @@
     font-kerning: auto;
     letter-spacing: normal;
     line-height: 1.75rem;
-    border-radius: 8px;
+    border-radius: 5px;
     background: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
+    padding:0.625rem 2rem;
+    border: none;
 
     @media (width<767px) {
         padding: 8px 24px;
