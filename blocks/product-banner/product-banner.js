@@ -9,10 +9,12 @@ let accumulated = 0;
 const pixelsPerDegree = 1.5;
 export async function updatePriceAndLocation() {
     const [dataMapping] = await useDataMapping()
-    const li = document.querySelector('.banner-price').querySelector('ul li ul li')
+    const bannerPriceEl = document.querySelector('.banner-price');
+    const li = bannerPriceEl.querySelector('ul li ul li')
     const [priceEl, locationEl] = li.querySelectorAll('strong');
     priceEl.textContent = `₹ ${dataMapping.banner_price.toLocaleString("en-IN") }`;
     locationEl.textContent = `, ${dataMapping.current_location.city}`;
+    bannerPriceEl.classList.remove('dp-none');
 }
 export async function decorateProductBanner(block, data) {
     let heading;
@@ -210,7 +212,9 @@ export async function decorateProductBanner(block, data) {
 
 
 export default async function decorate(block) {
-    decorateProductBanner(block);
+    block.classList.add("dp-none");
+    await decorateProductBanner(block);
+    block.classList.remove("dp-none");
 }
 
 const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {
