@@ -67,9 +67,9 @@ section .buy-card-container>.buy-card-wrapper{
     font-kerning: auto;
     letter-spacing: normal;
     line-height: 2rem;
-    font-family: "TSTAR-PRO-Bold";
+    font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
-    color: #484848;
+    color: rgb(48,48,48);
 }
 .cards-card-body > h4 > span {
     clip-path: polygon(8% 1%, 53% 22%, 54% 100%, 8% 72%);
