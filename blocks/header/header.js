@@ -71,10 +71,10 @@ export async function appendXF(block, xfPath) {
           }
         }
       });
-      // block.removeEventListener('click', addClientLibScript);
+      block.removeEventListener('click', addClientLibScript);
     }
-    // block.addEventListener('click', addClientLibScript)
-    addClientLibScript();
+    block.addEventListener('click', addClientLibScript)
+    // addClientLibScript();
     // block.style.display = 'block';
     
     // setTimeout(() => {
