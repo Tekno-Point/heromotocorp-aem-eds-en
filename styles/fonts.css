@@ -62,7 +62,7 @@
   font-style: "Bold";
   font-display: swap;
   font-weight: 700;
-  src: url('../fonts/TSTAR-PRO-Bold.ttf') format('woff2');
+  src: url('../fonts/TSTAR-PRO-Bold.woff2') format('woff2');
 }
 @font-face {
   font-family: "TRANSDUCER-Bold";

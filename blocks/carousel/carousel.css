@@ -157,6 +157,10 @@
     max-width: 400px;
 }
 
+.carousel h3.swiper-pagination-bullet:first-child {
+    border-left: unset;
+}
+
 .carousel h3.swiper-pagination-bullet {
     display: flex;
     height: 32px;
@@ -168,7 +172,7 @@
     color: #303030;
     font-size: 24px;
     padding-left: 38px;
-    border-left: 2px solid #b9b2b2;
+    border-left: 1px solid #b9b2b2;
     background-color: white;
     opacity: 0.9;
     font-weight: 700;
@@ -221,7 +225,7 @@
 .carousel .swiper-button-prev {
     left: 10px;
     left: 0px;
-    top: 44px;
+    top: 47px;
 }
 
 .carousel .swiper-button-next {
@@ -230,7 +234,7 @@
 }
 
 .carousel .btnWrapper>.swiper-pagination {
-    max-width: 1203px;
+    max-width: 1032px;
     height: 30px;
     width: 100%;
     justify-content: center;
@@ -239,11 +243,12 @@
     display: flex;
     gap: 60px;
     justify-content: flex-start;
-    margin: 0 50px;
+    margin: 0 126px;
     gap: 1rem;
     /* margin-bottom: 10px; */
     margin-top: 2px;
-    top: -43px;
+    top: -33px;
+    gap: 3px;
 }
 
 .carousel.block .swiper-wrapper {
@@ -251,8 +256,9 @@
 }
 
 .carousel .inner-innerSub-1>h2 {
-    font-family: "TSTAR-PRO-Regular";
-    padding-bottom: 20px;
+    font-family: "TSTAR-PRO-Bold";
+    font-size: 32px;
+    padding-bottom: 12px;
     border-bottom: 1px solid #a5a5a5;
     width: max-content;
     color: #303030;
@@ -265,10 +271,19 @@
     font-family: "TSTAR-PRO-Medium";
 }
 
-.carousel .swiper-pagination>h3 {
+.section .carousel-wrapper .carousel .swiper-pagination>h3 {
     width: max-content;
     padding: 7px;
     padding-left: 31px;
+    margin: unset;
+    padding: 0 15px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+
+.section .carousel-wrapper .carousel .swiper-pagination>h3.swiper-pagination-bullet-active {
+    font-weight: 900;
 }
 
 .carousel #xsens-fi-technology {
@@ -314,6 +329,12 @@
 .carousel-container>.carousel-wrapper {
     max-width: 1286px;
     padding: unset;
+}
+
+.section .swiper-button-prev.swiper-button-disabled,
+.section .swiper-button-next.swiper-button-disabled {
+    background-color: #fff;
+    color: rgb(73, 73, 73);
 }
 
 @media (max-width: 600px) {
@@ -388,7 +409,7 @@
         margin-left: 51px;
         /* width: 210px; */
         width: 73%;
-
+        top: -45px;
     }
 
     .carousel .swiper-button-prev,
@@ -404,7 +425,7 @@
     }
 
     .carousel .swiper-button-next {
-        right: 6px;
+        right: 35px;
 
     }
 
@@ -417,11 +438,15 @@
     }
 
     .carousel .inner-innerSub-1>h2 {
-        width: 100%;
+        width: max-content;
         font-family: "TSTAR-PRO-Regular";
         padding-bottom: 20px;
         border-bottom: 1px solid #a5a5a5;
         /* width: max-content; */
         color: #303030;
+    }
+
+    .section .carousel-wrapper .carousel .swiper-pagination>h3 {
+        font-size: 1.125rem;
     }
 }
