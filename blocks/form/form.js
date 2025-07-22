@@ -1,6 +1,6 @@
 import createField from "./form-fields.js";
 import { div, ul, li, p } from "../../scripts/dom-helpers.js";
-import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp } from "../../scripts/common.js";
+import { fetchBookARide, fetchOTP, pubsub, useDataMapping, verifyOtp } from "../../scripts/common.js";
 
 const nameRegex = /^[a-zA-Z\s]{1,50}$/;
 
@@ -172,7 +172,9 @@ async function handleSubmit(form) {
   }
 }
 
-export default async function decorate(block) {
+export async function decorateForm(block) {
+  console.log('Form , decorateForm called');
+  
   const [dataMapping] = await useDataMapping()
   const links = [...block.querySelectorAll("a")].map((a) => a.href);
   const formLink = links.find(
@@ -511,4 +513,16 @@ export default async function decorate(block) {
     //   alert("Form Valid...You can call Submit API here");
     // }
   };
+}
+
+
+export default async function decorate(block) {
+  const [dataMapping ] = await useDataMapping()
+  if (dataMapping) {
+    decorateForm(block);
+  }else{
+    pubsub.subscribe('form-init-event', function () {
+      decorateForm(block);
+    }) 
+  }
 }

@@ -210,7 +210,16 @@ export async function decorateProductBanner(block, data) {
 
 
 export default async function decorate(block) {
-    decorateProductBanner(block);
+    const [dataMapping ] = await useDataMapping()
+      if (dataMapping) {
+        decorateProductBanner(block);
+      }else{
+
+          pubsub.subscribe('product-banner-init-event', function () {
+              decorateProductBanner(block);
+          });
+      }
+    // decorateProductBanner(block);
 }
 
 const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {

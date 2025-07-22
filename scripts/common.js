@@ -223,14 +223,16 @@ async function getDataMapping() {
       "GET",
       prodcutAPI
         .replace("{stateCode}", code.stateCode)
-        .replace("{cityCode}", code.cityCode)
+        .replace("{cityCode}", code.code)
     );
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     console.log(data);
     dataMapping.sku = variantsData[0].colors[0].sku;
     sessionStorage.setItem("dataMapping", JSON.stringify(dataMapping));
     data = sessionStorage.getItem("dataMapping");
-    // setSkuAndStateCity();
+    pubsub.publish('product-banner-init-event');
+    pubsub.publish('form-init-event');
+    // pubsub.publish('product-dealer-cards-init-event');
   }
   data = JSON.parse(data);
   return data;
@@ -434,3 +436,4 @@ const vehicleTypeFilter = (vehicleList) => {
 
 export { fetchCategory };
 
+// getDataMapping();

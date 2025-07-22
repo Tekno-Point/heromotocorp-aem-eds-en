@@ -268,11 +268,11 @@ export default async function decorate(block) {
       });
   }
 
-  await appendXF(
-    block,
-    stageendpoint +
-      "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
-  );
+  // await appendXF(
+  //   block,
+  //   stageendpoint +
+  //     "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
+  // );
 
   /* init Compare */
   const addVehicleCheckboxs = block.querySelectorAll(

@@ -343,6 +343,8 @@ export async function decorateProductDealerCards(block = document.querySelector(
   renderDealers(activeState, activeCity);
 }
 
-export default function decorate(block) {
-  decorateProductDealerCards(block)
+export default async function decorate(block) {
+  pubsub.subscribe('product-dealer-cards-init-event', () => {
+    decorateProductDealerCards(block);
+  });
 }

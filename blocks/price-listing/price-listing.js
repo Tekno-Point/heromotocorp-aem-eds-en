@@ -1,6 +1,4 @@
 import {
-  fetchStateCityMaster,
-  fetchStateCity,
   fetchProduct,
   useDataMapping,
   pubsub
@@ -315,13 +313,8 @@ export async function updatePriceListing() {
 }
 
 export default async function decorate(block) {
-  const { dropdowns, fieldsetEl } = await decoratePriceListing();
   const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
   const liList = headingUL?.querySelectorAll('li') || [];
-
-  if (liList[0]) {
-    liList[0].replaceChildren(dropdowns, fieldsetEl);
-  }
 
   if (liList[1]) {
     const innerUL = liList[1].querySelector('ul');
@@ -336,5 +329,20 @@ export default async function decorate(block) {
       }
       innerUL.replaceWith(wrap);
     }
+  }
+  
+  const [dataMapping ] = await useDataMapping()
+  if (dataMapping) {
+    const { dropdowns, fieldsetEl } = await decoratePriceListing();
+        if (liList[0]) {
+          liList[0].replaceChildren(dropdowns, fieldsetEl);
+        }
+  }else{
+    pubsub.subscribe('price-listing-event',async function () {
+      const { dropdowns, fieldsetEl } = await decoratePriceListing();
+        if (liList[0]) {
+          liList[0].replaceChildren(dropdowns, fieldsetEl);
+        }
+    });
   }
 }
