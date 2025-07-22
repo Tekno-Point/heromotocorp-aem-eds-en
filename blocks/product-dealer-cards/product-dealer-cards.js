@@ -1,5 +1,5 @@
 import { fetchDealers, useDataMapping, pubsub } from "../../scripts/common.js";
-import { div, p } from "../../scripts/dom-helpers.js";
+import { div, p, span } from "../../scripts/dom-helpers.js";
 import Swiper from "../carousel/swiper.min.js";
 pubsub.subscribe('product-dealer-cards-event', decorateProductDealerCards);
 
@@ -27,7 +27,6 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   clearBtn.style.cssText = `
     color: silver;
     position: absolute;
-    top: -8px;
     right: 27px;
     cursor: pointer;
     display: ${defaultValue ? 'block' : 'none'};
@@ -296,10 +295,20 @@ export async function decorateProductDealerCards(block = document.querySelector(
           {
             class: "dealer-card",
           },
-          div({ class: "dealer-name" }, dealer.name),
-          p({ class: 'dealer-phone' }, `${dealer.phone}`),
-          p({ class: 'dealer-email' }, `${dealer.email}`),
-          p({ class: 'dealer-address' }, `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`),
+          div({ class: "dealer-name" }, div({ class: "wrapper" }, span({ class: "heroicon-logo hero-icon" },
+            span({ class: "path1" }),
+            span({ class: "path2" }),
+            span({ class: "path3" })
+          ), dealer.name)
+          ),
+          p({ class: 'dealer-phone' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-call" }), `${dealer.phone}`)),
+          p({ class: 'dealer-email' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-email" }), `${dealer.email}`)),
+          p({ class: 'dealer-address' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-address" },
+            span({ class: "path1" }),
+            span({ class: "path2" }),
+            span({ class: "path3" })
+          ),
+            `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`)),
         )
       );
       swiperWrapper.appendChild(card);
