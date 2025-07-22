@@ -121,7 +121,7 @@
     width: 96%;
     max-height: 250px;
     overflow-y: auto;
-    z-index: 999;
+    z-index: 2;
     background: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
