@@ -33,6 +33,7 @@
 }
 
 .product-dealer-cards .custom-select-wrapper .dropdown-label {
+    font-family: "TSTAR-PRO-Bold";
     font-weight: 700;
     font-size: 18px;
     color: #333;
@@ -56,6 +57,7 @@
     font-size: 18px;
     letter-spacing: normal;
     line-height: 1.5rem;
+    font-family: "TSTAR-PRO-Bold";
     font-weight: bold;
 }
 
@@ -225,6 +227,13 @@
     max-width: 1365px;
     min-height: 340px;
     width: 100%;
+}
+
+.dealer-card-wrapperr .no-dealers>p{
+    font-family: "TSTAR-PRO-Heavy";
+    font-size: 32px;
+    line-height: 1.25rem;
+    color: red;
 }
 
 .product-dealer-cards-container {

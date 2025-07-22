@@ -281,6 +281,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
 
     if (!dealers.length) {
       swiperWrapper.innerHTML = "<p>No dealers found for this location.</p>";
+      swiperWrapper.classList.add("no-dealers");
       return;
     }
 
