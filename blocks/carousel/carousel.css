@@ -251,8 +251,9 @@
 }
 
 .carousel .inner-innerSub-1>h2 {
-    font-family: "TSTAR-PRO-Regular";
-    padding-bottom: 20px;
+    font-family: "TSTAR-PRO-Bold";
+    font-size: 32px;
+    padding-bottom: 12px;
     border-bottom: 1px solid #a5a5a5;
     width: max-content;
     color: #303030;
