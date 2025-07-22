@@ -52,7 +52,7 @@ export async function appendXF(block, xfPath) {
     });
     block.append(div);
     function addClientLibScript(e) {
-      if(window.location.href.endsWith('index-1')) {
+      if(window.location.href.endsWith('splendor-plus')) {
         block.removeEventListener('click', addClientLibScript);
         document.removeEventListener('touchstart', addClientLibScript)
       }
@@ -97,7 +97,7 @@ export async function appendXF(block, xfPath) {
       // },1000)
       // debugger;
     }
-    if(window.location.href.endsWith('index-1')) {
+    if(window.location.href.endsWith('splendor-plus')) {
       block.addEventListener('click', addClientLibScript)
       document.addEventListener('touchstart', addClientLibScript)
     }else{
