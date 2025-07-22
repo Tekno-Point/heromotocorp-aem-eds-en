@@ -6,7 +6,7 @@ import { stageendpoint } from "../../scripts/common.js";
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia("(min-width: 900px)");
-
+let scriptcount = 0;
 export async function getFetchAPI(url) {
   try {
     const resp = await fetch(url);
@@ -59,18 +59,19 @@ export async function appendXF(block, xfPath) {
           '/launch'
         ]
         const inculdeLink = [
-          '/clientlibs/granite',
+          '/clientlibs/granite/jquery',
           // '/foundation/clientlibs',
           '/clientlib-dependencies',
           // '/components/commons',
           // '/clientlibs/clientlib-base',
-          'clientlibs/clientlib-site',
+          'clientlib-site-lite',
           '/clientlib-page'
         ];
         // debugger;
         // if (!exculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
         if (inculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
-          console.log(link.src);
+          scriptcount++;
+          console.log(scriptcount , ' : ',link.src);
           try {
             const newScript = document.createElement('script');
             newScript.src = link.src;
