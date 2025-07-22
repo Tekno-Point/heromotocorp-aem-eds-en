@@ -98,6 +98,7 @@
     flex-wrap: wrap;
     gap: 27px;
     list-style: none;
+    margin-top: 66px;
 }
 
 .splendor-tab .tab-slide > ul > li {
@@ -171,13 +172,14 @@
     display: flex;
     /* justify-content: space-around; */
     gap: 15px;
+    text-transform: uppercase;
 }
 
 .tab-slide > p:nth-child(3) {
     position: absolute;
     top: 30px;
     right: 0px;
-    opacity: 0.6;
+    opacity: 0.3;
 }
 .tab-slide > p:nth-child(3) > picture > img {
     max-width: 209px;
