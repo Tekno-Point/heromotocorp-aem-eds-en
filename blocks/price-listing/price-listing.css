@@ -194,6 +194,7 @@
         font-size: 20px;
    padding: 8px 24px;
    line-height: 1.75rem;
+   text-wrap: nowrap;
 }
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(2)>div>a:nth-child(2) {
