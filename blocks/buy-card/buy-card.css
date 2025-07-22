@@ -115,6 +115,14 @@ section .buy-card-container>.buy-card-wrapper{
 .buy-card > ul > li:nth-child(4) > .cards-card-body > p:nth-child(3) {
     display: none;
 }
+
+
+
+.buy-card-container>.buy-card-wrapper{
+    max-width: 1366px;
+    width: 100%;
+}
+
 @media (max-width: 786px) {
     .buy-card > ul {
         gap: 60px;
@@ -176,7 +184,10 @@ section .buy-card-container>.buy-card-wrapper{
         font-size: 28px;
     }
     .buy-card{
-       padding: 62px 2px;
+       padding: 0px 2px;
+    }
+    .section.buy-card-container{
+        margin: 0px;
     }
 }
 
@@ -191,8 +202,3 @@ section .buy-card-container>.buy-card-wrapper{
 
 /*bug fixs */
 
-
-.buy-card-container>.buy-card-wrapper{
-    max-width: 1366px;
-    width: 100%;
-}

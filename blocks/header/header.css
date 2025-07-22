@@ -504,3 +504,19 @@ body.appear {
 padding: 10px 32px;
 line-height: 24px;
 }
+
+@media(max-width: 900px) {
+   .nav-bar>.default-content-wrapper {
+        align-items: end;
+   }
+
+  
+   .section.carousel-container>.default-content-wrapper{
+     padding: 0px;
+   }
+   /* .carousel>.swiper-wrapper>.swiper-slide>.inner-innerSub-2{
+    width: 100%;
+    justify-content: space-between;
+    padding: 2px;
+   } */
+}

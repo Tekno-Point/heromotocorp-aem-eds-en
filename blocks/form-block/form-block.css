@@ -186,11 +186,15 @@
         font-size: 20px;
         text-align: center;
         font-size: 31px;
+        padding: 0px;
     }
     .emi-container {
         margin-top: 0px;
         flex-direction: column;
         gap: 12px
+    }
+    .section.form-block-container{
+        margin: 0px;
     }
 }
 

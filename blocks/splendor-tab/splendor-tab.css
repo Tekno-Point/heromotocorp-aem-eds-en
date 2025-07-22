@@ -100,6 +100,7 @@
     gap: 27px;
     list-style: none;
     margin-top: 66px;
+    align-items: baseline;
 }
 
 .splendor-tab .tab-slide > ul > li {
@@ -229,10 +230,16 @@
         font-size: 16px;
     }
     .splendor-tab .tab-slide > ul > li > ul > li {
-        font-size: 18px;
+        /* font-size: 18px; */
+        font-size: 1.125rem;
+        -webkit-font-kerning: auto;
+        font-kerning: auto;
+        letter-spacing: normal;
+        line-height: 1.5rem;
     }
     .section.splendor-tab-container > .default-content-wrapper > h2 {
         font-size: 1.75rem;
+        padding-bottom: 5px;
     }
 
     .splendor-tab .tab-slide > ul {
@@ -240,6 +247,7 @@
         width: 100%;
         justify-content: center;
         padding: 20px;
+        align-items: baseline;
     }
 
     .splendor-tab .tab-slide > ul > li {
@@ -248,11 +256,13 @@
     }
 
     .splendor-tab .tabs-panel {
-        padding: 100px 10px;
+      padding: 45px 5px 10px 5px;
     }
     .tab-slide > p:nth-child(3) {
         display: none;
     }
+
+   
 }
 
 @media (max-width: 476px) {
@@ -264,6 +274,10 @@
     }
     .section.splendor-tab-container {
         margin-bottom: 16px;
+        margin-top: 0px;
+    }
+    .splendor-tab .tab-slide > ul{
+        margin-top: 0px;
     }
 }
 
