@@ -256,6 +256,10 @@
     font-family: 'TSTAR-PRO-Bold';
     font-size: 18px;
     font-weight: 700;
+
+    @media (width<767px) {
+        font-size: 16px;
+    }
 }
 
 .price-listing .custom-dropdown-list>.dropdown-item {
@@ -271,12 +275,21 @@
     font-weight: 800;
     font-size: 18px;
     line-height: 24px;
+
+    @media (width<767px) {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .react-select__input::placeholder {
     font-family: 'TSTAR-PRO-Bold';
     font-size: 18px;
     color: #6A737D;
+
+    @media (width<767px) {
+        font-size: 16px;
+    }
 }
 
 .price-listing .col-6>.price-details-col>.price-details-col__text {
