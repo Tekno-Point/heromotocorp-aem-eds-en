@@ -78,7 +78,7 @@
 
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>.price-details--info>.row>div p {
     font-size: 16px;
-    font-weight : 500;
+    font-weight: 500;
 }
 
 .price-listing>div:nth-child(2)>div>p {
@@ -257,7 +257,11 @@
 }
 
 .price-listing .custom-dropdown-list>.dropdown-item {
+    font-family: 'TSTAR-PRO-Bold';
+    font-family: 'TSTAR-PRO-Bold';
+    font-weight: 700;
     font-family: 'TSTAR-PRO-Heavy';
+    font-weight: 500;
 }
 
 .price-listing .input-wrapper>.react-select__input {
