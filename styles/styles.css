@@ -183,6 +183,10 @@ a:hover {
   text-decoration: underline;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* buttons */
 a.button:any-link,
 button {
@@ -229,20 +233,22 @@ button.secondary {
 }
 
 /* show price */
-.banner-price>.default-content-wrapper>ul{
+.banner-price>.default-content-wrapper>ul {
   padding: unset;
   margin: unset;
 }
 
 .banner-price {
-    @media (width >=900px) {
-        height: 140px;
-        padding: 0;
-    }
+  @media (width >=900px) {
+    height: 140px;
+    padding: 0;
+  }
 }
+
 .banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul {
   margin: 0;
 }
+
 .banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li {
   margin: 0;
 }
@@ -291,20 +297,20 @@ main img {
 }
 
 .heroicon-logo .path1:before {
-    content: "";
-    color: #000
+  content: "";
+  color: #000
 }
 
 .heroicon-logo .path2:before {
-    content: "";
-    color: #000;
-    margin-left: -0.6669921875em
+  content: "";
+  color: #000;
+  margin-left: -0.6669921875em
 }
 
 .heroicon-logo .path3:before {
-    content: "";
-    color: #ee2326;
-    margin-left: -0.6669921875em
+  content: "";
+  color: #ee2326;
+  margin-left: -0.6669921875em
 }
 
 .heroicon-call:before {
@@ -316,8 +322,8 @@ main img {
 }
 
 .heroicon-logo .path1:before {
-    content: "";
-    color: #000;
+  content: "";
+  color: #000;
 }
 
 .heroicon-email::before {
@@ -510,6 +516,6 @@ main .section.highlight {
   display: block;
 }
 
-.dp-none{
+.dp-none {
   display: none;
 }

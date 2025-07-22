@@ -149,6 +149,7 @@
 @media (max-width: 465px) {
     .compare-container>.default-content-wrapper>h2 {
         font-size: 25px;
+        padding: 0px;
         /* check this */
     }
 
@@ -161,7 +162,7 @@
     }
 
     .compare-child-2-inner-1>ul>li>ul>li>h4 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     /* .compare-container{

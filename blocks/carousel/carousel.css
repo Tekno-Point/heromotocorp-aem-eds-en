@@ -401,13 +401,13 @@
     }
 
     .carousel>.swiper-wrapper>.swiper-slide>.inner-innerSub-2>p>picture>img {
-        max-width: 131px;
-        height: 111px;
+        max-width: 156px;
+        min-height: 127px !important;
     }
 
     .carousel>.swiper-wrapper>.swiper-slide>.inner-innerSub-2>p:nth-child(2)>picture>img {
         max-width: 156px;
-        height: 165px;
+        min-height: 127px;
     }
 
     .carousel .btnWrapper>.swiper-pagination {
@@ -454,4 +454,12 @@
     .section .carousel-wrapper .carousel .swiper-pagination>h3 {
         font-size: 1.125rem;
     }
+     .carousel-container>.default-content-wrapper>h2{
+       padding: 0px 0px 5px 0px;
+   }
+   .carousel>.swiper-wrapper>.swiper-slide>.inner-innerSub-2{
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px;
+   }
 }
