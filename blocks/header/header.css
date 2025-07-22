@@ -96,7 +96,7 @@ header nav[aria-expanded="true"] {
 .nav-bar>.default-content-wrapper>ul {
     display: flex;
     list-style: none;
-    gap: 20px;
+    gap: 2rem;
     margin-right: 17px;
 }
 
@@ -123,12 +123,17 @@ header nav[aria-expanded="true"] {
 }
 
 .nav-bar>.default-content-wrapper>ul:nth-child(2) {
-    padding-left: 170px;
+    padding-left: 65px;
+    text-transform: uppercase;
 }
 
-.header-main .top-bar-main {
-    gap: 20px !important;
+nav .nav-link.dropdown-toggle.new-header-variation span {
+    color: rgba(48, 48, 48, 1);
 }
+
+/* .header-main .top-bar-main {
+    gap: 20px !important;
+} */
 
 .homepage-redesign-dropdown-menu .hp-dropdown-content .column.column3 .bike-details .bike-details-col-2 p {
     display: block;
@@ -222,8 +227,12 @@ header nav[aria-expanded="true"] {
         display: flex;
         justify-content: space-between;
         gap: 0 32px;
-        max-width: 1264px;
+        max-width: 100%;
         padding: 0 32px;
+    }
+
+    .header-main.new-header-variation nav.navbar{
+        padding: 0 40px;
     }
 
     header nav[aria-expanded="true"] {

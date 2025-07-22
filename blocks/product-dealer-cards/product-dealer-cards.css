@@ -56,7 +56,7 @@
     font-size: 18px;
     letter-spacing: normal;
     line-height: 1.5rem;
-    color: rgb(51, 51, 51);
+    font-weight: bold;
 }
 
 .product-dealer-cards .custom-select-wrapper .clear-btn {
@@ -239,6 +239,6 @@
 }
 
 .custom-input::placeholder{
-    color: black;
+    color: rgb(41, 41, 41);
     font-family: 'TSTAR-PRO-Heavy';
 }
