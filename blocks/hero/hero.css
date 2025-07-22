@@ -3,16 +3,18 @@
     max-width: 1560px;
     width: 100%;
     padding: 0;
+    max-width: 100%;
 }
-.section.hero-banner{
-    margin: 0px;
-} 
 
-.hero{
+.section.hero-banner {
+    margin: 0px;
+}
+
+.hero {
     position: relative;
     padding: 40px 24px;
     min-height: 569px;
-    margin: 40px 0px 0px 0px; 
+    margin: 40px 0px 0px 0px;
 }
 
 .hero h1 {
@@ -36,33 +38,38 @@
     height: auto;
 }
 
-.hero > div:nth-child(1) > div > p:nth-child(2) > picture > img {
+.hero>div:nth-child(1)>div>p:nth-child(2)>picture>img {
     display: none;
 }
 
 
 
-@media (width >= 900px) {
+@media (width >=900px) {
     .hero {
         padding: 40px 32px;
     }
 }
 
 @media (max-width: 678px) {
-    .hero > div:nth-child(1) > div > p:nth-child(2) > picture > img {
+    .hero>div:nth-child(1)>div>p:nth-child(2)>picture>img {
         display: block;
         object-fit: contain;
     }
-    .hero > div:nth-child(1) > div > p:nth-child(1) > picture > img {
+
+    .hero>div:nth-child(1)>div>p:nth-child(1)>picture>img {
         display: none;
     }
+
     .hero {
         position: relative;
         padding: 40px 24px;
         min-height: 300px;
     }
-    .section.hero-banner>.hero-wrapper>.hero{
-    margin: 16px 0px 0px 0px;
-}
+
+    .section.hero-banner>.hero-wrapper>.hero {
+        margin: 16px 0px 0px 0px;
+        height: 389px;
+        margin-top: 33px;
+    }
 
 }

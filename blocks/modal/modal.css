@@ -1,188 +1,156 @@
 body.modal-open {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .modal dialog::backdrop {
-    background-color: rgb(19 19 19 / 75%);
+  background-color: rgb(19 19 19 / 75%);
 }
 
 .modal dialog {
-    overscroll-behavior: none;
-    overflow-y: hidden;
-    width: calc(100vw - 48px);
-    max-width: 900px;
-    max-height: calc(100dvh - (2 * var(--header-height)));
-    padding: 0;
-    border: 1px solid var(--dark-color);
+  overscroll-behavior: none;
+  overflow-y: hidden;
+  width: calc(100vw - 48px);
+  max-width: 900px;
+  max-height: calc(100dvh - (2 * var(--header-height)));
+  padding: 0;
+  border: 1px solid var(--dark-color);
 }
 
 .modal dialog .modal-content {
-    box-sizing: border-box;
-    overflow-y: auto;
-    overscroll-behavior: none;
-    width: 100%;
-    max-height: calc(100dvh - (2 * var(--header-height)) - 48px);
-    padding: 24px;
-    padding-top: 0;
-    margin-top: 44px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overscroll-behavior: none;
+  width: 100%;
+  max-height: calc(100dvh - (2 * var(--header-height)) - 48px);
+  padding: 24px;
+  padding-top: 0;
+  margin-top: 44px;
 }
 
 @media (width >=900px) {
-    .modal dialog {
-        width: calc(100vw - 64px);
-    }
+  .modal dialog {
+    width: calc(100vw - 64px);
+  }
 
-    .modal dialog .modal-content {
-        max-height: calc(100dvh - (2 * var(--header-height)) - 64px);
-        padding: 32px;
-        padding-top: 0;
-    }
+  .modal dialog .modal-content {
+    max-height: calc(100dvh - (2 * var(--header-height)) - 64px);
+    padding: 32px;
+    padding-top: 0;
+  }
 }
 
 .modal .close-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 44px;
-    height: 44px;
-    margin: 0;
-    border: none;
-    outline: none;
-    border-radius: 0;
-    padding: 0;
-    background-color: transparent;
-    color: var(--text-color);
-    line-height: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  padding: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  line-height: 0;
 }
 
 .modal .close-button .icon.icon-close {
-    content: "";
-    width: 24px;
-    height: 24px;
+  content: "";
+  width: 24px;
+  height: 24px;
 }
 
 .modal .close-button .icon.icon-close::before,
 .modal .close-button .icon.icon-close::after {
-    content: "";
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    width: 24px;
-    height: 2px;
-    border-radius: 2px;
-    background-color: currentcolor;
+  content: "";
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentcolor;
 }
 
 .modal .close-button .icon.icon-close::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .modal dialog .section {
-    padding: 0;
+  padding: 0;
 }
 
 /*  share Modal css*/
 
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    .modal.block
-    dialog::backdrop {
-    display: none;
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog::backdrop {
+  display: none;
 }
 
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    .modal.block
-    dialog {
-    all: unset;
-    width: 60px;
-    height: 60px;
-    max-width: unset;
-    max-height: unset;
-    position: absolute;
-    top: 0;
-    left: 0;
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog {
+  all: unset;
+  width: 60px;
+  height: 60px;
+  max-width: unset;
+  max-height: unset;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    dialog
-    .modal-content {
-    all: unset;
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .modal-content {
+  all: unset;
 }
 
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    .modal.block
-    dialog,
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    dialog {
-    display: block;
-    position: absolute;
-    top: 63px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    right: calc((100% - 1246px) / 2);
-    margin: unset;
-    left: unset;
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
+  display: block;
+  position: absolute;
+  top: 63px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  right: calc((100% - 1246px) / 2);
+  margin: unset;
+  left: unset;
 }
 
 .modal dialog::backdrop {
-    display: none;
+  display: none;
 }
 
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    dialog
-    .close-button {
-    display: none;
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .close-button {
+  display: none;
 }
 
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    dialog
-    .section.share-modal-sec
-    .default-content-wrapper {
-    display: flex;
-    gap: 10px;
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .section.share-modal-sec .default-content-wrapper {
+  display: flex;
+  gap: 10px;
 }
 
-.section.splendor-tab-container
-    .splendor-tab-wrapper
-    .splendor-tab.block
-    dialog
-    .section.share-modal-sec
-    .default-content-wrapper
-    a {
-    all: unset;
+.section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog .section.share-modal-sec .default-content-wrapper a {
+  all: unset;
 }
 
 @media (width<767px) {
-    .section.splendor-tab-container
-        .splendor-tab-wrapper
-        .splendor-tab.block
-        .modal.block
-        dialog,
-    .section.splendor-tab-container
-        .splendor-tab-wrapper
-        .splendor-tab.block
-        dialog {
-        bottom: 181px;
-        top: unset;
-        right: calc((100% - 306px) / 2);
-    }
+
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
+    bottom: 181px;
+    top: unset;
+    right: calc((100% - 306px) / 2);
+  }
+
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
+  .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
+    bottom: 73px;
+    top: unset;
+    right: calc((100% - 294px) / 2);
+
+  }
 }
 
 /* share Modal css end */
@@ -190,110 +158,105 @@ body.modal-open {
 /*modal book ride */
 
 .modal.book-ride {
-    background-color: black !important;
-    opacity: 0.9;
-}
-.modal.book-ride > dialog {
-    max-width: 100%;
-    width: 100%;
-    background-color: #ee2326;
-    border: none;
-    max-width: 1366px;
-    width: 100%;
-    border-radius: 10px;
-    top: 25%;
-    left: 5%;
+  background-color: black !important;
+  opacity: 0.9;
 }
 
-.modal.book-ride > dialog > .modal-content {
-    background-color: #ee2326;
-    border: none;
-    padding: 0px;
-    /* border-radius: 10px; */
+.modal.book-ride>dialog {
+  max-width: 100%;
+  width: 100%;
+  background-color: #ee2326;
+  border: none;
+  max-width: 1366px;
+  width: 100%;
+  border-radius: 10px;
+  top: 25%;
+  left: 5%;
 }
 
-.modal.book-ride > dialog > .close-button {
-    border: 1px solid #ee2326;
-    margin: 0px;
-    padding: 0px;
-    top: 11px;
-    right: 46px;
+.modal.book-ride>dialog>.modal-content {
+  background-color: #ee2326;
+  border: none;
+  padding: 0px;
+  /* border-radius: 10px; */
+}
+
+.modal.book-ride>dialog>.close-button {
+  border: 1px solid #ee2326;
+  margin: 0px;
+  padding: 0px;
+  top: 11px;
+  right: 46px;
 }
 
 /* .modal.book-ride>dialog>.close-button1::before{
   content: " x";
 } */
-.modal.book-ride > dialog > .close-button:focus,
-.modal.book-ride > dialog > .close-button:focus-visible {
-    border: 1px solid #ee2326 !important ;
-    outline: none !important;
-    line-height: 0;
+.modal.book-ride>dialog>.close-button:focus,
+.modal.book-ride>dialog>.close-button:focus-visible {
+  border: 1px solid #ee2326 !important;
+  outline: none !important;
+  line-height: 0;
 }
 
-.modal.book-ride > dialog > .close-button > span {
-    color: white;
-    font-weight: 400;
-    border: none;
-}
-.modal.book-ride
-    > dialog
-    > .modal-content
-    > .book-ride
-    > .form-wrapper
-    > .form {
-    padding: 0px;
-    margin: 0px 0px 25px 0px;
+.modal.book-ride>dialog>.close-button>span {
+  color: white;
+  font-weight: 400;
+  border: none;
 }
 
-.modal.book-ride
-    > dialog
-    > .modal-content
-    > .book-ride
-    > .form-wrapper
-    > .form
-    > form
-    > #form-f1-1 {
-    max-width: 100% !important;
-    display: flex;
-    margin-top: 30px;
-    justify-content: center;
-    align-items: center;
+.modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form {
+  padding: 0px;
+  margin: 0px 0px 25px 0px;
+}
+
+.modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form>form>#form-f1-1 {
+  max-width: 100% !important;
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 767px) {
-    .modal.book-ride > dialog {
-        top: 10%;
-        left: 1%;
-        width: 398px;
-        margin: 10px;
-    }
-    .modal.book-ride > dialog > .modal-content {
-        padding: 0px;
-    }
-    .modal.book-ride > dialog > .close-button{
-      top: 10px;
-      right: 13px;
-    }
-    .modal.book-ride > dialog > .modal-content > .book-ride > .form-wrapper > .form > form > #form-f1-1{
-      flex-direction: column;
-      margin-top: 0px;
-    }
-    .modal.book-ride > dialog > .modal-content > .book-ride > .form-wrapper > .form > form > #form-f1-1>.field-wrapper{
-      width: 100%;
-    }
+  .modal.book-ride>dialog {
+    top: 10%;
+    left: 1%;
+    width: 398px;
+    margin: 10px;
+  }
+
+  .modal.book-ride>dialog>.modal-content {
+    padding: 0px;
+  }
+
+  .modal.book-ride>dialog>.close-button {
+    top: 10px;
+    right: 13px;
+  }
+
+  .modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form>form>#form-f1-1 {
+    flex-direction: column;
+    margin-top: 0px;
+  }
+
+  .modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form>form>#form-f1-1>.field-wrapper {
+    width: 100%;
+  }
 }
 
 @media (max-width: 376px) {
-    .modal.book-ride > dialog {
-        width: 350px;
-        margin: 10px;
-        top: 10%;
-        left: 1%;
-    }
+  .modal.book-ride>dialog {
+    width: 350px;
+    margin: 10px;
+    top: 10%;
+    left: 1%;
+  }
 }
+
 @media (max-width: 321px) {
-    .modal.book-ride > dialog {
-        width: 296px;
-        margin: 3%;
-    }
+  .modal.book-ride>dialog {
+    width: 296px;
+    margin: 3%;
+  }
 }
