@@ -262,7 +262,7 @@ body.modal-open {
 
 @media (max-width: 767px) {
     .modal.book-ride > dialog {
-        top: 2%;
+        top: 10%;
         left: 1%;
         width: 398px;
         margin: 10px;
@@ -270,13 +270,24 @@ body.modal-open {
     .modal.book-ride > dialog > .modal-content {
         padding: 0px;
     }
+    .modal.book-ride > dialog > .close-button{
+      top: 10px;
+      right: 13px;
+    }
+    .modal.book-ride > dialog > .modal-content > .book-ride > .form-wrapper > .form > form > #form-f1-1{
+      flex-direction: column;
+      margin-top: 0px;
+    }
+    .modal.book-ride > dialog > .modal-content > .book-ride > .form-wrapper > .form > form > #form-f1-1>.field-wrapper{
+      width: 100%;
+    }
 }
 
 @media (max-width: 376px) {
     .modal.book-ride > dialog {
         width: 350px;
         margin: 10px;
-        top: 2%;
+        top: 10%;
         left: 1%;
     }
 }
