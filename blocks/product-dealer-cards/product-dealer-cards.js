@@ -1,16 +1,18 @@
 import { fetchDealers, useDataMapping, pubsub } from "../../scripts/common.js";
 import { div, p, span } from "../../scripts/dom-helpers.js";
 import Swiper from "../carousel/swiper.min.js";
+
 pubsub.subscribe('product-dealer-cards-event', decorateProductDealerCards);
+
+let selectedEl = null;
+let isStateDropdownOpen = false;
+let isCityDropdownOpen = false;
 
 function createCustomDropdown(className, labelText, optionsList, onSelect, defaultValue = "") {
   const wrapper = div({ class: "custom-select-wrapper position-relative" });
-
   const labelEl = p({ class: "dropdown-label mb-1" }, labelText);
-
   const inputWrapper = document.createElement("div");
   inputWrapper.className = "input-wrapper";
-  inputWrapper.style.position = "relative";
 
   const inputEl = document.createElement("input");
   inputEl.type = "text";
@@ -20,29 +22,13 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   inputEl.autocomplete = "off";
   inputEl.style.width = "100%";
 
-
   const clearBtn = document.createElement("span");
   clearBtn.textContent = "×";
   clearBtn.className = "clear-btn";
-  clearBtn.style.cssText = `
-    color: silver;
-    position: absolute;
-    right: 27px;
-    cursor: pointer;
-    display: ${defaultValue ? 'block' : 'none'};
-    z-index: 4;
-  `;
+  clearBtn.style.display = defaultValue ? 'block' : 'none';
 
   const arrowBtn = document.createElement("span");
   arrowBtn.className = "dropdown-arrow";
-  arrowBtn.style.cssText = `
-    position: absolute;
-    top: 10px;
-    right: 8px;
-    width: 12px;
-    height: 12px;
-    cursor: pointer;
-  `;
 
   const dropdown = document.createElement("ul");
   dropdown.className = "dropdown-options position-absolute bg-white border rounded shadow-sm z-3 mt-1";
@@ -51,19 +37,18 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   inputWrapper.appendChild(inputEl);
   inputWrapper.appendChild(clearBtn);
   inputWrapper.appendChild(arrowBtn);
-
   wrapper.appendChild(labelEl);
   wrapper.appendChild(inputWrapper);
   wrapper.appendChild(dropdown);
 
-  let isDropdownOpen = false;
-  let disabled = false; // 🔹 Added flag to track disabled state
+  let disabled = false;
 
   function updateOptions(query = "") {
-    if (disabled) return; // 🔹 Do nothing if disabled
+    if (disabled) return;
 
     dropdown.innerHTML = "";
     const currentValue = inputEl.value.trim().toLowerCase();
+    selectedEl = null;
 
     const filtered = query.trim()
       ? optionsList.filter(opt => opt.toLowerCase().includes(query.toLowerCase()))
@@ -83,11 +68,13 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
         if (isSelected) {
           li.style.backgroundColor = '#f1f1f1';
           li.style.fontWeight = 'bold';
+          selectedEl = li;
         }
         li.addEventListener("click", () => {
           inputEl.value = value;
           dropdown.style.display = "none";
-          isDropdownOpen = false;
+          if (inputEl.id === 'state-input') isStateDropdownOpen = false;
+          if (inputEl.id === 'city-input') isCityDropdownOpen = false;
           clearBtn.style.display = "block";
           onSelect(value);
         });
@@ -96,46 +83,81 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
     }
 
     dropdown.style.display = "block";
-    isDropdownOpen = true;
+    if (inputEl.id === 'state-input') isStateDropdownOpen = true;
+    if (inputEl.id === 'city-input') isCityDropdownOpen = true;
+
+    if (selectedEl) {
+      setTimeout(() => selectedEl.scrollIntoView({ block: "nearest", behavior: "smooth" }), 0);
+    } else if (filtered.length > 0) {
+      const firstItemEl = dropdown.querySelector('.dropdown-option:not(.no-results)');
+      if (firstItemEl) {
+        setTimeout(() => firstItemEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 0);
+      }
+    }
   }
 
   inputEl.addEventListener("input", () => {
-    if (disabled) return; // 🔹 Prevent input when disabled
+    if (disabled) return;
     clearBtn.style.display = inputEl.value ? "block" : "none";
     updateOptions(inputEl.value);
+    if (inputEl.id === 'state-input' && isCityDropdownOpen) {
+      cityDropdown.wrapper.querySelector('.dropdown-options').style.display = 'none';
+      isCityDropdownOpen = false;
+    } else if (inputEl.id === 'city-input' && isStateDropdownOpen) {
+      stateDropdown.wrapper.querySelector('.dropdown-options').style.display = 'none';
+      isStateDropdownOpen = false;
+    }
   });
 
   inputEl.addEventListener("focus", () => {
-    if (disabled) return; // 🔹 Prevent focus actions when disabled
+    if (disabled) return;
     updateOptions();
-    // inputEl.select();
+    if (inputEl.id === 'state-input' && isCityDropdownOpen) {
+      cityDropdown.wrapper.querySelector('.dropdown-options').style.display = 'none';
+      isCityDropdownOpen = false;
+    } else if (inputEl.id === 'city-input' && isStateDropdownOpen) {
+      stateDropdown.wrapper.querySelector('.dropdown-options').style.display = 'none';
+      isStateDropdownOpen = false;
+    }
   });
 
   clearBtn.addEventListener("click", () => {
-    if (disabled) return; // 🔹 Prevent clear when disabled
+    if (disabled) return;
     inputEl.value = "";
-    clearBtn.style.display = "block";
-    updateOptions();
-    isDropdownOpen = false;
+    clearBtn.style.display = "none";
+    dropdown.style.display = "none";
+    if (inputEl.id === 'state-input') isStateDropdownOpen = false;
+    if (inputEl.id === 'city-input') isCityDropdownOpen = false;
     onSelect("");
   });
 
   arrowBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    if (disabled) return; // 🔹 Prevent dropdown toggle when disabled
-    if (isDropdownOpen) {
+    if (disabled) return;
+    const isCurrentDropdownOpen = (inputEl.id === 'state-input' && isStateDropdownOpen) || (inputEl.id === 'city-input' && isCityDropdownOpen);
+
+    if (isCurrentDropdownOpen) {
       dropdown.style.display = "none";
-      isDropdownOpen = false;
+      if (inputEl.id === 'state-input') isStateDropdownOpen = false;
+      if (inputEl.id === 'city-input') isCityDropdownOpen = false;
     } else {
+      if (inputEl.id === 'state-input' && isCityDropdownOpen) {
+        cityDropdown.wrapper.querySelector('.dropdown-options').style.display = 'none';
+        isCityDropdownOpen = false;
+      } else if (inputEl.id === 'city-input' && isStateDropdownOpen) {
+        stateDropdown.wrapper.querySelector('.dropdown-options').style.display = 'none';
+        isStateDropdownOpen = false;
+      }
       updateOptions();
       inputEl.focus();
     }
   });
 
   document.addEventListener("click", (e) => {
-    if (!wrapper.contains(e.target)) {
+    if (!wrapper.contains(e.target) && dropdown.style.display === 'block') {
       dropdown.style.display = "none";
-      isDropdownOpen = false;
+      if (inputEl.id === 'state-input') isStateDropdownOpen = false;
+      if (inputEl.id === 'city-input') isCityDropdownOpen = false;
     }
   });
 
@@ -146,6 +168,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
       disabled = state;
       inputEl.disabled = state;
       dropdown.style.display = "none";
+      clearBtn.style.display = "none";
     },
     setOptions: (newOptions) => {
       optionsList = newOptions;
@@ -153,130 +176,107 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   };
 }
 
-export async function decorateProductDealerCards(block = document.querySelector('.product-dealer-cards')) {
-  const [dataMapping] = await useDataMapping();
+let stateDropdown;
+let cityDropdown;
 
+export async function decorateProductDealerCards(block = document.querySelector('.product-dealer-cards')) {
+  const [dataMapping, setDataMapping] = await useDataMapping();
   const sku = dataMapping?.sku;
   const current = dataMapping.current_location || {};
   const states = dataMapping.state_city_master.state;
   const cityMap = dataMapping.state_city_master;
 
-  let activeState =
-    current.state && cityMap[current.state.toUpperCase()]
-      ? current.state
-      : states[0];
-  let activeCity =
-    current.city &&
-      cityMap[activeState.toUpperCase()] &&
-      Object.values(cityMap[activeState.toUpperCase()]).some(
-        (c) => c.label.toUpperCase() === current.city.toUpperCase()
-      )
-      ? current.city
-      : Object.values(cityMap[activeState.toUpperCase()])[0]?.label;
+  let activeState = current.state && cityMap[current.state.toUpperCase()] ? current.state : states[0];
+  let activeCity = "";
 
-  let cityDropdown;
-
-  const stateDropdown = createCustomDropdown(
+  stateDropdown = createCustomDropdown(
     "state-input",
     "State",
     states,
     async (newState) => {
       activeState = newState;
+      activeCity = "";
+      cityDropdown.inputEl.value = "";
+      cityDropdown.setOptions([]);
+      cityDropdown.setDisabled(true);
 
       if (!newState || !cityMap[newState.toUpperCase()]) {
-        cityDropdown.setOptions([]);
-        cityDropdown.inputEl.value = "";
-        cityDropdown.setDisabled(true); // ✅ Disable city if no state
+        dataMapping.current_location = { state: activeState, city: "" };
+        setDataMapping(dataMapping);
+        swiperWrapper.innerHTML = "<p>Please select a state and city to find dealers.</p>";
+        pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
         return;
       }
 
       const cityList = Object.values(cityMap[newState.toUpperCase()] || {}).map((c) => c.label);
-      activeCity = cityList[0];
-
       cityDropdown.setOptions(cityList);
-      cityDropdown.inputEl.value = activeCity;
       cityDropdown.setDisabled(false);
-
-      const [dataMapping, setDataMapping] = await useDataMapping();
-      dataMapping.current_location = { state: activeState, city: activeCity };
+      dataMapping.current_location = { state: activeState, city: "" };
       setDataMapping(dataMapping);
-
-      renderDealers(activeState, activeCity);
-      pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
-        test: true,
-      });
+      swiperWrapper.innerHTML = "<p>Please select a city to find dealers.</p>";
+      pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
     },
     activeState
   );
 
-  const cityList = Object.values(cityMap[activeState.toUpperCase()] || {}).map(
-    (c) => c.label
-  );
+  const initialCityList = Object.values(cityMap[activeState.toUpperCase()] || {}).map((c) => c.label);
   cityDropdown = createCustomDropdown(
     "city-input",
     "City",
-    cityList,
+    initialCityList,
     async (newCity) => {
       activeCity = newCity;
+      const [updatedDataMapping, setUpdatedDataMapping] = await useDataMapping();
+      const selectedCityObj = Object.values(cityMap[activeState.toUpperCase()] || {}).find(
+        (c) => c.label.toUpperCase() === newCity.toUpperCase()
+      );
 
-      const [dataMapping, setDataMapping] = await useDataMapping();
-      dataMapping.current_location = { state: activeState, city: activeCity };
-      setDataMapping(dataMapping);
+      updatedDataMapping.current_location = { state: activeState, city: selectedCityObj ? selectedCityObj.code : "" };
+      setUpdatedDataMapping(updatedDataMapping);
 
       if (!newCity) {
+        swiperWrapper.innerHTML = "<p>Please select a city.</p>";
         return;
       }
 
-      renderDealers(activeState, activeCity);
+      if (selectedCityObj) {
+        renderDealers(activeState, selectedCityObj.code);
+      } else {
+        swiperWrapper.innerHTML = "<p>Invalid city selected. Please try again.</p>";
+      }
 
-      pubsub.publish("product-banner-event", document.querySelector(".product-banner"), {
-        test: true,
-      });
+      pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
     },
-    activeCity
+    ""
   );
 
-  cityDropdown.setDisabled(true);
-
-  // ✅ Re-enable city dropdown if a valid state is pre-selected
-  if (activeState && cityMap[activeState.toUpperCase()]) {
-    const cityList = Object.values(cityMap[activeState.toUpperCase()] || {}).map((c) => c.label);
-    cityDropdown.setOptions(cityList);
+  if (!activeState || !cityMap[activeState.toUpperCase()] || Object.values(cityMap[activeState.toUpperCase()]).length === 0 || activeCity === "") {
+    cityDropdown.setDisabled(true);
+    cityDropdown.inputEl.value = "";
+  } else {
     cityDropdown.setDisabled(false);
   }
 
-  const dropdowns = div(
-    {
-      class: "dealer-dropdownss",
-    },
-    stateDropdown.wrapper,
-    cityDropdown.wrapper
-  );
-
+  const dropdowns = div({ class: "dealer-dropdownss" }, stateDropdown.wrapper, cityDropdown.wrapper);
   const swiperWrapper = div({ class: "swiper-wrapper" });
-  const swiperEl = div(
-    { class: "dealer-card-wrapperr row swiper" },
-    swiperWrapper
-  );
+  const swiperEl = div({ class: "dealer-card-wrapperr row swiper" }, swiperWrapper);
   block.innerHTML = "";
   block.appendChild(dropdowns);
   block.appendChild(swiperEl);
 
-  async function renderDealers(state, city) {
-    const cityData = Object.values(cityMap[state.toUpperCase()] || []).find(
-      (c) => c.label.toUpperCase() === city.toUpperCase()
-    );
-
-    if (!cityData) {
-      swiperWrapper.innerHTML = "<p>No city data found.</p>";
+  async function renderDealers(stateLabel, cityCode) {
+    if (!stateLabel || !cityCode) {
+      swiperWrapper.innerHTML = "<p>Please select both a state and a city to find dealers.</p>";
       return;
     }
 
-    const dealerData = await fetchDealers(
-      sku,
-      cityData.stateCode,
-      cityData.code
-    );
+    const cityData = Object.values(cityMap[stateLabel.toUpperCase()] || []).find(c => c.code === cityCode);
+    if (!cityData) {
+      swiperWrapper.innerHTML = "<p>No city data found for the selected city.</p>";
+      return;
+    }
+
+    const dealerData = await fetchDealers(sku, cityData.stateCode, cityData.code);
     const dealers = dealerData?.data?.dealers?.items || [];
 
     if (!dealers.length) {
@@ -284,31 +284,18 @@ export async function decorateProductDealerCards(block = document.querySelector(
       return;
     }
 
-    const slidesPerView = "swiper-slide";
-
+    if (swiperEl.swiper) swiperEl.swiper.destroy(true, true);
     swiperWrapper.innerHTML = "";
 
     dealers.forEach((dealer) => {
       const card = div(
-        { class: slidesPerView },
+        { class: "swiper-slide" },
         div(
-          {
-            class: "dealer-card",
-          },
-          div({ class: "dealer-name" }, div({ class: "wrapper" }, span({ class: "heroicon-logo hero-icon" },
-            span({ class: "path1 heroicon-logo hero-icon" }),
-            span({ class: "path2 heroicon-logo hero-icon" }),
-            span({ class: "path3 heroicon-logo hero-icon" })
-          ), dealer.name)
-          ),
-          p({ class: 'dealer-phone' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-call" }), `${dealer.phone}`)),
-          p({ class: 'dealer-email' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-email" }), `${dealer.email}`)),
-          p({ class: 'dealer-address' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-address" },
-            span({ class: "path1 heroicon-logo hero-icon" }),
-            span({ class: "path2 heroicon-logo hero-icon" }),
-            span({ class: "path3 heroicon-logo hero-icon" })
-          ),
-            `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`)),
+          { class: "dealer-card" },
+          div({ class: "dealer-name" }, div({ class: "wrapper" }, span({ class: "heroicon-logo hero-icon" }, span({ class: "path1 heroicon-logo hero-icon" }), span({ class: "path2 heroicon-logo hero-icon" }), span({ class: "path3 heroicon-logo hero-icon" })), dealer.name)),
+          p({ class: 'dealer-phone' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-call" }), dealer.phone)),
+          p({ class: 'dealer-email' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-email" }), dealer.email)),
+          p({ class: 'dealer-address' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-address" }, span({ class: "path1 heroicon-logo hero-icon" }), span({ class: "path2 heroicon-logo hero-icon" }), span({ class: "path3 heroicon-logo hero-icon" })), `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`))
         )
       );
       swiperWrapper.appendChild(card);
@@ -317,32 +304,45 @@ export async function decorateProductDealerCards(block = document.querySelector(
     const paginationEl = document.createElement("div");
     paginationEl.classList.add("swiper-pagination");
     swiperEl.appendChild(paginationEl);
-    Swiper = new Swiper(swiperEl, {
+
+    new Swiper(swiperEl, {
       grabCursor: true,
       spaceBetween: 20,
-      pagination: {
-        el: paginationEl,
-        clickable: true,
-      },
+      pagination: { el: paginationEl, clickable: true },
       observer: true,
       observeParents: true,
       breakpoints: {
-        0: {
-          slidesPerView: 1.2,
-        },
-        768: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 4,
-        },
+        0: { slidesPerView: 1.2 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 4 },
       },
     });
   }
 
-  renderDealers(activeState, activeCity);
+  if (current.state && cityMap[current.state.toUpperCase()]) {
+    activeState = current.state;
+    const initialCityObj = Object.values(cityMap[activeState.toUpperCase()] || {}).find(c => c.label.toUpperCase() === current.city.toUpperCase());
+    if (initialCityObj) {
+      activeCity = initialCityObj.label;
+      cityDropdown.inputEl.value = activeCity;
+      cityDropdown.setDisabled(false);
+      renderDealers(activeState, initialCityObj.code);
+    } else {
+      activeCity = "";
+      cityDropdown.inputEl.value = "";
+      cityDropdown.setDisabled(false);
+      swiperWrapper.innerHTML = "<p>Please select a city to find dealers.</p>";
+    }
+  } else {
+    activeState = states[0] || "";
+    stateDropdown.inputEl.value = activeState;
+    activeCity = "";
+    cityDropdown.inputEl.value = "";
+    cityDropdown.setDisabled(true);
+    swiperWrapper.innerHTML = "<p>Please select a state and city to find dealers.</p>";
+  }
 }
 
 export default function decorate(block) {
-  decorateProductDealerCards(block)
+  decorateProductDealerCards(block);
 }
