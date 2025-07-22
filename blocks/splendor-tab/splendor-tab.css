@@ -117,6 +117,7 @@
 .splendor-tab .tab-slide > ul > li > p {
     font-weight: 900;
     font-size: 18px;
+    font-family:"TSTAR-PRO-Heavy";
 }
 .splendor-tab .tab-slide > ul > li > ul {
     padding: 0px;
@@ -126,6 +127,7 @@
     font-family: "TSTAR-PRO-Medium";
     font-size: 24px;
     padding-top: 10px;
+    line-height: 32px;
 }
 
 .splendor-tab .tab-slide > p > picture > img {
