@@ -237,14 +237,23 @@ export default async function decorate(block) {
   const { dropdowns, fieldsetEl } = await decoratePriceListing();
   const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
   const liList = headingUL?.querySelectorAll('li') || [];
+
   if (liList[0]) liList[0].replaceChildren(dropdowns, fieldsetEl);
+
   if (liList[1]) {
     const innerUL = liList[1].querySelector('ul');
     if (innerUL) {
-      const labels = [...innerUL.querySelectorAll('li')].map(li => li.textContent.trim());
-      const wrap = div();
-      if (labels[0]) wrap.append(a({ href: '/content/hero-commerce/in/en/pre-approved-offers.html', class: 'avail-finance-button-size' }, labels[0]));
-      if (labels[1]) wrap.append(a({ href: 'https://www.heromotocorp.com/.../splendor-plus.html', class: 'buynow-button-size button' }, labels[1]));
+      const links = [...innerUL.querySelectorAll('li a')];
+      const wrap = document.createElement('div');
+
+      if (links[0]) {
+        wrap.append(a({ href: links[0].href, class: 'avail-finance-button-size' }, links[0].textContent.trim()));
+      }
+
+      if (links[1]) {
+        wrap.append(a({ href: links[1].href, class: 'buynow-button-size button' }, links[1].textContent.trim()));
+      }
+
       innerUL.replaceWith(wrap);
     }
   }

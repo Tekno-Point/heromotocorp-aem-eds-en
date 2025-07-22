@@ -320,5 +320,9 @@
     .section.product-banner-container .product-banner-wrapper .product-banner.block>.bottom-sec>p:first-child {
         position: unset;
     }
+    .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__360View .hero-360 .spritespin-stage img{
+    position: unset;
+    transform: unset;
+}
 
 }
