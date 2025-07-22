@@ -212,7 +212,9 @@ export async function decorateProductBanner(block, data) {
 
 
 export default async function decorate(block) {
-    decorateProductBanner(block);
+    block.classList.add("dp-none");
+    await decorateProductBanner(block);
+    block.classList.remove("dp-none");
 }
 
 const rotateImg = (event, activeIndex = 0, rotateUrlString, imgEl, isTouch = false) => {

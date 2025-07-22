@@ -51,7 +51,6 @@ export async function appendXF(block, xfPath) {
       }
     });
     block.append(div);
-    block.addEventListener('click', addClientLibScript)
     function addClientLibScript() {
       div.querySelectorAll('script').forEach((link) => {
         const exculdeLink = [
@@ -74,6 +73,8 @@ export async function appendXF(block, xfPath) {
       });
       block.removeEventListener('click', addClientLibScript);
     }
+    block.addEventListener('click', addClientLibScript)
+    // addClientLibScript();
     // block.style.display = 'block';
     
     // setTimeout(() => {
@@ -351,11 +352,11 @@ export default async function decorate(block) {
   }
 
 
-  // await appendXF(
-  //   block,
-  //   stageendpoint +
-  //     "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
-  // );
+  await appendXF(
+    block,
+    stageendpoint +
+      "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
+  );
 
   /* init Compare */
   const addVehicleCheckboxs = block.querySelectorAll(
