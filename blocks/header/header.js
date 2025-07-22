@@ -51,8 +51,8 @@ export async function appendXF(block, xfPath) {
       }
     });
     block.append(div);
-    function addClientLibScript() {
-      block.removeEventListener('mouseover', addClientLibScript);
+    function addClientLibScript(e) {
+      block.removeEventListener('click', addClientLibScript);
       document.removeEventListener('touchstart', addClientLibScript)
       div.querySelectorAll('script').forEach((link) => {
         const exculdeLink = [
@@ -73,8 +73,16 @@ export async function appendXF(block, xfPath) {
           }
         }
       });
+      setTimeout(() => {
+        e.target.closest('.megamenu-li').querySelector('span').click();
+        // $(e.target.closest('.megamenu-li')).trigger('click');
+      //   e.target.closest('.nav-item').classList.add('active');
+      //   e.target.closest('.nav-item').querySelector('.dropdown-menu').classList.add('megamenu', 'slim-scroll' ,'homepage-drop-animation');
+      //   e.target.closest('.nav-item').querySelector('.scroll-indicator').style.display = 'flex';
+      },1000)
+      // debugger;
     }
-    block.addEventListener('mouseover', addClientLibScript)
+    block.addEventListener('click', addClientLibScript)
     document.addEventListener('touchstart', addClientLibScript)
     // addClientLibScript();
     // block.style.display = 'block';
