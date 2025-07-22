@@ -87,7 +87,7 @@ section .buy-card-container>.buy-card-wrapper{
 }
 
 .buy-card > ul >li>div:nth-child(1){
-    padding-bottom: 12px;
+    padding-bottom: 16px;
 }
 
 .cards-card-body > p:nth-child(3) {
