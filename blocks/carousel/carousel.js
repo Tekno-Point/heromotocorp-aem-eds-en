@@ -1,6 +1,6 @@
 // changes for slide over 
 
-import Swiper from "./swiper.min.js";
+import Swiper from "../swiper/swiper.min.js";
 
 export default function decorate(block) {
   console.log("Carousel block detected");
