@@ -280,7 +280,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
     const dealers = dealerData?.data?.dealers?.items || [];
 
     if (!dealers.length) {
-      swiperWrapper.innerHTML = "<p>No dealers found for this location.</p>";
+      swiperWrapper.innerHTML = "<p>Sorry, no dealers are available in your area.</p>";
       swiperWrapper.classList.add("no-dealers");
       return;
     }

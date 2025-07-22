@@ -229,11 +229,19 @@
     width: 100%;
 }
 
-.dealer-card-wrapperr .no-dealers>p{
+.dealer-card-wrapperr .no-dealers>p {
     font-family: "TSTAR-PRO-Heavy";
-    font-size: 32px;
-    line-height: 1.25rem;
-    color: red;
+    font-size: 2rem;
+    -webkit-font-kerning: auto;
+    font-kerning: auto;
+    letter-spacing: normal;
+    line-height: 3rem;
+    color: #d30000;
+
+    @media (width<767px) {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
 }
 
 .product-dealer-cards-container {
@@ -292,6 +300,6 @@
 }
 
 .custom-input::placeholder {
-    color: #6A737D; 
+    color: #6A737D;
     font-weight: bold;
 }
