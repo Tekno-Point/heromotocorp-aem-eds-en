@@ -296,17 +296,17 @@ export async function decorateProductDealerCards(block = document.querySelector(
             class: "dealer-card",
           },
           div({ class: "dealer-name" }, div({ class: "wrapper" }, span({ class: "heroicon-logo hero-icon" },
-            span({ class: "path1" }),
-            span({ class: "path2" }),
-            span({ class: "path3" })
+            span({ class: "path1 heroicon-logo hero-icon" }),
+            span({ class: "path2 heroicon-logo hero-icon" }),
+            span({ class: "path3 heroicon-logo hero-icon" })
           ), dealer.name)
           ),
           p({ class: 'dealer-phone' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-call" }), `${dealer.phone}`)),
           p({ class: 'dealer-email' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-email" }), `${dealer.email}`)),
           p({ class: 'dealer-address' }, div({ class: "wrapper" }, span({ class: "hero-icon heroicon-address" },
-            span({ class: "path1" }),
-            span({ class: "path2" }),
-            span({ class: "path3" })
+            span({ class: "path1 heroicon-logo hero-icon" }),
+            span({ class: "path2 heroicon-logo hero-icon" }),
+            span({ class: "path3 heroicon-logo hero-icon" })
           ),
             `${dealer.address_line_1} ${dealer.address_line_2} ${dealer.city}, ${dealer.state} - ${dealer.zip_code}`)),
         )
