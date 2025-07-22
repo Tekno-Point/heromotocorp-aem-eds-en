@@ -52,11 +52,13 @@ export async function appendXF(block, xfPath) {
     });
     block.append(div);
     function addClientLibScript(e) {
-      // block.removeEventListener('click', addClientLibScript);
-      // document.removeEventListener('touchstart', addClientLibScript)
+      if(window.location.href.endsWith('index-1')) {
+        block.removeEventListener('click', addClientLibScript);
+        document.removeEventListener('touchstart', addClientLibScript)
+      }
       div.querySelectorAll('script').forEach((link) => {
         const exculdeLink = [
-          '/launch'
+          // '/granite/csrf'
         ]
         const inculdeLink = [
           '/clientlibs/granite/jquery',
@@ -95,22 +97,13 @@ export async function appendXF(block, xfPath) {
       // },1000)
       // debugger;
     }
-    // block.addEventListener('click', addClientLibScript)
-    // document.addEventListener('touchstart', addClientLibScript)
-    addClientLibScript();
-    // block.style.display = 'block';
-    
-    // setTimeout(() => {
-    //     // $.noConflict();
-    //   const event = new Event('DOMContentLoaded');
-    //   // Dispatch the event
-    //   document.dispatchEvent(event);
-    // });
-    // if (window.isLast) {
-    // }
-    // window.isLast = true;
+    if(window.location.href.endsWith('index-1')) {
+      block.addEventListener('click', addClientLibScript)
+      document.addEventListener('touchstart', addClientLibScript)
+    }else{
+      addClientLibScript();
+    }
   }
-  
   return block;
 }
 
