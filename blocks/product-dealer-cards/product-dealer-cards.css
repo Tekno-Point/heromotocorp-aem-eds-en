@@ -109,11 +109,13 @@
     font-weight: 700;
     cursor: pointer;
     transition: background 0.2s ease-in-out;
+    font-family: 'TSTAR-PRO-Heavy';
+    font-weight: 500;
 }
 
 .product-dealer-cards .dropdown-option:hover {
     background-color: #f5f5f5;
-    background-color: #009fda33;
+    background-color: #deebff;
 }
 
 .product-dealer-cards .dealer-dropdownss {
