@@ -62,12 +62,16 @@
 .product-dealer-cards .custom-select-wrapper .input-wrapper {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     background: #ededed;
     border: none;
     /* border: 1px solid #ccc; */
     border-bottom: 0.125rem solid silver;
     position: relative;
+}
+
+.price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item:hover {
+    background-color: #009fda33;
 }
 
 .product-dealer-cards .custom-select-wrapper .clear-btn {
@@ -109,6 +113,7 @@
 
 .product-dealer-cards .dropdown-option:hover {
     background-color: #f5f5f5;
+    background-color: #009fda33;
 }
 
 .product-dealer-cards .dealer-dropdownss {
@@ -132,7 +137,7 @@
     cursor: pointer;
     /* margin-right: 27px; */
     top: -16px;
-    top: -8px;
+    top: -16px;
     font-size: 28px;
     height: 23px;
 }
@@ -145,7 +150,7 @@
     content: "";
     display: inline-block;
     position: absolute;
-    top: 40%;
+    top: 2px;
     right: 0px;
     transform: rotate(135deg);
     width: 8px;

@@ -32,7 +32,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
 
   const dropdown = document.createElement("ul");
   dropdown.className = "dropdown-options position-absolute bg-white border rounded shadow-sm z-3 mt-1";
-  dropdown.style.cssText = "max-height: 180px; overflow-y: auto; max-width:100%; display: none;";
+  dropdown.style.cssText = "max-height: 250px; overflow-y: auto; max-width:100%; display: none;";
 
   inputWrapper.appendChild(inputEl);
   inputWrapper.appendChild(clearBtn);
@@ -66,7 +66,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
         li.textContent = value;
         li.className = `dropdown-option px-3 py-2 hover-bg${isSelected ? ' selected' : ''}`;
         if (isSelected) {
-          li.style.backgroundColor = '#f1f1f1';
+          li.style.backgroundColor = '#007aff';
           li.style.fontWeight = 'bold';
           selectedEl = li;
         }
@@ -203,8 +203,8 @@ export async function decorateProductDealerCards(block = document.querySelector(
       if (!newState || !cityMap[newState.toUpperCase()]) {
         dataMapping.current_location = { state: activeState, city: "" };
         setDataMapping(dataMapping);
-        swiperWrapper.innerHTML = "<p>Please select a state and city to find dealers.</p>";
-        pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
+        // swiperWrapper.innerHTML = "<p>Please select a state and city to find dealers.</p>";
+        // pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
         return;
       }
 
@@ -213,8 +213,8 @@ export async function decorateProductDealerCards(block = document.querySelector(
       cityDropdown.setDisabled(false);
       dataMapping.current_location = { state: activeState, city: "" };
       setDataMapping(dataMapping);
-      swiperWrapper.innerHTML = "<p>Please select a city to find dealers.</p>";
-      pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
+      // swiperWrapper.innerHTML = "<p>Please select a city to find dealers.</p>";
+      // pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
     },
     activeState
   );
@@ -331,7 +331,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
       activeCity = "";
       cityDropdown.inputEl.value = "";
       cityDropdown.setDisabled(false);
-      swiperWrapper.innerHTML = "<p>Please select a city to find dealers.</p>";
+      // swiperWrapper.innerHTML = "<p>Please select a city to find dealers.</p>";
     }
   } else {
     activeState = states[0] || "";
@@ -339,7 +339,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
     activeCity = "";
     cityDropdown.inputEl.value = "";
     cityDropdown.setDisabled(true);
-    swiperWrapper.innerHTML = "<p>Please select a state and city to find dealers.</p>";
+    // swiperWrapper.innerHTML = "<p>Please select a state and city to find dealers.</p>";
   }
 }
 
