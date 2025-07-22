@@ -50,13 +50,28 @@
     position: relative;
     background: #ededed;
     border: none;
-    border-bottom: 0.125rem solid silver;
+    /* border-bottom: 0.125rem solid silver; */
     padding: 0px;
     padding-bottom: 2px;
     font-size: 18px;
     letter-spacing: normal;
     line-height: 1.5rem;
-    color: rgb(51, 51, 51);
+    font-weight: bold;
+}
+
+.product-dealer-cards .custom-select-wrapper .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ededed;
+    border: none;
+    /* border: 1px solid #ccc; */
+    border-bottom: 0.125rem solid silver;
+    position: relative;
+}
+
+.price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item:hover {
+    background-color: #009fda33;
 }
 
 .product-dealer-cards .custom-select-wrapper .clear-btn {
@@ -94,10 +109,13 @@
     font-weight: 700;
     cursor: pointer;
     transition: background 0.2s ease-in-out;
+    font-family: 'TSTAR-PRO-Heavy';
+    font-weight: 500;
 }
 
 .product-dealer-cards .dropdown-option:hover {
     background-color: #f5f5f5;
+    background-color: #deebff;
 }
 
 .product-dealer-cards .dealer-dropdownss {
@@ -119,25 +137,35 @@
     color: silver;
     position: relative;
     cursor: pointer;
-    margin-right: 27px;
-    top: -13px;
+    /* margin-right: 27px; */
+    top: -16px;
+    top: -16px;
+    font-size: 28px;
+    height: 23px;
+}
+
+.product-dealer-cards .input-wrapper>.clear-btn:hover {
+    color: rgb(153, 153, 153) !important;
 }
 
 .product-dealer-cards .input-wrapper>.dropdown-arrow::after {
     content: "";
     display: inline-block;
     position: absolute;
-    top: -9px;
-    right: 26px;
+    top: 2px;
+    right: 0px;
     transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border: 2px solid currentcolor;
     border-radius: 0 1px 0 0;
     border-width: 3px 3px 0 0;
     color: silver;
 }
 
+.product-dealer-cards .input-wrapper>.dropdown-arrow::after:hover {
+    color: rgb(153, 153, 153);
+}
 
 /* Dealer card style (resembling your reference) */
 .product-dealer-cards .dealer-card {
@@ -166,10 +194,25 @@
 .product-dealer-cards .dealer-card>p:nth-of-type(1),
 .product-dealer-cards .dealer-card>p:nth-of-type(2) {
     cursor: pointer;
-    font-family: "TSTAR-PRO-Regular";
+    font-family: "TSTAR-PRO-Bold";
     font-weight: 600;
     font-size: 18px;
     word-break: break-word;
+}
+
+.product-dealer-cards .dealer-card>p:nth-of-type(1)>.wrapper,
+.product-dealer-cards .dealer-card>p:nth-of-type(2)>.wrapper {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 0.625rem;
+}
+
+.product-dealer-cards .dealer-name>.wrapper,
+.product-dealer-cards .dealer-address>.wrapper {
+    display: flex;
+    font-family: "TSTAR-PRO-Medium";
+    align-items: flex-start;
+    column-gap: .625rem;
 }
 
 .product-dealer-cards-container>.product-dealer-cards-wrapper {
@@ -180,7 +223,7 @@
 
 .product-dealer-cards>.swiper {
     max-width: 1365px;
-    min-height: 388px;
+    min-height: 340px;
     width: 100%;
 }
 
@@ -230,15 +273,16 @@
     }
 
     .product-dealer-cards-container>.default-content-wrapper>h2 {
-        font-size: 16px;
+        font-size: 28px;
     }
 }
 
 .product-dealer-cards-container.section {
     margin: 0px;
+    padding-top: 70px;
 }
 
-.custom-input::placeholder{
-    color: black;
-    font-family: 'TSTAR-PRO-Heavy';
+.custom-input::placeholder {
+    color: #303030;
+    font-weight: bold;
 }

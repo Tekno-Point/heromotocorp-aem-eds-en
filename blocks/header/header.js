@@ -234,7 +234,7 @@ export default async function decorate(block) {
         (secondUl.style.display = "flex");
       img.style.display = "block";
       navBarWrapper.style.height = "72px";
-      navBarWrapper.style.padding = "20px 10px 0";
+      navBarWrapper.style.padding = "0px 10px 0";
       // navBarWrapper.style.top = "0"
     } else {
       navWrapper2.style.transform = "translateY(0)";
