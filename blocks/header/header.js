@@ -23,7 +23,7 @@ export async function appendXF(block, xfPath) {
   if (resp.ok) {
     let str = await resp.text();
     const { location } = window;
-    if (location.href.includes('localhost') || location.href.includes('.aem.live')) {
+    if (location.href.includes('localhost') || location.href.includes('.aem.live') || location.href.includes('.aem.page')) {
       str = str.replaceAll(
         '/etc.clientlibs/',
         'https://stage.heromotocorp.com/etc.clientlibs/',
