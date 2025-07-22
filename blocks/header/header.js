@@ -52,6 +52,8 @@ export async function appendXF(block, xfPath) {
     });
     block.append(div);
     function addClientLibScript() {
+      block.removeEventListener('mouseover', addClientLibScript);
+      document.removeEventListener('touchstart', addClientLibScript)
       div.querySelectorAll('script').forEach((link) => {
         const exculdeLink = [
           // '/clientlibs/granite/',
@@ -71,9 +73,9 @@ export async function appendXF(block, xfPath) {
           }
         }
       });
-      block.removeEventListener('click', addClientLibScript);
     }
-    block.addEventListener('click', addClientLibScript)
+    block.addEventListener('mouseover', addClientLibScript)
+    document.addEventListener('touchstart', addClientLibScript)
     // addClientLibScript();
     // block.style.display = 'block';
     
