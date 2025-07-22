@@ -27,7 +27,7 @@ let isStateOpen = false;
 let isCityOpen = false;
 
 function populateList(input, list, data, onSelect) {
-  list.innerHTML = '';
+  // list.innerHTML = '';
   const typedValue = (input.dataset.filter || '').trim().toLowerCase();
   const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
   const currentValue = input.value.trim().toLowerCase();
