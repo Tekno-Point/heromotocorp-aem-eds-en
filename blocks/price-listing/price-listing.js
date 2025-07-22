@@ -155,7 +155,7 @@ async function decoratePriceListing() {
   let isCityOpen = false;
 
   si.addEventListener('focus', () => {
-    si.select();
+    // si.select();
     si.dataset.filter = '';
     populateList(si, sl, states, onStateSelect);
   });
@@ -166,7 +166,7 @@ async function decoratePriceListing() {
   });
 
   ci.addEventListener('focus', () => {
-    ci.select(); // optional: highlights text
+    // ci.select(); // optional: highlights text
     ci.dataset.filter = '';
     populateList(ci, cl, selectedState.cities, onCitySelect);
   });
