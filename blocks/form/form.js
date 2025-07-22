@@ -2,6 +2,13 @@ import createField from "./form-fields.js";
 import { div, ul, li, p } from "../../scripts/dom-helpers.js";
 import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp } from "../../scripts/common.js";
 
+const nameRegex = /^[a-zA-Z\s]{1,50}$/;
+
+// Example usage:
+const isValidName = (name) => nameRegex.test(name);  
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const mobRegex = /^[6-9][0-9]{9}$/;
+
 function errorField(message) {
     return p({ class: "error-msg" }, message);
 };
@@ -14,6 +21,61 @@ function showError(field, msg) {
     msgEl.textContent = 'aa ' + msg 
   }else{
     field.appendChild(errorField('aa '+ msg));
+  }
+}
+
+
+function validateName(fieldWrapper, inpVal) {
+ if(inpVal){
+          if(isValidName(inpVal)){
+            showError(fieldWrapper,'')
+            return true
+          }else{
+            showError(fieldWrapper,'Invalid Name')
+            return false
+          }
+        }else{
+          showError(fieldWrapper,'The Name is required')
+          return false
+        } 
+}
+
+function validateOtp(fieldWrapper, mobile, otp) {
+      const isValid = verifyOtp(mobile, otp);
+        if(!isValid){
+          showError(fieldWrapper,'Incorrect OTP')
+        }          
+        showError(fieldWrapper,'')
+        return isValid;
+  
+}
+
+function validateMobile(fieldWrapper, inpVal) {
+  if (inpVal) {
+    if (mobRegex.test(inpVal)) {
+      showError(fieldWrapper, '');
+      return true;
+    } else {
+      showError(fieldWrapper, 'Enter correct mobile number');
+      return false;
+    }
+  } else {
+    showError(fieldWrapper, 'The Mobile is required');
+    return false;
+  }
+}
+function validateEmail(fieldWrapper, inpVal) {
+  if (inpVal) {
+    if (emailRegex.test(inpVal)) {
+      showError(fieldWrapper, '');
+      return true;
+    } else {
+      showError(fieldWrapper, 'Please enter correct email');
+      return false;
+    }
+  } else {
+    showError(fieldWrapper, 'The Email is required');
+    return false;
   }
 }
 async function createForm(formHref, submitHref) {
@@ -320,11 +382,10 @@ export default async function decorate(block) {
 
   // Validation Start
   // Name validation
-  const nameRegex = /^[a-z]+(?: [a-z]+)?$/;
   const nameInp = block.querySelector("#form-name");
   const nameField = nameInp.closest(".text-wrapper");
   nameInp.addEventListener("input", function () {
-    checkValidity()
+    validateName(nameField, nameInp.value);
     // const nameError = nameField.querySelector(".error-msg");
     // const value = nameInp.value.trim();
     // if (nameError) {
@@ -339,15 +400,21 @@ export default async function decorate(block) {
 
   // Mobile validation
   // const mobRegex = /^[6-9]\d{9}$/;
-  const mobRegex = /^[6-9][0-9]{9}$/;
   const mobInp = block.querySelector("#form-mobile");
   const mobField = mobInp.closest(".tel-wrapper");
   mobInp.addEventListener("input", function () {
+    // this.value = this.value.replace(/\D/g, "");
+    this.value = this.value.substr(0,10);
     block.querySelector(".sendOTP-btn").classList.add("dsp-none");
-    const valid = checkValidity();
-    debugger;
-    if(valid[1]){
+    block.querySelector(".resendOTP-btn").classList.add("dsp-none");
+    
+    form.otp.disabled = true;
+    form.otp.value = '';
+    const valid = validateMobile(mobField, mobInp.value);
+    if(valid){
+      form.otp.disabled = false;
       block.querySelector(".sendOTP-btn").classList.remove("dsp-none");
+      // block.querySelector(".resendOTP-btn").classList.remove("dsp-none");
     }
     // const mobError = mobField.querySelector(".error-msg");
     // const value = mobInp.value.trim();
@@ -364,8 +431,19 @@ export default async function decorate(block) {
     // }
   });
 
+  // OTP Validation  
+  const otpInp = block.querySelector("#form-otp");
+  const otpField = mobInp.closest(".field-wrapper");
+  otpInp.addEventListener("input", function () {
+    this.value = this.value.substr(0,6);
+    const valid = validateOtp(otpField, form.mobile.value, otpInp.value);
+    if(!valid){
+      showError(otpField,'Incorrect OTP')
+    }
+    showError(otpField,'')
+  })
+
   // Email Validation
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const emailInp = block.querySelector("#form-email");
   const emailField = emailInp.closest(".email-wrapper");
   emailInp.addEventListener("input", function () {
@@ -407,36 +485,23 @@ export default async function decorate(block) {
       const error = fieldWrapper.querySelector(".error-msg");
       const inpVal = inp.value;
       const inpName = inp.name;
-      if (inpVal == "") {
+      if (inpName == "name") {
+        return validateName(fieldWrapper, inpVal);
+      } else if (inpName == "otp" ) {
+        return validateOtp(fieldWrapper, form.mobile.value, form.otp.value);
+      } else if (inpName == "mobile") {
+        const isValid = validateMobile(fieldWrapper, inpVal);
+        form.otp.disabled = true;
+        if (isValid) {
+          form.otp.disabled = false;
+        }
+        return isValid;
+      } else if (inpName == "email" && !emailRegex.test(inpVal)) {
+        return validateEmail(fieldWrapper, inpVal);
+      }else if (inpVal == "") {
         showError(fieldWrapper,'Field is required')
         return false
-      } else if (inpName == "name") {
-        if(inpVal){
-          if(nameRegex.test(inpVal)){
-            showError(fieldWrapper,'')
-            return true
-          }else{
-            showError(fieldWrapper,'Invalid Name')
-            return false
-          }
-        }else{
-          showError(fieldWrapper,'The Name is required')
-          return false
-        }
-      } else if (inpName == "otp" ) {
-        const isValid = verifyOtp(form.mobile.value, form.otp.value);
-        if(!isValid){
-          showError(fieldWrapper,'Incorrect OTP')
-        }          
-        showError(fieldWrapper,'')
-        return isValid;
-      } else if (inpName == "mobile" && !mobRegex.test(inpVal)) {
-        showError(fieldWrapper,'Enter correct mobile number')
-        return false
-      } else if (inpName == "email" && !emailRegex.test(inpVal)) {
-        showError(fieldWrapper,'Please enter correct email')
-        return false
-      } else {
+      }else {
         showError(fieldWrapper,'')
         return true
       }
