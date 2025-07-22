@@ -207,7 +207,7 @@ export default async function decorate(block) {
   initCompare();
 
   const navWrapper2 = document.querySelector(".nav-wrapper");
-  const heroSection = document.querySelector(".hero-banner");
+  const heroSection = document.querySelector(".banner-price");  //changed it acc to the site
 
   window.addEventListener("scroll", () => {
     const heroBottom = heroSection.getBoundingClientRect().bottom;
