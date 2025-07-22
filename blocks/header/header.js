@@ -52,15 +52,25 @@ export async function appendXF(block, xfPath) {
     });
     block.append(div);
     function addClientLibScript(e) {
-      block.removeEventListener('click', addClientLibScript);
-      document.removeEventListener('touchstart', addClientLibScript)
+      // block.removeEventListener('click', addClientLibScript);
+      // document.removeEventListener('touchstart', addClientLibScript)
       div.querySelectorAll('script').forEach((link) => {
         const exculdeLink = [
-          // '/clientlibs/granite/',
+          '/launch'
+        ]
+        const inculdeLink = [
+          '/clientlibs/granite',
           // '/foundation/clientlibs',
+          '/clientlib-dependencies',
+          // '/components/commons',
+          // '/clientlibs/clientlib-base',
+          'clientlibs/clientlib-site',
+          '/clientlib-page'
         ];
         // debugger;
-        if (!exculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
+        // if (!exculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
+        if (inculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
+          console.log(link.src);
           try {
             const newScript = document.createElement('script');
             newScript.src = link.src;
@@ -71,20 +81,22 @@ export async function appendXF(block, xfPath) {
           } catch (error) {
             console.error(error); // eslint-disable-line
           }
+        }else{
+          console.warn(`Skipping script: ${link.src}`);
         }
       });
-      setTimeout(() => {
-        e.target.closest('.megamenu-li').querySelector('span').click();
+      // setTimeout(() => {
+        // e.target.closest('.megamenu-li').querySelector('span').click();
         // $(e.target.closest('.megamenu-li')).trigger('click');
       //   e.target.closest('.nav-item').classList.add('active');
       //   e.target.closest('.nav-item').querySelector('.dropdown-menu').classList.add('megamenu', 'slim-scroll' ,'homepage-drop-animation');
       //   e.target.closest('.nav-item').querySelector('.scroll-indicator').style.display = 'flex';
-      },1000)
+      // },1000)
       // debugger;
     }
-    block.addEventListener('click', addClientLibScript)
-    document.addEventListener('touchstart', addClientLibScript)
-    // addClientLibScript();
+    // block.addEventListener('click', addClientLibScript)
+    // document.addEventListener('touchstart', addClientLibScript)
+    addClientLibScript();
     // block.style.display = 'block';
     
     // setTimeout(() => {
