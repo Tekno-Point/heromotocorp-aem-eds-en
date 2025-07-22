@@ -185,7 +185,7 @@ async function decoratePriceListing() {
     ci.disabled = true;
     cl.style.display = 'none';
     isCityOpen = false;
-    priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
+    // priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
   });
 
   ci.addEventListener('focus', () => {
@@ -238,7 +238,7 @@ async function decoratePriceListing() {
     ci.value = '';
     cl.style.display = 'none';
     isCityOpen = false;
-    priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
+    // priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
   });
 
   document.addEventListener('click', e => {
@@ -260,16 +260,16 @@ async function decoratePriceListing() {
     cl.style.display = 'none';
     isCityOpen = false;
 
-    priceInfo.innerHTML = '<p class="no-results">Please select a city to view prices.</p>';
+    // priceInfo.innerHTML = '<p class="no-results">Please select a city to view prices.</p>';
 
     sl.style.display = 'none';
     isStateOpen = false;
 
-    const [dataMapping, setCurrentDataMapping] = await useDataMapping();
-    dataMapping.current_location = { state: s.label, city: '' };
-    setCurrentDataMapping(dataMapping);
+    // const [dataMapping, setCurrentDataMapping] = await useDataMapping();
+    // dataMapping.current_location = { state: s.label, city: '' };
+    // setCurrentDataMapping(dataMapping);
 
-    pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
+    // pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
   }
 
   async function onCitySelect(c) {
@@ -299,7 +299,7 @@ async function decoratePriceListing() {
   if (selectedState && selectedCity) {
     renderPriceTable(selectedState.label, selectedCity.code);
   } else {
-    priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
+    // priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
   }
 
   return { dropdowns, fieldsetEl }
