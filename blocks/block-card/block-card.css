@@ -7,6 +7,7 @@
 .block-card-container > .block-card-wrapper {
     max-width: 100%;
     padding: 0px;
+    overflow-x: hidden;
 }
 .block-card > ul > li {
     max-width: 100%;
