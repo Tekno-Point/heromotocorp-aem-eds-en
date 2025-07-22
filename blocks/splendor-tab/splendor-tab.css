@@ -215,6 +215,7 @@
     }
     .splendor-tab .tabs-panel > .tab-slide {
         justify-content: center;
+        gap: 25px;
     }
 
     .splendor-tab .tabs-list > .tabs-tab > ul > li > ul {

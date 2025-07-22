@@ -14,7 +14,7 @@ export default function decorate(block) {
 
   [amountWrap, interestWrap, durationWrap].forEach((wrap) => wrap.innerHTML = '');
 
-  const amountSlider = input({ type: 'range', min: amountMin, max: amountMax, step: 1000, value: amountMin });
+  const amountSlider = input({ type: 'range', min: amountMin, max: amountMax, step: 1, value: amountMin });
   const rateSlider = input({ type: 'range', min: rateMin, max: rateMax, step: 0.1, value: rateMin });
   const monthsSlider = input({ type: 'range', min: monthsMin, max: monthsMax, step: 1, value: monthsMin });
 
@@ -59,10 +59,11 @@ export default function decorate(block) {
   const wrapper = div({ class: 'emi-container' }, controls, emiOutput);
   block.append(wrapper);
 
+  // EMI formula: P * r * (1+r)^n / ((1+r)^n - 1)
   function calculateEMI(P, r, n) {
     const monthlyRate = r / 12 / 100;
     const emi = P * monthlyRate * Math.pow(1 + monthlyRate, n) / (Math.pow(1 + monthlyRate, n) - 1);
-    return Math.round(emi);
+    return Math.round(emi); // No decimal in result
   }
 
   function updateUI() {
@@ -86,7 +87,7 @@ export default function decorate(block) {
     return Math.max(min, Math.min(max, value));
   }
 
-  function formatIndianNumberWithCursor(inputEl) {
+  function formatIndianNumber(inputEl) {
     const raw = inputEl.value.replace(/,/g, '').replace(/[^\d]/g, '');
     const val = parseInt(raw);
     if (!isNaN(val)) {
@@ -96,7 +97,7 @@ export default function decorate(block) {
 
   function handleNumberInput(inputEl, sliderEl, min, max, isFloat = false, useCommas = false, suffix = '') {
     inputEl.addEventListener('input', () => {
-      if (useCommas) formatIndianNumberWithCursor(inputEl);
+      if (useCommas) formatIndianNumber(inputEl);
     });
 
     inputEl.addEventListener('blur', () => {
