@@ -240,6 +240,12 @@ button.secondary {
         padding: 0;
     }
 }
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul {
+  margin: 0;
+}
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li {
+  margin: 0;
+}
 
 main img {
   max-width: 100%;
