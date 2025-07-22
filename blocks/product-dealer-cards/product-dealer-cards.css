@@ -174,7 +174,7 @@
 .product-dealer-cards .dealer-card>p:nth-of-type(1),
 .product-dealer-cards .dealer-card>p:nth-of-type(2) {
     cursor: pointer;
-    font-family: "TSTAR-PRO-Regular";
+    font-family: "TSTAR-PRO-Bold";
     font-weight: 600;
     font-size: 18px;
     word-break: break-word;
@@ -190,7 +190,7 @@
 .product-dealer-cards .dealer-name > .wrapper,
 .product-dealer-cards .dealer-address > .wrapper {
     display: flex;
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: "TSTAR-PRO-Medium";
     align-items: flex-start;
     column-gap: .625rem;
 }
@@ -203,7 +203,7 @@
 
 .product-dealer-cards>.swiper {
     max-width: 1365px;
-    min-height: 388px;
+    min-height: 340px;
     width: 100%;
 }
 
@@ -253,12 +253,13 @@
     }
 
     .product-dealer-cards-container>.default-content-wrapper>h2 {
-        font-size: 16px;
+        font-size: 28px;
     }
 }
 
 .product-dealer-cards-container.section {
     margin: 0px;
+    padding-top: 70px;
 }
 
 .custom-input::placeholder {
