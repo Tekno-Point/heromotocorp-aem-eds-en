@@ -215,11 +215,11 @@ export default async function decorate(block) {
     const navBar = document.querySelector(".nav-bar");
     const secondUl = navBar?.querySelectorAll("ul")[1];
 
-    if (secondUl) {
-      console.log("Second <ul> found:", secondUl);
-    } else {
-      console.warn("Second <ul> not found");
-    }
+    // if (secondUl) {
+    //   // console.log("Second <ul> found:", secondUl);
+    // } else {
+    //   console.warn("Second <ul> not found");
+    // }
 
     const img = document.querySelector(".nav-bar p");
 

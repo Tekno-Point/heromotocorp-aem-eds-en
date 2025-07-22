@@ -1,4 +1,4 @@
-.section.compare-container>.compare-wrapper{
+.section.compare-container>.compare-wrapper {
     padding: 20px 0px;
 }
 
@@ -8,7 +8,8 @@
     padding: 40px 0px;
     margin: 0px auto;
 }
-.block.compare  {
+
+.block.compare {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -22,75 +23,91 @@
     display: flex;
     justify-content: center;
 }
+
 .compare-child-inner {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: start;
 }
-.compare-child-1-inner-1 > h3 {
+
+.compare-child-1-inner-2.compare-child-inner{
+    align-items: end;
+}   
+
+.compare-child-1-inner-1>h3 {
     color: rgb(338 35 38);
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
+    color: #ee2326;
 }
-.compare-child-1-inner-1 > p {
+
+.compare-child-1-inner-1>p {
     position: absolute;
     left: 0px;
     top: 11%;
 }
-.compare-child-1-inner-2 > p {
+
+.compare-child-1-inner-2>p {
     position: absolute;
     right: 26px;
     top: 11%;
 }
+
 .compare-child-1 {
     max-width: 500px;
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
+
 .compare-child-2 {
     max-width: 500px;
     width: 100%;
 }
-.compare-child-2-inner-1 > ul {
+
+.compare-child-2-inner-1>ul {
     padding: 0px;
     list-style: none;
 }
 
-.compare-child-2-inner-1 > ul >li{
+.compare-child-2-inner-1>ul>li {
     padding-top: 2.25rem;
 }
-.compare-child-1-inner-2 > h3 {
+
+.compare-child-1-inner-2>h3 {
     color: #009fda;
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
 }
 
-.compare-child-2-inner-1 > ul > li > ul {
+.compare-child-2-inner-1>ul>li>ul {
     display: flex;
     gap: 40px;
     padding: 0px;
     list-style: none;
 }
 
-.compare-child-2-inner-1 > ul > li > ul > li {
+.compare-child-2-inner-1>ul>li>ul>li {
     max-width: 300px;
     width: 100%;
     text-align: center;
 }
-.compare-child-2-inner-1 > ul > li > ul > li > h4 {
+
+.compare-child-2-inner-1>ul>li>ul>li>h4 {
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     font-size: 24px;
 }
-.compare-child-2-inner-1 > ul > li > ul > li:nth-child(2) > h4 {
+
+.compare-child-2-inner-1>ul>li>ul>li:nth-child(2)>h4 {
     /* Your styles here */
     color: #303030;
     font-family: "TSTAR-PRO-Bold";
     font-weight: 700;
 }
-.compare-container > .default-content-wrapper > h2 {
+
+.compare-container>.default-content-wrapper>h2 {
     /* check this */
     text-align: center;
     font-family: "TSTAR-PRO-Heavy";
@@ -101,34 +118,43 @@
 }
 
 @media (max-width: 1000px) {
-    .compare-container > .default-content-wrapper > h2 {
-        font-size: 35px; /* check this */
+    .compare-container>.default-content-wrapper>h2 {
+        font-size: 35px;
+        /* check this */
     }
-    .compare-child-1-inner-1 > p {
+
+    .compare-child-1-inner-1>p {
         position: static;
     }
-    .compare-child-1-inner-2 > p {
+
+    .compare-child-1-inner-2>p {
         position: static;
     }
+
     .compare {
         padding: 15px 10px;
     }
+
     .compare-child-1 {
-       gap: 73px;
+        gap: 63px;
     }
 }
 
 @media (max-width: 465px) {
-    .compare-container > .default-content-wrapper > h2 {
-        font-size: 25px; /* check this */
+    .compare-container>.default-content-wrapper>h2 {
+        font-size: 25px;
+        /* check this */
     }
-    .compare-child-1-inner-1 > h3 {
+
+    .compare-child-1-inner-1>h3 {
         font-size: 20px;
     }
-    .compare-child-1-inner-2 > h3 {
+
+    .compare-child-1-inner-2>h3 {
         font-size: 20px;
     }
-    .compare-child-2-inner-1 > ul > li > ul > li > h4 {
+
+    .compare-child-2-inner-1>ul>li>ul>li>h4 {
         font-size: 20px;
     }
 
@@ -140,6 +166,7 @@
 
 /*change becouse now is first component */
 
-.compare-container{
+.section.compare-container {
+    margin: unset;
     margin-top: 50px !important;
 }

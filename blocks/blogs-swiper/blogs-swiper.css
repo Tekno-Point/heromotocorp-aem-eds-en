@@ -63,7 +63,7 @@
 /* Image inside card */
 .blogs-swiper .swiper-slide img {
     width: 100%;
-    height: auto;
+    height: 295px;
     display: block;
     border-radius: 4px;
     margin-bottom: 12px;
@@ -181,6 +181,10 @@
     } 
     .section.blogs-swiper-container>.blogs-swiper-wrapper>.blogs-swiper{
         padding: 10px 30px ;
+    }
+
+    .blogs-swiper .swiper-slide img{
+        height: 265px;
     }
 }
 

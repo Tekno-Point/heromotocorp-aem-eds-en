@@ -152,9 +152,8 @@ export async function decorateProductBanner(block, data) {
                 div({ class: "spritespin-stage" },
                     img({
                         class: "rotate", src: firstImage.url,
-                        width: "500",
-                        height: "500",
-                        style: "transform: translate3d(0,0,0);"
+                        width: "490",
+                        height: "350"
                     })
                 )
             ),

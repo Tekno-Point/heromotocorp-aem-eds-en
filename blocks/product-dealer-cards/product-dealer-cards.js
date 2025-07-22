@@ -109,7 +109,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
   inputEl.addEventListener("focus", () => {
     if (disabled) return; // 🔹 Prevent focus actions when disabled
     updateOptions();
-    inputEl.select();
+    // inputEl.select();
   });
 
   clearBtn.addEventListener("click", () => {
