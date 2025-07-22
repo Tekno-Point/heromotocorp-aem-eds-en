@@ -300,6 +300,7 @@
     .price-listing>div:nth-child(2)>div>h1 {
         font-size: 28px;
         text-align: center;
+        padding-bottom: 10px;
     }
 
     .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>div {
@@ -347,7 +348,9 @@
     }
 
     .block.price-listing {
+        margin: 0px;
         gap: 0px;
+        padding: 10px;
     }
 
     .price-listing>div:nth-child(2)>div>ul>li:nth-child(2)>div>a:nth-child(2) {
@@ -364,4 +367,7 @@
         line-height: 20px;
     }
 
+    .price-listing .col-6>.price-details-col>.price-details-col__text{
+        font-size: 18px;
+    }
 }
