@@ -228,6 +228,19 @@ button.secondary {
   color: var(--text-color);
 }
 
+/* show price */
+.banner-price>.default-content-wrapper>ul{
+  padding: unset;
+  margin: unset;
+}
+
+.banner-price {
+    @media (width >=900px) {
+        height: 140px;
+        padding: 0;
+    }
+}
+
 main img {
   max-width: 100%;
   width: auto;
