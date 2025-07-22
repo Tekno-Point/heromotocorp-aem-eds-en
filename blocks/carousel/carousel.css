@@ -369,6 +369,8 @@
 
     .carousel .swiper-wrapper>.swiper-slide {
         margin-top: 60px;
+        justify-content: center;
+        align-items: center;
     }
 
     .swiper-button-prev {

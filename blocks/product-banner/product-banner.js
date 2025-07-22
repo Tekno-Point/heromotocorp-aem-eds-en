@@ -135,7 +135,7 @@ export async function decorateProductBanner(block, data) {
                         div({ class: "price-txt-wrap " },
                             input(radioProps),
                             label({ for: value_index, class: "" }, span(variantLabel)),
-                            div({ class: "price-sec" }, span(`₹ ${variant_price.toLocaleString('en-IN')}`))
+                            div({ class: "price-sec" }, span(`( ₹ ${variant_price.toLocaleString('en-IN')} )`))
                         )
                     );
                 })
