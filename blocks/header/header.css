@@ -502,4 +502,5 @@ body.appear {
 
 .nav-bar>.default-content-wrapper>ul:nth-child(3)>li:nth-child(2)>a{
 padding: 10px 32px;
+line-height: 24px;
 }
