@@ -27,7 +27,7 @@ let isStateOpen = false;
 let isCityOpen = false;
 
 function populateList(input, list, data, onSelect) {
-  // list.innerHTML = '';
+  list.innerHTML = '';
   const typedValue = (input.dataset.filter || '').trim().toLowerCase();
   const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
   const currentValue = input.value.trim().toLowerCase();
@@ -125,7 +125,7 @@ async function decoratePriceListing() {
             ),
             div({ class: 'col-6' },
               div({ class: 'price-details-col' },
-                div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, `₹ ${v.variant_price}`))
+                div({ class: 'price-details-col__text' }, p({ class: 'body2 weight-medium' }, `₹ ${v.variant_price.toLocaleString('en-IN')}`))
               )
             )
           )
@@ -139,6 +139,11 @@ async function decoratePriceListing() {
     populateList(si, sl, states, onStateSelect);
     sl.style.display = 'block';
     isStateOpen = true;
+    // Close city dropdown if state is focused
+    if (isCityOpen) {
+      cl.style.display = 'none';
+      isCityOpen = false;
+    }
   });
 
   si.addEventListener('input', () => {
@@ -146,6 +151,11 @@ async function decoratePriceListing() {
     populateList(si, sl, states, onStateSelect);
     sl.style.display = 'block';
     isStateOpen = true;
+    // Close city dropdown if state input is typed into
+    if (isCityOpen) {
+      cl.style.display = 'none';
+      isCityOpen = false;
+    }
   });
 
   sd.addEventListener('click', e => {
@@ -154,6 +164,11 @@ async function decoratePriceListing() {
       sl.style.display = 'none';
       isStateOpen = false;
     } else {
+      // Close city dropdown before opening state dropdown
+      if (isCityOpen) {
+        cl.style.display = 'none';
+        isCityOpen = false;
+      }
       si.dataset.filter = '';
       populateList(si, sl, states, onStateSelect);
       sl.style.display = 'block';
@@ -170,6 +185,7 @@ async function decoratePriceListing() {
     ci.disabled = true;
     cl.style.display = 'none';
     isCityOpen = false;
+    priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
   });
 
   ci.addEventListener('focus', () => {
@@ -178,6 +194,11 @@ async function decoratePriceListing() {
     populateList(ci, cl, selectedState.cities, onCitySelect);
     cl.style.display = 'block';
     isCityOpen = true;
+    // Close state dropdown if city is focused
+    if (isStateOpen) {
+      sl.style.display = 'none';
+      isStateOpen = false;
+    }
   });
 
   ci.addEventListener('input', () => {
@@ -186,6 +207,11 @@ async function decoratePriceListing() {
     populateList(ci, cl, selectedState.cities, onCitySelect);
     cl.style.display = 'block';
     isCityOpen = true;
+    // Close state dropdown if city input is typed into
+    if (isStateOpen) {
+      sl.style.display = 'none';
+      isStateOpen = false;
+    }
   });
 
   cd.addEventListener('click', e => {
@@ -195,6 +221,11 @@ async function decoratePriceListing() {
       cl.style.display = 'none';
       isCityOpen = false;
     } else {
+      // Close state dropdown before opening city dropdown
+      if (isStateOpen) {
+        sl.style.display = 'none';
+        isStateOpen = false;
+      }
       ci.dataset.filter = '';
       populateList(ci, cl, selectedState.cities, onCitySelect);
       cl.style.display = 'block';
@@ -207,6 +238,7 @@ async function decoratePriceListing() {
     ci.value = '';
     cl.style.display = 'none';
     isCityOpen = false;
+    priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
   });
 
   document.addEventListener('click', e => {
@@ -227,6 +259,8 @@ async function decoratePriceListing() {
     ci.value = '';
     cl.style.display = 'none';
     isCityOpen = false;
+
+    priceInfo.innerHTML = '<p class="no-results">Please select a city to view prices.</p>';
 
     sl.style.display = 'none';
     isStateOpen = false;
@@ -264,6 +298,8 @@ async function decoratePriceListing() {
 
   if (selectedState && selectedCity) {
     renderPriceTable(selectedState.label, selectedCity.code);
+  } else {
+    priceInfo.innerHTML = '<p class="no-results">Please select a state and city to view prices.</p>';
   }
 
   return { dropdowns, fieldsetEl }
