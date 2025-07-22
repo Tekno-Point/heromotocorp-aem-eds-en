@@ -509,3 +509,7 @@ main .section.highlight {
 .section .block {
   display: block;
 }
+
+.dp-none{
+  display: none;
+}
