@@ -393,6 +393,7 @@
 
     .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>div {
         font-size: 14px;
+        gap: 12px;
     }
 
     .price-listing>div:nth-child(2)>div>p {

@@ -1,12 +1,97 @@
 import { getMetadata } from "../../scripts/aem.js";
 import initCompare from "./compare.js";
 import { loadFragment } from "../fragment/fragment.js";
-import { appendXF } from "./xf.js";
 import { onVehicleAdd, onVehicleRmove } from "./compare-components.js";
 import { stageendpoint } from "../../scripts/common.js";
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia("(min-width: 900px)");
+
+export async function getFetchAPI(url) {
+  try {
+    const resp = await fetch(url);
+    // const text = type === 'json' ? await resp.json() : await resp.text();
+    return resp;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function appendXF(block, xfPath) {
+  // block.style.display = 'none';
+  const resp = await getFetchAPI(xfPath);
+  if (resp.ok) {
+    let str = await resp.text();
+    const { location } = window;
+    if (location.href.includes('localhost') || location.href.includes('.aem.live')) {
+      str = str.replaceAll(
+        '/etc.clientlibs/',
+        'https://stage.heromotocorp.com/etc.clientlibs/',
+      );
+      str = str.replaceAll(
+        '/content/dam/',
+        'https://stage.heromotocorp.com/content/dam/',
+      );
+      str = str.replaceAll('hp-hide-cmp-checkbox', '');
+    }
+    const div = document.createElement('div');
+    div.innerHTML = str;
+    div.querySelector('.tray-container').remove();
+    div.querySelector('.drawer-container').remove();
+
+    div.querySelectorAll('link').forEach((link) => {
+      try {
+        const newLink = document.createElement('link');
+        newLink.href = link.href
+        // newLink.href = link.href.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
+        newLink.rel = 'stylesheet';
+        document.head.append(newLink);
+      } catch (error) {
+        console.error(error); // eslint-disable-line
+      }
+    });
+    block.append(div);
+    function addClientLibScript() {
+      block.removeEventListener('mouseover', addClientLibScript);
+      document.removeEventListener('touchstart', addClientLibScript)
+      div.querySelectorAll('script').forEach((link) => {
+        const exculdeLink = [
+          // '/clientlibs/granite/',
+          // '/foundation/clientlibs',
+        ];
+        // debugger;
+        if (!exculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
+          try {
+            const newScript = document.createElement('script');
+            newScript.src = link.src;
+          //   newScript.src = link.src.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
+            newScript.type = 'text/javascript';
+  
+            document.body.append(newScript);
+          } catch (error) {
+            console.error(error); // eslint-disable-line
+          }
+        }
+      });
+    }
+    block.addEventListener('mouseover', addClientLibScript)
+    document.addEventListener('touchstart', addClientLibScript)
+    // addClientLibScript();
+    // block.style.display = 'block';
+    
+    // setTimeout(() => {
+    //     // $.noConflict();
+    //   const event = new Event('DOMContentLoaded');
+    //   // Dispatch the event
+    //   document.dispatchEvent(event);
+    // });
+    // if (window.isLast) {
+    // }
+    // window.isLast = true;
+  }
+  
+  return block;
+}
 
 function closeOnEscape(e) {
   if (e.code === "Escape") {
@@ -267,6 +352,7 @@ export default async function decorate(block) {
         });
       });
   }
+
 
   await appendXF(
     block,

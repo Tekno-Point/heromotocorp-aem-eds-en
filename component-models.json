@@ -151,6 +151,10 @@
         "label": "Style",
         "options": [
           {
+            "name": "Hide",
+            "value": "dp-none"
+          },
+          {
             "name": "Highlight",
             "value": "highlight"
           },

@@ -121,7 +121,7 @@
     width: 96%;
     max-height: 250px;
     overflow-y: auto;
-    z-index: 999;
+    z-index: 2;
     background: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -253,7 +253,13 @@
 }
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>label {
-    font-family: 'TSTAR-PRO-Heavy';
+    font-family: 'TSTAR-PRO-Bold';
+    font-size: 18px;
+    font-weight: 700;
+
+    @media (width<767px) {
+        font-size: 16px;
+    }
 }
 
 .price-listing .custom-dropdown-list>.dropdown-item {
@@ -265,15 +271,25 @@
 }
 
 .price-listing .input-wrapper>.react-select__input {
-    font-family: 'TSTAR-PRO-Heavy';
-    font-weight: 500;
+    font-family: 'TSTAR-PRO-Bold';
+    font-weight: 800;
     font-size: 18px;
     line-height: 24px;
+
+    @media (width<767px) {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .react-select__input::placeholder {
-    font-family: 'TSTAR-PRO-Heavy';
+    font-family: 'TSTAR-PRO-Bold';
+    font-size: 18px;
     color: #6A737D;
+
+    @media (width<767px) {
+        font-size: 16px;
+    }
 }
 
 .price-listing .col-6>.price-details-col>.price-details-col__text {
