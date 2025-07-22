@@ -244,7 +244,7 @@
 .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>div {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 /* images */
@@ -266,6 +266,9 @@
 
 .price-listing .input-wrapper>.react-select__input {
     font-family: 'TSTAR-PRO-Heavy';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
 }
 
 .react-select__input::placeholder {
@@ -345,6 +348,20 @@
 
     .block.price-listing {
         gap: 0px;
+    }
+
+    .price-listing>div:nth-child(2)>div>ul>li:nth-child(2)>div>a:nth-child(2) {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px 24px;
+        line-height: 20px;
+    }
+
+    .price-listing>div:nth-child(2)>div>ul>li:nth-child(2)>div>a:nth-child(1) {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px 24px;
+        line-height: 20px;
     }
 
 }

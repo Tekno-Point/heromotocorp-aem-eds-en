@@ -180,7 +180,7 @@ section .buy-card-container>.buy-card-wrapper{
 
 @media (max-width : 325px){
        .cards-card-body > p:nth-child(3) {
-        left: 68px;
+        left: 90px;
        }
 }
 

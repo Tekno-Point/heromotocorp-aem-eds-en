@@ -257,6 +257,7 @@
 
 .carousel .inner-innerSub-1>h2 {
     font-family: "TSTAR-PRO-Bold";
+    font-family: 'TSTAR-PRO-Heavy';
     font-size: 32px;
     padding-bottom: 12px;
     border-bottom: 1px solid #a5a5a5;
@@ -284,6 +285,7 @@
 
 .section .carousel-wrapper .carousel .swiper-pagination>h3.swiper-pagination-bullet-active {
     font-weight: 900;
+    font-family: "TSTAR-PRO-Heavy";
 }
 
 .carousel #xsens-fi-technology {
@@ -369,6 +371,8 @@
 
     .carousel .swiper-wrapper>.swiper-slide {
         margin-top: 60px;
+        justify-content: center;
+        align-items: center;
     }
 
     .swiper-button-prev {
