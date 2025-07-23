@@ -72,12 +72,30 @@ function buildAutoBlocks() {
 }
 
 /**
+ * Wraps images followed by links within a matching <a> tag.
+ * @param {Element} container The container element
+ */
+function wrapImgsInLinks(container) {
+  const pictures = container.querySelectorAll('picture');
+  pictures.forEach((pic) => {
+    // debugger;
+    const link = pic?.parentElement?.nextElementSibling?.firstElementChild;
+    if (link && link.tagName === 'A' && link.href) {
+      link.innerHTML = pic.outerHTML;
+      link.parentElement.remove();
+      pic.replaceWith(link);
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
+  wrapImgsInLinks(main);
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
