@@ -96,7 +96,7 @@ header nav[aria-expanded="true"] {
 .nav-bar>.default-content-wrapper>ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 28px;
     margin-right: 17px;
 }
 

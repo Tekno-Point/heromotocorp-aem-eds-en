@@ -292,6 +292,9 @@
     .product-dealer-cards-container>.default-content-wrapper>h2 {
         font-size: 28px;
     }
+    .product-dealer-cards>.swiper {
+      min-height: 380px;
+    }
 }
 
 .product-dealer-cards-container.section {
