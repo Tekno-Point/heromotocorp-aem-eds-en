@@ -351,7 +351,7 @@ export default async function decorate(block) {
       .querySelectorAll(".header .section.nav-bar ul li ")
       .forEach((link) => {
         link.addEventListener("click", (e) => {
-          // e.preventDefault();
+          e.preventDefault();
           const targetId = e.target
             .closest("li")
             .querySelector("a")
