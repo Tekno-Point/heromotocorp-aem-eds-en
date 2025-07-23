@@ -53,7 +53,7 @@ export default function decorate(block) {
   const emiOutput = div({ class: 'emi-output' },
     p({ class: 'emi-title' }, 'Monthly Payment (EMI)'),
     emiValue,
-    button({}, 'APPLY LOAN')
+    button({class:'apply-btn'}, 'APPLY LOAN')
   );
 
   const wrapper = div({ class: 'emi-container' }, controls, emiOutput);
@@ -150,4 +150,11 @@ export default function decorate(block) {
   updateFill(amountSlider);
   updateFill(rateSlider);
   updateFill(monthsSlider);
+  const btn = block.querySelector('.apply-btn');
+  if(btn){
+  btn.addEventListener('click',function(){
+  window.location.href = 'https://www.heromotocorp.com/en-in/pre-approved-offers.html'
+  })
+  }
+  
 }
