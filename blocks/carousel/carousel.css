@@ -444,8 +444,8 @@
 
     .carousel .inner-innerSub-1>h2 {
         width: max-content;
-        font-family: "TSTAR-PRO-Regular";
-        padding-bottom: 20px;
+        font-family: "TSTAR-PRO-Bold";
+        padding-bottom: 8px;
         border-bottom: 1px solid #a5a5a5;
         /* width: max-content; */
         color: #303030;
@@ -461,5 +461,9 @@
     width: 100%;
     justify-content: space-between;
     padding: 16px;
+   }
+
+   .section.carousel-container{
+    margin: 16px;
    }
 }
