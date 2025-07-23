@@ -6,7 +6,7 @@ import { stageendpoint } from "../../scripts/common.js";
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia("(min-width: 900px)");
-
+let scriptcount = 0;
 export async function getFetchAPI(url) {
   try {
     const resp = await fetch(url);
@@ -23,7 +23,7 @@ export async function appendXF(block, xfPath) {
   if (resp.ok) {
     let str = await resp.text();
     const { location } = window;
-    if (location.href.includes('localhost') || location.href.includes('.aem.live')) {
+    if (location.href.includes('localhost') || location.href.includes('.aem.live') || location.href.includes('.aem.page')) {
       str = str.replaceAll(
         '/etc.clientlibs/',
         'https://stage.heromotocorp.com/etc.clientlibs/',
@@ -52,15 +52,28 @@ export async function appendXF(block, xfPath) {
     });
     block.append(div);
     function addClientLibScript(e) {
-      block.removeEventListener('click', addClientLibScript);
-      document.removeEventListener('touchstart', addClientLibScript)
+      if(window.location.href.endsWith('splendor-plus')) {
+        block.removeEventListener('click', addClientLibScript);
+        document.removeEventListener('touchstart', addClientLibScript)
+      }
       div.querySelectorAll('script').forEach((link) => {
         const exculdeLink = [
-          // '/clientlibs/granite/',
+          // '/granite/csrf'
+        ]
+        const inculdeLink = [
+          '/clientlibs/granite/jquery',
           // '/foundation/clientlibs',
+          '/clientlib-dependencies',
+          // '/components/commons',
+          // '/clientlibs/clientlib-base',
+          'clientlib-site-lite',
+          '/clientlib-page'
         ];
         // debugger;
-        if (!exculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
+        // if (!exculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
+        if (inculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
+          scriptcount++;
+          console.log(scriptcount , ' : ',link.src);
           try {
             const newScript = document.createElement('script');
             newScript.src = link.src;
@@ -71,33 +84,26 @@ export async function appendXF(block, xfPath) {
           } catch (error) {
             console.error(error); // eslint-disable-line
           }
+        }else{
+          console.warn(`Skipping script: ${link.src}`);
         }
       });
-      setTimeout(() => {
-        e.target.closest('.megamenu-li').querySelector('span').click();
+      // setTimeout(() => {
+        // e.target.closest('.megamenu-li').querySelector('span').click();
         // $(e.target.closest('.megamenu-li')).trigger('click');
       //   e.target.closest('.nav-item').classList.add('active');
       //   e.target.closest('.nav-item').querySelector('.dropdown-menu').classList.add('megamenu', 'slim-scroll' ,'homepage-drop-animation');
       //   e.target.closest('.nav-item').querySelector('.scroll-indicator').style.display = 'flex';
-      },1000)
+      // },1000)
       // debugger;
     }
-    block.addEventListener('click', addClientLibScript)
-    document.addEventListener('touchstart', addClientLibScript)
-    // addClientLibScript();
-    // block.style.display = 'block';
-    
-    // setTimeout(() => {
-    //     // $.noConflict();
-    //   const event = new Event('DOMContentLoaded');
-    //   // Dispatch the event
-    //   document.dispatchEvent(event);
-    // });
-    // if (window.isLast) {
-    // }
-    // window.isLast = true;
+    if(window.location.href.endsWith('splendor-plus')) {
+      block.addEventListener('click', addClientLibScript)
+      document.addEventListener('touchstart', addClientLibScript)
+    }else{
+      addClientLibScript();
+    }
   }
-  
   return block;
 }
 

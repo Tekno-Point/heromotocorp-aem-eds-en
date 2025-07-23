@@ -225,6 +225,7 @@
     padding: 8px 24px;
     font-size: 20px;
     line-height: 1.75rem;
+    padding: .625rem 2rem;
 }
 
 .price-listing>div:nth-child(2)>div>h1 {
@@ -385,5 +386,12 @@
 
     .price-listing .col-6>.price-details-col>.price-details-col__text{
         font-size: 18px;
+    }
+    .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>.price-details--info>.row>div p {
+        font-size: 0.875rem;
+        font-weight: 400;
+    }
+    .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>div {
+        gap: 12px;
     }
 }
