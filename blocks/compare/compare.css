@@ -1,5 +1,5 @@
-.section.compare-container>.compare-wrapper {
-    padding: 20px 0px;
+.section.compare-container > .compare-wrapper {
+    padding: 0px 0px 10px;
     max-width: 100%;
 }
 
@@ -33,24 +33,24 @@
     width: 100%;
 }
 
-.compare-child-1-inner-2.compare-child-inner{
+.compare-child-1-inner-2.compare-child-inner {
     align-items: end;
-}   
+}
 
-.compare-child-1-inner-1>h3 {
+.compare-child-1-inner-1 > h3 {
     color: rgb(338 35 38);
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     color: #ee2326;
 }
 
-.compare-child-1-inner-1>p {
+.compare-child-1-inner-1 > p {
     position: absolute;
     left: 0px;
     top: 0%;
 }
 
-.compare-child-1-inner-2>p {
+.compare-child-1-inner-2 > p {
     position: absolute;
     right: 26px;
     top: 0%;
@@ -68,43 +68,43 @@
     width: 100%;
 }
 
-.compare-child-2-inner-1>ul {
+.compare-child-2-inner-1 > ul {
     padding: 0px;
     list-style: none;
     width: 100%;
 }
 
-.compare-child-2-inner-1>ul>li {
+.compare-child-2-inner-1 > ul > li {
     padding-top: 2.25rem;
 }
 
-.compare-child-1-inner-2>h3 {
+.compare-child-1-inner-2 > h3 {
     color: #009fda;
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
 }
 
-.compare-child-2-inner-1>ul>li>ul {
+.compare-child-2-inner-1 > ul > li > ul {
     display: flex;
     gap: 40px;
     padding: 0px;
     list-style: none;
 }
 
-.compare-child-2-inner-1>ul>li>ul>li {
+.compare-child-2-inner-1 > ul > li > ul > li {
     max-width: 300px;
     width: 100%;
     text-align: center;
 }
 
-.compare-child-2-inner-1>ul>li>ul>li>h4 {
+.compare-child-2-inner-1 > ul > li > ul > li > h4 {
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     font-size: 24px;
     line-height: 32px;
 }
 
-.compare-child-2-inner-1>ul>li>ul>li:nth-child(2)>h4 {
+.compare-child-2-inner-1 > ul > li > ul > li:nth-child(2) > h4 {
     /* Your styles here */
     color: #303030;
     font-family: "TSTAR-PRO-Bold";
@@ -112,7 +112,7 @@
     line-height: 32px;
 }
 
-.compare-container>.default-content-wrapper>h2 {
+.compare-container > .default-content-wrapper > h2 {
     /* check this */
     text-align: center;
     font-family: "TSTAR-PRO-Heavy";
@@ -124,16 +124,16 @@
 }
 
 @media (max-width: 1000px) {
-    .compare-container>.default-content-wrapper>h2 {
+    .compare-container > .default-content-wrapper > h2 {
         font-size: 35px;
         /* check this */
     }
 
-    .compare-child-1-inner-1>p {
+    .compare-child-1-inner-1 > p {
         position: static;
     }
 
-    .compare-child-1-inner-2>p {
+    .compare-child-1-inner-2 > p {
         position: static;
     }
 
@@ -147,21 +147,21 @@
 }
 
 @media (max-width: 465px) {
-    .compare-container>.default-content-wrapper>h2 {
+    .compare-container > .default-content-wrapper > h2 {
         font-size: 25px;
         padding: 0px;
         /* check this */
     }
 
-    .compare-child-1-inner-1>h3 {
+    .compare-child-1-inner-1 > h3 {
         font-size: 20px;
     }
 
-    .compare-child-1-inner-2>h3 {
+    .compare-child-1-inner-2 > h3 {
         font-size: 20px;
     }
 
-    .compare-child-2-inner-1>ul>li>ul>li>h4 {
+    .compare-child-2-inner-1 > ul > li > ul > li > h4 {
         font-size: 18px;
     }
 
@@ -170,10 +170,16 @@
     } */
 }
 
-
 /*change becouse now is first component */
 
 .section.compare-container {
     margin: unset;
-    margin-top: 50px !important;
+    margin-top: 50px;
+}
+
+@media (width<767px) {
+    .section.compare-container {
+        margin-top: 0;
+        padding: 20px 0;
+    }
 }
