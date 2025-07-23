@@ -15,7 +15,7 @@ function createDropdownInput(placeholder) {
   const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' });
   const clearBtn = span({ class: 'clear-btn' }, '×');
   const dropdownBtn = span({ class: 'dropdown-btn' },
-    img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
+    img({ src: '/icons/svgviewer-png-output.png', width: 16, height: 16, alt: 'Dropdown' })
   );
   const wrapper = div({ class: 'input-wrapper' }, input, clearBtn, dropdownBtn);
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
