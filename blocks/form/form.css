@@ -368,6 +368,8 @@ input::placeholder {
     font-size: 48px;
     line-height: 58px;
     font-weight: 500;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
 }
 
 .section.book-ride .form .plaintext-wrapper p {
