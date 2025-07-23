@@ -11,7 +11,7 @@ let vehiclePriceData = sessionStorage.getItem('vehiclePriceData');
 vehiclePriceData = (vehiclePriceData && vehiclePriceData != 'undefined') ? JSON.parse(vehiclePriceData) : []; // Default to empty array if null or undefined
 
 const getSkuItem = (sku) => {
-    const vehicles = vehiclesList.length ? vehiclesList : vehiclePriceData?.data?.products?.items;  
+    const vehicles = vehiclesList.length ? vehiclesList : vehiclePriceData?.data?.products?.items; 
     const vehicle = vehicles.find((vehicle) => vehicle.sku === sku);
     if (vehicle) {
         return vehicle;
