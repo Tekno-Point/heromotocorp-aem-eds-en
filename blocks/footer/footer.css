@@ -37,7 +37,7 @@ footer .footer p {
     flex-direction: column;
     align-items: start;
     gap: 20px;
-    padding: 15px;
+    padding: 0px 15px;
 
 }
 
@@ -116,10 +116,10 @@ footer .footer p {
     cursor: pointer;
 }
 
-.hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>span{
+/* .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>span{
     width: 32px;
     height: 32px;
-}
+} */
 
 .hero-footer-icon {
     padding-bottom: 55px;
@@ -131,7 +131,7 @@ footer .footer p {
     justify-content: end;
     position: relative;
     align-items: center;
-    padding: 15px;
+    padding: 0px 15px;
 }
 .hero-footer-icon > .default-content-wrapper > ul {
     position: absolute;
@@ -177,10 +177,15 @@ footer .footer p {
  .hero-footer-icon > .default-content-wrapper > ul{
       left: 35px;
  }
- .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>span{
+ .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>a>span{
     width: 32px;
     height: 32px;
 }
+.hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>a>span{
+    width: 32px;
+    height: 32px;
+}
+
 
 .footer .footer > div{
     display: flex;
@@ -200,7 +205,7 @@ footer .footer p {
     justify-content: space-between;
         /* gap: 160px; */
     align-items: center;
-    padding: 15px;
+    padding: 0px 15px;
 }
 .hero-footer-policy > .default-content-wrapper > ul {
     padding: 0px;
@@ -270,4 +275,30 @@ footer .footer > div{
     .hero-footer-icon>.default-content-wrapper>p{
       margin: 0px;
     }
+}
+
+
+/* .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>a>span>img{
+    width: 32px;
+    height: 32px;
+} */
+
+.hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>a{
+    width: 32px;
+    height: 32px;
+}
+.hero-footer-icon > .default-content-wrapper > p{
+    background-color: rgb(24, 24, 24);
+    padding: 2px;
+}
+
+.hero-footer-icon > .default-content-wrapper > p >a>picture>img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul >li>a>span{
+    width: 32px;
+    height: 32px;
 }
