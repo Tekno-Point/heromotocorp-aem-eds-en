@@ -63,6 +63,11 @@ export async function appendXF(block, xfPath) {
           target.parentElement?.classList.contains("nav-link");
 
         if (isNavLink) {
+          this.parentElement
+            ?.querySelectorAll(".megamenu-li.active")
+            ?.forEach((el) => {
+              if (el !== this) el.classList.remove("active");
+            });
           const allMenus = document.querySelectorAll(".megamenu.slim-scroll");
           const thisMenu = this.querySelector(".megamenu.slim-scroll");
 
@@ -349,7 +354,26 @@ export async function appendXF(block, xfPath) {
 
       setTimeout(handleScrollIndicator, 500);
     }
+    const handleClickBikeFilters = (event) => {
+      // Remove 'selected' class from all filters
+      filtersContainer.forEach((filter) => {
+        filter.classList.remove("selected");
+      });
 
+      // Add 'selected' class to the clicked one
+      const clickedFilter = event.currentTarget;
+      clickedFilter.classList.add("selected");
+
+      // Get the filter range and call the filter function
+      const range = clickedFilter.dataset.filterRange;
+      if (range) {
+        filterBikes(range.trim());
+      }
+    };
+    const extractNumberFromSpecification = (str) => {
+      const match = str.match(/(\d+(\.\d+)?)/);
+      return match ? Number(match[0]) : null;
+    };
     // document.querySelector(".navbar-nav").addEventListener("click", (e) => {
     //   const navItem = e.target.closest(".nav-item");
     //   if (!navItem) return;
