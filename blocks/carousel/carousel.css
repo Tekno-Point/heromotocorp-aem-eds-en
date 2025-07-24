@@ -286,6 +286,8 @@
 .section .carousel-wrapper .carousel .swiper-pagination>h3.swiper-pagination-bullet-active {
     font-weight: 900;
     font-family: "TSTAR-PRO-Heavy";
+    /* align-items: center; */
+     /* transform: scale(1.2); */
 }
 
 .carousel #xsens-fi-technology {
@@ -423,6 +425,9 @@
         height: 24px;
         top: 21px;
     }
+    .carousel .inner-innerSub-1>p{
+        font-size: 16px;
+    }
 
     .carousel .swiper-button-prev::after,
     .carousel .swiper-button-next::after {
@@ -430,7 +435,7 @@
     }
 
     .carousel .swiper-button-next {
-        right: 35px;
+        right: 8px;
 
     }
 
@@ -443,12 +448,13 @@
     }
 
     .carousel .inner-innerSub-1>h2 {
-        width: max-content;
+        width:280px;
         font-family: "TSTAR-PRO-Bold";
         padding-bottom: 8px;
         border-bottom: 1px solid #a5a5a5;
         /* width: max-content; */
         color: #303030;
+        font-size: 24px;
     }
 
     .section .carousel-wrapper .carousel .swiper-pagination>h3 {
@@ -466,4 +472,13 @@
    .section.carousel-container{
     margin: 16px;
    }
+}
+
+@media(max-width : 321px){
+        .carousel>.swiper-wrapper>.swiper-slide>.inner-innerSub-2{
+            padding: 0px;
+        }
+        .hero-footer-icon > .default-content-wrapper > p{
+            margin: 10px;
+        }
 }

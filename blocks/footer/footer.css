@@ -2,6 +2,9 @@ footer {
     background-color: var(--light-color);
     font-size: var(--body-font-size-xs);
 }
+.hero-footer-policy {
+    padding: 30px 0px;
+}
 
 .footer-wrapper{
     background-color: black !important;
@@ -47,6 +50,12 @@ footer .footer p {
     width: 100%;
     list-style: none;
     padding: 0px;
+}
+.footer > div > .hero-footer > .default-content-wrapper > ul>li>p{
+padding-bottom: 24px;
+}
+.footer > div > .hero-footer > .default-content-wrapper >p{
+    padding-bottom: 40px;
 }
 .footer > div > .hero-footer > .default-content-wrapper > ul > li {
     text-align: left;
@@ -164,27 +173,35 @@ footer .footer p {
 
     .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul {
         margin: 100px 20px 30px 24px;
+        padding-top: 46px;
     }
       .hero-footer-icon > .default-content-wrapper{
        justify-content: center;
  }
 
+ .hero-footer-policy{
+    padding-bottom: 98px;
+ }
+
  .hero-footer-icon>.default-content-wrapper>p{
   margin-left: 30px;
  margin-bottom: 30px;
+  width: 146px;
+    height: 50px;
  }
 
  .hero-footer-icon > .default-content-wrapper > ul{
       left: 35px;
  }
- .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>a>span{
-    width: 32px;
-    height: 32px;
+ /* .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>a>span{
+    width: 142px;
+    height: 50px;
 }
 .hero-footer-icon > .default-content-wrapper > ul > li:nth-child(1) > ul > li>a>span{
     width: 32px;
     height: 32px;
-}
+} */
+
 
 
 .footer .footer > div{
@@ -197,9 +214,7 @@ footer .footer p {
 }
 
 /* hero-footer-policy */
-.hero-footer-policy {
-    padding: 30px 0px;
-}
+
 .hero-footer-policy > .default-content-wrapper {
     display: flex;
     justify-content: space-between;
@@ -265,6 +280,12 @@ footer .footer > div{
     footer .footer > div{
         padding: 0px;
     }
+    .hero-footer-policy > .default-content-wrapper > ul > li > a {
+    font-size: 12px;
+}
+.hero-footer-policy > .default-content-wrapper > p {
+    font-size: 12px;
+}
   
 }
 
@@ -290,6 +311,7 @@ footer .footer > div{
 .hero-footer-icon > .default-content-wrapper > p{
     background-color: rgb(24, 24, 24);
     padding: 2px;
+    z-index: 2;
 }
 
 .hero-footer-icon > .default-content-wrapper > p >a>picture>img{

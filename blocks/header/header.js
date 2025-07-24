@@ -320,7 +320,7 @@ export default async function decorate(block) {
     //   console.warn("Second <ul> not found");
     // }
 
-    const img = document.querySelector(".nav-bar p");
+    const img = document.querySelectorAll(".nav-bar p");
 
     const navBarWrapper = document.querySelector(
       ".nav-bar > .default-content-wrapper"
@@ -331,8 +331,11 @@ export default async function decorate(block) {
       (document.getElementsByClassName("header-main")[0].style.display =
         "none"),
         (secondUl.style.display = "flex");
-      img.style.display = "block";
-      navBarWrapper.style.height = "72px";
+      // img.style.display = "block";
+       img.forEach((images)=>{
+        images.style.display = "block"
+      })
+      navBarWrapper.style.height = "76px";
       navBarWrapper.style.padding = "0px 10px 0";
       // navBarWrapper.style.top = "0"
     } else {
@@ -341,7 +344,10 @@ export default async function decorate(block) {
         "block"),
         (navBarWrapper.style.padding = "unset");
       secondUl.style.display = "none";
-      img.style.display = "none";
+      // img.style.display = "none";
+       img.forEach((images)=>{
+        images.style.display = "none"
+      })
       navBarWrapper.style.height = "40px";
     }
   });

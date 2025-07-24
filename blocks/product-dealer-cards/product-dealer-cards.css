@@ -217,6 +217,7 @@
     font-family: "TSTAR-PRO-Medium";
     align-items: flex-start;
     column-gap: .625rem;
+    font-size: 18px;
 }
 
 .product-dealer-cards-container>.product-dealer-cards-wrapper {
@@ -297,6 +298,13 @@
     .product-dealer-cards>.swiper {
       min-height: 380px;
     }
+    .product-dealer-cards .dealer-address>.wrapper{
+        font-size: 14px;
+    }
+    .product-dealer-cards .dealer-card>p:nth-of-type(1)>.wrapper,
+    .product-dealer-cards .dealer-card>p:nth-of-type(2)>.wrapper{
+        font-size: 16px;
+    }
 }
 
 .product-dealer-cards-container.section {
@@ -307,4 +315,8 @@
 .custom-input::placeholder {
     color: #6A737D;
     font-weight: bold;
+}
+
+.product-dealer-cards .dealer-card>p:nth-child(4)>.wrapper{
+    font-size: 16px;
 }
