@@ -189,16 +189,16 @@
     gap: 15px;
 }
 
-.product-dealer-cards .dealer-card>div {
-    font-family: "TSTAR-PRO-Heavy";
+.product-dealer-cards .dealer-card>div>.wrapper {
+    font-family: "TSTAR-PRO-Heavy" !important;
     font-weight: 900;
     font-size: 24px;
 }
 
-.product-dealer-cards .dealer-card>p:nth-of-type(1),
-.product-dealer-cards .dealer-card>p:nth-of-type(2) {
+.product-dealer-cards .dealer-card>p:nth-of-type(1)>.wrapper,
+.product-dealer-cards .dealer-card>p:nth-of-type(2).wrapper {
     cursor: pointer;
-    font-family: "TSTAR-PRO-Bold";
+    font-family: "TSTAR-PRO-Bold" !important;
     font-weight: 600;
     font-size: 18px;
     word-break: break-word;
