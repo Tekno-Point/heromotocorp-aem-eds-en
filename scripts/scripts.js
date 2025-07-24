@@ -82,6 +82,7 @@ function wrapImgsInLinks(container) {
     const link = pic?.parentElement?.nextElementSibling?.firstElementChild;
     if (link && link.tagName === 'A' && link.href) {
       link.innerHTML = pic.outerHTML;
+      link.setAttribute('target', '_blank'); // changes fo target blanck
       link.parentElement.remove();
       pic.replaceWith(link);
     }
@@ -180,3 +181,10 @@ async function loadPage() {
 }
 
 loadPage();
+
+
+
+// document.querySelectorAll('a').forEach(a => {
+//   a.setAttribute('target', '_blank');
+// });
+

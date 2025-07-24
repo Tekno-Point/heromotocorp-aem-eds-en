@@ -476,6 +476,17 @@ function decorateIcons(element, prefix = '') {
   const icons = element.querySelectorAll('span.icon');
   icons.forEach((span) => {
     decorateIcon(span, prefix);
+
+  //  this is check for target blanck 
+
+if (span?.parentElement.tagName.toLowerCase() === 'a') {
+     span.parentElement.setAttribute('target', '_blank');
+} else {
+  console.log('No, parent is not <a>');
+}
+
+// end
+
   });
 }
 
