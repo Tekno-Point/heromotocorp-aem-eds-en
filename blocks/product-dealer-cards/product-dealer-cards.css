@@ -195,8 +195,8 @@
     font-size: 24px;
 }
 
-.product-dealer-cards .dealer-card>p:nth-of-type(1)>.wrapper,
-.product-dealer-cards .dealer-card>p:nth-of-type(2).wrapper {
+.product-dealer-cards .dealer-card>.dealer-phone>.wrapper,
+.product-dealer-cards .dealer-card>.dealer-email>.wrapper{
     cursor: pointer;
     font-family: "TSTAR-PRO-Bold" !important;
     font-weight: 600;
