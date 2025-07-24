@@ -42,10 +42,12 @@ function validateName(fieldWrapper, inpVal) {
 
 function validateOtp(fieldWrapper, mobile, otp) {
       const isValid = verifyOtp(mobile, otp);
-        if(!isValid){
+      showError(fieldWrapper,'')
+      if(!otp){
+        showError(fieldWrapper,'The OTP is required')
+      }else         if(!isValid){
           showError(fieldWrapper,'Incorrect OTP')
         }          
-        showError(fieldWrapper,'')
         return isValid;
   
 }
@@ -60,10 +62,22 @@ function validateMobile(fieldWrapper, inpVal) {
       return false;
     }
   } else {
-    showError(fieldWrapper, 'The Mobile is required');
+    showError(fieldWrapper, 'Please Enter a valid Mobile Number');
     return false;
   }
 }
+function validateOtherFields(fieldWrapper, inpName, inpVal) {
+  if(inpVal){
+    showError(fieldWrapper,'')
+    return true
+  }else  if(inpName == "state" ){
+          showError(fieldWrapper,'Select a state')
+    }else if ( inpName == "city") {
+          showError(fieldWrapper,'Select a city')
+        }
+        return false
+}
+
 function validateEmail(fieldWrapper, inpVal) {
   if (inpVal) {
     if (emailRegex.test(inpVal)) {
@@ -359,9 +373,11 @@ export default async function decorate(block) {
   block.querySelector(".sendOTP-btn").addEventListener("click", function () {
     console.log("Hi Send otp");
     try {
-      fetchOTP(form.mobile.value);
       block.querySelector(".sendOTP-btn").classList.add("dsp-none");
       block.querySelector(".resendOTP-btn").classList.remove("dsp-none");
+      form.otp.disabled = false;
+      form.otp.value = '';
+      fetchOTP(form.mobile.value);
     } catch (error) {
       console.log(error);
     } finally {
@@ -370,9 +386,9 @@ export default async function decorate(block) {
   });
 
   block.querySelector(".resendOTP-btn").addEventListener("click", function () {
-    console.log("Hi Send otp");
+    console.log("Hi Resend otp");
     try {
-      fetchOTP("8169850484");
+      fetchOTP(form.mobile.value);
     } catch (error) {
       console.log(error);
     } finally {
@@ -412,7 +428,6 @@ export default async function decorate(block) {
     form.otp.value = '';
     const valid = validateMobile(mobField, mobInp.value);
     if(valid){
-      form.otp.disabled = false;
       block.querySelector(".sendOTP-btn").classList.remove("dsp-none");
       // block.querySelector(".resendOTP-btn").classList.remove("dsp-none");
     }
@@ -433,22 +448,19 @@ export default async function decorate(block) {
 
   // OTP Validation  
   const otpInp = block.querySelector("#form-otp");
-  const otpField = mobInp.closest(".field-wrapper");
+  const otpField = otpInp.closest(".field-wrapper");
   otpInp.addEventListener("input", function () {
     this.value = this.value.substr(0,6);
-    const valid = validateOtp(otpField, form.mobile.value, otpInp.value);
-    if(!valid){
-      showError(otpField,'Incorrect OTP')
-    }
-    showError(otpField,'')
+    validateOtp(otpField, form.mobile.value, otpInp.value);
   })
 
   // Email Validation
   const emailInp = block.querySelector("#form-email");
   const emailField = emailInp.closest(".email-wrapper");
   emailInp.addEventListener("input", function () {
-    checkValidity()
-    // const emailError = emailField.querySelector(".error-msg");
+    // checkValidity()
+    const emailError = emailField.querySelector(".error-msg");
+    validateEmail(emailField, emailInp.value);
     // const value = emailInp.value.trim();
     // if (emailError) {
     //   emailError.remove();
@@ -466,13 +478,14 @@ export default async function decorate(block) {
     const optionField = inp.closest(".field-wrapper");
     const optionError = optionField.querySelector(".error-msg");
     inp.addEventListener("input", function () {
-      const value = inp.value.trim();
-      if (optionError) {
-        optionError.remove();
-      }
-      if (value == "") {
-        optionField.appendChild(errorField("Field is required"));
-      }
+      validateOtherFields(optionField, inp.name, inp.value);
+      // const value = inp.value.trim();
+      // if (optionError) {
+      //   optionError.remove();
+      // }
+      // if (value == "") {
+      //   optionField.appendChild(errorField("kk Field is required"));
+      // }
     });
   });
 
@@ -499,8 +512,7 @@ export default async function decorate(block) {
       } else if (inpName == "email" && !emailRegex.test(inpVal)) {
         return validateEmail(fieldWrapper, inpVal);
       }else if (inpVal == "") {
-        showError(fieldWrapper,'Field is required')
-        return false
+        return validateOtherFields(fieldWrapper, inpName, inpVal);
       }else {
         showError(fieldWrapper,'')
         return true
