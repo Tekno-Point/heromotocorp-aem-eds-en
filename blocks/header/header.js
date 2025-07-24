@@ -308,6 +308,12 @@ export default async function decorate(block) {
   const navWrapper2 = document.querySelector(".nav-wrapper");
   const heroSection = document.querySelector(".banner-price");  //changed it acc to the site
 
+
+ const img = document.querySelectorAll(".nav-bar p");
+   img.forEach((images)=>{
+        images.style.display = "none"
+      })
+
   window.addEventListener("scroll", () => {
     const heroBottom = heroSection.getBoundingClientRect().bottom;
 

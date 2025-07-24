@@ -172,6 +172,7 @@ nav .nav-link.dropdown-toggle.new-header-variation span {
         /*hide btn*/
         display: none;
         align-items: self-end;
+        padding-bottom: 10px;
     }
 
     .nav-bar > .default-content-wrapper > p {
@@ -527,6 +528,13 @@ body.appear {
 @media (max-width: 900px) {
     .nav-bar > .default-content-wrapper {
         align-items: end;
+         max-width: 1200px;
+        /* height: px; */
+        width: 100%;
+        overflow-x: scroll;
+        z-index: 19;
+        overflow-x: scroll;
+       scrollbar-width: thin; 
     }
 
     .section.carousel-container > .default-content-wrapper {
@@ -539,8 +547,12 @@ body.appear {
    } */
 }
 
+.nav-bar > .default-content-wrapper > p:nth-child(4) > picture > img {
+    display: none;
+}
+
 .nav-bar > .default-content-wrapper > p:nth-child(4) {
-    display: none !important;
+    display: none;
 }
 
 @media (max-width: 426px) {
@@ -548,22 +560,32 @@ body.appear {
         display: none !important ;
     }
     .nav-bar > .default-content-wrapper > p:nth-child(4) {
-        display: block !important ;
+        /* display: block !important ;
         position: absolute;
         top: 24px;
         left: 10px;
-        height: 34px;
+        height: 34px; */
+        display: block;
+        position: fixed;
+        top: 78px;
+        left: 0px;
+        padding-left: 10px;
+        height: 40px;
+        width: 50px;
+        background: white;
     }
-    .nav-bar > .default-content-wrapper > p:nth-child(4)>picture>img{
-height: 100%;
+    .nav-bar > .default-content-wrapper > p:nth-child(4) > picture > img {
+        height: 100%;
     }
     .nav-bar > .default-content-wrapper > ul:nth-child(2) {
         padding-left: 62px;
-                /* padding-bottom: 10px; */
+        padding-bottom: 15px;
+       
     }
-    .nav-bar>.default-content-wrapper>ul:nth-child(3)>li:first-child>a{
-        padding: 8px 32px ;
+    .nav-bar > .default-content-wrapper > ul:nth-child(3) > li:first-child > a {
+        padding: 8px 32px;
+    }
+    .nav-bar > .default-content-wrapper > p:nth-child(4) > picture > img {
+        display: block;
     }
 }
-
-
