@@ -682,7 +682,7 @@ export async function appendXF(block, xfPath) {
         .forEach((header) => {
           header.addEventListener("click", function (e) {
             e.stopImmediatePropagation();
-            
+
             const content = this.nextElementSibling;
             const icon = this.querySelector(".icon");
             const anchor = this.querySelector("a");
