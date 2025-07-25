@@ -1,0 +1,176 @@
+import { div, p, input, span, label, button } from '../../scripts/dom-helpers.js';
+
+export default function decorate(block) {
+  const [amountWrap, interestWrap, durationWrap] = block.children;
+
+  const amountMin = parseInt(amountWrap.querySelectorAll('p')[2].textContent.trim());
+  const amountMax = parseInt(amountWrap.querySelectorAll('p')[4].textContent.trim());
+
+  const rateMin = parseInt(interestWrap.querySelectorAll('p')[2].textContent.trim());
+  const rateMax = parseInt(interestWrap.querySelectorAll('p')[4].textContent.trim());
+
+  const monthsMin = parseInt(durationWrap.querySelectorAll('p')[2].textContent.trim());
+  const monthsMax = parseInt(durationWrap.querySelectorAll('p')[4].textContent.trim());
+
+  [amountWrap, interestWrap, durationWrap].forEach((wrap) => wrap.innerHTML = '');
+
+  const amountSlider = input({ type: 'range', min: amountMin, max: amountMax, step: 1, value: amountMin });
+  const rateSlider = input({ type: 'range', min: rateMin, max: rateMax, step: 1, value: rateMin });
+  const monthsSlider = input({ type: 'range', min: monthsMin, max: monthsMax, step: 1, value: monthsMin });
+
+  const amountVal = p({ class: 'input-value' }, `₹ ${amountMin.toLocaleString('en-IN')}`);
+  const amountInput = input({ type: 'text', value: amountMin.toLocaleString('en-IN'), class: 'number-box' });
+
+  const rateVal = p({ class: 'input-value' }, `${rateMin}%`);
+  const rateInput = input({ type: 'text', value: `${rateMin}%`, class: 'number-box' });
+
+  const monthsVal = p({ class: 'input-value' }, `${monthsMin} months`);
+  const monthsInput = input({ type: 'number', value: monthsMin, class: 'number-box' });
+
+  function createSliderGroup(labelText, valP, inputEl, slider, minLabel, maxLabel) {
+    const labelInputRow = div({ class: 'label-input-row' },
+      label({}, labelText),
+      inputEl
+    );
+
+    const sliderElements = [
+      div({ class: 'value-row' }, valP),
+      labelInputRow,
+      div({ class: 'slider-row' }, slider),
+      div({ class: 'range-labels' }, p({}, minLabel), p({}, maxLabel)),
+    ];
+
+    return div({ class: 'slider-group' }, ...sliderElements);
+  }
+
+  const amountGroup = createSliderGroup('Amount Needed (₹)', amountVal, amountInput, amountSlider, '₹ 10 Thousand', '₹ 1 Lakh');
+  const rateGroup = createSliderGroup('Interest rate (P.A)', rateVal, rateInput, rateSlider, '8 %', '15 %');
+  const monthsGroup = createSliderGroup('Duration (Months)', monthsVal, monthsInput, monthsSlider, '12 Months', '60 Months');
+
+  const controls = div({ class: 'emi-controls' }, amountGroup, rateGroup, monthsGroup);
+
+  const emiValue = span({ class: 'emi-value' }, '0');
+  const emiOutput = div({ class: 'emi-output' },
+    p({ class: 'emi-title' }, 'Monthly Payment (EMI)'),
+    emiValue,
+    button({ class: 'apply-btn' }, 'APPLY LOAN')
+  );
+
+  const wrapper = div({ class: 'emi-container' }, controls, emiOutput);
+  block.append(wrapper);
+
+  function calculateEMI(P, r, n) {
+    const monthlyRate = r / 12 / 100;
+    const emi = P * monthlyRate * Math.pow(1 + monthlyRate, n) / (Math.pow(1 + monthlyRate, n) - 1);
+    return Math.round(emi);
+  }
+
+  function updateUI() {
+    const amount = parseFloat(amountSlider.value);
+    const rate = parseFloat(rateSlider.value);
+    const months = parseInt(monthsSlider.value);
+
+    amountVal.textContent = `₹ ${amount.toLocaleString('en-IN')}`;
+    rateVal.textContent = `${Math.round(rate)}%`;
+    monthsVal.textContent = `${months} months`;
+
+    amountInput.value = amount.toLocaleString('en-IN');
+    rateInput.value = `${Math.round(rate)}%`;
+    monthsInput.value = months;
+
+    const emi = calculateEMI(amount, rate, months);
+    emiValue.textContent = `₹ ${emi.toLocaleString('en-IN')}`;
+  }
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function formatIndianNumber(inputEl, value, suffix = '') {
+    if (!isNaN(value)) {
+      inputEl.value = value.toLocaleString('en-IN') + suffix;
+    }
+  }
+
+  function handleNumberInput(inputEl, sliderEl, min, max, isFloat = false, useCommas = false, suffix = '') {
+    inputEl.addEventListener('input', () => {
+      let raw = inputEl.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+      let val = isFloat ? parseFloat(raw) : parseInt(raw);
+
+      if (!isNaN(val)) {
+        // Clamp immediately only for max
+        if (val > max) val = max;
+
+        sliderEl.value = val;
+        updateUI();
+        updateFill(sliderEl);
+
+        if (useCommas) {
+          inputEl.value = val.toLocaleString('en-IN') + suffix;
+        } else {
+          inputEl.value = val + suffix;
+        }
+      }
+    });
+
+    inputEl.addEventListener('blur', () => {
+      let raw = inputEl.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+      let val = isFloat ? parseFloat(raw) : parseInt(raw);
+
+      if (isNaN(val)) val = min;
+      val = clamp(val, min, max);
+
+      sliderEl.value = val;
+      updateUI();
+      updateFill(sliderEl);
+
+      if (useCommas) {
+        inputEl.value = val.toLocaleString('en-IN') + suffix;
+      } else {
+        inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
+      }
+    });
+  }
+
+  function updateFill(range) {
+    const min = range.min;
+    const max = range.max;
+    const val = range.value;
+    const percent = ((val - min) / (max - min)) * 100;
+    range.style.setProperty('--progress', `${percent}%`);
+  }
+
+  // Slider input listeners
+  amountSlider.addEventListener('input', () => {
+    updateUI();
+    updateFill(amountSlider);
+  });
+
+  rateSlider.addEventListener('input', () => {
+    updateUI();
+    updateFill(rateSlider);
+  });
+
+  monthsSlider.addEventListener('input', () => {
+    updateUI();
+    updateFill(monthsSlider);
+  });
+
+  // Input handlers
+  handleNumberInput(amountInput, amountSlider, amountMin, amountMax, false, true);
+  handleNumberInput(rateInput, rateSlider, rateMin, rateMax, false, false, '%');
+  handleNumberInput(monthsInput, monthsSlider, monthsMin, monthsMax);
+
+  // Initial UI setup
+  updateUI();
+  updateFill(amountSlider);
+  updateFill(rateSlider);
+  updateFill(monthsSlider);
+
+  const btn = block.querySelector('.apply-btn');
+  if (btn) {
+    btn.addEventListener('click', function () {
+      window.location.href = 'https://www.heromotocorp.com/en-in/pre-approved-offers.html';
+    });
+  }
+}
