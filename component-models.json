@@ -140,7 +140,7 @@
         "label": "Section Name",
         "description": "The label shown for this section in the Content Tree"
       },
-       {
+      {
         "component": "text",
         "name": "id",
         "label": "Id"
@@ -234,47 +234,47 @@
       }
     ]
   },
-   {
-      "id": "hero",
-      "fields": [
-        {
-          "component": "reference",
-          "valueType": "string",
-          "name": "col1_image",
-          "label": "Image",
-          "multi": false
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "col1_imageAlt",
-          "label": "Image Alt",
-          "value": ""
-        },
-        {
-          "component": "reference",
-          "valueType": "string",
-          "name": "col1_image1",
-          "label": "Image",
-          "multi": false
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "col1_image1Alt",
-          "label": "Image Alt",
-          "value": ""
-        },
-        {
-          "component": "richtext",
-          "name": "text",
-          "value": "",
-          "label": "Text",
-          "valueType": "string"
-        }
-      ]
-    },
- {
+  {
+    "id": "hero",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col1_imageAlt",
+        "label": "Image Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col1_image1",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col1_image1Alt",
+        "label": "Image Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "buy-item",
     "fields": [
       {
@@ -565,7 +565,7 @@
         "valueType": "string",
         "name": "form-url",
         "label": "form path",
-        "value":""
+        "value": ""
       },
       {
         "component": "text",
@@ -603,70 +603,6 @@
     ]
   },
   {
-    "id":"ride-thankyou-content",
-    "fields":[
-        {
-            "component": "reference",
-            "valueType": "string",
-            "name": "col1_loader",
-            "label": "Image",
-            "multi": false
-        },
-        {
-            "component": "text",
-            "valueType": "string",
-            "name": "col1_loaderAlt",
-            "label": "Alt",
-            "value": ""
-        },
-        {
-            "component": "reference",
-            "valueType": "string",
-            "name": "col2_thankyou",
-            "label": "Image",
-            "multi": false
-        },
-        {
-            "component": "text",
-            "valueType": "string",
-            "name": "col2_thankyouAlt",
-            "label": "Alt",
-            "value": ""
-        },
-        {
-            "component": "richtext",
-            "name": "col2_title",
-            "value": "",
-            "label": "Thank You Content",
-            "valueType": "string"
-        }
-    ]
-  },
-  {
-    "id": "thankyou-popup-item",
-    "fields":[
-        {
-            "component": "reference",
-            "valueType": "string",
-            "name": "image",
-            "label": "Image",
-            "multi": false
-        },
-        {
-            "component": "text",
-            "valueType": "string",
-            "name": "imageAlt",
-            "label": "Alt",
-            "value": ""
-        },
-        {
-            "component": "aem-content",
-            "name": "link",
-            "label": "Enter Modal path"
-        }
-    ]
-  },
-   {
     "id": "compare-item1",
     "fields": [
       {
@@ -713,7 +649,7 @@
       }
     ]
   },
-   {
+  {
     "id": "compare-item2",
     "fields": [
       {
@@ -725,7 +661,7 @@
       }
     ]
   },
-   {
+  {
     "id": "splendor-tab-item",
     "fields": [
       {
@@ -735,7 +671,7 @@
         "label": "Text",
         "valueType": "string"
       },
-       {
+      {
         "component": "reference",
         "valueType": "string",
         "name": "col2_image",
@@ -772,7 +708,7 @@
       }
     ]
   },
-   {
+  {
     "id": "form-block",
     "fields": [
       {
@@ -855,7 +791,7 @@
         "name": "Max",
         "label": "Max"
       },
-       {
+      {
         "component": "reference",
         "name": "image",
         "label": "Image",
@@ -894,8 +830,8 @@
       }
     ]
   },
-  
-   {
+
+  {
     "id": "product-dealer-cards",
     "fields": [
       {
@@ -940,6 +876,46 @@
         "valueType": "string",
         "name": "schema-object",
         "label": "Schema Object"
+      }
+    ]
+  },
+  {
+    "id": "ride-thankyou-content",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col1_loader",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col1_loaderAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_thankyou",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_thankyouAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "col2_title",
+        "value": "",
+        "label": "Thank You Content",
+        "valueType": "string"
       }
     ]
   }
