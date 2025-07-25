@@ -96,6 +96,17 @@ export async function appendXF(block, xfPath) {
             }, 50);
           }
 
+          document
+            .querySelectorAll(".bike-item-container .bike-spec p")
+            .forEach((p) => {
+              p.style.display = "block"; // or "inline"
+            });
+
+          document
+            .querySelectorAll(".about-premia-text p")
+            .forEach((p) => {
+              p.style.display = "block"; // or "inline"
+            });
           // Handle combined class names
           const classNames = this.className.split(/\s+/);
           const combinedClassNames = "." + classNames.join(".");
@@ -410,8 +421,6 @@ export async function appendXF(block, xfPath) {
           }
         });
 
-
-
         // initHeaderMenu();
         let homepageDesktopHeaderLogo;
 
@@ -508,7 +517,6 @@ export async function appendXF(block, xfPath) {
           window.addEventListener("resize", handleHeaderBehavior);
           handleHeaderBehavior();
         }
-
 
         ///////////////////////////end///////////
       });
@@ -644,7 +652,9 @@ export async function appendXF(block, xfPath) {
             document
               .querySelector(".new-header-variation.Premium.mobile-accordion")
               ?.scrollIntoView();
-            document.querySelector(".event_register_footer")?.classList.add("hide");
+            document
+              .querySelector(".event_register_footer")
+              ?.classList.add("hide");
             const navbar = document.querySelector(
               ".navbar.navbar-expand-lg.new-header-variation"
             );
@@ -655,7 +665,9 @@ export async function appendXF(block, xfPath) {
             document.documentElement.classList.add("overflow-hidden");
           } else if (menu.classList.contains("open-menu")) {
             document
-              .querySelector(".bike-container-wrapper.show .back-button-container")
+              .querySelector(
+                ".bike-container-wrapper.show .back-button-container"
+              )
               ?.click();
             document.querySelector(".accordion-header .selected")?.click();
             menu.classList.remove("open-menu");
@@ -687,7 +699,8 @@ export async function appendXF(block, xfPath) {
             const icon = this.querySelector(".icon");
             const anchor = this.querySelector("a");
             const parentLi = this.closest("li");
-            const classSelector = "." + Array.from(parentLi.classList).join(".");
+            const classSelector =
+              "." + Array.from(parentLi.classList).join(".");
             mobileMenuHandler(classSelector);
             const isVisible = content.style.display === "block";
             document.querySelectorAll(".hp-dropdown-content").forEach((el) => {
@@ -841,62 +854,65 @@ export async function appendXF(block, xfPath) {
       let selectedCategory = document.querySelector(parentClassName);
       function onFilterClick() {
         if (window.innerWidth >= 1024) return;
-        document.querySelectorAll(".mobile-menu .filters").forEach((filterBtn) => {
-          filterBtn.addEventListener("click", function () {
-            const parentLi = this.closest("li");
-            if (!parentLi) return;
-            const parentLiClasses = Array.from(parentLi.classList);
-            const combinedClassNames = "." + parentLiClasses.join(".");
-            selectedCategory = document.querySelector(combinedClassNames);
-            const isNewLaunch = this.dataset.filterRange;
-            const bikeContainers = selectedCategory.querySelectorAll(
-              ".mobile-menu .bike-container"
-            );
-            const aboutPremiaText = selectedCategory.querySelector(
-              ".mobile-menu .about-premia-text"
-            );
-            if (isNewLaunch === "newlaunch") {
-              if (aboutPremiaText) aboutPremiaText.classList.add("d-none");
-              bikeContainers.forEach((container) => {
-                const isNew = container.dataset.isNewLaunch === "true";
-                container.style.display = isNew ? "flex" : "none";
-              });
-            } else if (isNewLaunch === "aboutpremia") {
-              bikeContainers.forEach(
-                (container) => (container.style.display = "none")
+        document
+          .querySelectorAll(".mobile-menu .filters")
+          .forEach((filterBtn) => {
+            filterBtn.addEventListener("click", function () {
+              const parentLi = this.closest("li");
+              if (!parentLi) return;
+              const parentLiClasses = Array.from(parentLi.classList);
+              const combinedClassNames = "." + parentLiClasses.join(".");
+              selectedCategory = document.querySelector(combinedClassNames);
+              const isNewLaunch = this.dataset.filterRange;
+              const bikeContainers = selectedCategory.querySelectorAll(
+                ".mobile-menu .bike-container"
               );
-              if (aboutPremiaText) aboutPremiaText.classList.remove("d-none");
-            } else {
-              const [minRange, maxRange] = isNewLaunch.split("-").map(Number);
-              if (aboutPremiaText) aboutPremiaText.classList.add("d-none");
-              const bikeSpecs = selectedCategory.querySelectorAll(
-                ".mobile-menu .bike-container .bike-item-container .bike-spec"
+              const aboutPremiaText = selectedCategory.querySelector(
+                ".mobile-menu .about-premia-text"
               );
-              bikeSpecs.forEach((spec, index) => {
-                const match = spec.textContent.match(/\d+/);
-                const number = match ? parseInt(match[0], 10) : 0;
-                const container = bikeContainers[index];
-                container.style.display =
-                  number >= minRange && number <= maxRange ? "flex" : "none";
-              });
-            }
-            const bikeWrapper = selectedCategory.querySelector(
-              ".mobile-menu .bike-container-wrapper"
-            );
-            if (bikeWrapper) bikeWrapper.classList.add("show");
-            document
-              .querySelectorAll("#newMobileNav .accordion-item")
-              .forEach((item) => {
-                item.classList.add("remove-margin");
-              });
-            const labelText = this.querySelector(".filter-label")?.textContent;
-            // debugger;
-            const backText = bikeWrapper.querySelector(
-              "#newMobileNav .back-button-text-container"
-            );
-            if (backText && labelText) backText.textContent = labelText;
+              if (isNewLaunch === "newlaunch") {
+                if (aboutPremiaText) aboutPremiaText.classList.add("d-none");
+                bikeContainers.forEach((container) => {
+                  const isNew = container.dataset.isNewLaunch === "true";
+                  container.style.display = isNew ? "flex" : "none";
+                });
+              } else if (isNewLaunch === "aboutpremia") {
+                bikeContainers.forEach(
+                  (container) => (container.style.display = "none")
+                );
+                if (aboutPremiaText) aboutPremiaText.classList.remove("d-none");
+              } else {
+                const [minRange, maxRange] = isNewLaunch.split("-").map(Number);
+                if (aboutPremiaText) aboutPremiaText.classList.add("d-none");
+                const bikeSpecs = selectedCategory.querySelectorAll(
+                  ".mobile-menu .bike-container .bike-item-container .bike-spec"
+                );
+                bikeSpecs.forEach((spec, index) => {
+                  const match = spec.textContent.match(/\d+/);
+                  const number = match ? parseInt(match[0], 10) : 0;
+                  const container = bikeContainers[index];
+                  container.style.display =
+                    number >= minRange && number <= maxRange ? "flex" : "none";
+                });
+              }
+              const bikeWrapper = selectedCategory.querySelector(
+                ".mobile-menu .bike-container-wrapper"
+              );
+              if (bikeWrapper) bikeWrapper.classList.add("show");
+              document
+                .querySelectorAll("#newMobileNav .accordion-item")
+                .forEach((item) => {
+                  item.classList.add("remove-margin");
+                });
+              const labelText =
+                this.querySelector(".filter-label")?.textContent;
+              // debugger;
+              const backText = bikeWrapper.querySelector(
+                "#newMobileNav .back-button-text-container"
+              );
+              if (backText && labelText) backText.textContent = labelText;
+            });
           });
-        });
         document
           .querySelectorAll(".mobile-menu .back-button-container")
           .forEach((backBtn) => {
@@ -1183,7 +1199,7 @@ export default async function decorate(block) {
   await appendXF(
     block,
     stageendpoint +
-    "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
+      "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
   );
 
   /* init Compare */
