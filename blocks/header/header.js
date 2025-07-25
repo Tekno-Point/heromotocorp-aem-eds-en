@@ -55,6 +55,7 @@ export async function appendXF(block, xfPath) {
       }
     });
     block.append(div);
+    ///////////////////AK11 25-07///////////////
     document.querySelectorAll(".megamenu-li").forEach((menuItem) => {
       menuItem.addEventListener("click", function (event) {
         const target = event.target;
@@ -129,7 +130,7 @@ export async function appendXF(block, xfPath) {
         }
       });
     });
-
+  
     function initHeader(parentClassName) {
       if (parentClassName?.toString().toLowerCase().includes("service")) return;
 
@@ -374,49 +375,33 @@ export async function appendXF(block, xfPath) {
       const match = str.match(/(\d+(\.\d+)?)/);
       return match ? Number(match[0]) : null;
     };
-    // document.querySelector(".navbar-nav").addEventListener("click", (e) => {
-    //   const navItem = e.target.closest(".nav-item");
-    //   if (!navItem) return;
-    //   const type = ['Premia', 'Motorcycles','Scooters'].find(cls => navItem.classList.contains(cls));
-    //   document.querySelectorAll(".nav-item.active").forEach((item) => {
-    //     item.classList.remove("active");
-    //   });
-    //   // ✅ Add classes only to the clicked one
-    //   switch (type) {
-    //     case "Premia":
-    //     case "Motorcycles":
-    //     case "Scooters":
-    //       navItem.classList.add("active");
-    //       navItem
-    //         .querySelector(".dropdown-menu")
-    //         ?.classList.add("homepage-drop-animation");
-    //       navItem
-    //         .querySelector(".bike-filters")
-    //         ?.classList.add("homepage-animate");
-    //       navItem
-    //         .querySelector(".hp-headerenabletracker")
-    //         ?.classList.add("homepage-animate");
-    //       navItem
-    //         .querySelector(".bike-details")
-    //         ?.classList.add("selected", "homepage-animate");
-    //       navItem
-    //         .querySelectorAll(".add-to-compare")
-    //         .forEach((el) => el.classList.add("hp-hide-cmp-checkbox"));
-    //       navItem
-    //         .querySelector(".homepage-fade-left-side")
-    //         ?.classList.add("selected");
-    //       navItem
-    //         .querySelector(".bike-item-container")
-    //         .forEach((el) => el.classList.add("homepage-animate"));
-    //       navItem
-    //         .querySelector(".bike-item-container")
-    //         ?.style.setProperty("display", "flex");
-    //       break;
+    ///////////////////AK11 25-07///////////////
+    document.querySelectorAll(".header-explore-tabs .explore-nav-link").forEach((tab) => {
+    tab.addEventListener("click", function () {
+      const tabId = this.dataset.id;
 
-    //     default:
-    //       break;
-    //   }
-    // });
+      // Remove 'active' class from all tabs
+      document.querySelectorAll(".header-explore-tabs .explore-nav-link").forEach((el) => {
+        el.classList.remove("active");
+      });
+
+      // Add 'active' to clicked tab
+      this.classList.add("active");
+
+      // Hide all tab contents
+      document.querySelectorAll(".header-explore-tabs .explore-tab-content").forEach((content) => {
+        content.classList.add("d-none");
+        content.classList.remove("active");
+      });
+
+      // Show selected tab content
+      const targetContent = document.querySelector(`.header-explore-tabs .explore-tab-content[data-id="${tabId}"]`);
+      if (targetContent) {
+        targetContent.classList.remove("d-none");
+        targetContent.classList.add("active");
+      }
+    });
+  });
   }
   return block;
 }
