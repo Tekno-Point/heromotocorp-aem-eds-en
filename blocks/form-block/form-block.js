@@ -86,11 +86,9 @@ export default function decorate(block) {
     return Math.max(min, Math.min(max, value));
   }
 
-  function formatIndianNumber(inputEl) {
-    const raw = inputEl.value.replace(/,/g, '').replace(/[^\d]/g, '');
-    const val = parseInt(raw);
-    if (!isNaN(val)) {
-      inputEl.value = val.toLocaleString('en-IN');
+  function formatIndianNumber(inputEl, value, suffix = '') {
+    if (!isNaN(value)) {
+      inputEl.value = value.toLocaleString('en-IN') + suffix;
     }
   }
 
@@ -100,15 +98,18 @@ export default function decorate(block) {
       let val = isFloat ? parseFloat(raw) : parseInt(raw);
 
       if (!isNaN(val)) {
-        if (val >= min && val <= max) {
-          sliderEl.value = val;
-          updateUI();
-          updateFill(sliderEl);
-        }
-      }
+        // Clamp immediately only for max
+        if (val > max) val = max;
 
-      if (useCommas) {
-        formatIndianNumber(inputEl);
+        sliderEl.value = val;
+        updateUI();
+        updateFill(sliderEl);
+
+        if (useCommas) {
+          inputEl.value = val.toLocaleString('en-IN') + suffix;
+        } else {
+          inputEl.value = val + suffix;
+        }
       }
     });
 
@@ -118,16 +119,16 @@ export default function decorate(block) {
 
       if (isNaN(val)) val = min;
       val = clamp(val, min, max);
+
       sliderEl.value = val;
+      updateUI();
+      updateFill(sliderEl);
 
       if (useCommas) {
         inputEl.value = val.toLocaleString('en-IN') + suffix;
       } else {
         inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
       }
-
-      updateUI();
-      updateFill(sliderEl);
     });
   }
 
@@ -139,6 +140,7 @@ export default function decorate(block) {
     range.style.setProperty('--progress', `${percent}%`);
   }
 
+  // Slider input listeners
   amountSlider.addEventListener('input', () => {
     updateUI();
     updateFill(amountSlider);
@@ -154,10 +156,12 @@ export default function decorate(block) {
     updateFill(monthsSlider);
   });
 
+  // Input handlers
   handleNumberInput(amountInput, amountSlider, amountMin, amountMax, false, true);
   handleNumberInput(rateInput, rateSlider, rateMin, rateMax, false, false, '%');
   handleNumberInput(monthsInput, monthsSlider, monthsMin, monthsMax);
 
+  // Initial UI setup
   updateUI();
   updateFill(amountSlider);
   updateFill(rateSlider);
