@@ -6,8 +6,8 @@ export default function decorate(block) {
   const amountMin = parseInt(amountWrap.querySelectorAll('p')[2].textContent.trim());
   const amountMax = parseInt(amountWrap.querySelectorAll('p')[4].textContent.trim());
 
-  const rateMin = parseFloat(interestWrap.querySelectorAll('p')[2].textContent.trim());
-  const rateMax = parseFloat(interestWrap.querySelectorAll('p')[4].textContent.trim());
+  const rateMin = parseInt(interestWrap.querySelectorAll('p')[2].textContent.trim());
+  const rateMax = parseInt(interestWrap.querySelectorAll('p')[4].textContent.trim());
 
   const monthsMin = parseInt(durationWrap.querySelectorAll('p')[2].textContent.trim());
   const monthsMax = parseInt(durationWrap.querySelectorAll('p')[4].textContent.trim());
@@ -15,14 +15,14 @@ export default function decorate(block) {
   [amountWrap, interestWrap, durationWrap].forEach((wrap) => wrap.innerHTML = '');
 
   const amountSlider = input({ type: 'range', min: amountMin, max: amountMax, step: 1, value: amountMin });
-  const rateSlider = input({ type: 'range', min: rateMin, max: rateMax, step: 0.1, value: rateMin });
+  const rateSlider = input({ type: 'range', min: rateMin, max: rateMax, step: 1, value: rateMin });
   const monthsSlider = input({ type: 'range', min: monthsMin, max: monthsMax, step: 1, value: monthsMin });
 
   const amountVal = p({ class: 'input-value' }, `₹ ${amountMin.toLocaleString('en-IN')}`);
   const amountInput = input({ type: 'text', value: amountMin.toLocaleString('en-IN'), class: 'number-box' });
 
-  const rateVal = p({ class: 'input-value' }, `${rateMin.toFixed(2)}%`);
-  const rateInput = input({ type: 'text', value: `${rateMin.toFixed(2)}%`, class: 'number-box' });
+  const rateVal = p({ class: 'input-value' }, `${rateMin}%`);
+  const rateInput = input({ type: 'text', value: `${rateMin}%`, class: 'number-box' });
 
   const monthsVal = p({ class: 'input-value' }, `${monthsMin} months`);
   const monthsInput = input({ type: 'number', value: monthsMin, class: 'number-box' });
@@ -53,17 +53,16 @@ export default function decorate(block) {
   const emiOutput = div({ class: 'emi-output' },
     p({ class: 'emi-title' }, 'Monthly Payment (EMI)'),
     emiValue,
-    button({class:'apply-btn'}, 'APPLY LOAN')
+    button({ class: 'apply-btn' }, 'APPLY LOAN')
   );
 
   const wrapper = div({ class: 'emi-container' }, controls, emiOutput);
   block.append(wrapper);
 
-  // EMI formula: P * r * (1+r)^n / ((1+r)^n - 1)
   function calculateEMI(P, r, n) {
     const monthlyRate = r / 12 / 100;
     const emi = P * monthlyRate * Math.pow(1 + monthlyRate, n) / (Math.pow(1 + monthlyRate, n) - 1);
-    return Math.round(emi); // No decimal in result
+    return Math.round(emi);
   }
 
   function updateUI() {
@@ -72,11 +71,11 @@ export default function decorate(block) {
     const months = parseInt(monthsSlider.value);
 
     amountVal.textContent = `₹ ${amount.toLocaleString('en-IN')}`;
-    rateVal.textContent = `${rate.toFixed(2)}%`;
+    rateVal.textContent = `${Math.round(rate)}%`;
     monthsVal.textContent = `${months} months`;
 
     amountInput.value = amount.toLocaleString('en-IN');
-    rateInput.value = `${rate.toFixed(2)}%`;
+    rateInput.value = `${Math.round(rate)}%`;
     monthsInput.value = months;
 
     const emi = calculateEMI(amount, rate, months);
@@ -97,7 +96,20 @@ export default function decorate(block) {
 
   function handleNumberInput(inputEl, sliderEl, min, max, isFloat = false, useCommas = false, suffix = '') {
     inputEl.addEventListener('input', () => {
-      if (useCommas) formatIndianNumber(inputEl);
+      let raw = inputEl.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+      let val = isFloat ? parseFloat(raw) : parseInt(raw);
+
+      if (!isNaN(val)) {
+        if (val >= min && val <= max) {
+          sliderEl.value = val;
+          updateUI();
+          updateFill(sliderEl);
+        }
+      }
+
+      if (useCommas) {
+        formatIndianNumber(inputEl);
+      }
     });
 
     inputEl.addEventListener('blur', () => {
@@ -119,6 +131,14 @@ export default function decorate(block) {
     });
   }
 
+  function updateFill(range) {
+    const min = range.min;
+    const max = range.max;
+    const val = range.value;
+    const percent = ((val - min) / (max - min)) * 100;
+    range.style.setProperty('--progress', `${percent}%`);
+  }
+
   amountSlider.addEventListener('input', () => {
     updateUI();
     updateFill(amountSlider);
@@ -135,26 +155,18 @@ export default function decorate(block) {
   });
 
   handleNumberInput(amountInput, amountSlider, amountMin, amountMax, false, true);
-  handleNumberInput(rateInput, rateSlider, rateMin, rateMax, true, false, '%');
+  handleNumberInput(rateInput, rateSlider, rateMin, rateMax, false, false, '%');
   handleNumberInput(monthsInput, monthsSlider, monthsMin, monthsMax);
-
-  function updateFill(range) {
-    const min = range.min;
-    const max = range.max;
-    const val = range.value;
-    const percent = ((val - min) / (max - min)) * 100;
-    range.style.setProperty('--progress', `${percent}%`);
-  }
 
   updateUI();
   updateFill(amountSlider);
   updateFill(rateSlider);
   updateFill(monthsSlider);
+
   const btn = block.querySelector('.apply-btn');
-  if(btn){
-  btn.addEventListener('click',function(){
-  window.location.href = 'https://www.heromotocorp.com/en-in/pre-approved-offers.html'
-  })
+  if (btn) {
+    btn.addEventListener('click', function () {
+      window.location.href = 'https://www.heromotocorp.com/en-in/pre-approved-offers.html';
+    });
   }
-  
 }
