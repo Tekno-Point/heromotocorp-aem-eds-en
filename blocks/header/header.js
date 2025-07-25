@@ -23,86 +23,385 @@ export async function appendXF(block, xfPath) {
   if (resp.ok) {
     let str = await resp.text();
     const { location } = window;
-    if (location.href.includes('localhost') || location.href.includes('.aem.live') || location.href.includes('.aem.page')) {
+    if (
+      location.href.includes("localhost") ||
+      location.href.includes(".aem.live") ||
+      location.href.includes(".aem.page")
+    ) {
       str = str.replaceAll(
-        '/etc.clientlibs/',
-        'https://stage.heromotocorp.com/etc.clientlibs/',
+        "/etc.clientlibs/",
+        "https://stage.heromotocorp.com/etc.clientlibs/"
       );
       str = str.replaceAll(
-        '/content/dam/',
-        'https://stage.heromotocorp.com/content/dam/',
+        "/content/dam/",
+        "https://stage.heromotocorp.com/content/dam/"
       );
-      str = str.replaceAll('hp-hide-cmp-checkbox', '');
+      str = str.replaceAll("hp-hide-cmp-checkbox", "");
     }
-    const div = document.createElement('div');
+    const div = document.createElement("div");
     div.innerHTML = str;
-    div.querySelector('.tray-container').remove();
-    div.querySelector('.drawer-container').remove();
+    div.querySelector(".tray-container").remove();
+    div.querySelector(".drawer-container").remove();
 
-    div.querySelectorAll('link').forEach((link) => {
+    div.querySelectorAll("link").forEach((link) => {
       try {
-        const newLink = document.createElement('link');
-        newLink.href = link.href
+        const newLink = document.createElement("link");
+        newLink.href = link.href;
         // newLink.href = link.href.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
-        newLink.rel = 'stylesheet';
+        newLink.rel = "stylesheet";
         document.head.append(newLink);
       } catch (error) {
         console.error(error); // eslint-disable-line
       }
     });
     block.append(div);
-    function addClientLibScript(e) {
-      if(window.location.href.endsWith('splendor-plus')) {
-        block.removeEventListener('click', addClientLibScript);
-        document.removeEventListener('touchstart', addClientLibScript)
-      }
-      div.querySelectorAll('script').forEach((link) => {
-        const exculdeLink = [
-          // '/granite/csrf'
-        ]
-        const inculdeLink = [
-          '/clientlibs/granite/jquery',
-          // '/foundation/clientlibs',
-          '/clientlib-dependencies',
-          // '/components/commons',
-          // '/clientlibs/clientlib-base',
-          'clientlib-site-lite',
-          '/clientlib-page'
-        ];
-        // debugger;
-        // if (!exculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
-        if (inculdeLink.filter((clientLib) => link.src.includes(clientLib)).length) {
-          scriptcount++;
-          console.log(scriptcount , ' : ',link.src);
-          try {
-            const newScript = document.createElement('script');
-            newScript.src = link.src;
-          //   newScript.src = link.src.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
-            newScript.type = 'text/javascript';
-  
-            document.body.append(newScript);
-          } catch (error) {
-            console.error(error); // eslint-disable-line
+    ///////////////////AK11 25-07///////////////
+    document.querySelectorAll(".megamenu-li").forEach((menuItem) => {
+      menuItem.addEventListener("click", function (event) {
+        const target = event.target;
+        const isNavLink =
+          target.classList.contains("nav-link") ||
+          target.parentElement?.classList.contains("nav-link");
+
+        if (isNavLink) {
+          this.parentElement
+            ?.querySelectorAll(".megamenu-li.active")
+            ?.forEach((el) => {
+              if (el !== this) el.classList.remove("active");
+            });
+          const allMenus = document.querySelectorAll(".megamenu.slim-scroll");
+          const thisMenu = this.querySelector(".megamenu.slim-scroll");
+
+          // Remove animation if any other has it
+          allMenus.forEach((menu) => {
+            menu.classList.remove("homepage-drop-animation");
+          });
+
+          document.querySelectorAll(".homepage-animate").forEach((el) => {
+            el.classList.remove("homepage-animate");
+          });
+
+          // Handle toggle logic
+          if (
+            thisMenu &&
+            thisMenu.classList.contains("homepage-drop-animation")
+          ) {
+            navTimeoutSession = setTimeout(() => {
+              this.classList.toggle("active");
+            }, 400);
+          } else {
+            this.classList.toggle("active");
+            setTimeout(() => {
+              thisMenu?.classList.add("homepage-drop-animation");
+            }, 50);
           }
-        }else{
-          console.warn(`Skipping script: ${link.src}`);
+
+          // Handle combined class names
+          const classNames = this.className.split(/\s+/);
+          const combinedClassNames = "." + classNames.join(".");
+          const newVariationClassName = "new-header-variation";
+
+          if (combinedClassNames.includes(newVariationClassName)) {
+            this.querySelectorAll(".homepage-animate").forEach((el) => {
+              el.classList.remove("homepage-animate");
+            });
+          }
+
+          dropdownItemsSession = setTimeout(() => {
+            initHeader(combinedClassNames);
+          }, 50);
+
+          // Body class toggle based on active megamenu items
+          const anyActive =
+            document.querySelectorAll(".nav-item.dropdown.megamenu-li.active")
+              .length > 0;
+          document.body.classList.toggle("position-fixed", anyActive);
+
+          // Special case: remove other active menu items if `.e-shop` is active
+          if (document.querySelector(".e-shop")?.classList.contains("active")) {
+            const siblings =
+              this.parentElement?.parentElement?.querySelectorAll(
+                ".megamenu-li"
+              );
+            siblings?.forEach((sibling) => {
+              if (sibling !== this) sibling.classList.remove("active");
+            });
+          }
         }
       });
-      // setTimeout(() => {
-        // e.target.closest('.megamenu-li').querySelector('span').click();
-        // $(e.target.closest('.megamenu-li')).trigger('click');
-      //   e.target.closest('.nav-item').classList.add('active');
-      //   e.target.closest('.nav-item').querySelector('.dropdown-menu').classList.add('megamenu', 'slim-scroll' ,'homepage-drop-animation');
-      //   e.target.closest('.nav-item').querySelector('.scroll-indicator').style.display = 'flex';
-      // },1000)
-      // debugger;
+    });
+  
+    function initHeader(parentClassName) {
+      if (parentClassName?.toString().toLowerCase().includes("service")) return;
+
+      const selectedCategory = document.querySelector(
+        parentClassName?.toString()
+      );
+      if (!selectedCategory) return;
+
+      const bikeArray = selectedCategory.querySelector(
+        ".column2.vehicle-options"
+      );
+      const bikeDetailsArray = selectedCategory.querySelector(
+        ".column3.vehicle-spec-info"
+      );
+      const filtersArray = selectedCategory.querySelector(
+        ".column1.bike-filters"
+      );
+
+      const filtersContainer = filtersArray?.querySelectorAll(".filters");
+      const bikeItemContainers = bikeArray?.querySelectorAll(
+        ".bike-item-container"
+      );
+      const aboutPremiaContainer =
+        bikeArray?.querySelectorAll(".about-premia-text");
+      const aboutPremiaImgContainer = bikeDetailsArray?.querySelector(
+        ".about-premia-image-container"
+      );
+      const bikeDetailsContainers =
+        bikeDetailsArray?.querySelectorAll(".bike-details");
+
+      let timeOutSession;
+
+      // 👇 Bike Item Click
+      const handleClickBikeItem = (event, index) => {
+        bikeItemContainers.forEach((bike) => bike.classList.remove("selected"));
+        event.currentTarget.classList.add("selected");
+        handleBikeDetailsDisplay(index);
+      };
+
+      // 👇 Show Bike Details Panel
+      const handleBikeDetailsDisplay = (index) => {
+        clearTimeout(timeOutSession);
+        bikeDetailsContainers[index].classList.add("selected");
+        setTimeout(() => {
+          bikeDetailsContainers[index].classList.add("homepage-animate");
+        }, 30);
+        bikeDetailsContainers.forEach((item, i) => {
+          if (i !== index) item.classList.remove("homepage-animate");
+        });
+        timeOutSession = setTimeout(() => {
+          bikeDetailsContainers.forEach((item, i) => {
+            if (i !== index) item.classList.remove("selected");
+          });
+        }, 450);
+        setTimeout(handleScrollIndicator, 500);
+      };
+
+      // 👇 Show/Hide Premia Section
+      const handleAboutPremiaDisplay = (isShow) => {
+        if (!aboutPremiaContainer || !aboutPremiaImgContainer) return;
+        if (isShow) {
+          bikeDetailsContainers?.forEach((el) => {
+            el.classList.remove("selected", "homepage-animate");
+          });
+          bikeItemContainers?.forEach((el) => {
+            el.classList.remove("selected");
+            el.style.display = "none";
+          });
+          bikeDetailsArray?.classList.add("p-0");
+          bikeArray
+            ?.querySelector(".scroll-indicator")
+            ?.classList.add("d-none");
+          aboutPremiaContainer?.forEach((el) => el.classList.remove("d-none"));
+          aboutPremiaImgContainer.classList.remove("d-none");
+        } else {
+          aboutPremiaContainer?.forEach((el) => el.classList.add("d-none"));
+          aboutPremiaImgContainer.classList.add("d-none");
+          bikeDetailsArray?.classList.remove("p-0");
+        }
+      };
+
+      // 👇 Filter Click
+      const handleClickBikeFilters = (event, index) => {
+        filtersContainer.forEach((filter) =>
+          filter.classList.remove("selected")
+        );
+        event.currentTarget.classList.add("selected");
+        const range = event.currentTarget.dataset.filterRange;
+        if (range) filterBikes(range.trim());
+      };
+
+      // 👇 Bike Filter Logic
+      const filterBikes = (range) => {
+        clearTimeout(timeOutSession);
+        timeOutSession = setTimeout(() => {
+          bikeItemContainers.forEach((item) =>
+            item.classList.remove("homepage-animate")
+          );
+        });
+
+        setTimeout(() => {
+          let toBeSelectedIndex = -1;
+
+          if (range === "newlaunch") {
+            handleAboutPremiaDisplay(false);
+            bikeItemContainers.forEach((item, index) => {
+              if (item.dataset.isNewLaunch === "true") {
+                item.classList.remove("selected");
+                item.style.display = "flex";
+                setTimeout(() => item.classList.add("homepage-animate"), 50);
+                if (toBeSelectedIndex === -1) {
+                  toBeSelectedIndex = index;
+                  item.classList.add("selected");
+                  handleBikeDetailsDisplay(index);
+                }
+              } else {
+                item.style.display = "none";
+              }
+            });
+          } else if (range === "aboutpremia") {
+            handleAboutPremiaDisplay(true);
+          } else {
+            handleAboutPremiaDisplay(false);
+            const [left, right] = range.split("-");
+            const startRange = Number(left);
+            const endRange = Number(right);
+
+            bikeItemContainers.forEach((item, index) => {
+              const bikeSpec = item.querySelector(".bike-spec")?.textContent;
+              const cc = extractNumberFromSpecification(bikeSpec?.trim() || "");
+              if (cc && cc >= startRange && cc < endRange) {
+                item.classList.remove("selected");
+                item.style.display = "flex";
+                setTimeout(() => item.classList.add("homepage-animate"), 50);
+                if (toBeSelectedIndex === -1) {
+                  toBeSelectedIndex = index;
+                  item.classList.add("selected");
+                  handleBikeDetailsDisplay(index);
+                }
+              } else {
+                item.style.display = "none";
+              }
+            });
+          }
+        }, 350);
+      };
+
+      // 👇 Scroll Indicator Visibility
+      const handleScrollIndicator = () => {
+        const parentDiv = selectedCategory.querySelector(".column.column2");
+        if (!parentDiv) {
+          console.error('Parent div ".column.column2" not found.');
+          return;
+        }
+
+        const bikeItems = parentDiv.querySelectorAll(".bike-item-container");
+        const totalHeight = [...bikeItems].reduce(
+          (sum, el) => sum + el.offsetHeight,
+          0
+        );
+        const scrollIndicator =
+          selectedCategory.querySelector(".scroll-indicator");
+
+        if (totalHeight > parentDiv.offsetHeight) {
+          scrollIndicator.style.display = "flex";
+        } else {
+          scrollIndicator.style.display = "none";
+        }
+      };
+
+      // 👇 DOM Interactions
+      if (bikeArray && bikeItemContainers.length > 0) {
+        bikeItemContainers[0].classList.add("selected");
+        bikeItemContainers.forEach((item, index) => {
+          item.addEventListener("click", (e) => handleClickBikeItem(e, index));
+        });
+      } else {
+        console.error('".column2.vehicle-options" not found.');
+      }
+
+      if (filtersArray && filtersContainer?.length > 0) {
+        filtersArray.classList.remove("homepage-animate");
+        setTimeout(() => {
+          filtersArray.classList.add("homepage-animate");
+        }, 450);
+
+        filtersContainer.forEach((el) => el.classList.remove("selected"));
+        filtersContainer[0].classList.add("selected");
+
+        const defaultRange = filtersContainer[0].dataset.filterRange;
+        if (defaultRange) filterBikes(defaultRange.trim());
+
+        filtersContainer.forEach((filter, index) => {
+          filter.addEventListener("click", (e) =>
+            handleClickBikeFilters(e, index)
+          );
+        });
+      }
+
+      // 👇 Scroll Listener to hide scroll-indicator
+      const scrollContainers = document.querySelectorAll(".column.column2");
+      scrollContainers.forEach((container) => {
+        container.removeEventListener("scroll", handleScrollCheck);
+        container.addEventListener("scroll", handleScrollCheck);
+      });
+
+      function handleScrollCheck(e) {
+        const el = e.target;
+        const scrollPosition = el.scrollTop + el.clientHeight;
+        const divContentHeight = el.scrollHeight;
+        const indicator = el
+          .closest(parentClassName)
+          ?.querySelector(".scroll-indicator");
+        if (!indicator) return;
+
+        if (scrollPosition >= divContentHeight - 1) {
+          indicator.style.display = "none";
+        } else {
+          indicator.style.display = "flex";
+        }
+      }
+
+      setTimeout(handleScrollIndicator, 500);
     }
-    if(window.location.href.endsWith('splendor-plus')) {
-      block.addEventListener('click', addClientLibScript)
-      document.addEventListener('touchstart', addClientLibScript)
-    }else{
-      addClientLibScript();
-    }
+    const handleClickBikeFilters = (event) => {
+      // Remove 'selected' class from all filters
+      filtersContainer.forEach((filter) => {
+        filter.classList.remove("selected");
+      });
+
+      // Add 'selected' class to the clicked one
+      const clickedFilter = event.currentTarget;
+      clickedFilter.classList.add("selected");
+
+      // Get the filter range and call the filter function
+      const range = clickedFilter.dataset.filterRange;
+      if (range) {
+        filterBikes(range.trim());
+      }
+    };
+    const extractNumberFromSpecification = (str) => {
+      const match = str.match(/(\d+(\.\d+)?)/);
+      return match ? Number(match[0]) : null;
+    };
+    ///////////////////AK11 25-07///////////////
+    document.querySelectorAll(".header-explore-tabs .explore-nav-link").forEach((tab) => {
+    tab.addEventListener("click", function () {
+      const tabId = this.dataset.id;
+
+      // Remove 'active' class from all tabs
+      document.querySelectorAll(".header-explore-tabs .explore-nav-link").forEach((el) => {
+        el.classList.remove("active");
+      });
+
+      // Add 'active' to clicked tab
+      this.classList.add("active");
+
+      // Hide all tab contents
+      document.querySelectorAll(".header-explore-tabs .explore-tab-content").forEach((content) => {
+        content.classList.add("d-none");
+        content.classList.remove("active");
+      });
+
+      // Show selected tab content
+      const targetContent = document.querySelector(`.header-explore-tabs .explore-tab-content[data-id="${tabId}"]`);
+      if (targetContent) {
+        targetContent.classList.remove("d-none");
+        targetContent.classList.add("active");
+      }
+    });
+  });
   }
   return block;
 }
@@ -306,7 +605,7 @@ export default async function decorate(block) {
   initCompare();
 
   const navWrapper2 = document.querySelector(".nav-wrapper");
-  const heroSection = document.querySelector(".banner-price");  //changed it acc to the site
+  const heroSection = document.querySelector(".banner-price"); //changed it acc to the site
 
 
  const img = document.querySelectorAll(".nav-bar p");
@@ -379,7 +678,6 @@ export default async function decorate(block) {
       });
   }
 
-
   await appendXF(
     block,
     stageendpoint +
@@ -414,6 +712,8 @@ export default async function decorate(block) {
       e.target.dataset.vehiclesRendered = true;
     });
   });
-
+  document
+    .getElementsByClassName("navbar-nav")
+    .addEventListener("click", addClientLibScript);
   return block;
 }
