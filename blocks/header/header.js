@@ -417,7 +417,7 @@ export async function appendXF(block, xfPath) {
 
         openBtns.forEach((btn) => {
           btn.addEventListener("click", (e) => {
-            e.stopPropagation()
+            e.stopPropagation();
             initHeaderMenu();
           });
         });
@@ -502,6 +502,20 @@ export async function appendXF(block, xfPath) {
                 const isVisible =
                   content.offsetHeight > 0 &&
                   window.getComputedStyle(content).display !== "none";
+
+                document
+                  .querySelectorAll(".hp-dropdown-content")
+                  .forEach((el) => {
+                    el.style.display = "none";
+                  }); ///////hide
+
+                document.querySelectorAll(".drawer-fragment").forEach(el => {
+  el.style.display = "none";
+});
+
+ document.querySelectorAll(".our-range-fragment").forEach(el => {
+  el.style.display = "none";
+});
 
                 if (isVisible) {
                   slideUp(content);
