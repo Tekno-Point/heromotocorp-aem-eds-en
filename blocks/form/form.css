@@ -424,7 +424,8 @@ input::placeholder {
     width: 22%;
 }
 
-.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper {
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -435,7 +436,8 @@ input::placeholder {
     border-bottom: 2px solid #fff;
 }
 
-.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list {
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list ,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list{
     /* display: block; */
     position: absolute;
     top: 43px;
@@ -450,11 +452,13 @@ input::placeholder {
     z-index: 2;
 }
 
-.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list .dropdown-item {
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list .dropdown-item,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list .dropdown-item {
     padding: 0 10px;
 }
 
-.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input {
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper input {
     border: unset;
     /* padding: 0 10px;
     margin-left: 5px; */

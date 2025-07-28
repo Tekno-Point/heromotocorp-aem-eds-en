@@ -261,9 +261,9 @@ export default async function decorate(block) {
     }
   });
 
-  const state_inp = block.querySelector("#form-state");
+  const state_inp = form.state;
   const state_field_wrapper = state_inp.closest(".field-wrapper");
-  const city_inp = block.querySelector("#form-city");
+  const city_inp = form.city;
   const city_field_wrapper = city_inp.closest(".field-wrapper");
 
   const { wrapper: stateCustomWrapper, input: stateCustomInput, clearBtn: stateClearBtn, dropdownBtn: stateDropdownBtn, list: stateList } = createDropdownInput('Select State');
@@ -436,7 +436,7 @@ export default async function decorate(block) {
     isCityOpen = true;
   });
 
-  document.addEventListener('click', e => {
+  block.addEventListener('click', e => {
     if (!stateCustomWrapper.contains(e.target) && isStateOpen) {
       stateList.style.display = 'none';
       isStateOpen = false;
@@ -540,13 +540,13 @@ export default async function decorate(block) {
     }
   });
 
-  const nameInp = block.querySelector("#form-name");
+  const nameInp = form.name;
   const nameField = nameInp.closest(".text-wrapper");
   nameInp.addEventListener("input", function () {
     validateName(nameField, nameInp.value);
   });
 
-  const mobInp = block.querySelector("#form-mobile");
+  const mobInp = form.mobile;
   const mobField = mobInp.closest(".tel-wrapper");
   mobInp.addEventListener("input", function () {
     this.value = this.value.substr(0, 10);
@@ -561,14 +561,14 @@ export default async function decorate(block) {
     }
   });
 
-  const otpInp = block.querySelector("#form-otp");
+  const otpInp = form.otp;
   const otpField = otpInp.closest(".field-wrapper");
   otpInp.addEventListener("input", function () {
     this.value = this.value.substr(0, 6);
     validateOtp(otpField, form.mobile.value, otpInp.value);
   })
 
-  const emailInp = block.querySelector("#form-email");
+  const emailInp = form.email;
   const emailField = emailInp.closest(".email-wrapper");
   emailInp.addEventListener("input", function () {
     validateEmail(emailField, emailInp.value);
