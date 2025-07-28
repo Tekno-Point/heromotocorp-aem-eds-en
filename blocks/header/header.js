@@ -710,6 +710,9 @@ export async function appendXF(block, xfPath) {
             document.querySelectorAll(".our-range-fragment").forEach((el) => {
               el.style.display = "none";
             });
+            document.querySelectorAll(".add-to-compare ").forEach((el) => {
+              el.style.display = "none";
+            });
             document
               .querySelectorAll(".bike-item-container .bike-spec p")
               .forEach((p) => {
