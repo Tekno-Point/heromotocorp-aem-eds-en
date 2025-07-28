@@ -102,11 +102,9 @@ export async function appendXF(block, xfPath) {
               p.style.display = "block"; // or "inline"
             });
 
-          document
-            .querySelectorAll(".about-premia-text p")
-            .forEach((p) => {
-              p.style.display = "block"; // or "inline"
-            });
+          document.querySelectorAll(".about-premia-text p").forEach((p) => {
+            p.style.display = "block"; // or "inline"
+          });
           // Handle combined class names
           const classNames = this.className.split(/\s+/);
           const combinedClassNames = "." + classNames.join(".");
@@ -711,6 +709,15 @@ export async function appendXF(block, xfPath) {
             });
             document.querySelectorAll(".our-range-fragment").forEach((el) => {
               el.style.display = "none";
+            });
+            document
+              .querySelectorAll(".bike-item-container .bike-spec p")
+              .forEach((p) => {
+                p.style.display = "block"; // or "inline"
+              });
+
+            document.querySelectorAll(".about-premia-text p").forEach((p) => {
+              p.style.display = "block"; // or "inline"
             });
             document
               .querySelectorAll("#new-mobile .accordion-content")
