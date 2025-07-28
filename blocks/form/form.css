@@ -1,4 +1,3 @@
-
 .form-container {
     margin: 0 auto;
     display: flex;
@@ -401,7 +400,7 @@ input::placeholder {
     margin: 0 17px;
 }
 
-.section.book-ride .form form fieldset:not(#form-f1){
+.section.book-ride .form form fieldset:not(#form-f1) {
     position: relative;
 }
 
@@ -418,10 +417,47 @@ input::placeholder {
     gap: 0 34px;
     width: 100%;
     justify-content: center;
+    align-items: baseline;
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper {
     width: 22%;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    /* padding: 0 0 12px; */
+    border-bottom: 2px solid #fff;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list {
+    /* display: block; */
+    position: absolute;
+    top: 43px;
+    background: #fff;
+    color: #000;
+    /* padding: 10px; */
+    width: 100%;
+    scrollbar-width: thin;
+    max-height: 250px;
+    padding: 2px 0;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list .dropdown-item {
+    padding: 0 10px;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input {
+    border: unset;
+    /* padding: 0 10px;
+    margin-left: 5px; */
 }
 
 .section.book-ride .form form .field-wrapper input {
@@ -677,6 +713,6 @@ input::placeholder {
     display: none !important;
 }
 
-.dsp-block{
+.dsp-block {
     display: block !important;
 }
