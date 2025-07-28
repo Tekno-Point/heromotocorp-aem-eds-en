@@ -102,11 +102,9 @@ export async function appendXF(block, xfPath) {
               p.style.display = "block"; // or "inline"
             });
 
-          document
-            .querySelectorAll(".about-premia-text p")
-            .forEach((p) => {
-              p.style.display = "block"; // or "inline"
-            });
+          document.querySelectorAll(".about-premia-text p").forEach((p) => {
+            p.style.display = "block"; // or "inline"
+          });
           // Handle combined class names
           const classNames = this.className.split(/\s+/);
           const combinedClassNames = "." + classNames.join(".");
@@ -702,6 +700,7 @@ export async function appendXF(block, xfPath) {
             const classSelector =
               "." + Array.from(parentLi.classList).join(".");
             mobileMenuHandler(classSelector);
+            console.log(classSelector)
             const isVisible = content.style.display === "block";
             document.querySelectorAll(".hp-dropdown-content").forEach((el) => {
               el.style.display = "none";
@@ -712,6 +711,16 @@ export async function appendXF(block, xfPath) {
             document.querySelectorAll(".our-range-fragment").forEach((el) => {
               el.style.display = "none";
             });
+           
+            document
+              .querySelectorAll(".bike-item-container .bike-spec p")
+              .forEach((p) => {
+                p.style.display = "block"; // or "inline"
+              });
+
+            document.querySelectorAll(".about-premia-text p").forEach((p) => {
+              p.style.display = "block"; // or "inline"
+            });
             document
               .querySelectorAll("#new-mobile .accordion-content")
               .forEach((c) => (c.style.display = "none"));
@@ -719,13 +728,17 @@ export async function appendXF(block, xfPath) {
               .querySelectorAll("#new-mobile .accordion-header .icon")
               .forEach((i) => (i.textContent = "+"));
             if (!isVisible) {
+              console.log(content)
               content.style.display = "block";
               icon.textContent = "-";
               anchor?.classList.add("selected");
+               slideDown(content);
             } else {
+           
               content.style.display = "none";
               icon.textContent = "+";
               anchor?.classList.remove("selected");
+                 slideUp(content);
             }
           });
         });
@@ -773,7 +786,7 @@ export async function appendXF(block, xfPath) {
         element.style.removeProperty("transition");
       }, duration);
     }
-    function slideDown(element, duration = 300) {
+    function slideDown(element, duration = 700) {
       element.style.removeProperty("display");
       let display = window.getComputedStyle(element).display;
       if (display === "none") display = "block";
