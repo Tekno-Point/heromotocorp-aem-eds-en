@@ -96,6 +96,15 @@ export async function appendXF(block, xfPath) {
             }, 50);
           }
 
+          document
+            .querySelectorAll(".bike-item-container .bike-spec p")
+            .forEach((p) => {
+              p.style.display = "block"; // or "inline"
+            });
+
+          document.querySelectorAll(".about-premia-text p").forEach((p) => {
+            p.style.display = "block"; // or "inline"
+          });
           // Handle combined class names
           const classNames = this.className.split(/\s+/);
           const combinedClassNames = "." + classNames.join(".");
@@ -130,7 +139,7 @@ export async function appendXF(block, xfPath) {
         }
       });
     });
-  
+
     function initHeader(parentClassName) {
       if (parentClassName?.toString().toLowerCase().includes("service")) return;
 
@@ -376,35 +385,598 @@ export async function appendXF(block, xfPath) {
       return match ? Number(match[0]) : null;
     };
     ///////////////////AK11 25-07///////////////
-    document.querySelectorAll(".header-explore-tabs .explore-nav-link").forEach((tab) => {
-    tab.addEventListener("click", function () {
-      const tabId = this.dataset.id;
+    document
+      .querySelectorAll(".header-explore-tabs .explore-nav-link")
+      .forEach((tab) => {
+        tab.addEventListener("click", function () {
+          const tabId = this.dataset.id;
 
-      // Remove 'active' class from all tabs
-      document.querySelectorAll(".header-explore-tabs .explore-nav-link").forEach((el) => {
-        el.classList.remove("active");
+          // Remove 'active' class from all tabs
+          document
+            .querySelectorAll(".header-explore-tabs .explore-nav-link")
+            .forEach((el) => {
+              el.classList.remove("active");
+            });
+
+          // Add 'active' to clicked tab
+          this.classList.add("active");
+
+          // Hide all tab contents
+          document
+            .querySelectorAll(".header-explore-tabs .explore-tab-content")
+            .forEach((content) => {
+              content.classList.add("d-none");
+              content.classList.remove("active");
+            });
+
+          // Show selected tab content
+          const targetContent = document.querySelector(
+            `.header-explore-tabs .explore-tab-content[data-id="${tabId}"]`
+          );
+          if (targetContent) {
+            targetContent.classList.remove("d-none");
+            targetContent.classList.add("active");
+          }
+        });
+
+        // initHeaderMenu();
+        let homepageDesktopHeaderLogo;
+
+        function handleHeaderBehavior() {
+          const width = window.innerWidth;
+          const footer = document.querySelector(".event_register_footer");
+
+          if (width < 1024 && width > 767) {
+            footer?.classList.add("handle-new-variation-bottom-tab");
+          } else if (width < 768) {
+            footer?.classList.add("handle-new-variation-bottom-mob");
+          }
+
+          const isHomepage = document.querySelector(".homepage-banner");
+          const isComparePage = document.querySelector(
+            ".homepage-compare-page"
+          );
+          const navbar = document.querySelector(
+            ".navbar.navbar-expand-lg.new-header-variation"
+          );
+
+          if (width <= 767 && isHomepage) {
+            document
+              .querySelectorAll(".homepage-redesign-right-nav-icon")
+              .forEach((icon) => {
+                const mobileIcon = icon.getAttribute("data-mobileicon");
+                if (mobileIcon) {
+                  icon.setAttribute("src", mobileIcon);
+                }
+              });
+
+            document.querySelectorAll(".navbar-brand").forEach((brand) => {
+              const headerLogo = document
+                .getElementById("newMobileNav")
+                ?.getAttribute("data-mobileheaderlogo");
+              const img = brand.querySelector("img");
+
+              if (headerLogo && img) {
+                if (!homepageDesktopHeaderLogo) {
+                  homepageDesktopHeaderLogo = img.getAttribute("src");
+                }
+                img.setAttribute("src", headerLogo);
+              }
+            });
+
+            if (navbar) {
+              navbar.style.position = "fixed";
+            }
+
+            let prevScroll = window.scrollY;
+
+            window.addEventListener("scroll", () => {
+              let currentScroll = window.scrollY;
+
+              if (currentScroll <= 0) {
+                navbar.style.top = "0";
+                navbar.style.background = "unset";
+              } else {
+                navbar.style.background = "rgba(0,0,0,0.2)";
+                // navbar.style.top = "-70px"; // Uncomment if needed
+              }
+
+              prevScroll = currentScroll;
+            });
+          } else if (width > 767 && (isHomepage || isComparePage)) {
+            document.querySelectorAll(".navbar-brand").forEach((brand) => {
+              const img = brand.querySelector("img");
+              if (homepageDesktopHeaderLogo && img) {
+                img.setAttribute("src", homepageDesktopHeaderLogo);
+              }
+            });
+
+            if (navbar) {
+              navbar.style.top = "0";
+              navbar.style.position = "relative";
+            }
+
+            document
+              .querySelectorAll(".homepage-redesign-right-nav-icon")
+              .forEach((icon) => {
+                const desktopIcon = icon.getAttribute("data-desktopicon");
+                if (desktopIcon) {
+                  icon.setAttribute("src", desktopIcon);
+                }
+              });
+          } else if (width <= 767 && isComparePage) {
+            document
+              .querySelector(".header-main.new-header-variation")
+              ?.style.setProperty("position", "relative");
+          }
+        }
+
+        if (document.querySelector(".new-header-variation")) {
+          window.addEventListener("resize", handleHeaderBehavior);
+          handleHeaderBehavior();
+        }
+
+        ///////////////////////////end///////////
       });
+    //////////////////////////mobile code/////////
+    const openBtns = document.querySelectorAll(
+      "#custom-menu-open-btn, #custom-collapse-menu-btn"
+    );
 
-      // Add 'active' to clicked tab
-      this.classList.add("active");
-
-      // Hide all tab contents
-      document.querySelectorAll(".header-explore-tabs .explore-tab-content").forEach((content) => {
-        content.classList.add("d-none");
-        content.classList.remove("active");
+    openBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        initHeaderMenu();
       });
-
-      // Show selected tab content
-      const targetContent = document.querySelector(`.header-explore-tabs .explore-tab-content[data-id="${tabId}"]`);
-      if (targetContent) {
-        targetContent.classList.remove("d-none");
-        targetContent.classList.add("active");
-      }
     });
-  });
+
+    // function mobileMenuHandler(parentClassName = ".accordion-header") {
+    //   let selectedCategory = document.querySelector(parentClassName);
+
+    //   function onFilterClick() {
+    //     if (window.innerWidth >= 1024) return;
+
+    //     document
+    //       .querySelectorAll(".mobile-menu .filters")
+    //       .forEach((filterBtn) => {
+    //         filterBtn.addEventListener("click", function () {
+    //           const parentLi = this.closest("li");
+    //           if (!parentLi) return;
+    //           const parentLiClasses = Array.from(parentLi.classList);
+    //           const combinedClassNames = "." + parentLiClasses.join(".");
+    //           selectedCategory = document.querySelector(combinedClassNames);
+
+    //           const isNewLaunch = this.dataset.filterRange;
+
+    //           const bikeContainers = selectedCategory.querySelectorAll(
+    //             ".mobile-menu .bike-container"
+    //           );
+    //           const aboutPremiaText = selectedCategory.querySelector(
+    //             ".mobile-menu .about-premia-text"
+    //           );
+
+    //           if (isNewLaunch === "newlaunch") {
+    //             if (aboutPremiaText)
+    //               aboutPremiaText.classList.add("d-none");
+
+    //             bikeContainers.forEach((container) => {
+    //               const isNew = container.dataset.isNewLaunch === "true";
+    //               container.style.display = isNew ? "flex" : "none";
+    //             });
+    //           } else if (isNewLaunch === "aboutpremia") {
+    //             bikeContainers.forEach(
+    //               (container) => (container.style.display = "none")
+    //             );
+    //             if (aboutPremiaText)
+    //               aboutPremiaText.classList.remove("d-none");
+    //           } else {
+    //             const [minRange, maxRange] = isNewLaunch
+    //               .split("-")
+    //               .map(Number);
+    //             if (aboutPremiaText)
+    //               aboutPremiaText.classList.add("d-none");
+
+    //             const bikeSpecs = selectedCategory.querySelectorAll(
+    //               ".mobile-menu .bike-container .bike-item-container .bike-spec"
+    //             );
+    //             bikeSpecs.forEach((spec, index) => {
+    //               const match = spec.textContent.match(/\d+/);
+    //               const number = match ? parseInt(match[0], 10) : 0;
+    //               const container = bikeContainers[index];
+    //               container.style.display =
+    //                 number >= minRange && number <= maxRange
+    //                   ? "flex"
+    //                   : "none";
+    //             });
+    //           }
+
+    //           const bikeWrapper = selectedCategory.querySelector(
+    //             ".mobile-menu .bike-container-wrapper"
+    //           );
+    //           if (bikeWrapper) bikeWrapper.classList.add("show");
+
+    //           document
+    //             .querySelectorAll("#newMobileNav .accordion-item")
+    //             .forEach((item) => {
+    //               item.classList.add("remove-margin");
+    //             });
+
+    //           const labelText =
+    //             this.querySelector(".filter-label")?.textContent;
+    //           const backText = document.querySelector(
+    //             "#newMobileNav .back-button-text-container"
+    //           );
+    //           if (backText && labelText) backText.textContent = labelText;
+    //         });
+    //       });
+
+    //     document
+    //       .querySelectorAll(".mobile-menu .back-button-container")
+    //       .forEach((backBtn) => {
+    //         backBtn.addEventListener("click", function () {
+    //           const bikeWrapper = selectedCategory.querySelector(
+    //             ".mobile-menu .bike-container-wrapper"
+    //           );
+    //           if (bikeWrapper) bikeWrapper.classList.remove("show");
+
+    //           document
+    //             .querySelectorAll("#newMobileNav .accordion-item")
+    //             .forEach((item) => {
+    //               item.classList.remove("remove-margin");
+    //             });
+    //         });
+    //       });
+    //   }
+
+    //   onFilterClick();
+    //   window.addEventListener("resize", onFilterClick);
+    // }
+    function initHeaderMenu() {
+      const openBtns = document.querySelectorAll(
+        "#custom-menu-open-btn, #custom-collapse-menu-btn"
+      );
+      openBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const menu = document.getElementById("newMobileNav");
+          const imageUrl = menu.getAttribute("data-mobilemenuimg");
+          const imgContainer = menu.querySelector(".mobile-img-container");
+          // if (imgContainer && imageUrl) {
+          //   imgContainer.style.backgroundImage = `url("${imageUrl}")`;
+          // }
+
+          if (menu.classList.contains("collapse-menu")) {
+            menu.classList.remove("collapse-menu");
+            menu.classList.add("open-menu");
+            document
+              .querySelector(".new-header-variation.Premium.mobile-accordion")
+              ?.scrollIntoView();
+            document
+              .querySelector(".event_register_footer")
+              ?.classList.add("hide");
+            const navbar = document.querySelector(
+              ".navbar.navbar-expand-lg.new-header-variation"
+            );
+            if (navbar) {
+              navbar.style.top = "0";
+              navbar.style.background = "#000";
+            }
+            document.documentElement.classList.add("overflow-hidden");
+          } else if (menu.classList.contains("open-menu")) {
+            document
+              .querySelector(
+                ".bike-container-wrapper.show .back-button-container"
+              )
+              ?.click();
+            document.querySelector(".accordion-header .selected")?.click();
+            menu.classList.remove("open-menu");
+            menu.classList.add("collapse-menu");
+            document
+              .querySelector(".event_register_footer")
+              ?.classList.remove("hide");
+            const navbar = document.querySelector(
+              ".navbar.navbar-expand-lg.new-header-variation"
+            );
+            if (window.scrollY > 0 && navbar) {
+              navbar.style.top = "-70px";
+            }
+            document.documentElement.classList.remove("overflow-hidden");
+            if (navbar) navbar.style.background = "unset";
+          } else {
+            menu.classList.add("open-menu");
+            document.body.classList.add("position-fixed");
+          }
+        });
+      });
+      document
+        .querySelectorAll("#newMobileNav .accordion-header")
+        .forEach((header) => {
+          header.addEventListener("click", function (e) {
+            e.stopImmediatePropagation();
+
+            const content = this.nextElementSibling;
+            const icon = this.querySelector(".icon");
+            const anchor = this.querySelector("a");
+            const parentLi = this.closest("li");
+            const classSelector =
+              "." + Array.from(parentLi.classList).join(".");
+            mobileMenuHandler(classSelector);
+            console.log(classSelector)
+            const isVisible = content.style.display === "block";
+            document.querySelectorAll(".hp-dropdown-content").forEach((el) => {
+              el.style.display = "none";
+            }); ///////hide
+            document.querySelectorAll(".drawer-fragment").forEach((el) => {
+              el.style.display = "none";
+            });
+            document.querySelectorAll(".our-range-fragment").forEach((el) => {
+              el.style.display = "none";
+            });
+           
+            document
+              .querySelectorAll(".bike-item-container .bike-spec p")
+              .forEach((p) => {
+                p.style.display = "block"; // or "inline"
+              });
+
+            document.querySelectorAll(".about-premia-text p").forEach((p) => {
+              p.style.display = "block"; // or "inline"
+            });
+            document
+              .querySelectorAll("#new-mobile .accordion-content")
+              .forEach((c) => (c.style.display = "none"));
+            document
+              .querySelectorAll("#new-mobile .accordion-header .icon")
+              .forEach((i) => (i.textContent = "+"));
+            if (!isVisible) {
+              console.log(content)
+              content.style.display = "block";
+              icon.textContent = "-";
+              anchor?.classList.add("selected");
+               slideDown(content);
+            } else {
+           
+              content.style.display = "none";
+              icon.textContent = "+";
+              anchor?.classList.remove("selected");
+                 slideUp(content);
+            }
+          });
+        });
+      document.querySelectorAll(".service-mob-tab").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement.querySelector(".services-click").classList.add("show");
+        });
+      })
+
+      document.querySelectorAll(".parts-mob-tab").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement.querySelector(".parts-click").classList.add("show");
+        })
+      })
+
+      document.querySelectorAll(".services-click .back-button-container").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement?.classList?.remove("show");
+        });
+      })
+      document.querySelectorAll(".parts-click .back-button-container").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement.classList.remove("show");
+        });
+      })
+
+    }
+
+
+    function slideUp(element, duration = 300) {
+      element.style.transition = `height ${duration}ms ease, padding ${duration}ms ease`;
+      element.style.boxSizing = "border-box";
+      element.style.height = element.offsetHeight + "px";
+      element.offsetHeight; // force repaint
+      element.style.overflow = "hidden";
+      element.style.height = 0;
+      element.style.paddingTop = 0;
+      element.style.paddingBottom = 0;
+      setTimeout(() => {
+        element.style.display = "none";
+        element.style.removeProperty("height");
+        element.style.removeProperty("padding-top");
+        element.style.removeProperty("padding-bottom");
+        element.style.removeProperty("overflow");
+        element.style.removeProperty("transition");
+      }, duration);
+    }
+    function slideDown(element, duration = 700) {
+      element.style.removeProperty("display");
+      let display = window.getComputedStyle(element).display;
+      if (display === "none") display = "block";
+      element.style.display = display;
+      const height = element.scrollHeight + "px";
+      element.style.height = 0;
+      element.style.paddingTop = 0;
+      element.style.paddingBottom = 0;
+      element.style.overflow = "hidden";
+      element.offsetHeight; // force repaint
+      element.style.transition = `height ${duration}ms ease, padding ${duration}ms ease`;
+      element.style.height = height;
+      setTimeout(() => {
+        element.style.removeProperty("height");
+        element.style.removeProperty("overflow");
+        element.style.removeProperty("transition");
+        element.style.removeProperty("padding-top");
+        element.style.removeProperty("padding-bottom");
+      }, duration);
+    }
+
+    initHeaderMenu();
+    let homepageDesktopHeaderLogo;
+    function handleHeaderBehavior() {
+      const width = window.innerWidth;
+      const footer = document.querySelector(".event_register_footer");
+      if (width < 1024 && width > 767) {
+        footer?.classList.add("handle-new-variation-bottom-tab");
+      } else if (width < 768) {
+        footer?.classList.add("handle-new-variation-bottom-mob");
+      }
+      const isHomepage = document.querySelector(".homepage-banner");
+      const isComparePage = document.querySelector(".homepage-compare-page");
+      const navbar = document.querySelector(
+        ".navbar.navbar-expand-lg.new-header-variation"
+      );
+      if (width <= 767 && isHomepage) {
+        document
+          .querySelectorAll(".homepage-redesign-right-nav-icon")
+          .forEach((icon) => {
+            const mobileIcon = icon.getAttribute("data-mobileicon");
+            if (mobileIcon) {
+              icon.setAttribute("src", mobileIcon);
+            }
+          });
+        document.querySelectorAll(".navbar-brand").forEach((brand) => {
+          const headerLogo = document
+            .getElementById("newMobileNav")
+            ?.getAttribute("data-mobileheaderlogo");
+          const img = brand.querySelector("img");
+          if (headerLogo && img) {
+            if (!homepageDesktopHeaderLogo) {
+              homepageDesktopHeaderLogo = img.getAttribute("src");
+            }
+            img.setAttribute("src", headerLogo);
+          }
+        });
+        if (navbar) {
+          navbar.style.position = "fixed";
+        }
+        let prevScroll = window.scrollY;
+        window.addEventListener("scroll", () => {
+          let currentScroll = window.scrollY;
+          if (currentScroll <= 0) {
+            navbar.style.top = "0";
+            navbar.style.background = "unset";
+          } else {
+            navbar.style.background = "rgba(0,0,0,0.2)";
+            // navbar.style.top = "-70px"; // Uncomment if needed
+          }
+          prevScroll = currentScroll;
+        });
+      } else if (width > 767 && (isHomepage || isComparePage)) {
+        document.querySelectorAll(".navbar-brand").forEach((brand) => {
+          const img = brand.querySelector("img");
+          if (homepageDesktopHeaderLogo && img) {
+            img.setAttribute("src", homepageDesktopHeaderLogo);
+          }
+        });
+        if (navbar) {
+          navbar.style.top = "0";
+          navbar.style.position = "relative";
+        }
+        document
+          .querySelectorAll(".homepage-redesign-right-nav-icon")
+          .forEach((icon) => {
+            const desktopIcon = icon.getAttribute("data-desktopicon");
+            if (desktopIcon) {
+              icon.setAttribute("src", desktopIcon);
+            }
+          });
+      } else if (width <= 767 && isComparePage) {
+        document
+          .querySelector(".header-main.new-header-variation")
+          ?.style.setProperty("position", "relative");
+      }
+    }
+    if (document.querySelector(".new-header-variation")) {
+      window.addEventListener("resize", handleHeaderBehavior);
+      handleHeaderBehavior();
+    }
+
+
+
+    function mobileMenuHandler(parentClassName = ".accordion-header") {
+      let selectedCategory = document.querySelector(parentClassName);
+      function onFilterClick() {
+        if (window.innerWidth >= 1024) return;
+        document
+          .querySelectorAll(".mobile-menu .filters")
+          .forEach((filterBtn) => {
+            filterBtn.addEventListener("click", function () {
+              const parentLi = this.closest("li");
+              if (!parentLi) return;
+              const parentLiClasses = Array.from(parentLi.classList);
+              const combinedClassNames = "." + parentLiClasses.join(".");
+              selectedCategory = document.querySelector(combinedClassNames);
+              const isNewLaunch = this.dataset.filterRange;
+              const bikeContainers = selectedCategory.querySelectorAll(
+                ".mobile-menu .bike-container"
+              );
+              const aboutPremiaText = selectedCategory.querySelector(
+                ".mobile-menu .about-premia-text"
+              );
+              if (isNewLaunch === "newlaunch") {
+                if (aboutPremiaText) aboutPremiaText.classList.add("d-none");
+                bikeContainers.forEach((container) => {
+                  const isNew = container.dataset.isNewLaunch === "true";
+                  container.style.display = isNew ? "flex" : "none";
+                });
+              } else if (isNewLaunch === "aboutpremia") {
+                bikeContainers.forEach(
+                  (container) => (container.style.display = "none")
+                );
+                if (aboutPremiaText) aboutPremiaText.classList.remove("d-none");
+              } else {
+                const [minRange, maxRange] = isNewLaunch.split("-").map(Number);
+                if (aboutPremiaText) aboutPremiaText.classList.add("d-none");
+                const bikeSpecs = selectedCategory.querySelectorAll(
+                  ".mobile-menu .bike-container .bike-item-container .bike-spec"
+                );
+                bikeSpecs.forEach((spec, index) => {
+                  const match = spec.textContent.match(/\d+/);
+                  const number = match ? parseInt(match[0], 10) : 0;
+                  const container = bikeContainers[index];
+                  container.style.display =
+                    number >= minRange && number <= maxRange ? "flex" : "none";
+                });
+              }
+              const bikeWrapper = selectedCategory.querySelector(
+                ".mobile-menu .bike-container-wrapper"
+              );
+              if (bikeWrapper) bikeWrapper.classList.add("show");
+              document
+                .querySelectorAll("#newMobileNav .accordion-item")
+                .forEach((item) => {
+                  item.classList.add("remove-margin");
+                });
+              const labelText =
+                this.querySelector(".filter-label")?.textContent;
+              // debugger;
+              const backText = bikeWrapper.querySelector(
+                "#newMobileNav .back-button-text-container"
+              );
+              if (backText && labelText) backText.textContent = labelText;
+            });
+          });
+        document
+          .querySelectorAll(".mobile-menu .back-button-container")
+          .forEach((backBtn) => {
+            backBtn.addEventListener("click", function () {
+              const bikeWrapper = selectedCategory.querySelector(
+                ".mobile-menu .bike-container-wrapper"
+              );
+              if (bikeWrapper) bikeWrapper.classList.remove("show");
+              document
+                .querySelectorAll("#newMobileNav .accordion-item")
+                .forEach((item) => {
+                  item.classList.remove("remove-margin");
+                });
+            });
+          });
+      }
+      onFilterClick();
+      window.addEventListener("resize", onFilterClick);
+    }
   }
   return block;
 }
+
 
 function closeOnEscape(e) {
   if (e.code === "Escape") {
@@ -681,7 +1253,7 @@ export default async function decorate(block) {
   await appendXF(
     block,
     stageendpoint +
-      "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
+    "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
   );
 
   /* init Compare */
@@ -712,8 +1284,8 @@ export default async function decorate(block) {
       e.target.dataset.vehiclesRendered = true;
     });
   });
-  document
-    .getElementsByClassName("navbar-nav")
-    .addEventListener("click", addClientLibScript);
+  // document
+  //   .getElementsByClassName("navbar-nav")
+  //   .addEventListener("click", addClientLibScript);
   return block;
 }
