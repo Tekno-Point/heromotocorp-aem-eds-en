@@ -729,7 +729,32 @@ export async function appendXF(block, xfPath) {
             }
           });
         });
+      document.querySelectorAll(".service-mob-tab").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement.querySelector(".services-click").classList.add("show");
+        });
+      })
+
+      document.querySelectorAll(".parts-mob-tab").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement.querySelector(".parts-click").classList.add("show");
+        })
+      })
+
+      document.querySelectorAll(".services-click .back-button-container").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement?.classList?.remove("show");
+        });
+      })
+      document.querySelectorAll(".parts-click .back-button-container").forEach(function (eachEl) {
+        eachEl.addEventListener("click", (e) => {
+          e.currentTarget.parentElement.classList.remove("show");
+        });
+      })
+
     }
+
+
     function slideUp(element, duration = 300) {
       element.style.transition = `height ${duration}ms ease, padding ${duration}ms ease`;
       element.style.boxSizing = "border-box";
@@ -850,6 +875,9 @@ export async function appendXF(block, xfPath) {
       window.addEventListener("resize", handleHeaderBehavior);
       handleHeaderBehavior();
     }
+
+
+
     function mobileMenuHandler(parentClassName = ".accordion-header") {
       let selectedCategory = document.querySelector(parentClassName);
       function onFilterClick() {
@@ -935,6 +963,7 @@ export async function appendXF(block, xfPath) {
   }
   return block;
 }
+
 
 function closeOnEscape(e) {
   if (e.code === "Escape") {
@@ -1199,7 +1228,7 @@ export default async function decorate(block) {
   await appendXF(
     block,
     stageendpoint +
-      "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
+    "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
   );
 
   /* init Compare */

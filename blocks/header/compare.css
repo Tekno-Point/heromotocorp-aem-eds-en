@@ -512,12 +512,12 @@
 
 /* drawer-fragment */
 
-.drawer-fragment .drawer-accordion-wrapper {
+.drawer-fragment-wrap .drawer-accordion-wrapper {
     -webkit-transition: height .35s;
     transition: height .35s
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -533,7 +533,7 @@
     border-radius: 0;
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-icon {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-icon {
     -webkit-transform: rotate(0deg) translateX(-4px);
     transform: rotate(0deg) translateX(-4px);
     -webkit-transition: -webkit-transform .35s;
@@ -543,13 +543,13 @@
 }
 
 @media(max-width: 767px) {
-    .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-icon {
+    .drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-icon {
         width: 1rem;
         height: .625rem
     }
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle.active-acc .drawer-accordion-icon {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle.active-acc .drawer-accordion-icon {
     -webkit-transform: rotate(180deg) translateX(4px);
     transform: rotate(180deg) translateX(4px);
     -webkit-transition: -webkit-transform .35s;
@@ -558,31 +558,31 @@
     transition: transform .35s, -webkit-transform .35s
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label {
     font-size: 1.25rem;
     line-height: 100%;
     color: #303030
 }
 
 @media(max-width: 767px) {
-    .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label {
+    .drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label {
         font-size: 1rem
     }
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content {
     opacity: 1;
     -webkit-transition: all .3s;
     transition: all .3s
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content.collapsed {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content.collapsed {
     height: 0 !important;
     opacity: 0;
     overflow: hidden
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -602,31 +602,31 @@
 }
 
 @media(max-width: 767px) {
-    .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle {
+    .drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle {
         -webkit-column-gap: 4rem;
         -moz-column-gap: 4rem;
         column-gap: 4rem
     }
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-image {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-image {
     width: 7.375rem;
     height: 4.75rem
 }
 
 @media(max-width: 767px) {
-    .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-image {
+    .drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-image {
         width: 92px;
         height: 58px
     }
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details {
     font-family: "TRANSDUCER-Medium";
     text-align: left
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-label {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-label {
     font-size: 1.5rem;
     line-height: 100%;
     font-weight: 600;
@@ -637,12 +637,12 @@
 }
 
 @media(max-width: 767px) {
-    .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-label {
+    .drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-label {
         font-size: 1.25rem
     }
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-engine {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-engine {
     font-size: 1rem;
     line-height: 120%;
     font-weight: 700;
@@ -650,19 +650,19 @@
     margin-top: .375rem
 }
 
-.drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-engine sup {
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-engine sup {
     font-weight: 400;
     position: relative;
     top: -0.25rem
 }
 
 @media(max-width: 767px) {
-    .drawer-fragment .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-engine {
+    .drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-content .select-vehicle .vehicle-details .vehicle-engine {
         font-size: .75rem
     }
 }
 
-.drawer-fragment .drawer-accordion-wrapper.active-acc .drawer-accordion-toggle .drawer-accordion-icon {
+.drawer-fragment-wrap .drawer-accordion-wrapper.active-acc .drawer-accordion-toggle .drawer-accordion-icon {
     -webkit-transform: rotate(180deg) translateX(4px);
     transform: rotate(180deg) translateX(4px);
     -webkit-transition: -webkit-transform .35s;

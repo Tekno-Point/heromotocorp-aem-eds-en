@@ -197,13 +197,13 @@ const drawerSection = section({ class: 'drawer-container opaque', onclick: toggl
 
         div({ class: 'drawer-content drawer-content-motorcycles' },
             div({ class: 'homepage-placeholder-div' },
-                div({ class: 'drawer-fragment', id: 'motorcycles-drawer' })
+                div({ class: 'drawer-fragment-wrap', id: 'motorcycles-drawer' })
             ),
         ),
 
         div({ class: 'drawer-content drawer-content-scooters hidden' },
             div({ class: 'homepage-placeholder-div' },
-                div({ class: 'drawer-fragment', id: 'scooters-drawer' })
+                div({ class: 'drawer-fragment-wrap', id: 'scooters-drawer' })
             ),
         )
     )
