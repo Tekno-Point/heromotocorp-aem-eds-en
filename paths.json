@@ -1,6 +1,7 @@
 {
   "mappings": [
     "/content/hmcl/:/",
+    "/content/hmcl/api/placeholder:/api/placeholder.json",
     "/content/hmcl/configuration:/.helix/config.json",
     "/content/hmcl/metadata:/metadata.json"
   ],

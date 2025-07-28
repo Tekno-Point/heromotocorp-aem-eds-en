@@ -1,14 +1,20 @@
+.section .book-ride-thankyou-wrapper {
+    display: none;
+    min-height: 300px;
+}
+
 .book-ride-thankyou {
     background-color: #ee2326;
 }
 
-.book-ride-thankyou>div>div:first-of-type {
+.book-ride-thankyou>.popup-wrapper>.loader {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* display: block; */
 }
 
-.book-ride-thankyou>div>div:last-of-type {
+.book-ride-thankyou>.popup-wrapper>.succ-content {
     display: none;
 }
 
@@ -23,18 +29,18 @@
     align-items: center;
 }
 
-.book-ride-thankyou>div>div:last-of-type picture {
+.book-ride-thankyou>.popup-wrapper>.succ-content>.succ-img picture {
     line-height: 0;
     height: 100%;
     display: block;
 }
 
-.book-ride-thankyou>div>div:last-of-type picture img {
+.book-ride-thankyou>.popup-wrapper>.succ-content>.succ-img picture img {
     width: 100px;
     height: 100px;
 }
 
-.book-ride-thankyou>div>div:last-of-type h2 {
+.book-ride-thankyou>.popup-wrapper>.succ-content h2 {
     font-size: 48px;
     line-height: 67.2px;
     font-family: "Montserrat-Bold";
@@ -43,7 +49,7 @@
     margin: 0;
 }
 
-.book-ride-thankyou>div>div:last-of-type h4 {
+.book-ride-thankyou>.popup-wrapper>.succ-content h4 {
     font-size: 24px;
     line-height: 33.6px;
     font-family: "Montserrat-Medium";

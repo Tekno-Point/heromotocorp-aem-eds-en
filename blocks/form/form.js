@@ -1,55 +1,119 @@
+
 import createField from "./form-fields.js";
-import { div, ul, li, p } from "../../scripts/dom-helpers.js";
-import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp } from "../../scripts/common.js";
+import { div, ul, li, p, label, span, input as inputEl, img } from "../../scripts/dom-helpers.js";
+import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp, getRandomId } from "../../scripts/common.js";
 
 const nameRegex = /^[a-zA-Z\s]{1,50}$/;
 
-// Example usage:
-const isValidName = (name) => nameRegex.test(name);  
+const isValidName = (name) => nameRegex.test(name);
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const mobRegex = /^[6-9][0-9]{9}$/;
 
+let selectedEl = null;
+let isStateOpen = false;
+let isCityOpen = false;
+
+function createDropdownInput(placeholder) {
+  const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' });
+  const clearBtn = span({ class: 'clear-btn' }, '×');
+  const dropdownBtn = span({ class: 'dropdown-btn' },
+    img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
+  );
+  const wrapper = div({ class: 'input-wrapper' }, input, clearBtn, dropdownBtn);
+  const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
+
+  // Set initial display of clearBtn based on input value
+  clearBtn.style.display = input.value ? 'block' : 'none';
+
+  // Update clearBtn display on input changes
+  input.addEventListener('input', () => {
+    clearBtn.style.display = input.value ? 'block' : 'none';
+  });
+
+  return { wrapper, input, clearBtn, dropdownBtn, list };
+}
+
+function populateList(input, list, data, onSelect) {
+  list.innerHTML = '';
+  const typedValue = (input.dataset.filter || '').trim().toLowerCase();
+  const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
+  const currentValue = input.value.trim().toLowerCase();
+  selectedEl = null;
+
+  if (!filtered.length) {
+    list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
+  } else {
+    filtered.forEach(item => {
+      const isSelected = item.label.toLowerCase() === currentValue;
+      const itemEl = div(
+        {
+          class: `dropdown-item${isSelected ? ' selected' : ''}`,
+          style: isSelected ? 'background-color: #007aff; font-weight: bold;' : ''
+        },
+        item.label
+      );
+      itemEl.addEventListener('click', () => {
+        input.value = item.label;
+        list.style.display = 'none';
+        if (input.id === 'state-input') isStateOpen = false;
+        if (input.id === 'city-input') isCityOpen = false;
+        onSelect(item);
+      });
+      list.appendChild(itemEl);
+      if (isSelected) selectedEl = itemEl;
+    });
+  }
+  // debugger
+  list.style.display = 'block';
+  if (selectedEl) {
+    setTimeout(() => selectedEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 0);
+  } else if (filtered.length > 0) {
+    const firstItemEl = list.querySelector('.dropdown-item:not(.no-results)');
+    if (firstItemEl) {
+      setTimeout(() => firstItemEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 0);
+    }
+  }
+}
+
 function errorField(message) {
-    return p({ class: "error-msg" }, message);
+  return p({ class: "error-msg" }, message);
 };
 
 function showError(field, msg) {
   const msgEl = field.querySelector('.error-msg')
-  if(!msg){
+  if (!msg) {
     msgEl?.remove();
-  }else  if(msgEl){
-    msgEl.textContent = 'aa ' + msg 
-  }else{
-    field.appendChild(errorField('aa '+ msg));
+  } else if (msgEl) {
+    msgEl.textContent = msg
+  } else {
+    field.appendChild(errorField(msg));
   }
 }
 
-
 function validateName(fieldWrapper, inpVal) {
- if(inpVal){
-          if(isValidName(inpVal)){
-            showError(fieldWrapper,'')
-            return true
-          }else{
-            showError(fieldWrapper,'Invalid Name')
-            return false
-          }
-        }else{
-          showError(fieldWrapper,'The Name is required')
-          return false
-        } 
+  if (inpVal) {
+    if (isValidName(inpVal)) {
+      showError(fieldWrapper, '')
+      return true
+    } else {
+      showError(fieldWrapper, 'Invalid Name')
+      return false
+    }
+  } else {
+    showError(fieldWrapper, 'The Name is required')
+    return false
+  }
 }
 
 function validateOtp(fieldWrapper, mobile, otp) {
-      const isValid = verifyOtp(mobile, otp);
-      showError(fieldWrapper,'')
-      if(!otp){
-        showError(fieldWrapper,'The OTP is required')
-      }else         if(!isValid){
-          showError(fieldWrapper,'Incorrect OTP')
-        }          
-        return isValid;
-  
+  const isValid = verifyOtp(mobile, otp);
+  showError(fieldWrapper, '')
+  if (!otp) {
+    showError(fieldWrapper, 'The OTP is required')
+  } else if (!isValid) {
+    showError(fieldWrapper, 'Incorrect OTP')
+  }
+  return isValid;
 }
 
 function validateMobile(fieldWrapper, inpVal) {
@@ -66,16 +130,17 @@ function validateMobile(fieldWrapper, inpVal) {
     return false;
   }
 }
+
 function validateOtherFields(fieldWrapper, inpName, inpVal) {
-  if(inpVal){
-    showError(fieldWrapper,'')
+  if (inpVal) {
+    showError(fieldWrapper, '')
     return true
-  }else  if(inpName == "state" ){
-          showError(fieldWrapper,'Select a state')
-    }else if ( inpName == "city") {
-          showError(fieldWrapper,'Select a city')
-        }
-        return false
+  } else if (inpName == "state") {
+    showError(fieldWrapper, 'Select a state')
+  } else if (inpName == "city") {
+    showError(fieldWrapper, 'Select a city')
+  }
+  return false
 }
 
 function validateEmail(fieldWrapper, inpVal) {
@@ -92,6 +157,7 @@ function validateEmail(fieldWrapper, inpVal) {
     return false;
   }
 }
+
 async function createForm(formHref, submitHref) {
   const { pathname } = new URL(formHref);
   const resp = await fetch(pathname);
@@ -109,7 +175,6 @@ async function createForm(formHref, submitHref) {
     }
   });
 
-  // group fields into fieldsets
   const fieldsets = form.querySelectorAll("fieldset");
   fieldsets.forEach((fieldset) => {
     form
@@ -149,6 +214,7 @@ async function handleSubmit(form) {
   try {
     form.setAttribute("data-submitting", "true");
     submit.disabled = true;
+    form.closest(".section").querySelector(".book-ride-thankyou-wrapper").classList.add("dsp-block");
     const data = await fetchBookARide(
       form.name.value,
       form.mobile.value,
@@ -158,27 +224,10 @@ async function handleSubmit(form) {
       form.city.value,
       getRandomId()
     )
-    // create payload
-    
-    /*
-    const payload = generatePayload(form);
-    const response = await fetch(form.dataset.action, {
-      method: "POST",
-      body: JSON.stringify({ data: payload }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.ok) {
-      if (form.dataset.confirmation) {
-        window.location.href = form.dataset.confirmation;
-      }
-    } else {
-      const error = await response.text();
-      throw new Error(error);
-    }*/
+    form.closest(".section").querySelector(".book-ride-thankyou-wrapper .loader").classList.add("dsp-none");
+    form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").classList.add("dsp-block");
+    form.classList.add("dsp-none");
   } catch (e) {
-    // eslint-disable-next-line no-console
     console.error(e);
   } finally {
     form.setAttribute("data-submitting", "false");
@@ -187,7 +236,7 @@ async function handleSubmit(form) {
 }
 
 export default async function decorate(block) {
-  const [dataMapping] = await useDataMapping()
+  const [dataMapping, setDataMapping] = await useDataMapping();
   const links = [...block.querySelectorAll("a")].map((a) => a.href);
   const formLink = links.find(
     (link) => link.startsWith(window.location.origin) && link.endsWith(".json")
@@ -212,164 +261,259 @@ export default async function decorate(block) {
     }
   });
 
-  // Book a ride form start
   const state_inp = block.querySelector("#form-state");
-  const state_field = state_inp.closest(".field-wrapper");
+  const state_field_wrapper = state_inp.closest(".field-wrapper");
   const city_inp = block.querySelector("#form-city");
-  const city_field = city_inp.closest(".field-wrapper");
-  const submitBtn = block.querySelector(".submit-btn");
+  const city_field_wrapper = city_inp.closest(".field-wrapper");
 
-  
+  const { wrapper: stateCustomWrapper, input: stateCustomInput, clearBtn: stateClearBtn, dropdownBtn: stateDropdownBtn, list: stateList } = createDropdownInput('Select State');
+  const { wrapper: cityCustomWrapper, input: cityCustomInput, clearBtn: cityClearBtn, dropdownBtn: cityDropdownBtn, list: cityList } = createDropdownInput('Select City');
 
-  // Set autoComplete - off to all input and set disable to city field on "Load"
-  block
-    .querySelectorAll(".book-ride input")
-    .forEach((inp) => inp.setAttribute("autocomplete", "off"));
+  stateCustomInput.id = 'state-input';
+  cityCustomInput.id = 'city-input';
 
-  // Function for creating state/city list
-  const stateOptions = function (mainClass, ulClass, liClass, dataList) {
-    return div(
-      { class: mainClass },
-      ul(
-        { class: ulClass },
-        ...dataList.map((item) => li({ class: liClass }, item))
-      )
-    );
-  };
-  const cityOptions = function (mainClass, ulClass, liClass, dataList) {
-    return div(
-      { class: mainClass },
-      ul(
-        { class: ulClass },
-        ...Object.keys(dataList).map((item) => li({ class: liClass }, item))
-      )
-    );
-  };
+  state_inp.replaceWith(stateCustomWrapper);
+  state_field_wrapper.appendChild(stateList);
 
-  state_inp.addEventListener("focus",async function () {
-    // Avoid adding it again
-    const [dataMapping , setDataMapping] = await useDataMapping();
-    if (!state_field.querySelector(".state")) {
-      const states = dataMapping.state_city_master.state;
-      state_field.appendChild(
-        stateOptions("state", "state-list", "state-name", states)
-      );
-      city_field.querySelector(".city").classList.add("dsp-none");
-      block.querySelectorAll(".state-name").forEach((ele) => {
-        ele.addEventListener("click", function () {
-          block.querySelectorAll(".state-name").forEach((ele) => {
-            ele.classList.remove("active");
-          });
-          ele.classList.add("active");
-          state_inp.value = ele.textContent;
-          state_field.querySelector(".state").classList.add("dsp-none");
-          if (state_field.querySelector(".error-msg")) {
-            state_field.querySelector(".error-msg").remove();
-          }
-          toggleCityInputState();
-          city_field.querySelectorAll(".city").forEach((ele) => {
-            ele.remove();
-          });
-          const cities = dataMapping.state_city_master[state_inp.value];
-          city_field.appendChild(
-            cityOptions("city", "city-list", "city-name", cities)
-          );
-          city_inp.value = "";
-          city_field.querySelector(".city").classList.add("dsp-none");
-        });
-      });
-      toggleCityInputState();
-    }
-  });
+  city_inp.replaceWith(cityCustomWrapper);
+  city_field_wrapper.appendChild(cityList);
 
-  // on load city append for by default state (DELHI)
-  const cities = dataMapping.state_city_master[state_inp.value];
-  city_field.appendChild(cityOptions("city", "city-list", "city-name", cities));
-  city_field.querySelector(".city").classList.add("dsp-none");
-  city_inp.addEventListener("focus", function () {
-    if (city_field.querySelector(".city")) {
-      city_field.querySelector(".city").classList.remove("dsp-none");
-    }
-    block.querySelectorAll(".city-name").forEach((ele) => {
-      ele.addEventListener("click", function () {
-        block.querySelectorAll(".city-name").forEach((ele) => {
-          ele.classList.remove("active");
-        });
-        ele.classList.add("active");
-        city_inp.value = ele.textContent;
-        city_field.querySelector(".city").classList.add("dsp-none");
-        city_field.querySelector(".error-msg").remove();
-      });
-    });
-  });
+  block.querySelectorAll(".book-ride input").forEach((inp) => inp.setAttribute("autocomplete", "off"));
 
-  // Filtering Logic for state/City
-  function filterHandler(fieldWrapper, inputName, inputField, ulClass) {
-    let anyListVisibe = false;
-    fieldWrapper.querySelectorAll(inputName).forEach((list) => {
-      inputField.value = inputField.value.toUpperCase();
-      const inp_val = inputField.value.toUpperCase();
-      const ListName = list.textContent;
-      if (inp_val == "" || ListName.includes(inp_val)) {
-        list.classList.remove("dsp-none");
-        anyListVisibe = true;
-      } else {
-        list.classList.add("dsp-none");
-      }
-    });
-    // Handle No options
-    const existingNoOption = block
-      .querySelector(ulClass)
-      .querySelector(".noOption");
-    if (!anyListVisibe) {
-      if (!existingNoOption) {
-        const noOptionList = div({ class: "noOption" }, "No options");
-        block.querySelector(ulClass).append(noOptionList);
-      }
-    } else {
-      if (existingNoOption) {
-        existingNoOption.remove();
+  const mappedStates = dataMapping.state_city_master.state.map(stateLabel => ({
+    label: stateLabel,
+    cities: Object.values(dataMapping.state_city_master[stateLabel.toUpperCase()] || {})
+  }));
+
+  let selectedStateData = null;
+  let selectedCityData = null;
+
+  const initialCurrentLocation = dataMapping.current_location || {};
+  if (initialCurrentLocation.state) {
+    selectedStateData = mappedStates.find(s => s.label.toUpperCase() === initialCurrentLocation.state.toUpperCase());
+    if (selectedStateData) {
+      stateCustomInput.value = selectedStateData.label;
+      if (initialCurrentLocation.city) {
+        selectedCityData = selectedStateData.cities.find(c => c.code === initialCurrentLocation.city);
+        if (selectedCityData) {
+          cityCustomInput.value = selectedCityData.label;
+        }
       }
     }
+  } else {
+      selectedStateData = mappedStates[0];
+      stateCustomInput.value = selectedStateData ? selectedStateData.label : '';
   }
 
-  // State filter
-  state_inp.addEventListener("input", function () {
-    filterHandler(state_field, ".state-name", state_inp, ".state-list");
-    toggleCityInputState();
-  });
-
-  // City filter
-  city_inp.addEventListener("input", function () {
-    filterHandler(city_field, ".city-name", city_inp, ".city-list");
-    if (city_field.querySelector(".error-msg")) {
-      city_field.querySelector(".error-msg").remove();
+  stateCustomInput.addEventListener('focus', () => {
+    stateCustomInput.dataset.filter = '';
+    populateList(stateCustomInput, stateList, mappedStates, onStateSelect);
+    stateList.style.display = 'block';
+    isStateOpen = true;
+    if (isCityOpen) {
+      cityList.style.display = 'none';
+      isCityOpen = false;
     }
   });
 
-  // Hide dropdown if clicked outside input or dropdown
-  document.addEventListener("click", function (e) {
-    if (!state_field.contains(e.target)) {
-      const dropdown = state_field.querySelector(".state");
-      if (dropdown) dropdown.remove();
+  stateCustomInput.addEventListener('input', () => {
+    stateCustomInput.dataset.filter = stateCustomInput.value;
+    populateList(stateCustomInput, stateList, mappedStates, onStateSelect);
+    stateList.style.display = 'block';
+    isStateOpen = true;
+    if (isCityOpen) {
+      cityList.style.display = 'none';
+      isCityOpen = false;
     }
   });
 
-  // City disabled if state is empty
-  function toggleCityInputState() {
-    if (state_inp.value.trim() === "") {
-      city_inp.setAttribute("disabled", true);
-      city_inp.style.cursor = "not-allowed";
-      city_inp.value = "";
-      city_field.querySelector(".city").classList.add("dsp-none");
+  stateDropdownBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    if (isStateOpen) {
+      stateList.style.display = 'none';
+      isStateOpen = false;
     } else {
-      city_inp.removeAttribute("disabled", true);
-      city_inp.style.cursor = "unset";
+      if (isCityOpen) {
+        cityList.style.display = 'none';
+        isCityOpen = false;
+      }
+      stateCustomInput.dataset.filter = '';
+      populateList(stateCustomInput, stateList, mappedStates, onStateSelect);
+      stateList.style.display = 'block';
+      isStateOpen = true;
+      stateCustomInput.focus();
+    }
+  });
+
+  stateClearBtn.addEventListener('click', () => {
+    stateCustomInput.value = '';
+    stateCustomInput.dataset.filter = '';
+    stateClearBtn.style.display = 'none'; // Hide clear button when input is empty
+    isStateOpen = false; // Reset state open flag
+
+    cityCustomInput.value = '';
+    cityCustomInput.dataset.filter = '';
+    cityCustomInput.disabled = true;
+    cityClearBtn.style.display = 'none'; // Hide city clear button when state is cleared
+    cityList.style.display = 'none';
+    isCityOpen = false;
+
+    selectedStateData = null;
+    selectedCityData = null;
+
+    showError(state_field_wrapper, 'Select a state');
+    showError(city_field_wrapper, 'Select a city');
+
+    dataMapping.current_location = { state: '', city: '' };
+    setDataMapping(dataMapping);
+
+    populateList(stateCustomInput, stateList, mappedStates, onStateSelect); // Repopulate and open
+    stateList.style.display = 'block';
+    isStateOpen = true;
+  });
+
+  cityCustomInput.addEventListener('focus', () => {
+    if (cityCustomInput.disabled) return;
+    cityCustomInput.dataset.filter = '';
+    const citiesForSelectedState = selectedStateData ? selectedStateData.cities : [];
+    populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect);
+    cityList.style.display = 'block';
+    isCityOpen = true;
+    if (isStateOpen) {
+      stateList.style.display = 'none';
+      isStateOpen = false;
+    }
+  });
+
+  cityCustomInput.addEventListener('input', () => {
+    if (cityCustomInput.disabled) return;
+    cityCustomInput.dataset.filter = cityCustomInput.value;
+    const citiesForSelectedState = selectedStateData ? selectedStateData.cities : [];
+    populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect);
+    cityList.style.display = 'block';
+    isCityOpen = true;
+    if (isStateOpen) {
+      stateList.style.display = 'none';
+      isStateOpen = false;
+    }
+  });
+
+  cityDropdownBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    if (cityCustomInput.disabled) return;
+    if (isCityOpen) {
+      cityList.style.display = 'none';
+      isCityOpen = false;
+    } else {
+      if (isStateOpen) {
+        stateList.style.display = 'none';
+        isStateOpen = false;
+      }
+      cityCustomInput.dataset.filter = '';
+      const citiesForSelectedState = selectedStateData ? selectedStateData.cities : [];
+      populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect);
+      cityList.style.display = 'block';
+      isCityOpen = true;
+      cityCustomInput.focus();
+    }
+  });
+
+  cityClearBtn.addEventListener('click', () => {
+    cityCustomInput.value = '';
+    cityCustomInput.dataset.filter = '';
+    cityClearBtn.style.display = 'none'; // Hide clear button when input is empty
+    isCityOpen = false; // Reset city open flag
+
+    selectedCityData = null;
+    showError(city_field_wrapper, 'Select a city');
+
+    dataMapping.current_location = { state: selectedStateData ? selectedStateData.label : '', city: '' };
+    setDataMapping(dataMapping);
+
+    const citiesForSelectedState = selectedStateData ? selectedStateData.cities : [];
+    populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect); // Repopulate and open
+    cityList.style.display = 'block';
+    isCityOpen = true;
+  });
+
+  document.addEventListener('click', e => {
+    if (!stateCustomWrapper.contains(e.target) && isStateOpen) {
+      stateList.style.display = 'none';
+      isStateOpen = false;
+    }
+    if (!cityCustomWrapper.contains(e.target) && isCityOpen) {
+      cityList.style.display = 'none';
+      isCityOpen = false;
+    }
+  });
+
+  async function onStateSelect(s) {
+    selectedStateData = s;
+    selectedCityData = null;
+    cityCustomInput.disabled = false;
+    cityCustomInput.value = '';
+    cityList.style.display = 'none';
+    isCityOpen = false;
+
+    showError(state_field_wrapper, '');
+    showError(city_field_wrapper, 'Select a city');
+
+    stateList.style.display = 'none';
+    isStateOpen = false;
+
+    dataMapping.current_location = { state: s.label, city: '' };
+    setDataMapping(dataMapping);
+  }
+
+  async function onCitySelect(c) {
+    selectedCityData = c;
+    showError(city_field_wrapper, '');
+
+    cityList.style.display = 'none';
+    isCityOpen = false;
+
+    dataMapping.current_location = { state: selectedStateData.label, city: selectedCityData.code };
+    setDataMapping(dataMapping);
+  }
+
+  if (selectedStateData) {
+      stateCustomInput.value = selectedStateData.label;
+      stateClearBtn.style.display = 'block';
+      cityCustomInput.disabled = false;
+
+      if (selectedCityData) {
+          cityCustomInput.value = selectedCityData.label;
+          cityClearBtn.style.display = 'block';
+          showError(state_field_wrapper, '');
+          showError(city_field_wrapper, '');
+      } else {
+          cityCustomInput.value = '';
+          cityClearBtn.style.display = 'none';
+          showError(city_field_wrapper, 'Select a city');
+      }
+  } else {
+      cityCustomInput.disabled = true;
+      stateCustomInput.value = '';
+      stateClearBtn.style.display = 'none';
+      cityCustomInput.value = '';
+      cityClearBtn.style.display = 'none';
+      showError(state_field_wrapper, 'Select a state');
+      showError(city_field_wrapper, 'Select a city');
+  }
+
+  function toggleCityInputState() {
+    if (stateCustomInput.value.trim() === "") {
+      cityCustomInput.setAttribute("disabled", true);
+      cityCustomInput.style.cursor = "not-allowed";
+      cityCustomInput.value = "";
+      cityClearBtn.style.display = 'none';
+    } else {
+      cityCustomInput.removeAttribute("disabled");
+      cityCustomInput.style.cursor = "unset";
     }
   }
   toggleCityInputState();
 
-  // Send OTP click start
   block.querySelector(".sendOTP-btn").addEventListener("click", function () {
     console.log("Hi Send otp");
     try {
@@ -396,131 +540,71 @@ export default async function decorate(block) {
     }
   });
 
-  // Validation Start
-  // Name validation
   const nameInp = block.querySelector("#form-name");
   const nameField = nameInp.closest(".text-wrapper");
   nameInp.addEventListener("input", function () {
     validateName(nameField, nameInp.value);
-    // const nameError = nameField.querySelector(".error-msg");
-    // const value = nameInp.value.trim();
-    // if (nameError) {
-    //   nameError.remove();
-    // }
-    // if (value == "") {
-    //   nameField.appendChild(errorField("Field is required"));
-    // } else if (!nameRegex.test(value)) {
-    //   nameField.appendChild(errorField("Please enter a valid name"));
-    // }
   });
 
-  // Mobile validation
-  // const mobRegex = /^[6-9]\d{9}$/;
   const mobInp = block.querySelector("#form-mobile");
   const mobField = mobInp.closest(".tel-wrapper");
   mobInp.addEventListener("input", function () {
-    // this.value = this.value.replace(/\D/g, "");
-    this.value = this.value.substr(0,10);
+    this.value = this.value.substr(0, 10);
     block.querySelector(".sendOTP-btn").classList.add("dsp-none");
     block.querySelector(".resendOTP-btn").classList.add("dsp-none");
-    
+
     form.otp.disabled = true;
     form.otp.value = '';
     const valid = validateMobile(mobField, mobInp.value);
-    if(valid){
+    if (valid) {
       block.querySelector(".sendOTP-btn").classList.remove("dsp-none");
-      // block.querySelector(".resendOTP-btn").classList.remove("dsp-none");
     }
-    // const mobError = mobField.querySelector(".error-msg");
-    // const value = mobInp.value.trim();
-    // if (mobError) {
-    //   mobError.remove();
-    // }
-    // if (value == "") {
-    //   mobField.appendChild(errorField("Field is required"));
-    // } else if (value.length !== 10 && !mobRegex.test(value)) {
-    //   block.querySelector(".sendOTP-btn").classList.add("dsp-none");
-    //   mobField.appendChild(errorField("Please enter a valid mobile no."));
-    // } else {
-    //   block.querySelector(".sendOTP-btn").classList.remove("dsp-none");
-    // }
   });
 
-  // OTP Validation  
   const otpInp = block.querySelector("#form-otp");
   const otpField = otpInp.closest(".field-wrapper");
   otpInp.addEventListener("input", function () {
-    this.value = this.value.substr(0,6);
+    this.value = this.value.substr(0, 6);
     validateOtp(otpField, form.mobile.value, otpInp.value);
   })
 
-  // Email Validation
   const emailInp = block.querySelector("#form-email");
   const emailField = emailInp.closest(".email-wrapper");
   emailInp.addEventListener("input", function () {
-    // checkValidity()
-    const emailError = emailField.querySelector(".error-msg");
     validateEmail(emailField, emailInp.value);
-    // const value = emailInp.value.trim();
-    // if (emailError) {
-    //   emailError.remove();
-    // }
-    // if (value == "") {
-    //   emailField.appendChild(errorField("Field is required"));
-    // } else if (!emailRegex.test(value)) {
-    //   emailField.appendChild(errorField("Please enter a valid email"));
-    // }
   });
 
-  // State and city validation
-  const stateCityInp = block.querySelectorAll(".book-ride #form-f1 input");
-  stateCityInp.forEach((inp) => {
-    const optionField = inp.closest(".field-wrapper");
-    const optionError = optionField.querySelector(".error-msg");
-    inp.addEventListener("input", function () {
-      validateOtherFields(optionField, inp.name, inp.value);
-      // const value = inp.value.trim();
-      // if (optionError) {
-      //   optionError.remove();
-      // }
-      // if (value == "") {
-      //   optionField.appendChild(errorField("kk Field is required"));
-      // }
-    });
-  });
-
-  // Submit Click
-  // submitBtn.addEventListener("click", )
   function checkValidity() {
     const allInp = block.querySelectorAll("input[type='tel'],input[type='text'],input[type='email']");
     return [...allInp].map((inp) => {
       const fieldWrapper = inp.closest(".field-wrapper");
-      const error = fieldWrapper.querySelector(".error-msg");
       const inpVal = inp.value;
       const inpName = inp.name;
-      if (inpName == "name") {
+
+      if (inpName === "state") {
+          return validateOtherFields(state_field_wrapper, inpName, stateCustomInput.value);
+      } else if (inpName === "city") {
+          return validateOtherFields(city_field_wrapper, inpName, cityCustomInput.value);
+      } else if (inpName == "name") {
         return validateName(fieldWrapper, inpVal);
-      } else if (inpName == "otp" ) {
-        return validateOtp(fieldWrapper, form.mobile.value, form.otp.value);
+      } else if (inpName == "otp") {
+        return validateOtp(otpField, form.mobile.value, otpInp.value);
       } else if (inpName == "mobile") {
-        const isValid = validateMobile(fieldWrapper, inpVal);
+        const isValid = validateMobile(mobField, inpVal);
         form.otp.disabled = true;
         if (isValid) {
           form.otp.disabled = false;
         }
         return isValid;
-      } else if (inpName == "email" && !emailRegex.test(inpVal)) {
-        return validateEmail(fieldWrapper, inpVal);
-      }else if (inpVal == "") {
-        return validateOtherFields(fieldWrapper, inpName, inpVal);
-      }else {
-        showError(fieldWrapper,'')
+      } else if (inpName == "email") {
+        return validateEmail(emailField, inpVal);
+      } else if (inpVal == "") {
+        showError(fieldWrapper, 'This field is required');
+        return false;
+      } else {
+        showError(fieldWrapper, '')
         return true
       }
     });
-
-    // if (!block.querySelector(".error-msg")) {
-    //   alert("Form Valid...You can call Submit API here");
-    // }
   };
 }
