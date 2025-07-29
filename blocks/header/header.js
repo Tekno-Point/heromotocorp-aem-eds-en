@@ -722,6 +722,11 @@ export async function appendXF(block, xfPath) {
               p.style.display = "block"; // or "inline"
             });
             document
+              .querySelectorAll(".parts-desc")
+              .forEach((p) => {
+                p.style.display = "block"; // or "inline"
+              });
+            document
               .querySelectorAll("#new-mobile .accordion-content")
               .forEach((c) => (c.style.display = "none"));
             document
