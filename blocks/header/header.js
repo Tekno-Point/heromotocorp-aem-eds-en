@@ -658,7 +658,7 @@ export async function appendXF(block, xfPath) {
             );
             if (navbar) {
               navbar.style.top = "0";
-              navbar.style.background = "#000";
+              // navbar.style.background = "#000";
             }
             document.documentElement.classList.add("overflow-hidden");
           } else if (menu.classList.contains("open-menu")) {
