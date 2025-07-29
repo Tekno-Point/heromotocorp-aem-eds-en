@@ -711,7 +711,7 @@ export async function appendXF(block, xfPath) {
             document.querySelectorAll(".our-range-fragment").forEach((el) => {
               el.style.display = "none";
             });
-           
+
             document
               .querySelectorAll(".bike-item-container .bike-spec p")
               .forEach((p) => {
@@ -721,6 +721,18 @@ export async function appendXF(block, xfPath) {
             document.querySelectorAll(".about-premia-text p").forEach((p) => {
               p.style.display = "block"; // or "inline"
             });
+
+            document
+              .querySelectorAll(".parts-desc")
+              .forEach((p) => {
+                p.style.display = "block"; // or "inline"
+              });
+
+            document.querySelectorAll(".parts-wrap")
+              .forEach((p) => {
+                p.querySelector(".parts-title").style.display = "block"; // or "inline"
+              });
+
             document
               .querySelectorAll("#new-mobile .accordion-content")
               .forEach((c) => (c.style.display = "none"));
@@ -732,13 +744,13 @@ export async function appendXF(block, xfPath) {
               content.style.display = "block";
               icon.textContent = "-";
               anchor?.classList.add("selected");
-               slideDown(content);
+              slideDown(content);
             } else {
-           
+
               content.style.display = "none";
               icon.textContent = "+";
               anchor?.classList.remove("selected");
-                 slideUp(content);
+              slideUp(content);
             }
           });
         });
@@ -1180,10 +1192,10 @@ export default async function decorate(block) {
   const heroSection = document.querySelector(".banner-price"); //changed it acc to the site
 
 
- const img = document.querySelectorAll(".nav-bar p");
-   img.forEach((images)=>{
-        images.style.display = "none"
-      })
+  const img = document.querySelectorAll(".nav-bar p");
+  img.forEach((images) => {
+    images.style.display = "none"
+  })
 
   window.addEventListener("scroll", () => {
     const heroBottom = heroSection.getBoundingClientRect().bottom;
@@ -1209,7 +1221,7 @@ export default async function decorate(block) {
         "none"),
         (secondUl.style.display = "flex");
       // img.style.display = "block";
-       img.forEach((images)=>{
+      img.forEach((images) => {
         images.style.display = "block"
       })
       navBarWrapper.style.height = "76px";
@@ -1222,7 +1234,7 @@ export default async function decorate(block) {
         (navBarWrapper.style.padding = "unset");
       secondUl.style.display = "none";
       // img.style.display = "none";
-       img.forEach((images)=>{
+      img.forEach((images) => {
         images.style.display = "none"
       })
       navBarWrapper.style.height = "40px";
