@@ -436,8 +436,8 @@ input::placeholder {
     border-bottom: 2px solid #fff;
 }
 
-.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list ,
-.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list{
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list {
     /* display: block; */
     position: absolute;
     top: 43px;
@@ -460,9 +460,24 @@ input::placeholder {
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input,
 .section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper input {
     border: unset;
+    color: #fff;
     /* padding: 0 10px;
     margin-left: 5px; */
 }
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper span,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper span {
+    /* width: ; */
+    font-size: 22px;
+    color: #dcd9d9;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input::placeholder,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper input::placeholder {
+    color: white;
+}
+
+
 
 .section.book-ride .form form .field-wrapper input {
     background-color: transparent;

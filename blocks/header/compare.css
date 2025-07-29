@@ -241,7 +241,7 @@
     line-height: 100%;
     font-weight: 500;
     font-style: italic;
-    font-family: var(--font-transducer);
+    font-family: var(--font-tstar-regular);
     color: #fff;
     padding-right: 1.25rem
 }
@@ -289,7 +289,7 @@
     font-size: 4rem;
     line-height: 100%;
     font-weight: 500;
-    font-family: var(--font-transducer);
+    font-family: var(--font-tstar-medium);
     font-style: italic
 }
 
@@ -297,6 +297,8 @@
     font-size: 1rem;
     line-height: 120%;
     white-space: normal;
+    font-family: 'TSTAR-PRO-Bold';
+    font-weight: 400;
 }
 
 .tray-container .tray-wrapper .tray-cta-container {
@@ -445,6 +447,36 @@
     .drawer-container .drawer-wrapper .drawer-heading {
         font-size: 1.25rem
     }
+
+    body>.tray-container.open.disappear {
+        transform: translateY(100%);
+    }
+
+    body>.tray-container.open {
+        transform: translateY(0%);
+    }
+
+    body>.tray-container.disappear.compared.open {
+        transform: translateY(calc(100%));
+    }
+
+    .tray-container.open.disappear .tray-wrapper .tray-control {
+        top: -121px;
+        /* display: none; */
+    }
+
+    .tray-container.open .tray-wrapper .tray-control{
+        display: none;
+    }
+
+    .tray-container.compared.open .tray-wrapper .tray-control {
+        display: flex;
+    }
+
+    .tray-container.open .tray-wrapper .tray-control {
+        top: -54px;
+    }
+
 }
 
 .drawer-container .drawer-wrapper .drawer-tabs {

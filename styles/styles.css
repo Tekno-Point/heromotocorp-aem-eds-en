@@ -291,10 +291,13 @@ main img {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: pointer;
+  width: 32px;
+  height: 32px;
 }
 
 .heroicon-wheel:before {
   content: "\E9C9";
+  font-size: 2rem;
 }
 
 .heroicon-logo .path1:before {
@@ -350,6 +353,7 @@ main img {
 
 .heroicon-engine:before {
   content: "";
+      font-size: 2rem;
 }
 
 /* heroicon-engine */
@@ -357,22 +361,27 @@ main img {
 
 .heroicon-suspension:before {
   content: "\E9B2";
+  font-size: 2rem;
 }
 
 .heroicon-chassis:before {
   content: "\E92F";
+  font-size: 2rem;
 }
 
 .heroicon-disbrake:before {
   content: "\E945";
+  font-size: 2rem;
 }
 
 .heroicon-electrical:before {
   content: "\E94C";
+  font-size: 2rem;
 }
 
 .icon-moon-heroicon-reorder:before {
   content: "\E99E";
+  font-size: 2rem;
 }
 
 /*  */

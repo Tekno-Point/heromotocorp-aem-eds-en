@@ -384,7 +384,11 @@ export async function appendXF(block, xfPath) {
       const match = str.match(/(\d+(\.\d+)?)/);
       return match ? Number(match[0]) : null;
     };
+
+    document.querySelector(".scroll-for-more-container p").style.display = 'block';
+
     ///////////////////AK11 25-07///////////////
+
     document
       .querySelectorAll(".header-explore-tabs .explore-nav-link")
       .forEach((tab) => {
@@ -1224,10 +1228,12 @@ export default async function decorate(block) {
       img.forEach((images) => {
         images.style.display = "block"
       })
+      navBarWrapper.classList.add("scrolled")
       navBarWrapper.style.height = "76px";
       navBarWrapper.style.padding = "0px 10px 0";
       // navBarWrapper.style.top = "0"
     } else {
+      navBarWrapper.classList.remove("scrolled")
       navWrapper2.style.transform = "translateY(0)";
       (document.getElementsByClassName("header-main")[0].style.display =
         "block"),

@@ -17,7 +17,7 @@ function createDropdownInput(placeholder) {
   const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' });
   const clearBtn = span({ class: 'clear-btn' }, '×');
   const dropdownBtn = span({ class: 'dropdown-btn' },
-    img({ src: '/icons/chevron_down.svg', width: 16, height: 16, alt: 'Dropdown' })
+    img({ src: '/icons/svgviewer-png-output.png', width: 16, height: 16, alt: 'Dropdown' })
   );
   const wrapper = div({ class: 'input-wrapper' }, input, clearBtn, dropdownBtn);
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
@@ -52,12 +52,14 @@ function populateList(input, list, data, onSelect) {
         },
         item.label
       );
-      itemEl.addEventListener('click', () => {
+      itemEl.addEventListener('click', (e) => {
+
         input.value = item.label;
         list.style.display = 'none';
         if (input.id === 'state-input') isStateOpen = false;
         if (input.id === 'city-input') isCityOpen = false;
         onSelect(item);
+        e.currentTarget.closest(".field-wrapper").querySelector(".clear-btn").style.display = 'block'
       });
       list.appendChild(itemEl);
       if (isSelected) selectedEl = itemEl;
@@ -301,8 +303,8 @@ export default async function decorate(block) {
       }
     }
   } else {
-      selectedStateData = mappedStates[0];
-      stateCustomInput.value = selectedStateData ? selectedStateData.label : '';
+    selectedStateData = mappedStates[0];
+    stateCustomInput.value = selectedStateData ? selectedStateData.label : '';
   }
 
   stateCustomInput.addEventListener('focus', () => {
@@ -477,28 +479,28 @@ export default async function decorate(block) {
   }
 
   if (selectedStateData) {
-      stateCustomInput.value = selectedStateData.label;
-      stateClearBtn.style.display = 'block';
-      cityCustomInput.disabled = false;
+    stateCustomInput.value = selectedStateData.label;
+    stateClearBtn.style.display = 'block';
+    cityCustomInput.disabled = false;
 
-      if (selectedCityData) {
-          cityCustomInput.value = selectedCityData.label;
-          cityClearBtn.style.display = 'block';
-          showError(state_field_wrapper, '');
-          showError(city_field_wrapper, '');
-      } else {
-          cityCustomInput.value = '';
-          cityClearBtn.style.display = 'none';
-          showError(city_field_wrapper, 'Select a city');
-      }
-  } else {
-      cityCustomInput.disabled = true;
-      stateCustomInput.value = '';
-      stateClearBtn.style.display = 'none';
+    if (selectedCityData) {
+      cityCustomInput.value = selectedCityData.label;
+      cityClearBtn.style.display = 'block';
+      showError(state_field_wrapper, '');
+      showError(city_field_wrapper, '');
+    } else {
       cityCustomInput.value = '';
       cityClearBtn.style.display = 'none';
-      showError(state_field_wrapper, 'Select a state');
       showError(city_field_wrapper, 'Select a city');
+    }
+  } else {
+    cityCustomInput.disabled = true;
+    stateCustomInput.value = '';
+    stateClearBtn.style.display = 'none';
+    cityCustomInput.value = '';
+    cityClearBtn.style.display = 'none';
+    showError(state_field_wrapper, 'Select a state');
+    showError(city_field_wrapper, 'Select a city');
   }
 
   function toggleCityInputState() {
@@ -582,9 +584,9 @@ export default async function decorate(block) {
       const inpName = inp.name;
 
       if (inpName === "state") {
-          return validateOtherFields(state_field_wrapper, inpName, stateCustomInput.value);
+        return validateOtherFields(state_field_wrapper, inpName, stateCustomInput.value);
       } else if (inpName === "city") {
-          return validateOtherFields(city_field_wrapper, inpName, cityCustomInput.value);
+        return validateOtherFields(city_field_wrapper, inpName, cityCustomInput.value);
       } else if (inpName == "name") {
         return validateName(fieldWrapper, inpVal);
       } else if (inpName == "otp") {

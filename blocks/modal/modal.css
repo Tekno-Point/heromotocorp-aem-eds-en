@@ -260,3 +260,94 @@ body.modal-open {
     margin: 3%;
   }
 }
+
+
+body.modal-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(10, 10, 10, 0.8);
+    z-index: 999;
+}
+
+body{
+  position: relative;
+}
+
+/* country modal start*/
+.section.modal.country-modal-sec dialog {
+  /* margin: 0 auto;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  max-height: calc(100% - 100px); */
+  margin: 0 auto;
+  top: 10%;
+  transform: translateX(-50%);
+  left: 50%;
+  height: max-content;
+  border-radius: 8px;
+  border: unset;
+  overflow: auto;
+  /* min-height: calc(100% - 1.75rem * 2); */
+}
+
+
+.section.modal.country-modal-sec dialog::backdrop {
+  background-color: #686868;
+}
+
+.section.modal.country-modal-sec dialog .modal-content {
+  border: unset;
+}
+
+.section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper h2 {
+  font-family: TSTAR-PRO-Bold;
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper ul li {
+  width: 140px;
+  margin: 5px;
+}
+
+.section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper ul li a {
+  background-color: #686868;
+  color: #fff;
+  padding: 12px 8px;
+  font-family: TSTAR-PRO-Medium;
+  font-size: var(--font-size14);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  white-space: nowrap;
+}
+
+
+.section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper ul li a span {
+  width: 30px;
+  height: 20px;
+  display: flex;
+}
+
+.section.modal.country-modal-sec .close-button .icon.icon-close::before,
+.section.modal.country-modal-sec .close-button .icon.icon-close::after {
+  color: red;
+}
+
+/* country modal end */

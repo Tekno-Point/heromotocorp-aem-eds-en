@@ -325,7 +325,11 @@ const renderTrayCards = () => {
     }
 
     traySection.classList.add('compared');
-    compareButton.disabled = false;
+//    if(sessionVehilces.length > 1){
+//      compareButton.disabled = fals;
+//    }
+   compareButton.disabled = false;
+
 
     const sesssionVehLength = sessionVehilces.length;
 

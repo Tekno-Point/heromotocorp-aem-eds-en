@@ -70,13 +70,13 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
           li.style.fontWeight = 'bold';
           selectedEl = li;
         }
-        li.addEventListener("click", () => {
+        li.addEventListener("click", (e) => {
           inputEl.value = value;
           dropdown.style.display = "none";
           if (inputEl.id === 'state-input') isStateDropdownOpen = false;
           if (inputEl.id === 'city-input') isCityDropdownOpen = false;
-          clearBtn.style.display = "block";
           onSelect(value);
+          clearBtn.style.display = "block";
         });
         dropdown.appendChild(li);
       });
