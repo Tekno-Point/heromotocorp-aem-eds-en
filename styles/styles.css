@@ -272,6 +272,7 @@ main img {
   width: 100%;
 }
 
+
 .hero-icon {
   font-family: "hero-icon-font" !important;
   speak: none;
@@ -510,6 +511,14 @@ main .section.highlight {
 
 * {
   font-family: "TSTAR-PRO-Medium";
+}
+
+.homepage-redesign-dropdown-menu .dropdown-content .column.column2,
+.homepage-redesign-dropdown-menu .hp-dropdown-content .column.column2,
+.homepage-redesign-dropdown-menu,
+.homepage-redesign-dropdown-menu .hp-dropdown-content .column.column2 .bike-item-container .bike-text-content-wrapper .bike-title,
+.homepage-redesign-dropdown-menu .hp-dropdown-content .column.column2 .bike-item-container .bike-text-content-wrapper .bike-spec p {
+  font-family: "TRANSDUCER-Bold";
 }
 
 .section .block {
