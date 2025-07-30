@@ -24,6 +24,12 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "canonical",
+        "label": "Canonical"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "og:title",
         "label": "OG Title"
       },
