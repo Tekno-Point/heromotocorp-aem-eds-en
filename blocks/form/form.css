@@ -628,6 +628,7 @@ input::placeholder {
 
 
 .section.book-ride .form .submit-btn .button {
+    font-family: 'TSTAR-PRO-Heavy';
     font-size: 20px;
     line-height: 28px;
     font-weight: 900;
@@ -725,6 +726,15 @@ input::placeholder {
     .section.book-ride .form .submit-btn .button {
         font-size: 14px;
         line-height: 20px;
+    }
+
+    .section.book-ride .form form fieldset .sendOTP-btn label,
+    .section.book-ride .form form fieldset .resendOTP-btn label {
+        font-size: .875rem;
+        -webkit-font-kerning: auto;
+        font-kerning: auto;
+        letter-spacing: normal;
+        line-height: 1.25rem;
     }
 }
 
