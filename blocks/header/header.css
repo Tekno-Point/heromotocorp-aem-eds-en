@@ -154,7 +154,7 @@ nav .nav-link.dropdown-toggle.new-header-variation span {
     font-weight: 700;
 }
 
-.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label{
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label {
     font-weight: 600;
 }
 
@@ -219,6 +219,14 @@ nav .nav-link.dropdown-toggle.new-header-variation span {
         font-family: 'TSTAR-PRO-Regular';
         font-weight: 700;
     }
+
+    .mobile-only.new-header-variation.bottom-menu li a div {
+        color: #fff;
+    }
+}
+
+body .tray-container.open.disappear .tray-wrapper .tray-control .tray-toggle-cta>img{
+    transform: rotate(180deg);
 }
 
 .nav-bar>.default-content-wrapper>ul:nth-child(3)>li>ul {

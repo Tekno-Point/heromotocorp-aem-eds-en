@@ -39,8 +39,8 @@ export async function appendXF(block, xfPath) {
         "/content/dam/",
         "https://stage.heromotocorp.com/content/dam/"
       );
-      str = str.replaceAll("hp-hide-cmp-checkbox", "");
     }
+    str = str.replaceAll("hp-hide-cmp-checkbox", "");
     const div = document.createElement("div");
     div.innerHTML = str;
     div.querySelector(".tray-container").remove();
@@ -1314,5 +1314,8 @@ export default async function decorate(block) {
   // document
   //   .getElementsByClassName("navbar-nav")
   //   .addEventListener("click", addClientLibScript);
+  let stickyHeader = block.querySelector(".mobile-only.new-header-variation.bottom-menu");
+
+  document.body.append(stickyHeader);
   return block;
 }

@@ -1,9 +1,13 @@
 import { div, section, input, label, button, img, p, span, sup, i } from '../../scripts/dom-helpers.js';
 import { fetchCategory } from '../../scripts/common.js';
+import { fetchPlaceholders } from '../../scripts/aem.js';
+const placeholders = await fetchPlaceholders('/form');
+const { comparePageUrl } = placeholders;
 
 const RED_CHEVRON = '/icons/icon-chevron-red.svg';
 const WHITE_CROSS_ICON = '/icons/icon-cross-white.svg';
 const WHITE_CHEVRON = '/icons/icon-chevron-white.svg';
+const compareVehicles = 'compareVehicles';
 
 let vehiclesList = [];
 let comparedCardsContainer;
@@ -147,7 +151,8 @@ const traySection = section({ class: 'tray-container disappear open' },
             button({ class: 'tray-clear-cta', onclick: clearSessionVehicles }, 'CLEAR ALL'),
             button({
                 class: 'tray-compare-cta',
-                disabled: 'disabled',
+                // disabled: 'disabled',
+                disabled: true,
             }, 'COMPARE NOW')
         )
     )
@@ -157,7 +162,11 @@ document.addEventListener('mouseover', initVehicleRender);
 
 function clearSessionVehicles() {
     traySection.classList.toggle('disappear')
-    sessionStorage.removeItem('comparedVehicles');
+    JSON.parse(sessionStorage.getItem(compareVehicles))?.forEach(function (sku) {
+        document.querySelectorAll('[value="' + sku + '"]').forEach(check => check.checked = false);
+    })
+    sessionStorage.removeItem(compareVehicles);
+
     renderTrayCards();
 }
 
@@ -210,7 +219,7 @@ const drawerSection = section({ class: 'drawer-container opaque', onclick: toggl
 );
 
 const onVehicleAdd = (e) => {
-    let comparedVehicle = sessionStorage.getItem('comparedVehicles');
+    let comparedVehicle = sessionStorage.getItem(compareVehicles);
 
     if (comparedVehicle == 'undefined' || !comparedVehicle) {
         comparedVehicle = null
@@ -231,19 +240,19 @@ const onVehicleAdd = (e) => {
     const vehicle = getSkuItem(selectedVehicleSku);
     // console.log(vehicle, 'selected-sku');
 
-    sessionStorage.setItem('comparedVehicles', JSON.stringify(vehicles));
+    sessionStorage.setItem(compareVehicles, JSON.stringify(vehicles));
 
     renderTrayCards();
 }
 
 const onVehicleRmove = (e) => {
-    let comparedVehicle = sessionStorage.getItem('comparedVehicles');
-
+    let comparedVehicle = sessionStorage.getItem(compareVehicles);
     if (comparedVehicle == 'undefined' || !comparedVehicle) {
         comparedVehicle = null
     }
 
     const selectedVehicle = e.currentTarget.dataset.bikeId || e.currentTarget.value;
+    document.querySelector('[value="' + selectedVehicle + '"]').checked = false;
 
     let vehicles = [];
 
@@ -253,7 +262,7 @@ const onVehicleRmove = (e) => {
 
     vehicles.splice(vehicles.indexOf(selectedVehicle), 1);
 
-    sessionStorage.setItem('comparedVehicles', JSON.stringify(vehicles));
+    sessionStorage.setItem(compareVehicles, JSON.stringify(vehicles));
 
     renderTrayCards();
 }
@@ -308,12 +317,13 @@ const createAccordion = (label, vehicles) => {
 
 const compareButton = traySection.querySelector('.tray-compare-cta');
 compareButton.addEventListener('click', () => {
-    console.log(sessionStorage.getItem('comparedVehicles'), 'compare clicked');
+    console.log(sessionStorage.getItem(compareVehicles), 'compare clicked');
+    window.location.href = comparePageUrl;
 });
 
 const renderTrayCards = () => {
     const cardCountLabel = traySection.querySelector('.card-count');
-    let sessionVehilces = sessionStorage.getItem('comparedVehicles');
+    let sessionVehilces = sessionStorage.getItem(compareVehicles);
     sessionVehilces = (sessionVehilces && sessionVehilces != 'undefined') ? JSON.parse(sessionVehilces) : []; // Default to empty array if null or undefined
 
     if (!sessionVehilces.length) {
@@ -325,10 +335,12 @@ const renderTrayCards = () => {
     }
 
     traySection.classList.add('compared');
-//    if(sessionVehilces.length > 1){
-//      compareButton.disabled = fals;
-//    }
-   compareButton.disabled = false;
+    if (sessionVehilces.length > 1) {
+        compareButton.disabled = false;
+    } else {
+        compareButton.disabled = true;
+    }
+    //    compareButton.disabled = false;
 
 
     const sesssionVehLength = sessionVehilces.length;
