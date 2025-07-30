@@ -217,6 +217,7 @@ async function handleSubmit(form) {
     form.setAttribute("data-submitting", "true");
     submit.disabled = true;
     form.classList.add("dsp-none");
+
     form.closest(".section").querySelector(".book-ride-thankyou-wrapper").classList.add("dsp-block");
     const data = await fetchBookARide(
       form.name.value,
@@ -229,6 +230,7 @@ async function handleSubmit(form) {
     )
 
     if (data.ok) {
+      form.parentElement.style.padding = '0';
       form.closest(".section").querySelector(".book-ride-thankyou-wrapper .loader").classList.add("dsp-none");
       form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").classList.add("dsp-block");
       // return

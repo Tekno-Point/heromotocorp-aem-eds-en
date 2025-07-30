@@ -45,6 +45,10 @@
     margin-bottom: 6px;
 }
 
+.emi-controls .slider-group:nth-of-type(n+2) .value-row {
+    display: none;
+}
+
 .emi-container.input-value {
     font-size: 16px;
     font-weight: 500;
@@ -224,7 +228,33 @@
     background-color: #a5a5a5;
 }
 
+.emi-container input[type="range"]::-moz-range-track {
+    height: 10px;
+    border-radius: 16px;
+    background: linear-gradient(to right, #b50000 var(--progress, 0%), rgba(128, 128, 128, 0.3) var(--progress, 0%));
+}
+
 .emi-container input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    /* background: red; */
+    background: url("/icons/redbike.png"), linear-gradient(white, white);
+    background-position: center, center;
+    background-size: contain, cover;
+    background-repeat: no-repeat, no-repeat;
+    border-radius: 50%;
+    margin-top: -5px;
+    border: 2px solid #fff;
+    padding-top: 10px;
+    color: #a5a5a5;
+    background-color: #a5a5a5;
+    position: relative;
+    /* border-radius: .625rem; */
+    /* height: .375rem; */
+}
+
+.emi-container input[type="range"]::-moz-range-thumb {
     appearance: none;
     height: 25px;
     width: 25px;
