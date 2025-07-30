@@ -245,7 +245,7 @@ async function getDataMapping() {
       "GET",
       prodcutApi
         .replace("{stateCode}", code.stateCode)
-        .replace("{cityCode}", code.cityCode)
+        .replace("{cityCode}", code.code)
     );
     const { variant_to_colors: variantsData, variants: allVariantsDetails } = productInfo;
     // console.log(data);

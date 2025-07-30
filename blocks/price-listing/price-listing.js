@@ -286,7 +286,7 @@ async function decoratePriceListing() {
   }
 
   si.value = selectedState ? selectedState.label : '';
-  const initialCityFromMapping = selectedState.cities.find(c => c.code === current.city);
+  const initialCityFromMapping = selectedState.cities.find(c => c.code.toUpperCase() === current.city.toUpperCase());
   if (initialCityFromMapping) {
     ci.value = initialCityFromMapping.label;
     selectedCity = initialCityFromMapping;

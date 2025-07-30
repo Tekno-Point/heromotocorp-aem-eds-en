@@ -304,7 +304,7 @@ export default async function decorate(block) {
     if (selectedStateData) {
       stateCustomInput.value = selectedStateData.label;
       if (initialCurrentLocation.city) {
-        selectedCityData = selectedStateData.cities.find(c => c.code === initialCurrentLocation.city);
+        selectedCityData = selectedStateData.cities.find(c => c.code.toUpperCase() === initialCurrentLocation.city.toUpperCase());
         if (selectedCityData) {
           cityCustomInput.value = selectedCityData.label;
         }
@@ -523,7 +523,10 @@ export default async function decorate(block) {
     }
   }
   toggleCityInputState();
-
+  window.a = window.a || 0;
+  window.a++; 
+  console.log(window.a, "Book a ride form loaded");
+  
   block.querySelector(".sendOTP-btn").addEventListener("click", function () {
     // console.log("Hi Send otp");
     try {
