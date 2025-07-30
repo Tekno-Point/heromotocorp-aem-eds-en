@@ -1,7 +1,7 @@
 
 import createField from "./form-fields.js";
 import { div, ul, li, p, label, span, input as inputEl, img } from "../../scripts/dom-helpers.js";
-import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp, getRandomId } from "../../scripts/common.js";
+import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp, getRandomId, debounce } from "../../scripts/common.js";
 
 const nameRegex = /^[a-zA-Z\s]{1,50}$/;
 
@@ -527,7 +527,7 @@ export default async function decorate(block) {
   window.a++; 
   console.log(window.a, "Book a ride form loaded");
   
-  block.querySelector(".sendOTP-btn").addEventListener("click", function () {
+  function sendOTPHandler () {
     // console.log("Hi Send otp");
     try {
       block.querySelector(".sendOTP-btn").classList.add("dsp-none");
@@ -540,9 +540,11 @@ export default async function decorate(block) {
     } finally {
       // console.log("working");
     }
-  });
+  }
+  sendOTPHandler = debounce(sendOTPHandler, 1000);
+  block.querySelector(".sendOTP-btn").addEventListener("click", sendOTPHandler);
 
-  block.querySelector(".resendOTP-btn").addEventListener("click", function () {
+  function resendOTPHandler () {
     // console.log("Hi Resend otp");
     try {
       fetchOTP(form.mobile.value);
@@ -551,7 +553,9 @@ export default async function decorate(block) {
     } finally {
       // console.log("working");
     }
-  });
+  }
+  resendOTPHandler = debounce(resendOTPHandler, 1000);
+  block.querySelector(".resendOTP-btn").addEventListener("click", resendOTPHandler);
 
   const nameInp = form.name;
   const nameField = nameInp.closest(".text-wrapper");

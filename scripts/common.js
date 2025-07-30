@@ -36,6 +36,19 @@ PubSub.prototype.publish = function (eventName, data) {
 // Create a global pubsub instance
 export var pubsub = new PubSub();
 
+export function debounce(fn, delay) {
+  var timer = null;
+
+  return function () {
+    var context = this;
+    var args = arguments;
+
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      fn.apply(context, args);
+    }, delay);
+  };
+}
 
 export let dataMapping = {
   state_city_master: {},
