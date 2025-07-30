@@ -147,7 +147,7 @@ function setup() {
       }
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
+      console.warn(error);
     }
   }
 }
@@ -519,11 +519,11 @@ function decorateIcons(element, prefix = '') {
 
     //  this is check for target blanck 
 
-    if (span?.parentElement.tagName.toLowerCase() === 'a') {
-      span.parentElement.setAttribute('target', '_blank');
-    } else {
-      console.log('No, parent is not <a>');
-    }
+if (span?.parentElement.tagName.toLowerCase() === 'a') {
+     span.parentElement.setAttribute('target', '_blank');
+} else {
+  // console.log('No, parent is not <a>');
+}
 
     // end
 
@@ -756,7 +756,7 @@ async function fetchPlaceholders(prefix = 'default') {
   window.placeholders = window.placeholders || {};
   if (!window.placeholders[prefix]) {
     window.placeholders[prefix] = new Promise((resolve) => {
-      fetch(`${prefix === 'default' ? '' : prefix}/api/placeholder.json`)
+      fetch(`${prefix === 'default' ? '' : prefix}/placeholders.json`)
         .then((resp) => {
           if (resp.ok) {
             return resp.json();

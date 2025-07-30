@@ -1,8 +1,11 @@
-import { getMetadata } from "../../scripts/aem.js";
+import { fetchPlaceholders, getMetadata } from "../../scripts/aem.js";
 import initCompare from "./compare.js";
 import { loadFragment } from "../fragment/fragment.js";
 import { onVehicleAdd, onVehicleRmove } from "./compare-components.js";
-import { stageendpoint } from "../../scripts/common.js";
+const placeholders = await fetchPlaceholders('/form');
+// console.log(placeholders);
+
+const { headerXf } = placeholders;
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia("(min-width: 900px)");
@@ -704,7 +707,7 @@ export async function appendXF(block, xfPath) {
             const classSelector =
               "." + Array.from(parentLi.classList).join(".");
             mobileMenuHandler(classSelector);
-            console.log(classSelector)
+            // console.log(classSelector)
             const isVisible = content.style.display === "block";
             document.querySelectorAll(".hp-dropdown-content").forEach((el) => {
               el.style.display = "none";
@@ -744,7 +747,7 @@ export async function appendXF(block, xfPath) {
               .querySelectorAll("#new-mobile .accordion-header .icon")
               .forEach((i) => (i.textContent = "+"));
             if (!isVisible) {
-              console.log(content)
+              // console.log(content)
               content.style.display = "block";
               icon.textContent = "-";
               anchor?.classList.add("selected");
@@ -1269,9 +1272,7 @@ export default async function decorate(block) {
   }
 
   await appendXF(
-    block,
-    stageendpoint +
-    "/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html"
+    block, headerXf
   );
 
   /* init Compare */
