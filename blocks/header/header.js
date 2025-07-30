@@ -1314,5 +1314,8 @@ export default async function decorate(block) {
   // document
   //   .getElementsByClassName("navbar-nav")
   //   .addEventListener("click", addClientLibScript);
+  let stickyHeader = block.querySelector(".mobile-only.new-header-variation.bottom-menu");
+
+  document.body.append(stickyHeader);
   return block;
 }
