@@ -1302,6 +1302,14 @@ export default async function decorate(block) {
       e.target.dataset.vehiclesRendered = true;
     });
   });
+
+  block.querySelectorAll('[data-target="#countryModal"]').forEach((a) => {
+    a.addEventListener('click', async function (e) {
+      console.log(e);
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal('/modals/country');
+    })
+  })
   // document
   //   .getElementsByClassName("navbar-nav")
   //   .addEventListener("click", addClientLibScript);

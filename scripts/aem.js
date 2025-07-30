@@ -446,26 +446,65 @@ function decorateButtons(element) {
  * @param {string} [prefix] prefix to be added to icon src
  * @param {string} [alt] alt text to be added to icon
  */
+
 function decorateIcon(span, prefix = '', alt = '') {
-  const iconName = Array.from(span.classList)
-    .find((c) => c.startsWith('icon-'))
-    .substring(5);
   let heroIcon = span.classList[1].split("-").includes("moon");
   if (heroIcon) {
     let heroIconName = span?.classList[1]?.slice(10, span.classList[1].length);
     span.classList.add("icon", "hero-icon", heroIconName.trim());
+    return
   }
-  else {
+  if (Array.from(span.classList)
+    .find((c) => c.includes('icon-images'))) {
+    const classes = (span.classList[1])?.split('-');
+    const path = `/${classes.slice(1, 2).join('/')}/${classes.slice(2, -1).join('-')}.${classes.slice(-1)}`;
+    const img = document.createElement('img');
+    img.dataset.iconName = path;
+    img.src = `${window.hlx.codeBasePath}${prefix + path}`;
+    img.alt = alt;
+    img.loading = 'lazy';
+    span.append(img);
+  } else {
+    const iconName = Array.from(span.classList)
+      .find((c) => c.startsWith('icon-'))
+      .substring(5);
     const img = document.createElement('img');
     img.dataset.iconName = iconName;
     img.src = `${window.hlx.codeBasePath}${prefix}/icons/${iconName}.svg`;
     img.alt = alt;
     img.loading = 'lazy';
-    img.width = 16;
-    img.height = 16;
     span.append(img);
   }
 }
+
+// function decorateIcon(span, prefix = '', alt = '') {
+//   const iconName = Array.from(span.classList)
+//     .find((c) => c.startsWith('icon-'))
+//     .substring(5);
+//   let heroIcon = span.classList[1].split("-").includes("moon");
+//   if (heroIcon) {
+//     let heroIconName = span?.classList[1]?.slice(10, span.classList[1].length);
+//     span.classList.add("icon", "hero-icon", heroIconName.trim());
+//   }
+//   else {
+//     const img = document.createElement('img');
+//     img.dataset.iconName = iconName;
+//     img.src = `${window.hlx.codeBasePath}${prefix}/icons/${iconName}.svg`;
+//     img.alt = alt;
+//     img.loading = 'lazy';
+//     img.width = 16;
+//     img.height = 16;
+//     span.append(img);
+//   }
+// }
+
+// function decorateIcons(element, prefix = '') {
+//   const icons = [...element.querySelectorAll('span.icon')];
+//   icons.forEach((span) => {
+//     decorateIcon(span, prefix);
+//   });
+// }
+
 
 /**
  * Add <img> for icons, prefixed with codeBasePath and optional prefix.
@@ -473,19 +512,20 @@ function decorateIcon(span, prefix = '', alt = '') {
  * @param {string} [prefix] prefix to be added to icon the src
  */
 function decorateIcons(element, prefix = '') {
+
   const icons = element.querySelectorAll('span.icon');
   icons.forEach((span) => {
     decorateIcon(span, prefix);
 
-  //  this is check for target blanck 
+    //  this is check for target blanck 
 
-if (span?.parentElement.tagName.toLowerCase() === 'a') {
-     span.parentElement.setAttribute('target', '_blank');
-} else {
-  console.log('No, parent is not <a>');
-}
+    if (span?.parentElement.tagName.toLowerCase() === 'a') {
+      span.parentElement.setAttribute('target', '_blank');
+    } else {
+      console.log('No, parent is not <a>');
+    }
 
-// end
+    // end
 
   });
 }
@@ -713,34 +753,34 @@ async function loadSections(element) {
  */
 // eslint-disable-next-line import/prefer-default-export
 async function fetchPlaceholders(prefix = 'default') {
-    window.placeholders = window.placeholders || {};
-    if (!window.placeholders[prefix]) {
-        window.placeholders[prefix] = new Promise((resolve) => {
-            fetch(`${prefix === 'default' ? '' : prefix}/api/placeholder.json`)
-                .then((resp) => {
-                    if (resp.ok) {
-                        return resp.json();
-                    }
-                    return {};
-                })
-                .then((json) => {
-                    const placeholders = {};
-                    json.data
-                        .filter((placeholder) => placeholder.Key)
-                        .forEach((placeholder) => {
-                            placeholders[toCamelCase(placeholder.Key)] = placeholder.Text;
-                        });
-                    window.placeholders[prefix] = placeholders;
-                    resolve(window.placeholders[prefix]);
-                })
-                .catch(() => {
-                    // error loading placeholders
-                    window.placeholders[prefix] = {};
-                    resolve(window.placeholders[prefix]);
-                });
+  window.placeholders = window.placeholders || {};
+  if (!window.placeholders[prefix]) {
+    window.placeholders[prefix] = new Promise((resolve) => {
+      fetch(`${prefix === 'default' ? '' : prefix}/api/placeholder.json`)
+        .then((resp) => {
+          if (resp.ok) {
+            return resp.json();
+          }
+          return {};
+        })
+        .then((json) => {
+          const placeholders = {};
+          json.data
+            .filter((placeholder) => placeholder.Key)
+            .forEach((placeholder) => {
+              placeholders[toCamelCase(placeholder.Key)] = placeholder.Text;
+            });
+          window.placeholders[prefix] = placeholders;
+          resolve(window.placeholders[prefix]);
+        })
+        .catch(() => {
+          // error loading placeholders
+          window.placeholders[prefix] = {};
+          resolve(window.placeholders[prefix]);
         });
-    }
-    return window.placeholders[`${prefix}`];
+    });
+  }
+  return window.placeholders[`${prefix}`];
 }
 
 
