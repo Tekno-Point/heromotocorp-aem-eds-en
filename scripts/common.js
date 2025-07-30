@@ -1,5 +1,5 @@
 import { fetchPlaceholders, getMetadata } from "./aem.js";
-const placeholders = await fetchPlaceholders('/form');
+export const placeholders = await fetchPlaceholders('/form'); 
 // console.log(placeholders);
 
 // export const domain = "https://dev1.heromotocorp.com";

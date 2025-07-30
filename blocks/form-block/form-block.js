@@ -1,5 +1,6 @@
+import { placeholders } from '../../scripts/common.js';
 import { div, p, input, span, label, button } from '../../scripts/dom-helpers.js';
-
+const { preApprovedOfferPageUrl } = placeholders;
 export default function decorate(block) {
   const [amountWrap, interestWrap, durationWrap] = block.children;
 
@@ -153,7 +154,8 @@ export default function decorate(block) {
   const btn = block.querySelector('.apply-btn');
   if (btn) {
     btn.addEventListener('click', function () {
-      window.location.href = 'https://www.heromotocorp.com/en-in/pre-approved-offers.html'
+      window.location.href = preApprovedOfferPageUrl;
+      // window.location.href = 'https://www.heromotocorp.com/en-in/pre-approved-offers.html'
     })
   }
 
