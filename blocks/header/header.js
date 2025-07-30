@@ -1308,7 +1308,7 @@ export default async function decorate(block) {
     a.addEventListener('click', async function (e) {
       console.log(e);
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal('/modals/country');
+      openModal('/form/modals/country');
     })
   })
   // document
