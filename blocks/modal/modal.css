@@ -293,6 +293,12 @@ body{
   border: unset;
   overflow: auto;
   /* min-height: calc(100% - 1.75rem * 2); */
+
+  @media (max-width: 768px) {
+    transform: unset;
+    inset: 0;
+    width: 100%;
+  }
 }
 
 
@@ -300,8 +306,31 @@ body{
   background-color: #686868;
 }
 
+.section.modal.country-modal-sec dialog::-webkit-scrollbar{
+  scrollbar-width: thin;
+  width: 2px;
+}
+
+.section.modal.country-modal-sec dialog::-webkit-scrollbar {
+  width: 2px;
+}
+
+.section.modal.country-modal-sec dialog::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.section.modal.country-modal-sec dialog::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* or any color */
+  border-radius: 10px;
+}
+
 .section.modal.country-modal-sec dialog .modal-content {
   border: unset;
+
+  @media (max-width: 768px) {
+    height: 100vh;
+    padding-bottom: 82px;
+  }
 }
 
 .section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper h2 {
@@ -316,6 +345,10 @@ body{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 }
 
 .section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper ul li {

@@ -99,6 +99,14 @@ export async function appendXF(block, xfPath) {
             }, 50);
           }
 
+          if (this.classList.contains('active')) {
+            document.body.style.height = '100vh';
+            document.body.style.overflow = 'hidden';
+          } else {
+            document.body.style.height = 'auto';
+            document.body.style.overflow = 'auto';
+          }
+
           document
             .querySelectorAll(".bike-item-container .bike-spec p")
             .forEach((p) => {
@@ -1205,7 +1213,7 @@ export default async function decorate(block) {
   })
 
   window.addEventListener("scroll", () => {
-    const heroBottom = heroSection.getBoundingClientRect().bottom;
+    const heroBottom = heroSection.getBoundingClientRect().bottom - 76;
 
     const navBar = document.querySelector(".nav-bar");
     const secondUl = navBar?.querySelectorAll("ul")[1];
