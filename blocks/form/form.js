@@ -13,8 +13,8 @@ let selectedEl = null;
 let isStateOpen = false;
 let isCityOpen = false;
 
-function createDropdownInput(placeholder) {
-  const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' });
+function createDropdownInput(placeholder , name) {
+  const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' , name });
   const clearBtn = span({ class: 'clear-btn' }, '×');
   const dropdownBtn = span({ class: 'dropdown-btn' },
     img({ src: '/icons/svgviewer-png-output.png', width: 16, height: 16, alt: 'Dropdown' })
@@ -216,6 +216,7 @@ async function handleSubmit(form) {
   try {
     form.setAttribute("data-submitting", "true");
     submit.disabled = true;
+    form.classList.add("dsp-none");
     form.closest(".section").querySelector(".book-ride-thankyou-wrapper").classList.add("dsp-block");
     const data = await fetchBookARide(
       form.name.value,
@@ -228,7 +229,6 @@ async function handleSubmit(form) {
     )
     form.closest(".section").querySelector(".book-ride-thankyou-wrapper .loader").classList.add("dsp-none");
     form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").classList.add("dsp-block");
-    form.classList.add("dsp-none");
   } catch (e) {
     console.error(e);
   } finally {
@@ -268,8 +268,8 @@ export default async function decorate(block) {
   const city_inp = form.city;
   const city_field_wrapper = city_inp.closest(".field-wrapper");
 
-  const { wrapper: stateCustomWrapper, input: stateCustomInput, clearBtn: stateClearBtn, dropdownBtn: stateDropdownBtn, list: stateList } = createDropdownInput('Select State');
-  const { wrapper: cityCustomWrapper, input: cityCustomInput, clearBtn: cityClearBtn, dropdownBtn: cityDropdownBtn, list: cityList } = createDropdownInput('Select City');
+  const { wrapper: stateCustomWrapper, input: stateCustomInput, clearBtn: stateClearBtn, dropdownBtn: stateDropdownBtn, list: stateList } = createDropdownInput('Select State', 'state');
+  const { wrapper: cityCustomWrapper, input: cityCustomInput, clearBtn: cityClearBtn, dropdownBtn: cityDropdownBtn, list: cityList } = createDropdownInput('Select City', 'city');
 
   stateCustomInput.id = 'state-input';
   cityCustomInput.id = 'city-input';
