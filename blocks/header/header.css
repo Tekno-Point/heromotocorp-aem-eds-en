@@ -85,7 +85,8 @@ header nav[aria-expanded="true"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1287px;
+    width: 100%;
+    max-width: 1310px;
     height: 40px;
     overflow-x: auto;
     white-space: nowrap;
@@ -137,6 +138,26 @@ nav .nav-link.dropdown-toggle.new-header-variation span {
     display: block;
 }
 
+.d-block.d-lg-none.updated-sideNav.sideNavbar {
+    display: none !important;
+}
+
+.header .homepage-redesign-dropdown-menu .hp-dropdown-content .column.column3 .bike-details .bike-details-col-1 .bike-details-button-wrapper .primary-button,
+.header .homepage-redesign-dropdown-menu .hp-dropdown-content .column.column3 .bike-details .bike-details-col-1 .bike-details-button-wrapper .secondary-button,
+.header .homepage-redesign-dropdown-menu .hp-dropdown-content .column.column3 .bike-details .bike-details-col-2 .add-to-compare .uncheck,
+.header .homepage-redesign-dropdown-menu .hp-dropdown-content .column.column3 .bike-details .bike-details-col-2 .add-to-compare .check {
+    font-family: 'TSTAR-PRO-Bold';
+    font-weight: 700;
+}
+
+.header .homepage-redesign-dropdown-menu .hp-dropdown-content .column.column2 .bike-item-container .bike-text-content-wrapper .bike-spec sup {
+    font-weight: 700;
+}
+
+.drawer-fragment-wrap .drawer-accordion-wrapper .drawer-accordion-toggle .drawer-accordion-label{
+    font-weight: 600;
+}
+
 @media (max-width: 900px) {
     header .header {
         margin: unset;
@@ -146,8 +167,18 @@ nav .nav-link.dropdown-toggle.new-header-variation span {
         height: 50px;
     }
 
+    nav.navbar.navbar-expand-lg.new-header-variation {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, .3);
+    }
+
     header .header .section.nav-bar {
         top: 55px;
+        padding: 8px 0px;
     }
 
     .header-main.new-header-variation .navbar {
@@ -181,6 +212,12 @@ nav .nav-link.dropdown-toggle.new-header-variation span {
     .header nav .nav-brand img {
         width: 82px;
         height: 27px;
+    }
+
+    ul.mobile-only.new-header-variation.bottom-menu li {
+        font-family: 'TSTAR-PRO-Bold';
+        font-family: 'TSTAR-PRO-Regular';
+        font-weight: 700;
     }
 }
 
@@ -545,7 +582,8 @@ body.appear {
         margin-left: 19px;
 
     }
-    .header #newMobileNav .accordion-container .accordion-header a{
+
+    .header #newMobileNav .accordion-container .accordion-header a {
         color: #303030;
     }
 
