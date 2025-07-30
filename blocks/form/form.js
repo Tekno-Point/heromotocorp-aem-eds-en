@@ -13,8 +13,8 @@ let selectedEl = null;
 let isStateOpen = false;
 let isCityOpen = false;
 
-function createDropdownInput(placeholder , name) {
-  const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off' , name });
+function createDropdownInput(placeholder, name) {
+  const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off', name });
   const clearBtn = span({ class: 'clear-btn' }, '×');
   const dropdownBtn = span({ class: 'dropdown-btn' },
     img({ src: '/icons/svgviewer-png-output.png', width: 16, height: 16, alt: 'Dropdown' })
@@ -227,6 +227,12 @@ async function handleSubmit(form) {
       form.city.value,
       getRandomId()
     )
+
+    if (data.error) {
+      form.classList.add("dsp-block");
+      form.closest(".section").querySelector(".book-ride-thankyou-wrapper").classList.add("dsp-none");
+      return
+    }
     form.closest(".section").querySelector(".book-ride-thankyou-wrapper .loader").classList.add("dsp-none");
     form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").classList.add("dsp-block");
   } catch (e) {
