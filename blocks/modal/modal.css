@@ -376,6 +376,7 @@ body{
   width: 30px;
   height: 20px;
   display: flex;
+  margin-right: 5px;
 }
 
 .section.modal.country-modal-sec .close-button .icon.icon-close::before,

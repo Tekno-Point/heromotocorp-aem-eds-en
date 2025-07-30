@@ -1260,7 +1260,7 @@ export default async function decorate(block) {
 
   if (document.querySelector(".header .section.nav-bar ul li ")) {
     document
-      .querySelectorAll(".header .section.nav-bar ul li ")
+      .querySelectorAll(".header .section.nav-bar ul:first-of-type li ")
       .forEach((link) => {
         link.addEventListener("click", (e) => {
           e.preventDefault();
