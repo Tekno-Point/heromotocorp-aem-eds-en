@@ -1,5 +1,5 @@
-// const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-// openModal('/modals/get-a-call-back');
+const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+openModal('/form/modals/get-a-call-back');
 
 // add delayed functionality here
 const scriptCode = document.createElement('script');
