@@ -727,6 +727,15 @@ input::placeholder {
         font-size: 14px;
         line-height: 20px;
     }
+
+    .section.book-ride .form form fieldset .sendOTP-btn label,
+    .section.book-ride .form form fieldset .resendOTP-btn label {
+        font-size: .875rem;
+        -webkit-font-kerning: auto;
+        font-kerning: auto;
+        letter-spacing: normal;
+        line-height: 1.25rem;
+    }
 }
 
 .dsp-none {

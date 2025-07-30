@@ -63,16 +63,16 @@
 @media (max-width:768px) {
 
     .section .book-ride-thankyou-wrapper {
-        min-height: 200px;
+        min-height: 185px;
     }
 
     .book-ride-thankyou>.popup-wrapper>.succ-content h2 {
-        font-size: 28px;
-
+        font-size: 24px;
+        line-height: 33.6px;
     }
 
     .book-ride-thankyou>.popup-wrapper>.succ-content h4 {
-        font-size: 18px;
-
+        font-size: 14px;
+        line-height: 19.6px;
     }
 }
