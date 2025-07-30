@@ -228,13 +228,15 @@ async function handleSubmit(form) {
       getRandomId()
     )
 
-    if (data.error) {
+    if (data.ok) {
+      form.closest(".section").querySelector(".book-ride-thankyou-wrapper .loader").classList.add("dsp-none");
+      form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").classList.add("dsp-block");
+      // return
+    } else {
       form.classList.add("dsp-block");
       form.closest(".section").querySelector(".book-ride-thankyou-wrapper").classList.add("dsp-none");
-      return
+      form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").textContent = 'Error While Submitting';
     }
-    form.closest(".section").querySelector(".book-ride-thankyou-wrapper .loader").classList.add("dsp-none");
-    form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").classList.add("dsp-block");
   } catch (e) {
     console.error(e);
   } finally {
