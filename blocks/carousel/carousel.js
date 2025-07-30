@@ -3,7 +3,7 @@
 import Swiper from "../swiper/swiper.min.js";
 
 export default function decorate(block) {
-  console.log("Carousel block detected");
+  // console.log("Carousel block detected");
 
   // Add unique class names to children
   Array.from(block.children).forEach((element, index) => {

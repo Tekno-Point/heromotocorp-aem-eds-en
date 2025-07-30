@@ -92,7 +92,7 @@ export async function openModal(fragmentUrl, isShareModal) {
   const classList = fragment.firstElementChild.classList;
 
   const { block, showModal } = await createModal(fragment.childNodes, isShareModal);
-  console.log(fragment);
+  // console.log(fragment);
   // fragment.querySelector('.section').classList
   block.classList.add(...classList);
   showModal();

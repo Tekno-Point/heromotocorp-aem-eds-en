@@ -517,7 +517,7 @@ export default async function decorate(block) {
   toggleCityInputState();
 
   block.querySelector(".sendOTP-btn").addEventListener("click", function () {
-    console.log("Hi Send otp");
+    // console.log("Hi Send otp");
     try {
       block.querySelector(".sendOTP-btn").classList.add("dsp-none");
       block.querySelector(".resendOTP-btn").classList.remove("dsp-none");
@@ -525,20 +525,20 @@ export default async function decorate(block) {
       form.otp.value = '';
       fetchOTP(form.mobile.value);
     } catch (error) {
-      console.log(error);
+      console.warn(error);
     } finally {
-      console.log("working");
+      // console.log("working");
     }
   });
 
   block.querySelector(".resendOTP-btn").addEventListener("click", function () {
-    console.log("Hi Resend otp");
+    // console.log("Hi Resend otp");
     try {
       fetchOTP(form.mobile.value);
     } catch (error) {
-      console.log(error);
+      console.warn(error);
     } finally {
-      console.log("working");
+      // console.log("working");
     }
   });
 

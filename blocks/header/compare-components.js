@@ -229,7 +229,7 @@ const onVehicleAdd = (e) => {
     }
 
     const vehicle = getSkuItem(selectedVehicleSku);
-    console.log(vehicle, 'selected-sku');
+    // console.log(vehicle, 'selected-sku');
 
     sessionStorage.setItem('comparedVehicles', JSON.stringify(vehicles));
 
