@@ -49,7 +49,7 @@ export async function fetchAPI(
   return new Promise(async function (resolve, reject) {
     const key = url + method;
     
-    if (apiProxy[key]) {
+    if (apiProxy[key] && method === "GET") {
       resolve(apiProxy[key]);
       return apiProxy[key];
     }
