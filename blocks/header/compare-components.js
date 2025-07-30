@@ -1,5 +1,8 @@
 import { div, section, input, label, button, img, p, span, sup, i } from '../../scripts/dom-helpers.js';
 import { fetchCategory } from '../../scripts/common.js';
+import { fetchPlaceholders } from '../../scripts/aem.js';
+const placeholders = await fetchPlaceholders('/form');
+const { comparePageUrl } = placeholders;
 
 const RED_CHEVRON = '/icons/icon-chevron-red.svg';
 const WHITE_CROSS_ICON = '/icons/icon-cross-white.svg';
@@ -148,7 +151,8 @@ const traySection = section({ class: 'tray-container disappear open' },
             button({ class: 'tray-clear-cta', onclick: clearSessionVehicles }, 'CLEAR ALL'),
             button({
                 class: 'tray-compare-cta',
-                disabled: 'disabled',
+                // disabled: 'disabled',
+                disabled: true,
             }, 'COMPARE NOW')
         )
     )
@@ -159,7 +163,7 @@ document.addEventListener('mouseover', initVehicleRender);
 function clearSessionVehicles() {
     traySection.classList.toggle('disappear')
     JSON.parse(sessionStorage.getItem(compareVehicles))?.forEach(function (sku) {
-        document.querySelectorAll('[value="'+sku+'"]').forEach(check => check.checked = false);
+        document.querySelectorAll('[value="' + sku + '"]').forEach(check => check.checked = false);
     })
     sessionStorage.removeItem(compareVehicles);
 
@@ -243,12 +247,12 @@ const onVehicleAdd = (e) => {
 
 const onVehicleRmove = (e) => {
     let comparedVehicle = sessionStorage.getItem(compareVehicles);
-
     if (comparedVehicle == 'undefined' || !comparedVehicle) {
         comparedVehicle = null
     }
 
     const selectedVehicle = e.currentTarget.dataset.bikeId || e.currentTarget.value;
+    document.querySelector('[value="' + selectedVehicle + '"]').checked = false;
 
     let vehicles = [];
 
@@ -314,6 +318,7 @@ const createAccordion = (label, vehicles) => {
 const compareButton = traySection.querySelector('.tray-compare-cta');
 compareButton.addEventListener('click', () => {
     console.log(sessionStorage.getItem(compareVehicles), 'compare clicked');
+    window.location.href = comparePageUrl;
 });
 
 const renderTrayCards = () => {
@@ -330,10 +335,12 @@ const renderTrayCards = () => {
     }
 
     traySection.classList.add('compared');
-//    if(sessionVehilces.length > 1){
-//      compareButton.disabled = fals;
-//    }
-   compareButton.disabled = false;
+    if (sessionVehilces.length > 1) {
+        compareButton.disabled = false;
+    } else {
+        compareButton.disabled = true;
+    }
+    //    compareButton.disabled = false;
 
 
     const sesssionVehLength = sessionVehilces.length;
