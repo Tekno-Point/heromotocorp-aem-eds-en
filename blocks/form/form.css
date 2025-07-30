@@ -628,6 +628,7 @@ input::placeholder {
 
 
 .section.book-ride .form .submit-btn .button {
+    font-family: 'TSTAR-PRO-Heavy';
     font-size: 20px;
     line-height: 28px;
     font-weight: 900;

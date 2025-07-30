@@ -1,6 +1,6 @@
 .section .book-ride-thankyou-wrapper {
     display: none;
-    min-height: 300px;
+    min-height: 265px;
 }
 
 .book-ride-thankyou {
@@ -38,6 +38,7 @@
 .book-ride-thankyou>.popup-wrapper>.succ-content>.succ-img picture img {
     width: 100px;
     height: 100px;
+    margin: auto;
 }
 
 .book-ride-thankyou>.popup-wrapper>.succ-content h2 {
@@ -47,6 +48,7 @@
     font-weight: 700;
     text-transform: uppercase;
     margin: 0;
+    color: #fff;
 }
 
 .book-ride-thankyou>.popup-wrapper>.succ-content h4 {
@@ -55,4 +57,5 @@
     font-family: "Montserrat-Medium";
     font-weight: 400;
     margin: 0;
+    color: #fff;
 }
