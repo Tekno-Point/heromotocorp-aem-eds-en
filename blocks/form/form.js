@@ -556,6 +556,7 @@ export default async function decorate(block) {
   const nameInp = form.name;
   const nameField = nameInp.closest(".text-wrapper");
   nameInp.addEventListener("input", function () {
+    this.value = this.value.substr(0, 20);
     validateName(nameField, nameInp.value);
   });
 
