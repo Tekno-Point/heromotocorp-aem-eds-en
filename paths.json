@@ -1,7 +1,8 @@
 {
   "mappings": [
     "/content/hmcl/:/",
-    "/content/hmcl/hero-splinder-page/form/test-ride-form:/hero-splinder-page/form/test-ride-form.json",
+    "/content/hmcl/hero-splinder-page/form/test-ride-form:/form/test-ride-form.json",
+    "/content/hmcl/hero-splinder-page/form/placeholders:/form/placeholders.json",
     "/content/hmcl/hero-splinder-page/form/state:/hero-splinder-page/form/state.json",
     "/content/hmcl/hero-splinder-page/form/city:/hero-splinder-page/form/city.json",
     "/content/hmcl/configuration:/.helix/config.json",
