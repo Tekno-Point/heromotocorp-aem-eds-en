@@ -15,6 +15,9 @@ header .nav-wrapper {
     width: 100%;
     z-index: 8;
     position: fixed;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+    z-index: 99;
+    background: #fff;
 }
 
 header nav {
@@ -39,7 +42,12 @@ header nav[aria-expanded="true"] {
 }
 
 .nav-sections>.default-content-wrapper>ul>li {
-    font-family: "TRANSDUCER-Regular";
+        font-weight: 500;
+    font-family: "transducer-regular";
+    font-size: 1rem;
+    line-height: 1rem;
+    color: black;
+        padding: 22px 12px;
 }
 
 .nav-sections>.default-content-wrapper>ul>li>a {
@@ -541,6 +549,7 @@ body.appear {
 
 .nav-tools.section {
     /* display: none; */
+    margin-bottom: 8px;
 }
 
 .nav-bar>.default-content-wrapper>p>img {

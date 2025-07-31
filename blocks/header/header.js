@@ -5,7 +5,7 @@ import { onVehicleAdd, onVehicleRmove } from "./compare-components.js";
 const placeholders = await fetchPlaceholders('/form');
 // console.log(placeholders);
 
-const { headerXf , helpAndSupportPageUrl } = placeholders;
+const { headerXf, helpAndSupportPageUrl } = placeholders;
 
 
 // media query match that indicates mobile/tablet width
@@ -1280,57 +1280,59 @@ export default async function decorate(block) {
       });
   }
 
-  block.addEventListener('mouseover', async function (e) {
+  block.addEventListener('mouseover', aemHeaderHandler)
+  async function aemHeaderHandler(e) {
+    block.removeEventListener('mouseover', aemHeaderHandler)
     await appendXF(
       block, headerXf
     );
     block.classList.add('nav-eds-hide')
-  })
 
-  /* init Compare */
-  const addVehicleCheckboxs = block.querySelectorAll(
-    ".add-to-compare  .add-vehicle-checkbox"
-  );
-  const traySecion = document.querySelector(".tray-container");
+    /* init Compare */
+    const addVehicleCheckboxs = block.querySelectorAll(
+      ".add-to-compare  .add-vehicle-checkbox"
+    );
+    const traySecion = document.querySelector(".tray-container");
 
-  addVehicleCheckboxs.forEach((addVehicleCheckbox) => {
-    addVehicleCheckbox.addEventListener("change", (e) => {
-      traySecion.classList.toggle("disappear");
-      if (e.target.dataset.checked) {
-        e.target.dataset.checked = false;
-      } else {
-        e.target.dataset.checked = true;
-      }
-      if (e.target.dataset.checked) {
-        onVehicleAdd(e);
-      } else {
-        onVehicleRmove(e);
-      }
+    addVehicleCheckboxs.forEach((addVehicleCheckbox) => {
+      addVehicleCheckbox.addEventListener("change", (e) => {
+        traySecion.classList.toggle("disappear");
+        if (e.target.dataset.checked) {
+          e.target.dataset.checked = false;
+        } else {
+          e.target.dataset.checked = true;
+        }
+        if (e.target.dataset.checked) {
+          onVehicleAdd(e);
+        } else {
+          onVehicleRmove(e);
+        }
 
-      if (e.target.dataset.vehiclesRendered) {
-        return;
-      }
+        if (e.target.dataset.vehiclesRendered) {
+          return;
+        }
 
-      initCompare();
-      e.target.dataset.vehiclesRendered = true;
+        initCompare();
+        e.target.dataset.vehiclesRendered = true;
+      });
     });
-  });
 
-  block.querySelectorAll('[data-target="#countryModal"]').forEach((a) => {
-    a.addEventListener('click', async function (e) {
-      console.log(e);
-      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-      openModal('/form/modals/country');
+    block.querySelectorAll('[data-target="#countryModal"]').forEach((a) => {
+      a.addEventListener('click', async function (e) {
+        console.log(e);
+        const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+        openModal('/form/modals/country');
+      })
     })
-  })
-  // document
-  //   .getElementsByClassName("navbar-nav")
-  //   .addEventListener("click", addClientLibScript);
-  let stickyHeader = block.querySelector(".mobile-only.new-header-variation.bottom-menu");
-  stickyHeader.querySelectorAll('li')[1].querySelector('a').addEventListener('click',function (e) {
-    this.href = helpAndSupportPageUrl;
-  })
+    // document
+    //   .getElementsByClassName("navbar-nav")
+    //   .addEventListener("click", addClientLibScript);
+    let stickyHeader = block.querySelector(".mobile-only.new-header-variation.bottom-menu");
+    stickyHeader.querySelectorAll('li')[1].querySelector('a').addEventListener('click', function (e) {
+      this.href = helpAndSupportPageUrl;
+    })
 
-  document.body.append(stickyHeader);
+    document.body.append(stickyHeader);
+  }
   return block;
 }
