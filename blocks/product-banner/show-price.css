@@ -202,3 +202,13 @@ main>.banner-price {
         width: 100%;
     }
 }
+@media (max-width: 767px){
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>strong:first-child{
+    font-size: 24px;
+    line-height: normal;
+}
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>sub{
+    font-size: 14px;
+    line-height: normal;
+}
+}

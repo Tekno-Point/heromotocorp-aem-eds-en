@@ -223,8 +223,8 @@ body.modal-open {
   .modal.book-ride>dialog {
     top: 10%;
     left: 1%;
-    width: 398px;
     margin: 10px;
+    max-width: fit-content;
   }
 
   .modal.book-ride>dialog>.modal-content {
@@ -248,17 +248,17 @@ body.modal-open {
 
 @media (max-width: 376px) {
   .modal.book-ride>dialog {
-    width: 350px;
     margin: 10px;
     top: 10%;
     left: 1%;
+    max-width: fit-content;
   }
 }
 
 @media (max-width: 321px) {
   .modal.book-ride>dialog {
-    width: 296px;
     margin: 3%;
+    max-width: fit-content;
   }
 }
 
