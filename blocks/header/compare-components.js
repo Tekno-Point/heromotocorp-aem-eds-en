@@ -252,7 +252,9 @@ const onVehicleRmove = (e) => {
     }
 
     const selectedVehicle = e.currentTarget.dataset.bikeId || e.currentTarget.value;
-    document.querySelector('[value="' + selectedVehicle + '"]').checked = false;
+    document.querySelectorAll('[value="' + selectedVehicle + '"]').forEach(function (el) {
+        el.checked = false;
+    })
 
     let vehicles = [];
 
