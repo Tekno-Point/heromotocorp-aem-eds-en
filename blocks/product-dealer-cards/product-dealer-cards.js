@@ -168,7 +168,10 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
       disabled = state;
       inputEl.disabled = state;
       dropdown.style.display = "none";
-      clearBtn.style.display = "none";
+
+      if (state) {
+        clearBtn.style.display = "none";
+      }
     },
     setOptions: (newOptions) => {
       optionsList = newOptions;
@@ -187,7 +190,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
   const cityMap = dataMapping.state_city_master;
 
   let activeState = current.state && cityMap[current.state.toUpperCase()] ? current.state : states[0];
-  let activeCity = "";
+  let activeCity = current?.city || "";
 
   stateDropdown = createCustomDropdown(
     "state-input",
@@ -247,7 +250,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
 
       pubsub.publish("product-banner-event", document.querySelector(".product-banner"), { test: true });
     },
-    ""
+    activeCity
   );
 
   if (!activeState || !cityMap[activeState.toUpperCase()] || Object.values(cityMap[activeState.toUpperCase()]).length === 0 || activeCity === "") {
