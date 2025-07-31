@@ -22,6 +22,7 @@ export async function getFetchAPI(url) {
 
 export async function appendXF(block, xfPath) {
   // block.style.display = 'none';
+  const domain = new URL(xfPath).origin;
   const resp = await getFetchAPI(xfPath);
   if (resp.ok) {
     let str = await resp.text();
@@ -33,11 +34,11 @@ export async function appendXF(block, xfPath) {
     ) {
       str = str.replaceAll(
         "/etc.clientlibs/",
-        "https://stage.heromotocorp.com/etc.clientlibs/"
+        (domain + "/etc.clientlibs/")
       );
       str = str.replaceAll(
         "/content/dam/",
-        "https://stage.heromotocorp.com/content/dam/"
+        (domain + "/content/dam/")
       );
     }
     str = str.replaceAll("hp-hide-cmp-checkbox", "");
@@ -46,17 +47,41 @@ export async function appendXF(block, xfPath) {
     div.querySelector(".tray-container").remove();
     div.querySelector(".drawer-container").remove();
 
-    div.querySelectorAll("link").forEach((link) => {
-      try {
-        const newLink = document.createElement("link");
-        newLink.href = link.href;
-        // newLink.href = link.href.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
-        newLink.rel = "stylesheet";
-        document.head.append(newLink);
-      } catch (error) {
-        console.error(error); // eslint-disable-line
-      }
-    });
+    const links = [
+      '/etc.clientlibs/hero-aem-website/clientlibs/clientlib-dependencies.lc-44ecdad2eb4167d7e369f97d55e42492-lc.min.css',
+      '/etc.clientlibs/hero-aem-website/components/content/unusedassets/clientlibs.lc-97054c6fc653dd723f702ae415811065-lc.min.css',
+      '/etc.clientlibs/hero-aem-website/components/content/corporate-banner/clientlibs.lc-39306b3c10bae3078911a213dee59654-lc.min.css',
+      '/etc.clientlibs/hero-aem-website/clientlibs/clientlib-site-lite.lc-e7cd13edc12993bfe71479b3b0eed9e6-lc.min.css',
+      '/etc.clientlibs/hero-aem-website/clientlibs/clientlib-site.lc-7189123fa58a04ffd09778fd62184d54-lc.min.css',
+      '/etc.clientlibs/hero-aem-website/clientlibs/clientlib-campaign.lc-78d25e2f2cafac81105650a420ceacb3-lc.min.css',
+      '/etc.clientlibs/hero-aem-website/clientlibs/clientlib-survey-portal/clientlib-survey-site.lc-9025e5d9cbdc63bca9ac475e015bd875-lc.min.css',
+      '/etc.clientlibs/hero-aem-website/clientlibs/clientlib-base.lc-0c8fe2a3573ae8fb64347d60472d1508-lc.min.css'
+    ]
+    if(div.querySelectorAll("link").length > 3){
+      div.querySelectorAll("link").forEach((link) => {
+        try {
+          const newLink = document.createElement("link");
+          newLink.href = link.href;
+          // newLink.href = link.href.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
+          newLink.rel = "stylesheet";
+          document.head.append(newLink);
+        } catch (error) {
+          console.error(error); // eslint-disable-line
+        }
+      });
+    }else{
+      links.forEach((link) => {
+        try {
+          const newLink = document.createElement("link");
+          newLink.href = domain + link;
+          // newLink.href = link.href.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
+          newLink.rel = "stylesheet";
+          document.head.append(newLink);
+        } catch (error) {
+          console.error(error); // eslint-disable-line
+        }
+      });
+    }
     block.append(div);
     ///////////////////AK11 25-07///////////////
     document.querySelectorAll(".megamenu-li").forEach((menuItem) => {
@@ -1280,7 +1305,7 @@ export default async function decorate(block) {
   }
 
   await appendXF(
-    block, headerXf
+    block, 'https://dev1.heromotocorp.com/content/experience-fragments/hero-aem-website/in/en/hero-site/header/master.html'
   );
 
   /* init Compare */
