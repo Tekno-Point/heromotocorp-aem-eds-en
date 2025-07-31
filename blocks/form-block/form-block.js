@@ -16,7 +16,7 @@ export default function decorate(block) {
   [amountWrap, interestWrap, durationWrap].forEach((wrap) => wrap.innerHTML = '');
 
   const amountSlider = input({ type: 'range', min: amountMin, max: amountMax, step: 1, value: amountMin });
-  const rateSlider = input({ type: 'range', min: rateMin, max: rateMax, step: 0.1, value: rateMin });
+  const rateSlider = input({ type: 'range', min: rateMin, max: rateMax, step: 0.01, value: rateMin });
   const monthsSlider = input({ type: 'range', min: monthsMin, max: monthsMax, step: 1, value: monthsMin });
 
   const amountVal = p({ class: 'input-value' }, `₹ ${amountMin.toLocaleString('en-IN')}`);
@@ -103,12 +103,16 @@ export default function decorate(block) {
 
     inputEl.addEventListener('input', () => {
       let raw = inputEl.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+      if(raw.endsWith('.')) {
+        return
+      }
       let val = raw ?  parseFloat(raw) : 0;
 
       // if (isNaN(val)) val = min;
       // val = clamp(val, min, max);
       sliderEl.value = val;
       
+      updateFill(sliderEl);
       if(min <= val && val <= max) {
         inputEl.value = val;
         if (useCommas) {
@@ -116,7 +120,6 @@ export default function decorate(block) {
         } else {
           inputEl.value = raw + suffix;
         }
-        updateFill(sliderEl);
         updateUI();
       }
     });
