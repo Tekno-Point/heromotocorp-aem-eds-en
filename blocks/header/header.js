@@ -49,11 +49,30 @@ export async function appendXF(block, xfPath) {
 
     div.querySelectorAll("link").forEach((link) => {
       try {
+      const inculdeLink = [
+        '/clientlib-dependencies.lc',
+        '/clientlib-site-lite.lc'
+      ]
+      const exculdeLink = [
+        '/unusedassets/',
+        '/corporate-banner/',
+        '/clientlib-site.lc',
+        '/clientlib-campaign.lc',
+        '/clientlib-survey-portal/',
+        '/clientlib-base.lc',
+      ];
+      // debugger;
+      if (inculdeLink.filter((clientLib) => link.href.includes(clientLib)).length) {
         const newLink = document.createElement("link");
         newLink.href = link.href;
         // newLink.href = link.href.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
         newLink.rel = "stylesheet";
         document.head.append(newLink);
+        console.log(`Added link: ${link.href}`); // eslint-disable-line
+      }else{
+        link.remove();
+        console.warn(`Skipping link: ${link.href}`); // eslint-disable-line
+      }
       } catch (error) {
         console.error(error); // eslint-disable-line
       }
