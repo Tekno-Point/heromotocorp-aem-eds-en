@@ -1,5 +1,8 @@
-const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-openModal('/form/modals/get-a-call-back');
+setTimeout(async () => {
+  // This function will execute after a delay
+  const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+  openModal('/form/modals/get-a-call-back');
+}, 10000); // Delay in milliseconds
 
 // add delayed functionality here
 const scriptCode = document.createElement('script');
