@@ -229,7 +229,7 @@
     padding: .625rem 2rem;
 }
 
-.price-listing>div:nth-child(2)>div>h1 {
+.price-listing>div:nth-child(2)>div>h2 {
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     text-transform: uppercase;

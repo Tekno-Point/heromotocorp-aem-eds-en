@@ -1,5 +1,5 @@
 import { placeholders } from '../../scripts/common.js';
-import { div, p, input, span, label, button } from '../../scripts/dom-helpers.js';
+import { div, p, input, span, label, button,h1 } from '../../scripts/dom-helpers.js';
 const { preApprovedOfferPageUrl } = placeholders;
 export default function decorate(block) {
   const [amountWrap, interestWrap, durationWrap] = block.children;
@@ -50,7 +50,7 @@ export default function decorate(block) {
 
   const controls = div({ class: 'emi-controls' }, amountGroup, rateGroup, monthsGroup);
 
-  const emiValue = span({ class: 'emi-value' }, '0');
+  const emiValue = h1({ class: 'emi-value' }, '0');
   const emiOutput = div({ class: 'emi-output' },
     p({ class: 'emi-title' }, 'Monthly Payment (EMI)'),
     emiValue,
