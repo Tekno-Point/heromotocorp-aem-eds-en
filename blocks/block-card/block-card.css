@@ -3,7 +3,6 @@
 .section.block-card-container {
     margin: 0 auto;
 }
-
 .block-card-container > .block-card-wrapper {
     max-width: 100%;
     padding: 0px;
