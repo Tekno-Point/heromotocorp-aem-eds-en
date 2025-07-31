@@ -76,3 +76,15 @@
         line-height: 19.6px;
     }
 }
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    /* Safari-only styles go here */
+   .book-ride-thankyou>.popup-wrapper>.succ-content>.succ-img picture img {
+    display: block;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+}
+  }
+}

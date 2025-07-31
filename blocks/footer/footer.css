@@ -324,3 +324,15 @@ footer .footer > div{
     width: 32px;
     height: 32px;
 }
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    /* Safari-only styles go here */
+    .hero-footer-icon > .default-content-wrapper > p{
+    padding: 10px;
+}
+.hero-footer-icon > .default-content-wrapper{
+    padding: 20px 15px;
+}
+  }
+}

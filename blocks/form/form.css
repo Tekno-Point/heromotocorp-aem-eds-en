@@ -745,3 +745,13 @@ input::placeholder {
 .dsp-block {
     display: block !important;
 }
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    /* Safari-only styles go here */
+    .section.book-ride .form .submit-btn .button{
+        padding-top: 6px;
+        padding-right: 3px;
+    }
+  }
+}
