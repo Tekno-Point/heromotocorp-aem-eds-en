@@ -97,26 +97,27 @@ export default function decorate(block) {
   }
 
   function handleNumberInput(inputEl, sliderEl, min, max, isFloat = false, useCommas = false, suffix = '') {
+    // inputEl.addEventListener('input', () => {
+    //   if (useCommas) formatIndianNumber(inputEl);
+    // });
+
     inputEl.addEventListener('input', () => {
-      if (useCommas) formatIndianNumber(inputEl);
-    });
-
-    inputEl.addEventListener('blur', () => {
       let raw = inputEl.value.replace(/,/g, '').replace(/[^\d.]/g, '');
-      let val = isFloat ? parseFloat(raw) : parseInt(raw);
+      let val = raw ?  parseFloat(raw) : 0;
 
-      if (isNaN(val)) val = min;
-      val = clamp(val, min, max);
+      // if (isNaN(val)) val = min;
+      // val = clamp(val, min, max);
       sliderEl.value = val;
 
-      if (useCommas) {
-        inputEl.value = val.toLocaleString('en-IN') + suffix;
-      } else {
-        inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
+      if(min <= val && val <= max) {
+        if (useCommas) {
+          inputEl.value = val.toLocaleString('en-IN') + suffix;
+        } else {
+          inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
+        }
+        updateUI();
+        updateFill(sliderEl);
       }
-
-      updateUI();
-      updateFill(sliderEl);
     });
   }
 
