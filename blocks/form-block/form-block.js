@@ -73,11 +73,11 @@ export default function decorate(block) {
     const months = parseInt(monthsSlider.value);
 
     amountVal.textContent = `₹ ${amount.toLocaleString('en-IN')}`;
-    // rateVal.textContent = `${rate}%`;
+    rateVal.textContent = `${rate}%`;
     monthsVal.textContent = `${months} months`;
 
     amountInput.value = amount.toLocaleString('en-IN');
-    // rateInput.value = `${rate}%`;
+    rateInput.value = `${rate}%`;
     monthsInput.value = months;
 
     const emi = calculateEMI(amount, rate, months);
@@ -116,10 +116,8 @@ export default function decorate(block) {
         } else {
           inputEl.value = raw + suffix;
         }
-        if(inputEl.name !== 'emi') {
-          updateFill(sliderEl);
-          updateUI();
-        }
+        updateFill(sliderEl);
+        updateUI();
       }
     });
     inputEl.addEventListener('blur', () => {
