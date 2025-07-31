@@ -5,7 +5,8 @@ import { onVehicleAdd, onVehicleRmove } from "./compare-components.js";
 const placeholders = await fetchPlaceholders('/form');
 // console.log(placeholders);
 
-const { headerXf } = placeholders;
+const { headerXf , helpAndSupportPageUrl } = placeholders;
+
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia("(min-width: 900px)");
@@ -1323,6 +1324,9 @@ export default async function decorate(block) {
   //   .getElementsByClassName("navbar-nav")
   //   .addEventListener("click", addClientLibScript);
   let stickyHeader = block.querySelector(".mobile-only.new-header-variation.bottom-menu");
+  stickyHeader.querySelectorAll('li')[1].querySelector('a').addEventListener('click',function (e) {
+    this.href = helpAndSupportPageUrl;
+  })
 
   document.body.append(stickyHeader);
   return block;
