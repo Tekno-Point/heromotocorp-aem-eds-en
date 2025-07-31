@@ -23,7 +23,7 @@ export default function decorate(block) {
   const amountInput = input({ type: 'text', value: amountMin.toLocaleString('en-IN'), class: 'number-box' });
 
   const rateVal = p({ class: 'input-value' }, `${rateMin.toFixed(2)}%`);
-  const rateInput = input({ type: 'text', value: `${rateMin.toFixed(2)}%`, class: 'number-box' });
+  const rateInput = input({ type: 'text',name : 'emi', value: `${rateMin.toFixed(2)}%`, class: 'number-box' });
 
   const monthsVal = p({ class: 'input-value' }, `${monthsMin} months`);
   const monthsInput = input({ type: 'number', value: monthsMin, class: 'number-box' });
@@ -108,17 +108,37 @@ export default function decorate(block) {
       // if (isNaN(val)) val = min;
       // val = clamp(val, min, max);
       sliderEl.value = val;
-
+      
       if(min <= val && val <= max) {
+        inputEl.value = val;
+        debugger;
         if (useCommas) {
-          inputEl.value = val.toLocaleString('en-IN') + suffix;
+          inputEl.value = val.toLocaleString('en-IN');
         } else {
-          inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
+          inputEl.value = raw + suffix;
         }
-        updateUI();
-        updateFill(sliderEl);
+        if(inputEl.name !== 'emi') {
+          updateUI();
+          updateFill(sliderEl);
+        }
       }
     });
+    inputEl.addEventListener('blur', () => {
+      let raw = inputEl.value.replace(/,/g, '').replace(/[^\d.]/g, '');
+      let val = raw ?  parseFloat(raw) : 0;
+
+      // if (isNaN(val)) val = min;
+      // val = clamp(val, min, max);
+      sliderEl.value = val;
+
+      if (useCommas) {
+        inputEl.value = val.toLocaleString('en-IN') + suffix;
+      } else {
+        inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
+      }
+      updateUI();
+      updateFill(sliderEl);
+    })
   }
 
   amountSlider.addEventListener('input', () => {
