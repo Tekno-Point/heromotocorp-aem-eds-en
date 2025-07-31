@@ -73,11 +73,11 @@ export default function decorate(block) {
     const months = parseInt(monthsSlider.value);
 
     amountVal.textContent = `₹ ${amount.toLocaleString('en-IN')}`;
-    rateVal.textContent = `${rate.toFixed(2)}%`;
+    // rateVal.textContent = `${rate}%`;
     monthsVal.textContent = `${months} months`;
 
     amountInput.value = amount.toLocaleString('en-IN');
-    rateInput.value = `${rate.toFixed(2)}%`;
+    // rateInput.value = `${rate}%`;
     monthsInput.value = months;
 
     const emi = calculateEMI(amount, rate, months);
@@ -111,15 +111,14 @@ export default function decorate(block) {
       
       if(min <= val && val <= max) {
         inputEl.value = val;
-        debugger;
         if (useCommas) {
           inputEl.value = val.toLocaleString('en-IN');
         } else {
           inputEl.value = raw + suffix;
         }
         if(inputEl.name !== 'emi') {
-          updateUI();
           updateFill(sliderEl);
+          updateUI();
         }
       }
     });
@@ -134,7 +133,7 @@ export default function decorate(block) {
       if (useCommas) {
         inputEl.value = val.toLocaleString('en-IN') + suffix;
       } else {
-        inputEl.value = (isFloat ? val.toFixed(2) : val) + suffix;
+        inputEl.value = raw + suffix;
       }
       updateUI();
       updateFill(sliderEl);
