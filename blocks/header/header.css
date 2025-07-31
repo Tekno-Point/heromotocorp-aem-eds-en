@@ -90,6 +90,7 @@ header nav[aria-expanded="true"] {
     height: 40px;
     overflow-x: auto;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .nav-bar>.default-content-wrapper>ul {
@@ -535,11 +536,11 @@ body.appear {
 }
 
 .nav-sections.section {
-    display: none !important;
+    /* display: none !important; */
 }
 
 .nav-tools.section {
-    display: none;
+    /* display: none; */
 }
 
 .nav-bar>.default-content-wrapper>p>img {
@@ -670,4 +671,13 @@ body.appear {
     .nav-bar>.default-content-wrapper>p:nth-child(4)>picture>img {
         display: block;
     }
+}
+.nav-eds-hide .nav-sections{
+    display: none !important;
+}
+.nav-eds-hide .nav-tools{
+    display: none !important;
+}
+.nav-eds-hide .nav-brand{
+    display: none !important;
 }

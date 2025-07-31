@@ -1280,9 +1280,12 @@ export default async function decorate(block) {
       });
   }
 
-  await appendXF(
-    block, headerXf
-  );
+  block.addEventListener('mouseover', async function (e) {
+    await appendXF(
+      block, headerXf
+    );
+    block.classList.add('nav-eds-hide')
+  })
 
   /* init Compare */
   const addVehicleCheckboxs = block.querySelectorAll(
