@@ -307,9 +307,6 @@
     .product-dealer-cards .dealer-card>p:nth-of-type(2)>.wrapper{
         font-size: 16px;
     }
-    .product-dealer-cards>.swiper .swiper-slide{
-        height: auto;
-    }
 }
 
 .product-dealer-cards-container.section {
@@ -324,4 +321,8 @@
 
 .product-dealer-cards .dealer-card>p:nth-child(4)>.wrapper{
     font-size: 16px;
+}
+
+.product-dealer-cards>.swiper .swiper-slide{
+        height: auto;
 }
