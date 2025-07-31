@@ -265,6 +265,9 @@ const onVehicleRmove = (e) => {
     sessionStorage.setItem(compareVehicles, JSON.stringify(vehicles));
 
     renderTrayCards();
+    if(!vehicles.length){
+        toggleTray();
+    }
 }
 
 const createVehicleButton = (label, sku, cc, imageDetail) => {
