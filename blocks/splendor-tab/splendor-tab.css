@@ -140,11 +140,15 @@
     padding: 0px;
     list-style: none;
 }
-.splendor-tab .tab-slide > ul > li > ul > li {
+.splendor-tab .tab-slide > ul > li > ul > li,
+.splendor-tab .tab-slide > ul > li > ul > li a,
+.splendor-tab .tab-slide > ul > li > ul > li p a,
+.splendor-tab .tab-slide > ul > li > ul > li p{
     font-family: "TSTAR-PRO-Medium";
     font-size: 24px;
     padding-top: 10px;
     line-height: 32px;
+    color: #303030;
 }
 
 .splendor-tab .tab-slide > p > picture > img {
