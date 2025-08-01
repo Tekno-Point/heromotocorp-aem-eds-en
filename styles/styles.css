@@ -353,7 +353,7 @@ main img {
 
 .heroicon-engine:before {
   content: "";
-      font-size: 2rem;
+  font-size: 2rem;
 }
 
 /* heroicon-engine */
@@ -520,6 +520,10 @@ main .section.highlight {
 
 * {
   font-family: "TSTAR-PRO-Medium";
+}
+
+.modal.block {
+  display: block;
 }
 
 .homepage-redesign-dropdown-menu .dropdown-content .column.column2,
