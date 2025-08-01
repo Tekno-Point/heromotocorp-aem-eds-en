@@ -222,7 +222,9 @@ body.modal-open {
     top: 10%;
     left: 1%;
     margin: 10px;
-    max-width: fit-content;
+    max-width: -webkit-fill-available;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .modal.book-ride>dialog>.modal-content {
