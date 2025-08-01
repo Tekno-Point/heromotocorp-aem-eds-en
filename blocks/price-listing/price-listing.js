@@ -1,6 +1,4 @@
 import {
-  fetchStateCityMaster,
-  fetchStateCity,
   fetchProduct,
   useDataMapping,
   pubsub
