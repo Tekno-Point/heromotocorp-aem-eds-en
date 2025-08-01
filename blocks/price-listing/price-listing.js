@@ -309,7 +309,7 @@ export async function updatePriceListing() {
   const block = document.querySelector('.price-listing.block');
   if (!block) return;
   const { dropdowns, fieldsetEl } = await decoratePriceListing();
-  const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
+  const headingUL = block.children[1].querySelector('ul');
   const liList = headingUL?.querySelectorAll('li') || [];
   if (liList[0]) liList[0].replaceChildren(dropdowns, fieldsetEl);
 }

@@ -525,9 +525,6 @@ export default async function decorate(block) {
     }
   }
   toggleCityInputState();
-  window.a = window.a || 0;
-  window.a++; 
-  console.log(window.a, "Book a ride form loaded");
   
   function sendOTPHandler () {
     // console.log("Hi Send otp");
