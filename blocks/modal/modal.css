@@ -171,11 +171,6 @@ body.modal-open {
   max-width: 1366px;
   width: 100%;
   border-radius: 10px;
-  top: 25%;
-  left: 5%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .modal.book-ride>dialog>.modal-content {
