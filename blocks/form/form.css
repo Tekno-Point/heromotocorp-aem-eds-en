@@ -661,10 +661,12 @@ input::placeholder {
         padding: 32px 16px;
     }
 
-    .section.book-ride .form .heading-wrapper h2 {
+    .section.book-ride .form .heading-wrapper h2,
+    .form-block-container>.default-content-wrapper>h2 {
         font-size: 28px;
         line-height: 40px;
     }
+
 
     .section.book-ride .form .plaintext-wrapper p {
         margin: 0 0 6px;

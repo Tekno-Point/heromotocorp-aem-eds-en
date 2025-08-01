@@ -248,10 +248,10 @@ body.modal-open {
 
 @media (max-width: 376px) {
   .modal.book-ride>dialog {
-    margin: 10px;
+    /* margin: 10px;
     top: 10%;
     left: 1%;
-    max-width: fit-content;
+    max-width: fit-content; */
   }
 }
 
