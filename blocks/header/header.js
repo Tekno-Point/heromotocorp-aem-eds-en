@@ -68,10 +68,10 @@ export async function appendXF(block, xfPath) {
         // newLink.href = link.href.replace('http://localhost:3000', 'https://stage.heromotocorp.com');
         newLink.rel = "stylesheet";
         document.head.append(newLink);
-        console.log(`Added link: ${link.href}`); // eslint-disable-line
+        // console.log(`Added link: ${link.href}`); // eslint-disable-line
       }else{
         link.remove();
-        console.warn(`Skipping link: ${link.href}`); // eslint-disable-line
+        // console.warn(`Skipping link: ${link.href}`); // eslint-disable-line
       }
       } catch (error) {
         console.error(error); // eslint-disable-line
