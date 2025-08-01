@@ -72,12 +72,31 @@ function buildAutoBlocks() {
 }
 
 /**
+ * Wraps images followed by links within a matching <a> tag.
+ * @param {Element} container The container element
+ */
+function wrapImgsInLinks(container) {
+  const pictures = container.querySelectorAll('picture');
+  pictures.forEach((pic) => {
+    // debugger;
+    const link = pic?.parentElement?.nextElementSibling?.firstElementChild;
+    if (link && link.tagName === 'A' && link.href) {
+      link.innerHTML = pic.outerHTML;
+      link.setAttribute('target', '_blank'); // changes fo target blanck
+      link.parentElement.remove();
+      pic.replaceWith(link);
+    }
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
+  wrapImgsInLinks(main);
   decorateButtons(main);
   decorateIcons(main);
   buildAutoBlocks(main);
@@ -99,6 +118,8 @@ async function loadEager(doc) {
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
 
+
+
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
     if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
@@ -109,11 +130,26 @@ async function loadEager(doc) {
   }
 }
 
+function autolinkModals(element) {
+  element.addEventListener('click', async (e) => {
+    const origin = e.target.closest('a');
+
+    if (origin && origin.href && origin.href.includes('/modals/')) {
+      let shareModal = e.target.closest(".section.share-modal-sec")
+      e.preventDefault();
+      const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+      openModal(origin.href, shareModal);
+    }
+  });
+}
+
+
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
+  autolinkModals(doc)
   const main = doc.querySelector('main');
   await loadSections(main);
 
@@ -121,11 +157,11 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
-
-  loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
-  loadFonts();
+  await loadHeader(doc.querySelector('header'));
+  await loadFooter(doc.querySelector('footer'));
+  await loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
+  await loadFonts();
+  document.querySelector('.header.block').style.display = 'block';
 }
 
 /**
@@ -145,3 +181,10 @@ async function loadPage() {
 }
 
 loadPage();
+
+
+
+// document.querySelectorAll('a').forEach(a => {
+//   a.setAttribute('target', '_blank');
+// });
+

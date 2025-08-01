@@ -1,0 +1,214 @@
+main>.banner-price {
+    padding: 0;
+    margin: 0;
+}
+
+.banner-price {
+    @media (width >=900px) {
+        height: 140px;
+    }
+}
+
+.banner-price>.default-content-wrapper {
+    max-width: 100%;
+    margin: 0;
+    padding-inline: 0;
+    padding-block: 0;
+}
+
+.banner-price>.default-content-wrapper>ul:first-child {
+    background: #141414;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 1rem;
+    list-style: none;
+}
+
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child {
+    display: flex;
+    align-items: baseline;
+    width: 65%;
+    padding-left: calc(1.375rem * .5);
+    padding-right: calc(1.375rem * .5);
+    font-family: "TSTAR-PRO-Bold";
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    -webkit-font-kerning: auto;
+    font-kerning: auto;
+    letter-spacing: normal;
+    line-height: 2rem;
+
+    @media (max-width: 900px) {
+        display: initial;
+        padding-left: calc(2rem * .5);
+        padding-right: calc(2rem * .5);
+    }
+}
+
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li {
+    display: flex;
+    align-items: center;
+}
+
+
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>strong:first-child {
+    font-family: "TSTAR-PRO-Heavy";
+    color: #ee2326;
+    font-size: 2rem;
+    font-weight: 900;
+    -webkit-font-kerning: auto;
+    font-kerning: auto;
+    letter-spacing: normal;
+    line-height: 3rem;
+    margin-left: 1rem;
+
+    @media (max-width: 900px) {
+        margin-left: 0;
+    }
+}
+
+
+
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>sub {
+    display: flex;
+    font-size: 1rem;
+    font-weight: 400;
+    -webkit-font-kerning: auto;
+    font-kerning: auto;
+    letter-spacing: normal;
+    line-height: 2rem;
+    vertical-align: bottom;
+}
+
+
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>sub>strong {
+    font-weight: 400;
+}
+
+.banner-price>.default-content-wrapper>ul:first-child>li:nth-child(2) {
+    background-color: white;
+    border-radius: 0.25rem;
+}
+
+.banner-price>.default-content-wrapper>ul:first-child>li:nth-child(2)>a {
+    background-clip: text;
+    background-image: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
+    padding-top: .625rem;
+    padding-bottom: .625rem;
+    padding-right: 1.125rem;
+    padding-left: 1.125rem;
+    border-color: #d30000;
+    border-radius: .25rem;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    font-size: 1.25rem;
+    -webkit-font-kerning: auto;
+    font-kerning: auto;
+    letter-spacing: normal;
+    line-height: 1.75rem;
+    -webkit-text-fill-color: rgba(0, 0, 0, 0);
+
+    @media (max-width: 900px) {
+        padding-top: 5.5px;
+        padding-bottom: 5.5px;
+    }
+}
+
+
+.banner-price>.default-content-wrapper>ul:first-child>li:nth-child(3)>a {
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    font-size: 1.25rem;
+    -webkit-font-kerning: auto;
+    font-kerning: auto;
+    letter-spacing: normal;
+    line-height: 1.75rem;
+    padding-top: .625rem;
+    padding-bottom: .625rem;
+    padding-right: 1.125rem;
+    padding-left: 1.125rem;
+    border-radius: .25rem;
+    color: #fff;
+    background: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
+
+    @media (max-width: 900px) {
+        padding-top: 5.5px;
+        padding-bottom: 5.5px;
+    }
+}
+
+
+.banner-price>.default-content-wrapper>ul:nth-child(2) {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(114.58deg, #201F1F 4.19%, #454141 51.21%, #000000 98.23%);
+    padding: 8px 40px;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+    font-weight: 400;
+    font-family: "TSTAR-PRO-Regular";
+
+    @media screen and (max-width: 900px) {
+        padding: 10px 16px;
+        font-size: 16px;
+    }
+}
+
+.banner-price>.default-content-wrapper>ul:nth-child(2)>li>a {
+    font-weight: 900;
+    font-family: "TSTAR-PRO-Heavy";
+    text-decoration: underline;
+    display: inline-block;
+    pointer-events: auto;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 24px;
+    color: #fff;
+    margin-left: 5px;
+
+    @media (max-width: 900px) {
+        font-size: 16px;
+    }
+}
+
+.banner-price>.default-content-wrapper>ul:nth-child(2)>li .icon-iconcorp {
+    width: 40px;
+    height: 40px;
+    margin-right: 12px;
+}
+
+
+.banner-price>.default-content-wrapper>ul:nth-child(2)>li>a::after {
+    display: inline-block;
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-right: 2.5px solid #fff;
+    border-bottom: 2.5px solid #fff;
+    transform: rotate(-45deg);
+    margin-left: 5px;
+}
+
+@media (max-width: 900px) {
+    .banner-price>.default-content-wrapper>ul:first-child {
+        flex-wrap: wrap;
+    }
+
+    .banner-price>.default-content-wrapper>ul:first-child>li:first-child {
+        width: 100%;
+    }
+}
+@media (max-width: 767px){
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>strong:first-child{
+    font-size: 24px;
+    line-height: normal;
+}
+.banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>sub{
+    font-size: 14px;
+    line-height: normal;
+}
+}
