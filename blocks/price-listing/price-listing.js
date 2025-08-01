@@ -316,7 +316,7 @@ export async function updatePriceListing() {
 
 export default async function decorate(block) {
   const { dropdowns, fieldsetEl } = await decoratePriceListing();
-  const headingUL = block.querySelector('h1')?.closest('div')?.querySelector('ul');
+  const headingUL = block.children[1].querySelector('ul');
   const liList = headingUL?.querySelectorAll('li') || [];
 
   if (liList[0]) {
