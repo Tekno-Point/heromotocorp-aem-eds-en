@@ -316,7 +316,8 @@
         display: none;
     }
 
-    .price-listing>div:nth-child(2)>div>h1 {
+    .price-listing>div:nth-child(2)>div>h1,
+    .price-listing>div:nth-child(2)>div>h2 {
         font-size: 28px;
         text-align: center;
         padding-bottom: 10px;
