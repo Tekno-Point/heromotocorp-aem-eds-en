@@ -115,6 +115,7 @@ body.modal-open {
   border: none;
   background: transparent;
   right: calc((100% - 1246px) / 2);
+  right: calc((100% - 1308px) / 2);
   margin: unset;
   left: unset;
 }
@@ -150,7 +151,7 @@ body.modal-open {
     bottom: 73px;
     top: unset;
     right: calc((100% - 294px) / 2);
-
+    right: calc((100% - 414px) / 2);
   }
 }
 
@@ -264,17 +265,17 @@ body.modal-open {
 
 
 body.modal-open::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(10, 10, 10, 0.8);
-    z-index: 999;
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(10, 10, 10, 0.8);
+  z-index: 999;
 }
 
-body{
+body {
   position: relative;
 }
 
@@ -307,7 +308,7 @@ body{
   background-color: #686868;
 }
 
-.section.modal.country-modal-sec dialog::-webkit-scrollbar{
+.section.modal.country-modal-sec dialog::-webkit-scrollbar {
   scrollbar-width: thin;
   width: 2px;
 }
@@ -321,7 +322,8 @@ body{
 }
 
 .section.modal.country-modal-sec dialog::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5); /* or any color */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* or any color */
   border-radius: 10px;
 }
 
