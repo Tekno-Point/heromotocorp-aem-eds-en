@@ -79,6 +79,17 @@
     outline: none;
 }
 
+.emi-container .label-input-row input.number-box[type="number"]::-webkit-outer-spin-button,
+.emi-container .label-input-row input.number-box[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.emi-container .label-input-row input.number-box[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* Slider bar */
 .emi-container .slider-row {
     display: flex;

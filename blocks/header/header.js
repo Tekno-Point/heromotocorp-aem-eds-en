@@ -95,11 +95,13 @@ function initDesktopMegaMenu() {
         }
 
         if (this.classList.contains('active')) {
-          document.body.style.height = '100vh';
-          document.body.style.overflow = 'hidden';
+          document.body.classList.add("hide-scroll");
+          // document.body.style.height = '100vh';
+          // document.body.style.overflow = 'hidden';
         } else {
-          document.body.style.height = 'auto';
-          document.body.style.overflow = 'auto';
+          document.body.classList.remove("hide-scroll");
+          // document.body.style.height = 'auto';
+          // document.body.style.overflow = 'auto';
         }
 
         document.querySelectorAll(".bike-spec p, .about-premia-text p, .scroll-for-more-container p, .parts-desc, .parts-wrap .parts-title").forEach((p) => {
@@ -407,138 +409,138 @@ function initMobileMenu() {
     });
   });
 
-    document
-      .querySelectorAll(".header-explore-tabs .explore-nav-link")
-      .forEach((tab) => {
-        tab.addEventListener("click", function () {
-          const tabId = this.dataset.id;
+  document
+    .querySelectorAll(".header-explore-tabs .explore-nav-link")
+    .forEach((tab) => {
+      tab.addEventListener("click", function () {
+        const tabId = this.dataset.id;
 
-          // Remove 'active' class from all tabs
-          document
-            .querySelectorAll(".header-explore-tabs .explore-nav-link")
-            .forEach((el) => {
-              el.classList.remove("active");
-            });
+        // Remove 'active' class from all tabs
+        document
+          .querySelectorAll(".header-explore-tabs .explore-nav-link")
+          .forEach((el) => {
+            el.classList.remove("active");
+          });
 
-          // Add 'active' to clicked tab
-          this.classList.add("active");
+        // Add 'active' to clicked tab
+        this.classList.add("active");
 
-          // Hide all tab contents
-          document
-            .querySelectorAll(".header-explore-tabs .explore-tab-content")
-            .forEach((content) => {
-              content.classList.add("d-none");
-              content.classList.remove("active");
-            });
+        // Hide all tab contents
+        document
+          .querySelectorAll(".header-explore-tabs .explore-tab-content")
+          .forEach((content) => {
+            content.classList.add("d-none");
+            content.classList.remove("active");
+          });
 
-          // Show selected tab content
-          const targetContent = document.querySelector(
-            `.header-explore-tabs .explore-tab-content[data-id="${tabId}"]`
-          );
-          if (targetContent) {
-            targetContent.classList.remove("d-none");
-            targetContent.classList.add("active");
-          }
-        });
-
-        // initHeaderMenu();
-        let homepageDesktopHeaderLogo;
-
-        function handleHeaderBehavior() {
-          const width = window.innerWidth;
-          const footer = document.querySelector(".event_register_footer");
-
-          if (width < 1024 && width > 767) {
-            footer?.classList.add("handle-new-variation-bottom-tab");
-          } else if (width < 768) {
-            footer?.classList.add("handle-new-variation-bottom-mob");
-          }
-
-          const isHomepage = document.querySelector(".homepage-banner");
-          const isComparePage = document.querySelector(
-            ".homepage-compare-page"
-          );
-          const navbar = document.querySelector(
-            ".navbar.navbar-expand-lg.new-header-variation"
-          );
-
-          if (width <= 767 && isHomepage) {
-            document
-              .querySelectorAll(".homepage-redesign-right-nav-icon")
-              .forEach((icon) => {
-                const mobileIcon = icon.getAttribute("data-mobileicon");
-                if (mobileIcon) {
-                  icon.setAttribute("src", mobileIcon);
-                }
-              });
-
-            document.querySelectorAll(".navbar-brand").forEach((brand) => {
-              const headerLogo = document
-                .getElementById("newMobileNav")
-                ?.getAttribute("data-mobileheaderlogo");
-              const img = brand.querySelector("img");
-
-              if (headerLogo && img) {
-                if (!homepageDesktopHeaderLogo) {
-                  homepageDesktopHeaderLogo = img.getAttribute("src");
-                }
-                img.setAttribute("src", headerLogo);
-              }
-            });
-
-            if (navbar) {
-              navbar.style.position = "fixed";
-            }
-
-            let prevScroll = window.scrollY;
-
-            window.addEventListener("scroll", () => {
-              let currentScroll = window.scrollY;
-
-              if (currentScroll <= 0) {
-                navbar.style.top = "0";
-                navbar.style.background = "unset";
-              } else {
-                navbar.style.background = "rgba(0,0,0,0.2)";
-                // navbar.style.top = "-70px"; // Uncomment if needed
-              }
-
-              prevScroll = currentScroll;
-            });
-          } else if (width > 767 && (isHomepage || isComparePage)) {
-            document.querySelectorAll(".navbar-brand").forEach((brand) => {
-              const img = brand.querySelector("img");
-              if (homepageDesktopHeaderLogo && img) {
-                img.setAttribute("src", homepageDesktopHeaderLogo);
-              }
-            });
-
-            if (navbar) {
-              navbar.style.top = "0";
-              navbar.style.position = "relative";
-            }
-
-            document
-              .querySelectorAll(".homepage-redesign-right-nav-icon")
-              .forEach((icon) => {
-                const desktopIcon = icon.getAttribute("data-desktopicon");
-                if (desktopIcon) {
-                  icon.setAttribute("src", desktopIcon);
-                }
-              });
-          } else if (width <= 767 && isComparePage) {
-            document
-              .querySelector(".header-main.new-header-variation")
-              ?.style.setProperty("position", "relative");
-          }
+        // Show selected tab content
+        const targetContent = document.querySelector(
+          `.header-explore-tabs .explore-tab-content[data-id="${tabId}"]`
+        );
+        if (targetContent) {
+          targetContent.classList.remove("d-none");
+          targetContent.classList.add("active");
         }
-
-        if (document.querySelector(".new-header-variation")) {
-          window.addEventListener("resize", handleHeaderBehavior);
-          handleHeaderBehavior();
-        }
-
       });
+
+      // initHeaderMenu();
+      let homepageDesktopHeaderLogo;
+
+      function handleHeaderBehavior() {
+        const width = window.innerWidth;
+        const footer = document.querySelector(".event_register_footer");
+
+        if (width < 1024 && width > 767) {
+          footer?.classList.add("handle-new-variation-bottom-tab");
+        } else if (width < 768) {
+          footer?.classList.add("handle-new-variation-bottom-mob");
+        }
+
+        const isHomepage = document.querySelector(".homepage-banner");
+        const isComparePage = document.querySelector(
+          ".homepage-compare-page"
+        );
+        const navbar = document.querySelector(
+          ".navbar.navbar-expand-lg.new-header-variation"
+        );
+
+        if (width <= 767 && isHomepage) {
+          document
+            .querySelectorAll(".homepage-redesign-right-nav-icon")
+            .forEach((icon) => {
+              const mobileIcon = icon.getAttribute("data-mobileicon");
+              if (mobileIcon) {
+                icon.setAttribute("src", mobileIcon);
+              }
+            });
+
+          document.querySelectorAll(".navbar-brand").forEach((brand) => {
+            const headerLogo = document
+              .getElementById("newMobileNav")
+              ?.getAttribute("data-mobileheaderlogo");
+            const img = brand.querySelector("img");
+
+            if (headerLogo && img) {
+              if (!homepageDesktopHeaderLogo) {
+                homepageDesktopHeaderLogo = img.getAttribute("src");
+              }
+              img.setAttribute("src", headerLogo);
+            }
+          });
+
+          if (navbar) {
+            navbar.style.position = "fixed";
+          }
+
+          let prevScroll = window.scrollY;
+
+          window.addEventListener("scroll", () => {
+            let currentScroll = window.scrollY;
+
+            if (currentScroll <= 0) {
+              navbar.style.top = "0";
+              navbar.style.background = "unset";
+            } else {
+              navbar.style.background = "rgba(0,0,0,0.2)";
+              // navbar.style.top = "-70px"; // Uncomment if needed
+            }
+
+            prevScroll = currentScroll;
+          });
+        } else if (width > 767 && (isHomepage || isComparePage)) {
+          document.querySelectorAll(".navbar-brand").forEach((brand) => {
+            const img = brand.querySelector("img");
+            if (homepageDesktopHeaderLogo && img) {
+              img.setAttribute("src", homepageDesktopHeaderLogo);
+            }
+          });
+
+          if (navbar) {
+            navbar.style.top = "0";
+            navbar.style.position = "relative";
+          }
+
+          document
+            .querySelectorAll(".homepage-redesign-right-nav-icon")
+            .forEach((icon) => {
+              const desktopIcon = icon.getAttribute("data-desktopicon");
+              if (desktopIcon) {
+                icon.setAttribute("src", desktopIcon);
+              }
+            });
+        } else if (width <= 767 && isComparePage) {
+          document
+            .querySelector(".header-main.new-header-variation")
+            ?.style.setProperty("position", "relative");
+        }
+      }
+
+      if (document.querySelector(".new-header-variation")) {
+        window.addEventListener("resize", handleHeaderBehavior);
+        handleHeaderBehavior();
+      }
+
+    });
 
   document.querySelectorAll("#newMobileNav .accordion-header").forEach((header) => {
     header.addEventListener("click", function (e) {
