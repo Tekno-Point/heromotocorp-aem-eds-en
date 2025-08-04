@@ -23,6 +23,7 @@ function createDropdownInput(placeholder) {
 let selectedEl = null;
 let isStateOpen = false;
 let isCityOpen = false;
+let isEmptyInput = true;
 
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
@@ -133,6 +134,7 @@ async function decoratePriceListing() {
   }
 
   si.addEventListener('focus', () => {
+    isEmptyInput = true;
     si.dataset.filter = '';
     populateList(si, sl, states, onStateSelect);
     sl.style.display = 'block';
@@ -144,7 +146,11 @@ async function decoratePriceListing() {
     }
   });
 
-  si.addEventListener('input', () => {
+  si.addEventListener('input', (e) => {
+    if (isEmptyInput) {
+      si.value = e.data;
+      isEmptyInput = false;
+    }
     si.dataset.filter = si.value;
     populateList(si, sl, states, onStateSelect);
     sl.style.display = 'block';
@@ -188,6 +194,7 @@ async function decoratePriceListing() {
 
   ci.addEventListener('focus', () => {
     if (ci.disabled) return;
+    isEmptyInput = true;
     ci.dataset.filter = '';
     populateList(ci, cl, selectedState.cities, onCitySelect);
     cl.style.display = 'block';
@@ -199,8 +206,12 @@ async function decoratePriceListing() {
     }
   });
 
-  ci.addEventListener('input', () => {
+  ci.addEventListener('input', (e) => {
     if (ci.disabled) return;
+    if (isEmptyInput) {
+      ci.value = e.data;
+      isEmptyInput = false;
+    }
     ci.dataset.filter = ci.value;
     populateList(ci, cl, selectedState.cities, onCitySelect);
     cl.style.display = 'block';

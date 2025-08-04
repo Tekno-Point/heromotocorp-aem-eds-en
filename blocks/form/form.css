@@ -187,6 +187,10 @@
     gap: 20px 16px;
 }
 
+.section.book-ride.form-container .form form {
+    justify-content: space-between;
+}
+
 .form .field-wrapper {
     min-width: 296px;
 }
@@ -393,11 +397,21 @@ input::placeholder {
 
 .section.book-ride .form form>.field-wrapper:not(.heading-wrapper, .plaintext-wrapper, .submit-wrapper),
 .section.book-ride .form form fieldset:not(#form-f1) {
-    max-width: 22%;
+    /* max-width: 22%;
     min-width: unset;
     width: 100%;
     display: block;
-    margin: 0 17px;
+    margin: 0 17px; */
+    max-width: 23%;
+    min-width: unset;
+    width: 100%;
+    display: block;
+    /* /* margin: 0 17px; */
+}
+
+.section .price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item:hover {
+    background-color: #009fda33;
+    cursor: pointer;
 }
 
 .section.book-ride .form form fieldset:not(#form-f1) {
@@ -421,7 +435,8 @@ input::placeholder {
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper {
-    width: 22%;
+    /* width: 22%; */
+    width: 23%;
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper,
@@ -454,7 +469,13 @@ input::placeholder {
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list .dropdown-item,
 .section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list .dropdown-item {
-    padding: 0 10px;
+    padding: 7px 10px;
+    font-size: 18px;
+    color: rgb(48, 48, 48);
+    font-weight: 300;
+    line-height: 24px;
+    font-family: 'transducer-regular';
+    white-space: unset;
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input,
@@ -617,6 +638,7 @@ input::placeholder {
 }
 
 .section.book-ride .form .submit-btn {
+    margin: auto;
     margin-top: 36px;
     text-align: center;
     background-color: #fff;
@@ -738,6 +760,12 @@ input::placeholder {
         letter-spacing: normal;
         line-height: 1.25rem;
     }
+
+    .section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list .dropdown-item,
+    .section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list .dropdown-item {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 
 .dsp-none {
@@ -749,11 +777,12 @@ input::placeholder {
 }
 
 @media not all and (min-resolution: 0.001dpcm) {
-  @supports (-webkit-appearance: none) {
-    /* Safari-only styles go here */
-    .section.book-ride .form .submit-btn .button{
-        padding-top: 6px;
-        padding-right: 3px;
+    @supports (-webkit-appearance: none) {
+
+        /* Safari-only styles go here */
+        .section.book-ride .form .submit-btn .button {
+            padding-top: 6px;
+            padding-right: 3px;
+        }
     }
-  }
 }

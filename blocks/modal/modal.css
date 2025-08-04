@@ -210,6 +210,11 @@ body.modal-open {
   margin: 0px 0px 25px 0px;
 }
 
+.modal.book-ride dialog .section.book-ride .form fieldset#form-f1-1 .field-wrapper,
+.modal.book-ride dialog .section.book-ride .form fieldset#form-f1 .field-wrapper{
+  width: 23%;
+}
+
 .modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form>form>#form-f1-1 {
   max-width: 100% !important;
   display: flex;

@@ -1,6 +1,6 @@
 
 import createField from "./form-fields.js";
-import { div, ul, li, p, label, span, input as inputEl, img } from "../../scripts/dom-helpers.js";
+import { div, ul, li, p, label, span, input as inputEl, img, input } from "../../scripts/dom-helpers.js";
 import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp, getRandomId, debounce } from "../../scripts/common.js";
 
 const nameRegex = /^[a-zA-Z\s]{1,50}$/;
@@ -33,6 +33,8 @@ function createDropdownInput(placeholder, name) {
   return { wrapper, input, clearBtn, dropdownBtn, list };
 }
 
+let isEmptyInput = true;
+
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
   const typedValue = (input.dataset.filter || '').trim().toLowerCase();
@@ -53,7 +55,7 @@ function populateList(input, list, data, onSelect) {
         item.label
       );
       itemEl.addEventListener('click', (e) => {
-
+        isEmptyInput = false;
         input.value = item.label;
         list.style.display = 'none';
         if (input.id === 'state-input') isStateOpen = false;
@@ -318,6 +320,7 @@ export default async function decorate(block) {
   }
 
   stateCustomInput.addEventListener('focus', () => {
+  isEmptyInput = true;
     stateCustomInput.dataset.filter = '';
     populateList(stateCustomInput, stateList, mappedStates, onStateSelect);
     stateList.style.display = 'block';
@@ -328,7 +331,11 @@ export default async function decorate(block) {
     }
   });
 
-  stateCustomInput.addEventListener('input', () => {
+  stateCustomInput.addEventListener('input', (e) => {
+    if (isEmptyInput) {
+      stateCustomInput.value = e.data;
+      isEmptyInput = false;
+    }
     stateCustomInput.dataset.filter = stateCustomInput.value;
     populateList(stateCustomInput, stateList, mappedStates, onStateSelect);
     stateList.style.display = 'block';
@@ -386,6 +393,7 @@ export default async function decorate(block) {
 
   cityCustomInput.addEventListener('focus', () => {
     if (cityCustomInput.disabled) return;
+    isEmptyInput = true;
     cityCustomInput.dataset.filter = '';
     const citiesForSelectedState = selectedStateData ? selectedStateData.cities : [];
     populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect);
@@ -397,8 +405,13 @@ export default async function decorate(block) {
     }
   });
 
-  cityCustomInput.addEventListener('input', () => {
+  cityCustomInput.addEventListener('input', (e) => {
     if (cityCustomInput.disabled) return;
+    if (isEmptyInput) {
+      cityCustomInput.value = e.data;
+      isEmptyInput = false;
+    }
+
     cityCustomInput.dataset.filter = cityCustomInput.value;
     const citiesForSelectedState = selectedStateData ? selectedStateData.cities : [];
     populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect);
@@ -525,8 +538,8 @@ export default async function decorate(block) {
     }
   }
   toggleCityInputState();
-  
-  function sendOTPHandler () {
+
+  function sendOTPHandler() {
     // console.log("Hi Send otp");
     try {
       block.querySelector(".sendOTP-btn").classList.add("dsp-none");
@@ -543,7 +556,7 @@ export default async function decorate(block) {
   sendOTPHandler = debounce(sendOTPHandler, 1000);
   block.querySelector(".sendOTP-btn").addEventListener("click", sendOTPHandler);
 
-  function resendOTPHandler () {
+  function resendOTPHandler() {
     // console.log("Hi Resend otp");
     try {
       fetchOTP(form.mobile.value);

@@ -314,7 +314,7 @@ main img {
 .heroicon-logo .path3:before {
   content: "";
   color: #ee2326;
-  margin-left: -0.6669921875em
+  margin-left: -0.9669921875em
 }
 
 .heroicon-call:before {
@@ -508,6 +508,7 @@ body.hide-scroll {
   overflow: hidden;
   height: 100vh;
 }
+  
 
 @media (width >=900px) {
   main>.section>div {
