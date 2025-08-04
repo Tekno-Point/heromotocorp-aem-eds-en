@@ -43,12 +43,12 @@ export default function decorate(block) {
 
   const leftArrow = document.createElement("div");
   leftArrow.classList.add("swiper-button-prev");
-//   leftArrow.textContent = "<";
+  //   leftArrow.textContent = "<";
   btnWrapper.appendChild(leftArrow);
 
   const rightArrow = document.createElement("div");
   rightArrow.classList.add("swiper-button-next");
-//   rightArrow.textContent = ">";
+  //   rightArrow.textContent = ">";
   btnWrapper.appendChild(rightArrow);
 
   block.appendChild(btnWrapper);
@@ -79,23 +79,25 @@ export default function decorate(block) {
   });
 
   [prevBtn, nextBtn].forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const activeBullet = block.querySelector(".swiper-pagination-bullet-active");
-    const paginationContainer = block.querySelector(".swiper-pagination");
+    btn.addEventListener("click", () => {
+      const activeBullet = block.querySelector(".swiper-pagination-bullet-active");
+      const paginationContainer = block.querySelector(".swiper-pagination");
 
-    if (activeBullet && paginationContainer) {
-      const bulletLeft = activeBullet.offsetLeft;
-      const containerWidth = paginationContainer.offsetWidth;
-      const bulletWidth = activeBullet.offsetWidth;
+      if (activeBullet && paginationContainer) {
+        const bulletLeft = activeBullet.offsetLeft;
+        const containerWidth = paginationContainer.offsetWidth;
+        const bulletWidth = activeBullet.offsetWidth;
 
-      // Scroll the pagination container so the active bullet is centered
-      paginationContainer.scrollTo({
-        left: bulletLeft - (containerWidth / 2) + (bulletWidth / 2),
-        behavior: "smooth"
-      });
-    }
+        // Scroll the pagination container so the active bullet is centered
+        paginationContainer.scrollTo({
+          left: bulletLeft - (containerWidth / 2) + (bulletWidth / 2),
+          behavior: "smooth"
+        });
+      }
+    });
   });
-});
+
+
 
 
   // Update button states
@@ -113,3 +115,4 @@ export default function decorate(block) {
     }
   }
 }
+

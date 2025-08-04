@@ -1,8 +1,8 @@
-if(!location.href.includes("author-p") ){
+if (!location.href.includes("author-p")) {
 	setTimeout(async () => {
-	  // This function will execute after a delay
-	  const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
-	  openModal('/form/modals/get-a-call-back');
+		// This function will execute after a delay
+		const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
+		openModal('/form/modals/get-a-call-back');
 	}, 10000); // Delay in milliseconds
 }
 
@@ -16,3 +16,13 @@ scriptCode.innerHTML = `
 		})(window,document,'script','dataLayer','GTM-NJW8B6');
 `
 document.querySelector('head').append(scriptCode);
+
+document.querySelectorAll(".swiper-pagination.swiper-pagination-clickable h3").forEach(pag => {
+	pag.addEventListener("click", () => {
+		pag.scrollIntoView({
+			behavior: "smooth",
+			left: "center",
+			block: "nearest"
+		});
+	});
+});

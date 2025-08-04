@@ -144,6 +144,14 @@
     .compare-child-1 {
         gap: 63px;
     }
+
+    .section .compare-wrapper .compare.block .compare-child-1-inner-1>h3 {
+        padding-left: 16px;
+    }
+
+    .section .compare-wrapper .compare.block .compare-child-1-inner-2>h3 {
+        padding-right: 16px;
+    }
 }
 
 @media (max-width: 465px) {
@@ -193,7 +201,7 @@
         padding: 20px 0;
     }
 
-    .compare-child-2-inner-1>ul>li>ul{
+    .compare-child-2-inner-1>ul>li>ul {
         gap: unset;
     }
 }

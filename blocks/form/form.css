@@ -476,6 +476,7 @@ input::placeholder {
     line-height: 24px;
     font-family: 'transducer-regular';
     white-space: unset;
+
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input,
@@ -491,6 +492,10 @@ input::placeholder {
     /* width: ; */
     font-size: 22px;
     color: #dcd9d9;
+    font-size: 25px;
+    color: #fff;
+    line-height: 14px;
+
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input::placeholder,
@@ -498,6 +503,10 @@ input::placeholder {
     color: white;
 }
 
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper span img,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper span img {
+    filter: brightness(0) invert(1);
+}
 
 
 .section.book-ride .form form .field-wrapper input {
@@ -550,6 +559,8 @@ input::placeholder {
     display: block;
     border-bottom: 2px solid #fff;
     cursor: pointer;
+    font-size: 14px;
+    font-family: 'TSTAR-PRO-Bold';
 }
 
 .section.book-ride .form form fieldset .sendOTP-btn input,

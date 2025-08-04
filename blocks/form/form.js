@@ -50,7 +50,7 @@ function populateList(input, list, data, onSelect) {
       const itemEl = div(
         {
           class: `dropdown-item${isSelected ? ' selected' : ''}`,
-          style: isSelected ? 'background-color: #007aff; font-weight: bold;' : ''
+          style: isSelected ? 'background-color: #007aff;' : ''
         },
         item.label
       );

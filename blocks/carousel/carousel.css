@@ -262,15 +262,16 @@
 
 .carousel .inner-innerSub-1>h2 {
     font-family: "TSTAR-PRO-Bold";
-    font-family: 'TSTAR-PRO-Heavy';
+    /* font-family: 'TSTAR-PRO-Heavy'; */
     font-size: 32px;
     padding-bottom: 12px;
     border-bottom: 1px solid #a5a5a5;
     width: max-content;
     color: #303030;
+    font-weight: 700;
 }
 
-.carousel .inner-innerSub-1>p {
+.carousel .inner-inne:rSub-1>p {
     font-size: 18px;
     padding-top: 10px;
     color: #303030;
