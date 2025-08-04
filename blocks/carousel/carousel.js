@@ -116,13 +116,3 @@ export default function decorate(block) {
   }
 }
 
-debugger
-document.querySelectorAll(".swiper-pagination.swiper-pagination-clickable h3").forEach(pag => {
-  pag.addEventListener("click", () => {
-    pag.scrollIntoView({
-      behavior: "smooth",
-      left: "center",
-      block: "nearest"
-    });
-  });
-});

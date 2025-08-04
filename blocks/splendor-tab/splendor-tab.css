@@ -284,7 +284,7 @@
         width: 100%;
         max-width: unset;
         flex: 0 0 auto;
-        width: 46%;
+        width: 44%;
     }
 
     .splendor-tab .tabs-panel {
@@ -319,6 +319,7 @@
     .splendor-tab .tab-slide>ul>li {
         max-width: 142px;
         width: 100%;
+        width: 44%;
     }
 }
 
