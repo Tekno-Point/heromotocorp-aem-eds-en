@@ -164,7 +164,7 @@
 
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>.dropdown-btn img,
 .price-listing .custom-select-state-city__col>.custom-autocomplete>.input-wrapper>.dropdown-btn img {
-   filter: brightness(0) invert(77%) sepia(0%) saturate(0%) contrast(78%);
+    filter: brightness(0) invert(77%) sepia(0%) saturate(0%) contrast(78%);
     height: 20px;
     width: 20px;
     cursor: pointer;
@@ -229,13 +229,14 @@
     padding: .625rem 2rem;
 }
 
-.price-listing>div:nth-child(2)>div>h2 {
+.price-listing>div:nth-child(2)>div>h2,
+.price-listing>div:nth-child(2)>div>h1 {
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
     text-transform: uppercase;
     font-style: italic;
     font-size: 3rem;
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
     color: #303030;
 }
 
@@ -388,18 +389,20 @@
         line-height: 20px;
     }
 
-    .price-listing .col-6>.price-details-col>.price-details-col__text{
+    .price-listing .col-6>.price-details-col>.price-details-col__text {
         font-size: 18px;
     }
+
     .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>.price-details--info>.row>div p {
         font-size: 0.875rem;
         font-weight: 400;
     }
+
     .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>div {
         gap: 12px;
     }
-    
+
     .price-listing>div:nth-child(2)>div>ul>li:nth-child(1)>fieldset>.price-details--info>.row>.col-6 {
-    width: 46%;
+        width: 46%;
     }
 }

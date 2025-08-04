@@ -834,7 +834,7 @@ export default async function decorate(block) {
       navBarWrapper.classList.add("scrolled");
       navBarWrapper?.closest('body >header')?.classList.add('hide-header');
       navBarWrapper.style.height = "76px";
-      navBarWrapper.style.padding = "0px 10px 0";
+      navBarWrapper.style.padding = "0px 40px 0";
     } else {
       navBarWrapper.classList.remove("scrolled");
       navBarWrapper?.closest('body >header')?.classList.remove('hide-header');

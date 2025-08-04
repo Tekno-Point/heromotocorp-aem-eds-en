@@ -7,6 +7,7 @@ pubsub.subscribe('product-dealer-cards-event', decorateProductDealerCards);
 let selectedEl = null;
 let isStateDropdownOpen = false;
 let isCityDropdownOpen = false;
+let isEmptyInput = true;
 
 function createCustomDropdown(className, labelText, optionsList, onSelect, defaultValue = "") {
   const wrapper = div({ class: "custom-select-wrapper position-relative" });
@@ -96,8 +97,12 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
     }
   }
 
-  inputEl.addEventListener("input", () => {
+  inputEl.addEventListener("input", (e) => {
     if (disabled) return;
+     if (isEmptyInput) {
+      inputEl.value = e.data;
+      isEmptyInput = false;
+    }
     clearBtn.style.display = inputEl.value ? "block" : "none";
     updateOptions(inputEl.value);
     if (inputEl.id === 'state-input' && isCityDropdownOpen) {
@@ -111,6 +116,7 @@ function createCustomDropdown(className, labelText, optionsList, onSelect, defau
 
   inputEl.addEventListener("focus", () => {
     if (disabled) return;
+    isEmptyInput = true;
     updateOptions();
     if (inputEl.id === 'state-input' && isCityDropdownOpen) {
       cityDropdown.wrapper.querySelector('.dropdown-options').style.display = 'none';
