@@ -190,6 +190,10 @@ padding-bottom: 24px;
     height: 50px;
  }
 
+ .hero-footer-icon>.default-content-wrapper>p{
+    margin-left: 17px;
+ }
+
  .hero-footer-icon > .default-content-wrapper > ul{
       left: 35px;
  }
@@ -312,6 +316,10 @@ footer .footer > div{
     background-color: rgb(24, 24, 24);
     padding: 2px;
     z-index: 2;
+        padding: 9px;
+    text-align: center;
+    background-color: rgb(24, 24, 24);
+    border: 2px solid rgb(24, 24, 24);
 }
 
 .hero-footer-icon > .default-content-wrapper > p >a>picture>img{
