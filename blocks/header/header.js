@@ -821,7 +821,7 @@ export default async function decorate(block) {
   const navBarWrapper = document.querySelector(".nav-bar > .default-content-wrapper");
   const heroSection = document.querySelector(".banner-price");
 
-  window.addEventListener("scroll", () => {
+  document.addEventListener("scroll", () => {
     if (!heroSection || !secondUl || !navBarWrapper) return;
     const heroBottom = heroSection.getBoundingClientRect().bottom - 76;
     const img = document.querySelectorAll(".nav-bar p");
