@@ -203,7 +203,7 @@ section .buy-card-container>.buy-card-wrapper {
     }
 
     .buy-card>ul>li .cards-card-body {
-        width: 50%;
+        width: 54%;
     }
 
     .buy-card-container>div>p {
@@ -211,7 +211,7 @@ section .buy-card-container>.buy-card-wrapper {
     }
 
     .cards-card-body>h4 {
-        font-size: 1rem;
+        font-size: 18px;
     }
 
     .cards-card-body>h6 {

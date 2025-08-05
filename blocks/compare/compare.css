@@ -158,9 +158,15 @@
     }
 }
 
+@media (width<=767px) {
+    .compare-container>.default-content-wrapper>h2{
+        font-size: 28px;
+    }
+}
+
 @media (max-width: 465px) {
     .compare-container>.default-content-wrapper>h2 {
-        font-size: 25px;
+        font-size: 28px;
         padding: 0px;
         margin-bottom: 10px;
     }
