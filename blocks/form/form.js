@@ -534,7 +534,7 @@ export default async function decorate(block) {
       cityClearBtn.style.display = 'none';
     } else {
       cityCustomInput.removeAttribute("disabled");
-      cityCustomInput.style.cursor = "unset";
+      // cityCustomInput.style.cursor = "unset";
     }
   }
   toggleCityInputState();
