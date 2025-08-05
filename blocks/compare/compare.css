@@ -83,6 +83,7 @@
     color: #009fda;
     font-family: "TSTAR-PRO-Heavy";
     font-weight: 900;
+    font-size: 32px;
 }
 
 .compare-child-2-inner-1>ul>li>ul {
@@ -153,6 +154,7 @@
 
     .section .compare-wrapper .compare.block .compare-child-1-inner-2>h3 {
         padding-right: 16px;
+        font-size: 24px;
     }
 }
 
