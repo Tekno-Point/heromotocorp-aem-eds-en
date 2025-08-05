@@ -342,6 +342,7 @@ footer .footer>div {
 }
 
 .hero-footer-icon>.default-content-wrapper>p a {
+    display: block;
     padding: 4px;
     text-align: center;
     background-color: rgb(24, 24, 24);
