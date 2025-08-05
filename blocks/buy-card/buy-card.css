@@ -266,5 +266,11 @@ section .buy-card-container>.buy-card-wrapper {
     }
 }
 
+@media (width <= 368px) {
+    .buy-card>ul>li .cards-card-body:has(h4) {
+        width: 87%;
+    }
+}
+
 
 /*bug fixs */
