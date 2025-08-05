@@ -162,7 +162,7 @@ section .buy-card-container>.buy-card-wrapper {
     .buy-card>ul>li:nth-child(4)>.cards-card-body>p:first-child {
         top: -68px;
         font-size: 80px;
-        left: 110px;    
+        left: 110px;
     }
 
     .buy-card>ul>li:nth-child(2),
@@ -171,7 +171,7 @@ section .buy-card-container>.buy-card-wrapper {
     }
 
     .cards-card-body>p:nth-child(3) {
-                border-right: dashed 1px silver;
+        border-right: dashed 1px silver;
         position: absolute;
         top: 36px;
         left: 92px;
@@ -204,6 +204,10 @@ section .buy-card-container>.buy-card-wrapper {
 
     .buy-card>ul>li .cards-card-body {
         width: 54%;
+    }
+
+    .buy-card>ul>li .cards-card-body:has(h4) {
+        width: 56%;
     }
 
     .buy-card-container>div>p {
@@ -249,9 +253,9 @@ section .buy-card-container>.buy-card-wrapper {
     }
 }
 
-@media (width<=400px) {
+@media (width<=420px) {
     .buy-card>ul>li .cards-card-body:has(h4) {
-        width: 60%;
+        width: 67%;
     }
 }
 
