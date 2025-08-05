@@ -476,13 +476,14 @@ input::placeholder {
     line-height: 24px;
     font-family: 'transducer-regular';
     white-space: unset;
-    cursor: text;
+    cursor: default;
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input,
 .section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper input {
     border: unset;
     color: #fff;
+    cursor: default;
     /* padding: 0 10px;
     margin-left: 5px; */
 }
