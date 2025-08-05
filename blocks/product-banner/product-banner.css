@@ -13,6 +13,7 @@
 
 .section.product-banner-container .product-banner-wrapper .product-banner.block {
     display: block;
+    position: relative;
 }
 
 .section.product-banner-container .product-banner-wrapper .product-banner.block>.middle-sec {
