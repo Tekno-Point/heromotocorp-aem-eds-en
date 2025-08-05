@@ -874,6 +874,13 @@ export default async function decorate(block) {
   //   }
   //   document.body.append(stickyHeader);
   // }
+
+  document.querySelectorAll(".log-in-link").forEach((login)=>{
+    // login.addEventListener("click",()=>{
+      login.querySelector("a").href = 'https://dev1.heromotocorp.com/en-in.html';
+    // })
+  })
+
   return block;
 }
 
