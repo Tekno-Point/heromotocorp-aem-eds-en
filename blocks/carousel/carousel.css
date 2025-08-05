@@ -347,6 +347,14 @@
     color: rgb(73, 73, 73);
 }
 
+.carousel .inner-innerSub-1>p {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+    font-family: "TSTAR-PRO-Medium";
+    margin-top: 15px;
+}
+
 @media (max-width: 600px) {
     .swiper-slide {
         flex-direction: column;
@@ -438,6 +446,7 @@
 
     .carousel .inner-innerSub-1>p {
         font-size: 16px;
+        margin-top: 15px;
     }
 
     .carousel .swiper-button-prev::after,
