@@ -184,12 +184,12 @@
     }
 
     .emi-container .emi-output {
-        padding: 40px 10px;
+        padding: 25px 10px;
         border-radius: 10px;
     }
 
     .emi-container .emi-output .emi-title {
-                font-size: 24px;
+        font-size: 24px;
         width: 51%;
         line-height: 32px;
     }

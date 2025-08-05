@@ -106,7 +106,7 @@
     /* opacity: 0.8; */
 }
 
-.splendor-tab .tabs-panel>.tab-slide>p:first-child{
+.splendor-tab .tabs-panel>.tab-slide>p:first-child {
     background-color: #fef8f2;
     border-radius: 50%;
 }
@@ -230,9 +230,15 @@
     }
 
     .splendor-tab .tab-slide>ul>li:last-child {
-        position: static;
+        /* position: static; */
         max-width: 100%;
-        display: contents;
+        /* display: contents; */
+        text-align: center;
+        left: 50%;
+        transform: translateX(-72%);
+        bottom: 0;
+        right: unset;
+        top: unset;
     }
 
     .splendor-tab .tab-slide>ul>li:last-child>p {
@@ -277,6 +283,7 @@
         justify-content: center;
         padding: 20px;
         align-items: baseline;
+        margin-bottom: 44px;
     }
 
     .splendor-tab .tab-slide>ul>li {
@@ -312,6 +319,9 @@
 
     .splendor-tab .tab-slide>ul {
         margin-top: 0px;
+        justify-content: start;
+        margin-bottom: 66px;
+
     }
 }
 
