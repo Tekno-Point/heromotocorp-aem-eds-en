@@ -151,7 +151,7 @@ body.modal-open {
     bottom: 73px;
     top: unset;
     right: calc((100% - 294px) / 2);
-    right: calc((100% - 414px) / 2);
+    right: calc((100% - 176) / 2);
   }
 }
 
@@ -211,7 +211,7 @@ body.modal-open {
 }
 
 .modal.book-ride dialog .section.book-ride .form fieldset#form-f1-1 .field-wrapper,
-.modal.book-ride dialog .section.book-ride .form fieldset#form-f1 .field-wrapper{
+.modal.book-ride dialog .section.book-ride .form fieldset#form-f1 .field-wrapper {
   width: 23%;
 }
 
