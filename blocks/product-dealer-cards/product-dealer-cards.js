@@ -322,7 +322,7 @@ export async function decorateProductDealerCards(block = document.querySelector(
       observer: true,
       observeParents: true,
       breakpoints: {
-        0: { slidesPerView: 1.2 },
+        0: { slidesPerView: 1.4,spaceBetween: 16 },
         768: { slidesPerView: 2 },
         1024: { slidesPerView: 4 },
       },
