@@ -254,7 +254,7 @@
 }
 
 
-.section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .colors-container .color-wrapp{
+.section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .colors-container .color-wrapp {
     scrollbar-width: thin;
     scrollbar-color: #888 #f0f0f0;
 }
@@ -320,7 +320,7 @@
     line-height: 1.75rem;
     border-radius: 4px;
     background: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
-    padding:0.625rem 2rem;
+    padding: 0.625rem 2rem;
     border: none;
 
     @media (width<767px) {
@@ -371,10 +371,10 @@
         max-width: 100%;
     }
 
-    
-.section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .colors-container h4.mb-8.weight{
-    text-align: start;
-}
+
+    .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .colors-container h4.mb-8.weight {
+        text-align: start;
+    }
 
     .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .product-banner__variantWrapper .variants-wrap .radio-wrap {
         display: flex;
@@ -438,7 +438,7 @@
         transform: unset;
     }
 
-    .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .colors-container .color-wrapp{
+    .section.product-banner-container .product-banner-wrapper .product-banner.block .middle-sec .colors-container .color-wrapp {
         max-width: 100%;
     }
 
@@ -447,5 +447,12 @@
 @media (width>767px) {
     .product-banner-container>div>div>div.middle-sec>div.product-banner__variantWrapper>.variants-wrap>.radio-wrap {
         padding-left: .625rem;
+    }
+}
+
+@media (max-width:415px) {
+    .section.product-banner-container .product-banner-wrapper .product-banner.block .heading {
+        width: 70%;
+        margin: auto;
     }
 }

@@ -7,7 +7,7 @@
     height: 100%;
 }
 
-.hero.block{
+.hero.block {
     height: 100%;
     padding: unset;
 }
@@ -76,7 +76,8 @@
     .section.hero-banner>.hero-wrapper>.hero {
         margin: 16px 0px 0px 0px;
         /* height: 389px; */
-        margin-top: 33px;
+        margin-top: 55px;
+
     }
 
 }
