@@ -457,6 +457,7 @@ main img {
 
 .icon-moon-heroicon-suspension::before {
   content: "\E9B2";
+  font-size: 24px;
 }
 
 .icon-moon-heroicon-seat::before {

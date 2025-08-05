@@ -816,36 +816,14 @@ export default async function decorate(block) {
   navWrapper.append(nav);
   block.append(navWrapper);
 
-    const navBar = document.querySelector(".nav-bar");
-    const secondUl = navBar?.querySelectorAll("ul")[1];
-    const navBarWrapper = document.querySelector(".nav-bar > .default-content-wrapper");
-    const heroSection = document.querySelector(".banner-price");
+  const navBar = document.querySelector(".nav-bar");
+  const secondUl = navBar?.querySelectorAll("ul")[1];
+  const navBarWrapper = document.querySelector(".nav-bar > .default-content-wrapper");
+  const heroSection = document.querySelector(".banner-price");
 
-    document.body.addEventListener("scroll", () => {
-      if (!heroSection || !secondUl || !navBarWrapper) return;
-      const heroBottom = heroSection.getBoundingClientRect().bottom - 76;
-      const img = document.querySelectorAll(".nav-bar p");
+  document.body.addEventListener("scroll", () => handleheader(navWrapper, secondUl, navBarWrapper, heroSection));
 
-      if (heroBottom <= 0) {
-        navWrapper.style.transform = "translateY(-100%)";
-        // document.getElementsByClassName("header-main")[0].style.display = "none";
-        secondUl.style.display = "flex";
-        img.forEach((images) => (images.style.display = "block"));
-        navBarWrapper.classList.add("scrolled");
-        navBarWrapper?.closest('body >header')?.classList.add('hide-header');
-        navBarWrapper.style.height = "76px";
-        navBarWrapper.style.padding = "0px 40px 0";
-      } else {
-        navBarWrapper.classList.remove("scrolled");
-        navBarWrapper?.closest('body >header')?.classList.remove('hide-header');
-        navWrapper.style.transform = "translateY(0)";
-        // document.getElementsByClassName("header-main")[0].style.display = "block";
-        navBarWrapper.style.padding = "unset";
-        secondUl.style.display = "none";
-        img.forEach((images) => (images.style.display = "none"));
-        navBarWrapper.style.height = "40px";
-      }
-    });
+  window.addEventListener("scroll", () => handleheader(navWrapper, secondUl, navBarWrapper, heroSection));
 
   if (document.querySelector(".header .section.nav-bar ul li")) {
     document.querySelectorAll(".header .section.nav-bar ul:first-of-type li a").forEach((link) => {
@@ -897,4 +875,30 @@ export default async function decorate(block) {
   //   document.body.append(stickyHeader);
   // }
   return block;
+}
+
+function handleheader(navWrapper, secondUl, navBarWrapper, heroSection) {
+  if (!heroSection || !secondUl || !navBarWrapper) return;
+  const heroBottom = heroSection.getBoundingClientRect().bottom - 76;
+  const img = document.querySelectorAll(".nav-bar p");
+
+  if (heroBottom <= 0) {
+    navWrapper.style.transform = "translateY(-100%)";
+    // document.getElementsByClassName("header-main")[0].style.display = "none";
+    secondUl.style.display = "flex";
+    img.forEach((images) => (images.style.display = "block"));
+    navBarWrapper.classList.add("scrolled");
+    navBarWrapper?.closest('body >header')?.classList.add('hide-header');
+    navBarWrapper.style.height = "76px";
+    navBarWrapper.style.padding = "0px 40px 0";
+  } else {
+    navBarWrapper.classList.remove("scrolled");
+    navBarWrapper?.closest('body >header')?.classList.remove('hide-header');
+    navWrapper.style.transform = "translateY(0)";
+    // document.getElementsByClassName("header-main")[0].style.display = "block";
+    navBarWrapper.style.padding = "unset";
+    secondUl.style.display = "none";
+    img.forEach((images) => (images.style.display = "none"));
+    navBarWrapper.style.height = "40px";
+  }
 }
