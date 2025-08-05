@@ -476,7 +476,7 @@ input::placeholder {
     line-height: 24px;
     font-family: 'transducer-regular';
     white-space: unset;
-
+    cursor: text;
 }
 
 .section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input,
