@@ -155,14 +155,14 @@ section .buy-card-container>.buy-card-wrapper {
     }
 
     .buy-card-container>.buy-card-wrapper {
-        padding: 0 16px;
+        padding: 0 31px;
     }
 
     .buy-card>ul>li:nth-child(2)>.cards-card-body>p:first-child,
     .buy-card>ul>li:nth-child(4)>.cards-card-body>p:first-child {
         top: -68px;
         font-size: 80px;
-        left: 110px;
+        left: 110px;    
     }
 
     .buy-card>ul>li:nth-child(2),
@@ -171,11 +171,11 @@ section .buy-card-container>.buy-card-wrapper {
     }
 
     .cards-card-body>p:nth-child(3) {
-        border-right: dashed 1px silver;
+                border-right: dashed 1px silver;
         position: absolute;
         top: 36px;
         left: 92px;
-        width: 231px;
+        width: 208px;
         height: 375px;
         transform: rotate(0deg);
         transform: rotate(-391deg);
