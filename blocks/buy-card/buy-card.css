@@ -216,6 +216,8 @@ section .buy-card-container>.buy-card-wrapper {
 
     .cards-card-body>h6 {
         font-size: 1rem;
+        line-height: 20px;
+        margin-left: 7px;
     }
 
     .cards-card-body>p:nth-child(2)>picture>img {

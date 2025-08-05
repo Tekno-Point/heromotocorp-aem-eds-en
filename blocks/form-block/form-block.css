@@ -81,13 +81,13 @@
 
 .emi-container .label-input-row input.number-box[type="number"]::-webkit-outer-spin-button,
 .emi-container .label-input-row input.number-box[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 .emi-container .label-input-row input.number-box[type="number"] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 /* Slider bar */
@@ -189,11 +189,13 @@
     }
 
     .emi-container .emi-output .emi-title {
-        font-size: 20px;
+                font-size: 24px;
+        width: 51%;
+        line-height: 32px;
     }
 
     .emi-container .emi-output .emi-value {
-        font-size: 40px;
+        font-size: 32px;
     }
 
     .emi-container .emi-output button {
@@ -214,16 +216,27 @@
     .emi-container {
         margin-top: 0px;
         flex-direction: column;
-        gap: 12px
+        gap: 12px;
+        flex-wrap: unset;
     }
 
     .section.form-block-container {
         margin: 0px;
     }
 
-    .emi-container .label-input-row label{
+    .emi-container .label-input-row label {
         font-size: 16px;
     }
+
+    .emi-container .label-input-row {
+        margin-bottom: 14px;
+    }
+
+    .emi-container .range-labels {
+
+        margin-top: 14px;
+    }
+
 }
 
 /* thub */
