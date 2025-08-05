@@ -284,6 +284,9 @@
         padding: 20px;
         align-items: baseline;
         margin-bottom: 44px;
+        margin-top: 0px;
+        justify-content: start;
+        margin-bottom: 66px;
     }
 
     .splendor-tab .tab-slide>ul>li {
