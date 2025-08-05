@@ -15,6 +15,13 @@ export default async function decorate(block) {
   block.textContent = '';
   const footer = document.createElement('div');
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
+  
+// debugger
+// document.querySelectorAll('a').forEach((a) => {
+//   console.log(a)
+//   a.setAttribute('target', '_blank');
+  
+// ;});
 
   block.append(footer);
 }

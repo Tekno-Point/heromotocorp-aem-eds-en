@@ -1,0 +1,219 @@
+.section.compare-container>.compare-wrapper {
+    padding: 0px 0px 10px;
+    max-width: 100%;
+}
+
+.compare-container {
+    /* check this */
+    background-color: #ededed;
+    padding: 40px 0px;
+    margin: 0px auto;
+}
+
+.block.compare {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ededed;
+    padding: 0px;
+    position: relative;
+}
+
+.compare-child-1 {
+    display: flex;
+    justify-content: center;
+}
+
+.compare-child-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+}
+
+.compare-child-1-inner-2.compare-child-inner {
+    align-items: end;
+}
+
+.compare-child-1-inner-1>h3 {
+    color: rgb(338 35 38);
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    color: #ee2326;
+    font-size: 32px;
+}
+
+.compare-child-1-inner-1>p {
+    position: absolute;
+    left: 0px;
+    top: 0%;
+}
+
+.compare-child-1-inner-2>p {
+    position: absolute;
+    right: 26px;
+    top: 0%;
+}
+
+.compare-child-1 {
+    max-width: 749px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.compare-child-2 {
+    max-width: 883px;
+    width: 100%;
+}
+
+.compare-child-2-inner-1>ul {
+    padding: 0px;
+    list-style: none;
+    width: 100%;
+}
+
+.compare-child-2-inner-1>ul>li {
+    padding-top: 2.25rem;
+}
+
+.compare-child-1-inner-2>h3 {
+    color: #009fda;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.compare-child-2-inner-1>ul>li>ul {
+    display: flex;
+    gap: 40px;
+    padding: 0px;
+    list-style: none;
+}
+
+.compare-child-2-inner-1>ul>li>ul>li {
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+.compare-child-2-inner-1>ul>li>ul>li>h4 {
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.compare-child-2-inner-1>ul>li>ul>li:nth-child(2)>h4 {
+    /* Your styles here */
+    color: #303030;
+    font-family: "TSTAR-PRO-Bold";
+    font-weight: 700;
+    line-height: 32px;
+}
+
+.compare-container>.default-content-wrapper>h2 {
+    /* check this */
+    text-align: center;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+    padding-bottom: 32px;
+    font-size: 48px;
+    padding-top: 10px;
+    text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+    .compare-container>.default-content-wrapper>h2 {
+        font-size: 35px;
+        /* check this */
+    }
+
+    .compare-child-1-inner-1>p {
+        position: static;
+    }
+
+    .compare-child-1-inner-2>p {
+        position: static;
+    }
+
+    .compare {
+        padding: 15px 10px;
+    }
+
+    .compare-child-1 {
+        gap: 63px;
+    }
+
+    .section .compare-wrapper .compare.block .compare-child-1-inner-1>h3 {
+        padding-left: 16px;
+        font-size: 24px;
+    }
+
+    .section .compare-wrapper .compare.block .compare-child-1-inner-2>h3 {
+        padding-right: 16px;
+        font-size: 24px;
+    }
+}
+
+@media (width<=767px) {
+    .compare-container>.default-content-wrapper>h2 {
+        font-size: 28px;
+    }
+
+    .compare-child-2-inner-1>ul>li>ul>li>h4,
+    .compare-child-2-inner-1>ul>li>ul>li:nth-child(2)>h4 {
+        line-height: 24px;
+        font-size: 18px;
+    }
+
+}
+
+@media (max-width: 465px) {
+    .compare-container>.default-content-wrapper>h2 {
+        font-size: 28px;
+        padding: 0px;
+        margin-bottom: 10px;
+    }
+
+    .compare-child-1-inner-1>h3,
+    .compare-child-1-inner-2>h3 {
+        font-size: 20px;
+        font-size: 24px;
+    }
+
+    .section .compare-wrapper .compare.block .compare-child-1-inner-1>h3 {
+        padding-left: 16px;
+    }
+
+    .section .compare-wrapper .compare.block .compare-child-1-inner-2>h3 {
+        padding-right: 16px;
+    }
+
+    /* .compare-child-1-inner-2>h3 {
+        font-size: 20px;
+    } */
+    /* .compare-container{
+        width: 100%;
+    } */
+}
+
+/*change becouse now is first component */
+
+.section.compare-container {
+    margin: unset;
+    margin-top: 50px;
+}
+
+@media (width<767px) {
+    .section.compare-container {
+        margin-top: 0;
+        padding: 20px 0;
+    }
+
+    .compare-child-2-inner-1>ul>li>ul {
+        gap: unset;
+    }
+}

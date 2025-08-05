@@ -20,6 +20,54 @@
         "name": "keywords",
         "multi": true,
         "label": "Keywords"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "canonical",
+        "label": "Canonical"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "og:title",
+        "label": "OG Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "og:description",
+        "label": "OG Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "og:image",
+        "label": "OG Image"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "og:url",
+        "label": "OG URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "og:type",
+        "label": "OG Type"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "vehicle-name",
+        "label": "Vehicle Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "page-type",
+        "label": "Page Type"
       }
     ]
   },
@@ -129,13 +177,50 @@
         "description": "The label shown for this section in the Content Tree"
       },
       {
+        "component": "text",
+        "name": "id",
+        "label": "Id"
+      },
+      {
         "component": "multiselect",
         "name": "style",
         "label": "Style",
         "options": [
           {
+            "name": "Hide",
+            "value": "dp-none"
+          },
+          {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Book Ride",
+            "value": "book-ride"
+          },
+          {
+            "name": "hero-footer",
+            "value": "hero-footer"
+          },
+          {
+            "name": "hero-footer-icon",
+            "value": "hero-footer-icon"
+          },
+          {
+            "name": "hero-footer-policy",
+            "value": "hero-footer-policy"
+          },
+          {
+            "name": "Banner Price Section",
+            "value": "banner-price"
+          },
+          {
+            "name": "Share Modal",
+            "value": "share-modal-sec"
+          },
+          {
+            "name": "country Modal",
+            "value": "country-modal-sec"
           }
         ]
       }
@@ -195,6 +280,306 @@
       {
         "component": "reference",
         "valueType": "string",
+        "name": "col1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col1_imageAlt",
+        "label": "Image Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col1_image1",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col1_image1Alt",
+        "label": "Image Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "buy-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "cols1_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "cols1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cols1_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "name": "cols1_Bordertext",
+        "value": "",
+        "label": "Boder Text",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "cols2_richtext",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "why-choose-us",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Multi Select",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h3",
+            "value": "h4"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "embed",
+    "fields": [
+      {
+        "component": "text",
+        "name": "link",
+        "value": "",
+        "label": "Link",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "name": "youtubeVideoThumbnailDamPath",
+        "value": "",
+        "label": "youtubeVideoThumbnailDamPath",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "carousel-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "content_head",
+        "value": "",
+        "label": "head",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "content_headType",
+        "label": "head",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "content_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_one",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_oneAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_two",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_twoAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "content_head",
+        "value": "",
+        "label": "head",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "content_headType",
+        "label": "head",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "h1",
+            "value": "h1"
+          },
+          {
+            "name": "h2",
+            "value": "h2"
+          },
+          {
+            "name": "h3",
+            "value": "h3"
+          },
+          {
+            "name": "h4",
+            "value": "h4"
+          },
+          {
+            "name": "h5",
+            "value": "h5"
+          },
+          {
+            "name": "h6",
+            "value": "h6"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "content_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_one",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_oneAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image_two",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "image_twoAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "block-card",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Block Style",
+            "children": [
+              {
+                "name": "Wrap Anchor With Image",
+                "value": "wrap-anchor-with-image"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "block-card-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
         "name": "image",
         "label": "Image",
         "multi": false
@@ -211,6 +596,387 @@
         "name": "text",
         "value": "",
         "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "price-listing",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "api url",
+        "label": "url",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "form",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "form-url",
+        "label": "form path",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "api-url",
+        "label": "api-url",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "price-listing",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "compare-item1",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "img1_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "img1_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "img1_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "col2_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_imageAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "compare-item2",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "splendor-tab-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "col1_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "col2_text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_imageopt",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_imageoptAlt",
+        "label": "Alt",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "form-block",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Block Style",
+            "children": [
+              {
+                "name": "EMI Calculator",
+                "value": "emi-calculator"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "form-field",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Name"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "type",
+        "label": "Type",
+        "options": [
+          {
+            "name": "Heading",
+            "value": "heading"
+          },
+          {
+            "name": "Text",
+            "value": "text"
+          },
+          {
+            "name": "Range",
+            "value": "range"
+          },
+          {
+            "name": "Input",
+            "value": "input"
+          },
+          {
+            "name": "Submit",
+            "value": "submit"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Value",
+        "label": "value"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Min",
+        "label": "min"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "Max",
+        "label": "Max"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
+    "id": "blogs-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+
+  {
+    "id": "product-dealer-cards",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "product-banner",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "schema-tag",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "schema-object",
+        "label": "Schema Object"
+      }
+    ]
+  },
+  {
+    "id": "ride-thankyou-content",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col1_loader",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col1_loaderAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "col2_thankyou",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "col2_thankyouAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "col2_title",
+        "value": "",
+        "label": "Thank You Content",
         "valueType": "string"
       }
     ]

@@ -1,9 +1,7 @@
 [
   {
     "id": "main",
-    "components": [
-      "section"
-    ]
+    "components": ["section"]
   },
   {
     "id": "section",
@@ -15,28 +13,81 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "why-choose-us",
+      "embed",
+      "carousel",
+      "buy-card",
+      "compare",
+      "splendor-spec-tab",
+      "splendor-tab",
+      "hero-carousel-block",
+      "block-card",
+      "blogs-swiper",
+      "form",
+      "price-listing",
+      "ride-thankyou",
+      "form-block",
+      "product-dealer-cards",
+      "product-banner",
+      "schema-tag",
+      "thankyou-popup"
     ]
   },
   {
     "id": "cards",
-    "components": [
-      "card"
-    ]
+    "components": ["card"]
   },
   {
     "id": "columns",
-    "components": [
-      "column"
-    ]
+    "components": ["column"]
   },
   {
     "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title"
-    ]
+    "components": ["text", "image", "button", "title"]
+  },
+  {
+    "id": "carousel",
+    "components": ["carousel-item"]
+  },
+  {
+    "id": "buy-card",
+    "components": ["buy-item", "title"]
+  },
+  {
+    "id": "compare",
+    "components": ["compare-item1", "compare-item2"]
+  },
+  {
+    "id": "splendor-spec-tab",
+    "components": ["splendor-spec-tab-item"]
+  },
+  {
+    "id": "splendor-tab",
+    "components": ["splendor-tab-item"]
+  },
+  {
+    "id": "hero-carousel-block",
+    "components": ["hero-carousel-item"]
+  },
+  {
+    "id": "block-card",
+    "components": ["block-card-item"]
+  },
+  {
+    "id": "ride-thankyou",
+    "components": ["ride-thankyou-content"]
+  },
+  {
+    "id": "thankyou-popup",
+    "components": ["thankyou-popup-item"]
+  },
+   {
+    "id": "form-block",
+    "components": ["form-field"]
+  },
+  {
+    "id": "blogs-swiper",
+    "components": ["blogs-item"]
   }
 ]

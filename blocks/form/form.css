@@ -1,0 +1,800 @@
+.form-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ee2326;
+}
+
+.form-container {
+    font-family: "TSTAR-PRO-Medium";
+}
+
+.form .field-wrapper {
+    display: grid;
+    grid-auto-flow: row;
+    align-items: center;
+}
+
+.form fieldset {
+    display: grid;
+    grid-auto-flow: row;
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.form form>.selection-wrapper+.selection-wrapper,
+.form form fieldset .selection-wrapper+.selection-wrapper {
+    margin-top: 0.25em;
+}
+
+@media (width >=600px) {
+    .form fieldset {
+        grid-template-columns: repeat(2, auto);
+        gap: 0.25em 24px;
+    }
+
+    .form form>.selection-wrapper+.selection-wrapper,
+    .form form fieldset .field-wrapper+.field-wrapper,
+    .form form fieldset .selection-wrapper+.selection-wrapper {
+        margin-top: 0;
+    }
+}
+
+@media (width >=900px) {
+    .form fieldset {
+        grid-template-columns: repeat(3, auto);
+    }
+}
+
+.form label,
+.form fieldset>legend {
+    margin-bottom: 0.25em;
+    font-size: var(--body-font-size-s);
+    font-weight: 700;
+}
+
+.form .selection-wrapper label {
+    margin: 0;
+    font-weight: normal;
+}
+
+.form input,
+.form select,
+.form textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0.5em;
+    border-radius: 4px;
+    border: 1px solid var(--dark-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: var(--body-font-size-s);
+    transition: border-color 0.2s;
+}
+
+.form textarea {
+    resize: vertical;
+}
+
+.form input:hover,
+.form select:hover,
+.form textarea:hover {
+    border: 1px solid var(--text-color);
+}
+
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+}
+
+.form .selection-wrapper input {
+    width: max-content;
+}
+
+@media (width >=600px) {
+
+    .form input,
+    .form select,
+    .form textarea {
+        max-width: 50vw;
+    }
+
+    .form .button {
+        max-width: max-content;
+    }
+}
+
+@media (width >=900px) {
+
+    .form input,
+    .form select,
+    .form textarea {
+        max-width: 33vw;
+    }
+}
+
+.form .field-wrapper.selection-wrapper {
+    grid-auto-flow: column;
+    justify-content: start;
+    gap: 1ch;
+}
+
+.form label[data-required]::after {
+    content: "*";
+    color: firebrick;
+    margin-inline-start: 1ch;
+}
+
+.form .toggle-wrapper .switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+}
+
+.form .toggle-wrapper input {
+    opacity: 0;
+    width: 52px;
+    height: 28px;
+}
+
+.form .toggle-wrapper .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    border-radius: 28px;
+    background-color: var(--dark-color);
+    transition: background-color 0.2s;
+}
+
+.form .toggle-wrapper .slider::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    transition: transform 0.2s;
+}
+
+.form .toggle-wrapper input:checked+.slider {
+    background-color: var(--link-color);
+}
+
+.form .toggle-wrapper input:focus+.slider {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+}
+
+.form .toggle-wrapper input:checked+.slider::before {
+    transform: translateX(24px);
+}
+
+.form form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px 16px;
+}
+
+.section.book-ride.form-container .form form {
+    justify-content: space-between;
+}
+
+.form .field-wrapper {
+    min-width: 296px;
+}
+
+.form>form>.field-wrapper>input,
+.fieldset-wrapper>fieldset>.field-wrapper>input {
+    outline: none;
+    border: none;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    border-radius: 0;
+    background-color: #ee2326;
+}
+
+.form input:-webkit-autofill {
+    background-color: #ee2326 !important;
+    -webkit-box-shadow: 0 0 0 1000px #ee2326 inset !important;
+    -webkit-text-fill-color: #fff !important;
+    color: #fff !important;
+    border: none;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+    outline: none;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ee2326;
+    color: white;
+    padding: 20px 0 20px 0;
+}
+
+.form-container>.default-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ee2326;
+    color: white;
+    padding: 0;
+    gap: 5px;
+    text-align: center;
+}
+
+.form-container>.default-content-wrapper>#book-a-test-ride-now {
+    margin-bottom: 0;
+}
+
+.form-container>.default-content-wrapper>p {
+    margin: 0;
+}
+
+input::placeholder {
+    color: white;
+    opacity: 1;
+    font-size: 700;
+}
+
+.form-wrapper input {
+    color: white;
+    /* background-color: transparent; */
+}
+
+.form-wrapper label {
+    display: none;
+}
+
+.section .default-content-wrapper .button-container strong a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 1.125rem;
+    padding-left: 1.125rem;
+    padding: 12px 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    background: #fff;
+    color: #b50000;
+}
+
+.form>form>.field-wrapper.select-wrapper>select {
+    border-top: 0;
+    /* border-bottom: #ee2326; */
+    background: #ee2326;
+    outline: none;
+    color: white;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    border-bottom: 2px solid rgb(255, 255, 255);
+}
+
+/* this is for the drop-down menu */
+.form>form>.field-wrapper.select-wrapper>select option {
+    background: #fff;
+    color: #000;
+}
+
+.send-otp-btn {
+    background: #b50000;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    border-radius: 4px;
+    padding: 6px 16px;
+    font-weight: 700;
+    margin-left: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 1rem;
+}
+
+.input-helper {
+    display: block;
+    min-height: 0.5em;
+    /* Reserve space for the message */
+    color: #fff;
+    font-size: 0.75em;
+    margin-top: 4px;
+    visibility: hidden;
+    /* Hide text, keep space */
+}
+
+.input-helper.visible {
+    visibility: visible;
+}
+
+/* .form #form-f1 {
+    display: none;
+} */
+
+@media (max-width: 600px) {
+    .form-container>.default-content-wrapper>h1 {
+        font-size: 2rem;
+        font-kerning: auto;
+        letter-spacing: normal;
+        line-height: 1.25rem;
+        font-family: "TSTAR-PRO-Bold";
+        font-weight: 700;
+    }
+
+    .form-container>.default-content-wrapper>p {
+        font-family: "TSTAR-PRO-Medium";
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    .form-container>.form-wrapper {
+        padding: 0px;
+    }
+}
+
+
+/* Book Ride Form CSS Start */
+
+.section.book-ride.form-container {
+    background-color: #ee2326;
+    margin: 0px;
+}
+
+.section.book-ride.form-container .form {
+    background-color: unset;
+    padding: 32px 0;
+}
+
+.section.book-ride .form .heading-wrapper,
+.section.book-ride .form .plaintext-wrapper,
+.section.book-ride .form .submit-wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.section.book-ride .form .heading-wrapper h2 {
+    margin: 0;
+    font-size: 48px;
+    line-height: 58px;
+    font-weight: 500;
+    font-family: "TSTAR-PRO-Heavy";
+    font-weight: 900;
+}
+
+.section.book-ride .form .plaintext-wrapper p {
+    margin: 6px 0 32px;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.section.book-ride .form-wrapper {
+    max-width: 1286px;
+    width: 100%;
+    padding: 0;
+}
+
+.section.book-ride .form form,
+.section.book-ride .form form fieldset#form-f1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.section.book-ride .form form>.field-wrapper:not(.heading-wrapper, .plaintext-wrapper, .submit-wrapper),
+.section.book-ride .form form fieldset:not(#form-f1) {
+    /* max-width: 22%;
+    min-width: unset;
+    width: 100%;
+    display: block;
+    margin: 0 17px; */
+    max-width: 23%;
+    min-width: unset;
+    width: 100%;
+    display: block;
+    /* /* margin: 0 17px; */
+}
+
+.section .price-listing .custom-autocomplete .custom-dropdown-list .dropdown-item:hover {
+    background-color: #009fda33;
+    cursor: pointer;
+}
+
+.section.book-ride .form form fieldset:not(#form-f1) {
+    position: relative;
+}
+
+.section.book-ride .form form .field-wrapper {
+    min-width: unset;
+}
+
+.section.book-ride .form form .field-wrapper:not(.heading-wrapper, .plaintext-wrapper, .submit-wrapper, .button-wrapper) {
+    position: relative;
+}
+
+.section.book-ride .form form fieldset#form-f1 {
+    margin-top: 40px;
+    gap: 0 34px;
+    width: 100%;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper {
+    /* width: 22%; */
+    width: 23%;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    /* padding: 0 0 12px; */
+    border-bottom: 2px solid #fff;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list {
+    /* display: block; */
+    position: absolute;
+    top: 43px;
+    background: #fff;
+    color: #000;
+    /* padding: 10px; */
+    width: 100%;
+    scrollbar-width: thin;
+    max-height: 250px;
+    padding: 2px 0;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list .dropdown-item,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list .dropdown-item {
+    padding: 7px 10px;
+    font-size: 18px;
+    color: rgb(48, 48, 48);
+    font-weight: 300;
+    line-height: 24px;
+    font-family: 'transducer-regular';
+    white-space: unset;
+    cursor: default;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper input {
+    border: unset;
+    color: #fff;
+    cursor: default;
+    /* padding: 0 10px;
+    margin-left: 5px; */
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper span,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper span {
+    /* width: ; */
+    font-size: 22px;
+    color: #dcd9d9;
+    font-size: 25px;
+    color: #fff;
+    line-height: 14px;
+
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper input::placeholder,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper input::placeholder {
+    color: white;
+}
+
+.section.book-ride .form form fieldset#form-f1 .field-wrapper .input-wrapper span img,
+.section.book-ride .form form fieldset#form-f1-1 .field-wrapper .input-wrapper span img {
+    filter: brightness(0) invert(1);
+}
+
+
+.section.book-ride .form form .field-wrapper input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0 0 12px;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+    width: 100%;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.section.book-ride .error-msg {
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+    position: absolute;
+    bottom: -22px;
+}
+
+.section.book-ride .error-msg::before {
+    content: '';
+    background: url('../../icons/circle-info.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    display: block;
+}
+
+.section.book-ride .form form fieldset .sendOTP-btn,
+.section.book-ride .form form fieldset .resendOTP-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: max-content;
+    min-width: unset;
+    cursor: pointer;
+}
+
+.section.book-ride .form form fieldset .sendOTP-btn label,
+.section.book-ride .form form fieldset .resendOTP-btn label {
+    display: block;
+    border-bottom: 2px solid #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'TSTAR-PRO-Bold';
+}
+
+.section.book-ride .form form fieldset .sendOTP-btn input,
+.section.book-ride .form form fieldset .resendOTP-btn input {
+    display: none;
+}
+
+.section.book-ride .form form fieldset .sendOTP-btn .button,
+.section.book-ride .form form fieldset .resendOTP-btn .button {
+    margin: 0;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid #a5a5a5;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 0;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state,
+.section.book-ride .form form fieldset .field-wrapper .city {
+    position: absolute;
+    top: 55px;
+    width: 100%;
+    z-index: 10;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state .state-list,
+.section.book-ride .form form fieldset .field-wrapper .city .city-list {
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    max-height: 305px;
+    overflow: auto;
+    background-color: #fff;
+    border-radius: 8px 3px 3px 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state-list::-webkit-scrollbar,
+.section.book-ride .form form fieldset .field-wrapper .city-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state-list::-webkit-scrollbar-track,
+.section.book-ride .form form fieldset .field-wrapper .city-list::-webkit-scrollbar-track {
+    border-radius: 8px;
+    background-color: #d5d0d0;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state-list::-webkit-scrollbar-thumb,
+.section.book-ride .form form fieldset .field-wrapper .city-list::-webkit-scrollbar-thumb {
+    background: #a5a5a5;
+    border-radius: 8px;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state .state-list .state-name,
+.section.book-ride .form form fieldset .field-wrapper .city .city-list .city-name,
+.section.book-ride .form form fieldset .field-wrapper .state .noOption,
+.section.book-ride .form form fieldset .field-wrapper .city .noOption {
+    padding: 5px 10px;
+    color: #000;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state .noOption,
+.section.book-ride .form form fieldset .field-wrapper .city .noOption {
+    pointer-events: none;
+    cursor: unset;
+    color: #a5a5a5;
+    font-family: unset;
+    text-align: center;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state .state-list .state-name:hover,
+.section.book-ride .form form fieldset .field-wrapper .city .city-list .city-name:hover {
+    background-color: #d2e3f5;
+}
+
+.section.book-ride .form form fieldset .field-wrapper .state .state-list .state-name.active,
+.section.book-ride .form form fieldset .field-wrapper .city .city-list .city-name.active {
+    background-color: #007bff;
+}
+
+.section.book-ride .form .submit-btn {
+    margin: auto;
+    margin-top: 36px;
+    text-align: center;
+    background-color: #fff;
+    padding: 10px 32px;
+    max-width: max-content;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.section.book-ride .form .submit-btn .button {
+    font-family: 'TSTAR-PRO-Heavy';
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    border: none;
+    outline: none;
+}
+
+@media screen and (max-width: 1150px) {
+
+    .section.book-ride .form form>.field-wrapper:not(.heading-wrapper, .plaintext-wrapper, .submit-wrapper),
+    .section.book-ride .form form fieldset:not(#form-f1) {
+        max-width: 20%;
+    }
+
+    .section.book-ride .form form fieldset#form-f1 .field-wrapper {
+        width: 20%;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .section.book-ride.form-container .form {
+        padding: 32px 16px;
+    }
+
+    .section.book-ride .form .heading-wrapper h2,
+    .form-block-container>.default-content-wrapper>h2 {
+        font-size: 28px;
+        line-height: 40px;
+    }
+
+
+    .section.book-ride .form .plaintext-wrapper p {
+        margin: 0 0 6px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .section.book-ride .form form>.field-wrapper:not(.heading-wrapper, .plaintext-wrapper, .submit-wrapper) {
+        width: 100%;
+        max-width: unset;
+        margin: 0;
+        padding: 0 8px 28px;
+    }
+
+    .section.book-ride .form form fieldset:not(#form-f1),
+    .section.book-ride .form form fieldset#form-f1 .field-wrapper {
+        width: 100%;
+        max-width: unset;
+        margin: 0;
+        padding: 0 8px;
+    }
+
+    .section.book-ride .form form fieldset:not(#form-f1) .field-wrapper,
+    .section.book-ride .form form fieldset#form-f1 .field-wrapper {
+        padding: 0 0 28px;
+    }
+
+    .section.book-ride .form form fieldset#form-f1 {
+        margin-top: 0;
+        padding: 0 8px;
+    }
+
+    .section.book-ride .form form .field-wrapper input {
+        padding: 0 0 8px;
+        width: 100%;
+        max-width: unset;
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .section.book-ride .form form fieldset .sendOTP-btn,
+    .section.book-ride .form form fieldset .resendOTP-btn {
+        right: 10px;
+        top: 0px;
+        transform: unset;
+    }
+
+    .section.book-ride .error-msg {
+        bottom: 9px;
+        font-size: 10px;
+        line-height: 14px;
+    }
+
+    .section.book-ride .form .submit-btn {
+        margin-top: 0;
+        padding: 8px 24px;
+    }
+
+    .section.book-ride .form .submit-btn .button {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .section.book-ride .form form fieldset .sendOTP-btn label,
+    .section.book-ride .form form fieldset .resendOTP-btn label {
+        font-size: .875rem;
+        -webkit-font-kerning: auto;
+        font-kerning: auto;
+        letter-spacing: normal;
+        line-height: 1.25rem;
+    }
+
+    .section.book-ride .form form fieldset#form-f1 .field-wrapper .custom-dropdown-list .dropdown-item,
+    .section.book-ride .form form fieldset#form-f1-1 .field-wrapper .custom-dropdown-list .dropdown-item {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}
+
+.dsp-none {
+    display: none !important;
+}
+
+.dsp-block {
+    display: block !important;
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+
+        /* Safari-only styles go here */
+        .section.book-ride .form .submit-btn .button {
+            padding-top: 6px;
+            padding-right: 3px;
+        }
+    }
+}

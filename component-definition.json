@@ -156,6 +156,482 @@
               }
             }
           }
+        },
+        {
+          "title": "why choose us",
+          "id": "why-choose-us",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "why choose us",
+                  "model": "why-choose-us",
+                  "filter": "why-choose-us"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Embed",
+          "id": "embed",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Embed",
+                  "model": "embed"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Carousel",
+          "id": "carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Carousel",
+                  "model": "carousel",
+                  "filter": "carousel"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Carousel Item",
+          "id": "carousel-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/item",
+                "template": {
+                  "name": "Carousel Item",
+                  "model": "carousel-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Buy Card",
+          "id": "buy-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Buy Card",
+                  "model": "buy-card",
+                  "filter": "buy-card"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Buy Item",
+          "id": "buy-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Buy Item",
+                  "model": "buy-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Compare",
+          "id": "compare",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Compare",
+                  "model": "compare",
+                  "filter": "compare"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Compare Item 1",
+          "id": "compare-item1",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Compare Item 1",
+                  "model": "compare-item1"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Compare Item 2",
+          "id": "compare-item2",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Compare Item 2",
+                  "model": "compare-item2"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Splendor Spec Tab",
+          "id": "splendor-spec-tab",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Splendor Spec Tab",
+                  "filter": "splendor-spec-tab",
+                  "model": "splendor-spec-tab"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Splendor Spec Tab Item",
+          "id": "splendor-spec-tab-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Splendor Spec Tab Item",
+                  "model": "splendor-spec-tab-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Splendor Tab",
+          "id": "splendor-tab",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Splendor Tab",
+                  "filter": "splendor-tab",
+                  "model": "splendor-tab"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Splendor Tab Item",
+          "id": "splendor-tab-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Splendor Tab Item",
+                  "model": "splendor-tab-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Hero Carousel Block",
+          "id": "hero-carousel-block",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Hero Carousel Block",
+                  "filter": "hero-carousel-block",
+                  "model": "hero-carousel-block"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Hero Carousel Item",
+          "id": "hero-carousel-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Hero Carousel Item",
+                  "model": "hero-carousel-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Block Card",
+          "id": "block-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Block Card",
+                  "filter": "block-card",
+                  "model": "block-card"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Block Card Item",
+          "id": "block-card-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Block Card Item",
+                  "model": "block-card-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Blogs Swiper",
+          "id": "blogs-swiper",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Blogs Swiper",
+                  "model": "blogs-swiper"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Price Listing",
+          "id": "price-listing",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Price Listing",
+                  "model": "price-listing"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Form",
+          "id": "form",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Form",
+                  "filter": "form",
+                  "model": "form"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Book Ride Thankyou",
+          "id": "ride-thankyou",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Book Ride Thankyou",
+                  "filter": "ride-thankyou"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Book Ride Thankyou Content",
+          "id": "ride-thankyou-content",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Book Ride Thankyou Content",
+                  "model": "ride-thankyou-content"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Thank You Popup",
+          "id": "thankyou-popup",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Thank You Popup",
+                  "filter": "thankyou-popup"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Thank You Popup Item",
+          "id": "thankyou-popup-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Thank You Popup Item",
+                  "model": "thankyou-popup-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Form Block",
+          "id": "form-block",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Form Block",
+                  "model": "form-block",
+                  "filter": "form-block"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Form Field",
+          "id": "form-field",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Form Field",
+                  "model": "form-field"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Blogs Swiper",
+          "id": "blogs-swiper",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Blogs Swiper",
+                  "model": "blogs-swiper",
+                  "filter": "blogs-swiper"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Blogs Item",
+          "id": "blogs-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Blogs Item",
+                  "model": "blogs-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Product Dealer Cards",
+          "id": "product-dealer-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Product Dealer Cards",
+                  "model": "product-dealer-cards"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Product Banner",
+          "id": "product-banner",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Product Banner",
+                  "model": "product-banner"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Schema Tag",
+          "id": "schema-tag",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Schema Tag",
+                  "model": "schema-tag"
+                }
+              }
+            }
+          }
         }
       ]
     }
