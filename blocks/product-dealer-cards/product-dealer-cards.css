@@ -30,6 +30,10 @@
     width: 100%;
     max-width: 320px;
     position: relative;
+
+    @media (width<767px) {
+        max-width: 100%;
+    }
 }
 
 .product-dealer-cards .custom-select-wrapper .dropdown-label {
@@ -127,6 +131,10 @@
     gap: 24px;
     margin-bottom: 32px;
     justify-content: center;
+
+    @media (width<767px) {
+        padding: 0 20px;
+    }
 }
 
 .product-dealer-cards .dealer-card-wrapperr {
@@ -224,6 +232,10 @@
     max-width: 1350px;
     width: 100%;
     padding: 5px;
+
+    @media (width<767px) {
+        padding: unset;
+    }
 }
 
 .product-dealer-cards>.swiper {
@@ -250,7 +262,11 @@
 .product-dealer-cards-container {
     padding: 20px;
     background-color: #ededed;
+
     /* margin: 0px; */
+    @media (width<767px) {
+        padding: unset;
+    }
 }
 
 .product-dealer-cards-container>.default-content-wrapper>h2 {
@@ -302,6 +318,10 @@
     /* height: 100%; */
 }
 
+.product-dealer-cards-container>.product-dealer-cards-wrapper {
+    position: relative;
+}
+
 @media (max-width: 768px) {
     .product-dealer-cards .dealer-card {
         font-size: 15px;
@@ -318,8 +338,12 @@
     }
 
     .product-dealer-cards>.swiper {
+        all: unset;
         min-height: 440px;
         min-height: 387px;
+        padding: 0 0 0 15px;
+        width: 100%;
+        display: block;
     }
 
     .swiper-horizontal>.swiper-pagination-bullets,
