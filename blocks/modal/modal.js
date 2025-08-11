@@ -32,20 +32,19 @@ export async function createModal(contentNodes, isShareModal) {
     e.stopPropagation();
     e.preventDefault();
 
-    if (!e.target.closest("dialog")) {
-      isShareModal?.querySelector("dialog")?.remove();
+    if (!e.target.closest('dialog')) {
+      isShareModal?.querySelector('dialog')?.remove();
       document.body.removeEventListener('click', bodyClickHandler);
     }
   }
 
   if (!isShareModal) {
     document.querySelector('main').append(block);
-  }
-  else {
-    if (!isShareModal.querySelector("dialog")) {
+  } else {
+    if (!isShareModal.querySelector('dialog')) {
       document.body.addEventListener('click', bodyClickHandler, { once: true });
     }
-    let tabBlock = isShareModal?.querySelector(".splendor-tab.block");
+    const tabBlock = isShareModal?.querySelector('.splendor-tab.block');
     tabBlock?.append(dialog);
     return 1;
   }
@@ -89,7 +88,7 @@ export async function openModal(fragmentUrl, isShareModal) {
     : fragmentUrl;
 
   const fragment = await loadFragment(path);
-  const classList = fragment.firstElementChild.classList;
+  const { classList } = fragment.firstElementChild;
 
   const { block, showModal } = await createModal(fragment.childNodes, isShareModal);
   // console.log(fragment);

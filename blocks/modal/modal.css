@@ -1,3 +1,5 @@
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-descending-specificity */
 body.modal-open {
   overflow: hidden;
   height: 100vh;
@@ -85,7 +87,7 @@ body.modal-open {
   padding: 0;
 }
 
-/*  share Modal css*/
+/*  share Modal css */
 
 .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog::backdrop {
   display: none;
@@ -114,7 +116,6 @@ body.modal-open {
   padding: 0;
   border: none;
   background: transparent;
-  right: calc((100% - 1246px) / 2);
   right: calc((100% - 1308px) / 2);
   margin: unset;
   left: unset;
@@ -138,7 +139,6 @@ body.modal-open {
 }
 
 @media (width<767px) {
-
   .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block .modal.block dialog,
   .section.splendor-tab-container .splendor-tab-wrapper .splendor-tab.block dialog {
     bottom: 181px;
@@ -157,7 +157,7 @@ body.modal-open {
 
 /* share Modal css end */
 
-/*modal book ride */
+/* modal book ride */
 
 .modal.book-ride {
   background-color: black !important;
@@ -165,8 +165,6 @@ body.modal-open {
 }
 
 .modal.book-ride>dialog {
-  max-width: 100%;
-  width: 100%;
   background-color: #ee2326;
   border: none;
   max-width: 1366px;
@@ -177,14 +175,15 @@ body.modal-open {
 .modal.book-ride>dialog>.modal-content {
   background-color: #ee2326;
   border: none;
-  padding: 0px;
+  padding: 0;
+
   /* border-radius: 10px; */
 }
 
 .modal.book-ride>dialog>.close-button {
   border: 1px solid #ee2326;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   top: 11px;
   right: 46px;
 }
@@ -206,8 +205,8 @@ body.modal-open {
 }
 
 .modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form {
-  padding: 0px;
-  margin: 0px 0px 25px 0px;
+  padding: 0;
+  margin: 0 0 25px;
 }
 
 .modal.book-ride dialog .section.book-ride .form fieldset#form-f1-1 .field-wrapper,
@@ -223,9 +222,8 @@ body.modal-open {
   align-items: center;
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .modal.book-ride>dialog {
-    top: 10%;
     left: 1%;
     margin: 10px;
     max-width: -webkit-fill-available;
@@ -234,7 +232,7 @@ body.modal-open {
   }
 
   .modal.book-ride>dialog>.modal-content {
-    padding: 0px;
+    padding: 0;
   }
 
   .modal.book-ride>dialog>.close-button {
@@ -244,7 +242,7 @@ body.modal-open {
 
   .modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form>form>#form-f1-1 {
     flex-direction: column;
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   .modal.book-ride>dialog>.modal-content>.book-ride>.form-wrapper>.form>form>#form-f1-1>.field-wrapper {
@@ -252,7 +250,7 @@ body.modal-open {
   }
 }
 
-@media (max-width: 376px) {
+@media (width <= 376px) {
   .modal.book-ride>dialog {
     /* margin: 10px;
     top: 10%;
@@ -261,7 +259,7 @@ body.modal-open {
   }
 }
 
-@media (max-width: 321px) {
+@media (width <= 321px) {
   .modal.book-ride>dialog {
     margin: 3%;
     max-width: fit-content;
@@ -276,7 +274,7 @@ body.modal-open::after {
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(10, 10, 10, 0.8);
+  background-color: rgb(10 10 10 / 80%);
   z-index: 999;
 }
 
@@ -284,7 +282,7 @@ body {
   position: relative;
 }
 
-/* country modal start*/
+/* country modal start */
 .section.modal.country-modal-sec dialog {
   /* margin: 0 auto;
   top: 50%;
@@ -299,9 +297,10 @@ body {
   border-radius: 8px;
   border: unset;
   overflow: auto;
+
   /* min-height: calc(100% - 1.75rem * 2); */
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     transform: unset;
     inset: 0;
     width: 100%;
@@ -327,7 +326,8 @@ body {
 }
 
 .section.modal.country-modal-sec dialog::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(0 0 0 / 50%);
+
   /* or any color */
   border-radius: 10px;
 }
@@ -335,14 +335,14 @@ body {
 .section.modal.country-modal-sec dialog .modal-content {
   border: unset;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     height: 100vh;
     padding-bottom: 82px;
   }
 }
 
 .section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper h2 {
-  font-family: TSTAR-PRO-Bold;
+  font-family: TSTAR-PRO-Bold, sans-serif;
   font-size: 30px;
   font-weight: 900;
   margin-bottom: 25px;
@@ -351,10 +351,9 @@ body {
 
 .section.modal.country-modal-sec dialog .modal-content .section.country-modal-sec .default-content-wrapper ul {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
 
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     justify-content: center;
   }
 }
@@ -368,10 +367,10 @@ body {
   background-color: #686868;
   color: #fff;
   padding: 12px 8px;
-  font-family: TSTAR-PRO-Medium;
+  font-family: TSTAR-PRO-Medium, sans-serif;
   font-size: var(--font-size14);
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   -webkit-box-align: start;
   -ms-flex-align: start;

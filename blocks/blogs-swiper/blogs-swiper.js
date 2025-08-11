@@ -1,24 +1,22 @@
-
-
-import BlocksSwiper from "../swiper/swiper.min.js";
+import BlocksSwiper from '../swiper/swiper.min.js';
 
 export default function decorate(block) {
-  block.classList.add("swiper");
+  block.classList.add('swiper');
 
-  const swiperWrapper = document.createElement("div");
-  swiperWrapper.classList.add("swiper-wrapper");
+  const swiperWrapper = document.createElement('div');
+  swiperWrapper.classList.add('swiper-wrapper');
 
   Array.from(block.children).forEach((element) => {
-    element.classList.add("swiper-slide");
-    element.classList.add("blogs-card");
+    element.classList.add('swiper-slide');
+    element.classList.add('blogs-card');
     swiperWrapper.appendChild(element);
   });
 
   block.innerHTML = '';
   block.appendChild(swiperWrapper);
 
-  const paginationEl = document.createElement("div");
-  paginationEl.classList.add("swiper-pagination");
+  const paginationEl = document.createElement('div');
+  paginationEl.classList.add('swiper-pagination');
   block.appendChild(paginationEl);
 
   // Initialize Swiper
@@ -51,4 +49,3 @@ export default function decorate(block) {
     });
   }, 100);
 }
-

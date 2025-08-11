@@ -1,3 +1,4 @@
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
 .section .book-ride-thankyou-wrapper {
     display: none;
     min-height: 265px;
@@ -11,6 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     /* display: block; */
 }
 
@@ -44,7 +46,7 @@
 .book-ride-thankyou>.popup-wrapper>.succ-content h2 {
     font-size: 48px;
     line-height: 67.2px;
-    font-family: "Montserrat-Bold";
+    font-family: Montserrat-Bold;
     font-weight: 700;
     text-transform: uppercase;
     margin: 0;
@@ -54,14 +56,13 @@
 .book-ride-thankyou>.popup-wrapper>.succ-content h4 {
     font-size: 24px;
     line-height: 33.6px;
-    font-family: "Montserrat-Medium";
+    font-family: Montserrat-Medium;
     font-weight: 400;
     margin: 0;
     color: #fff;
 }
 
-@media (max-width:768px) {
-
+@media (width <=768px) {
     .section .book-ride-thankyou-wrapper {
         min-height: 185px;
     }
@@ -77,7 +78,7 @@
     }
 }
 
-@media not all and (min-resolution: 0.001dpcm) {
+@media not all and (resolution >= 0.001dpcm) {
   @supports (-webkit-appearance: none) {
     /* Safari-only styles go here */
    .book-ride-thankyou>.popup-wrapper>.succ-content>.succ-img picture img {
