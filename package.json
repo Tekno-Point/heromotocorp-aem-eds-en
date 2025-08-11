@@ -4,15 +4,24 @@
   "version": "1.3.0",
   "description": "Starter project for Adobe Helix",
   "scripts": {
-    "lint:js": "eslint . --ext .json,.js,.mjs",
-    "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\"",
+    "lint:styles": "stylelint \"**/*.{css,scss}\"",
+    "lint:styles:fix": "stylelint \"**/*.{css,scss}\" --fix",
     "lint": "npm run lint:js && npm run lint:css",
     "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
     "build:json": "npm-run-all -p build:json:models build:json:definitions build:json:filters",
     "build:json:models": "merge-json-cli -i \"models/_component-models.json\" -o \"component-models.json\"",
     "build:json:definitions": "merge-json-cli -i \"models/_component-definition.json\" -o \"component-definition.json\"",
     "build:json:filters": "merge-json-cli -i \"models/_component-filters.json\" -o \"component-filters.json\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "fix-css": "stylelint --fix **/**/*.css",
+    "fix-scss": "stylelint --fix **/**/*.scss",
+    "fix-js": "eslint --fix **/**/*.js",
+    "build:scss": "sass styles:styles blocks:blocks --style=expanded --source-map",
+    "watch:scss": "sass styles:styles blocks:blocks --watch --style=expanded --source-map",
+    "build:scss:compressed": "sass styles:styles blocks:blocks --style=compressed --source-map",
+    "clean:css": "powershell -Command \"Get-ChildItem -Path blocks,styles -Filter *.css -Recurse | Where-Object { $_.Name -notlike '*.min.css' } | Remove-Item\"",
+    "dev": "concurrently \"npm run watch:scss\" \"npm run lint:styles:fix\"",
+    "build": "npm run build:scss && npm run lint:styles"
   },
   "repository": {
     "type": "git",
@@ -34,7 +43,9 @@
     "husky": "9.1.1",
     "merge-json-cli": "1.0.4",
     "npm-run-all": "4.1.5",
-    "stylelint": "16.19.1",
-    "stylelint-config-standard": "38.0.0"
+    "sass": "^1.90.0",
+    "stylelint": "^16.12.0",
+    "stylelint-config-standard": "36.0.1",
+    "stylelint-config-standard-scss": "^15.0.1"
   }
 }
