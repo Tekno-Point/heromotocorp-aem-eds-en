@@ -1,37 +1,37 @@
-import SwiperText from "../swiper/swiper.min.js"
+import SwiperText from './swiper.min.js';
+
 export default function decorate(block) {
 //   const paginationTexts = ['Brakes', 'i3S Technology', 'Rear Suspension', 'Seat','Side Stand Indicator','xSENS FI Technology','Tyer','Warranty'];
   const paginationTexts = [];
-  block.classList.add("swiper");
-  const swapperWapper = document.createElement("div");
-  swapperWapper.classList.add("swiper-wrapper")
+  block.classList.add('swiper');
+  const swapperWapper = document.createElement('div');
+  swapperWapper.classList.add('swiper-wrapper');
   Array.from(block.children).forEach((element) => {
     paginationTexts.push(element?.firstElementChild?.firstElementChild);
-    element.classList.add("swiper-slide")
+    element.classList.add('swiper-slide');
     swapperWapper.append(element);
-  })
-  block.append(swapperWapper)
+  });
+  block.append(swapperWapper);
   // swiper-pagination
-  
 
-  const btnWrapper = document.createElement("div");
-  btnWrapper.classList.add("btnWrapper");
+  const btnWrapper = document.createElement('div');
+  btnWrapper.classList.add('btnWrapper');
 
-  const divPagination = document.createElement("div");
-  divPagination.classList.add("swiper-pagination");
+  const divPagination = document.createElement('div');
+  divPagination.classList.add('swiper-pagination');
   btnWrapper.append(divPagination);
 
-  const LeftArrow = document.createElement("div");
-  LeftArrow.classList.add("swiper-button-prev");
+  const LeftArrow = document.createElement('div');
+  LeftArrow.classList.add('swiper-button-prev');
   btnWrapper.appendChild(LeftArrow);
 
-  const RightArrow = document.createElement("div")
-  RightArrow.classList.add("swiper-button-next");
+  const RightArrow = document.createElement('div');
+  RightArrow.classList.add('swiper-button-next');
   btnWrapper.appendChild(RightArrow);
 
-  block.append(btnWrapper)
+  block.append(btnWrapper);
   SwiperText(block, {
-    loop:true,
+    loop: true,
     navigation: {
       nextEl: RightArrow,
       prevEl: LeftArrow,
@@ -39,21 +39,21 @@ export default function decorate(block) {
     pagination: {
       el: divPagination,
       clickable: true,
-      renderBullet: function (index, className) {
+      renderBullet(index, className) {
         // Use your text for each bullet based on index
         const el = paginationTexts[index];
         console.log(paginationTexts[index]);
         el?.remove();
         el.classList.add('swiper-pagination-bullet');
         return paginationTexts[index].outerHTML;
-      }
+      },
     },
-    freeMode: true,           // free scrolling mode
+    freeMode: true, // free scrolling mode
     // scrollbar: {
     //   el: divPagination,
     //   draggable: true,
     //   clickable: true,
     // },
-    scrollOnFocus : true
-  })
+    scrollOnFocus: true,
+  });
 }

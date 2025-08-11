@@ -118,8 +118,6 @@ async function loadEager(doc) {
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
 
-
-
   try {
     /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
     if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
@@ -135,7 +133,7 @@ function autolinkModals(element) {
     const origin = e.target.closest('a');
 
     if (origin && origin.href && origin.href.includes('/modals/')) {
-      let shareModal = e.target.closest(".section.share-modal-sec")
+      const shareModal = e.target.closest('.section.share-modal-sec');
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
       openModal(origin.href, shareModal);
@@ -143,13 +141,12 @@ function autolinkModals(element) {
   });
 }
 
-
 /**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
-  autolinkModals(doc)
+  autolinkModals(doc);
   const main = doc.querySelector('main');
   await loadSections(main);
 
@@ -182,9 +179,6 @@ async function loadPage() {
 
 loadPage();
 
-
-
 // document.querySelectorAll('a').forEach(a => {
 //   a.setAttribute('target', '_blank');
 // });
-

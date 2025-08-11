@@ -32,16 +32,15 @@ main>.banner-price {
     width: 65%;
     padding-left: calc(1.375rem * .5);
     padding-right: calc(1.375rem * .5);
-    font-family: "TSTAR-PRO-Bold";
+    font-family: TSTAR-PRO-Bold;
     color: #fff;
     font-size: 1.5rem;
     font-weight: 700;
-    -webkit-font-kerning: auto;
     font-kerning: auto;
     letter-spacing: normal;
     line-height: 2rem;
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
         display: initial;
         padding-left: calc(2rem * .5);
         padding-right: calc(2rem * .5);
@@ -55,17 +54,16 @@ main>.banner-price {
 
 
 .banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>strong:first-child {
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: TSTAR-PRO-Heavy;
     color: #ee2326;
     font-size: 2rem;
     font-weight: 900;
-    -webkit-font-kerning: auto;
     font-kerning: auto;
     letter-spacing: normal;
     line-height: 3rem;
     margin-left: 1rem;
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
         margin-left: 0;
     }
 }
@@ -76,7 +74,6 @@ main>.banner-price {
     display: flex;
     font-size: 1rem;
     font-weight: 400;
-    -webkit-font-kerning: auto;
     font-kerning: auto;
     letter-spacing: normal;
     line-height: 2rem;
@@ -95,23 +92,19 @@ main>.banner-price {
 
 .banner-price>.default-content-wrapper>ul:first-child>li:nth-child(2)>a {
     background-clip: text;
-    background-image: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
-    padding-top: .625rem;
-    padding-bottom: .625rem;
-    padding-right: 1.125rem;
-    padding-left: 1.125rem;
+    background-image: linear-gradient(160.69deg, #b50000 22.35%, #f00 68.47%, #b50000 114.59%);
+    padding: .625rem 1.125rem;
     border-color: #d30000;
     border-radius: .25rem;
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: TSTAR-PRO-Heavy;
     font-weight: 900;
     font-size: 1.25rem;
-    -webkit-font-kerning: auto;
     font-kerning: auto;
     letter-spacing: normal;
     line-height: 1.75rem;
-    -webkit-text-fill-color: rgba(0, 0, 0, 0);
+    -webkit-text-fill-color: rgb(0 0 0 / 0%);
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
         padding-top: 5.5px;
         padding-bottom: 5.5px;
     }
@@ -119,22 +112,18 @@ main>.banner-price {
 
 
 .banner-price>.default-content-wrapper>ul:first-child>li:nth-child(3)>a {
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: TSTAR-PRO-Heavy;
     font-weight: 900;
     font-size: 1.25rem;
-    -webkit-font-kerning: auto;
     font-kerning: auto;
     letter-spacing: normal;
     line-height: 1.75rem;
-    padding-top: .625rem;
-    padding-bottom: .625rem;
-    padding-right: 1.125rem;
-    padding-left: 1.125rem;
+    padding: .625rem 1.125rem;
     border-radius: .25rem;
     color: #fff;
-    background: linear-gradient(160.69deg, #b50000 22.35%, #ff0000 68.47%, #b50000 114.59%);
+    background: linear-gradient(160.69deg, #b50000 22.35%, #f00 68.47%, #b50000 114.59%);
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
         padding-top: 5.5px;
         padding-bottom: 5.5px;
     }
@@ -144,15 +133,15 @@ main>.banner-price {
 .banner-price>.default-content-wrapper>ul:nth-child(2) {
     display: flex;
     align-items: center;
-    background: linear-gradient(114.58deg, #201F1F 4.19%, #454141 51.21%, #000000 98.23%);
+    background: linear-gradient(114.58deg, #201F1F 4.19%, #454141 51.21%, #000 98.23%);
     padding: 8px 40px;
     font-size: 20px;
     line-height: 24px;
     color: #fff;
     font-weight: 400;
-    font-family: "TSTAR-PRO-Regular";
+    font-family: TSTAR-PRO-Regular;
 
-    @media screen and (max-width: 900px) {
+    @media screen and (width <= 900px) {
         padding: 10px 16px;
         font-size: 16px;
     }
@@ -160,7 +149,7 @@ main>.banner-price {
 
 .banner-price>.default-content-wrapper>ul:nth-child(2)>li>a {
     font-weight: 900;
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: TSTAR-PRO-Heavy;
     text-decoration: underline;
     display: inline-block;
     pointer-events: auto;
@@ -170,7 +159,7 @@ main>.banner-price {
     color: #fff;
     margin-left: 5px;
 
-    @media (max-width: 900px) {
+    @media (width <= 900px) {
         font-size: 16px;
     }
 }
@@ -193,7 +182,7 @@ main>.banner-price {
     margin-left: 5px;
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
     .banner-price>.default-content-wrapper>ul:first-child {
         flex-wrap: wrap;
     }
@@ -202,11 +191,13 @@ main>.banner-price {
         width: 100%;
     }
 }
-@media (max-width: 767px){
+
+@media (width <= 767px){
 .banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>strong:first-child{
     font-size: 24px;
     line-height: normal;
 }
+
 .banner-price>.default-content-wrapper>ul:first-child>li:first-child>ul>li>sub{
     font-size: 14px;
     line-height: normal;

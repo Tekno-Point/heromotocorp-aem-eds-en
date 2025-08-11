@@ -1,5 +1,6 @@
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
 .form-block-container>.form-block-wrapper {
-    padding: 0px;
+    padding: 0;
 }
 
 .form-block-container {
@@ -8,7 +9,7 @@
 
 .form-block-container>.default-content-wrapper>h2 {
     font-size: 48px;
-    font-family: "TSTAR-PRO-Bold";
+    font-family: TSTAR-PRO-Bold;
     font-weight: 700;
     line-height: 3.625rem;
     text-align: center;
@@ -18,16 +19,17 @@
 .emi-container {
     display: flex;
     flex-wrap: wrap;
+
     /* gap: 30px; */
     padding: 10px;
     margin-top: 40px;
 }
 
-/*padding*/
+/* padding */
 
 .emi-container .emi-controls {
     flex: 1;
-    padding: 0px 20px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     gap: 60px;
@@ -65,13 +67,13 @@
 
 .emi-container .label-input-row label {
     font-size: 18px;
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: TSTAR-PRO-Heavy;
     font-weight: 900;
 }
 
 .emi-container .label-input-row input.number-box {
     margin-left: 20px;
-    padding: 0px 8px 0px 8px;
+    padding: 0 8px;
     font-size: 15px;
     width: 120px;
     border-radius: 6px;
@@ -81,13 +83,13 @@
 
 .emi-container .label-input-row input.number-box[type="number"]::-webkit-outer-spin-button,
 .emi-container .label-input-row input.number-box[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    appearance: none;
     margin: 0;
 }
 
 /* Firefox */
 .emi-container .label-input-row input.number-box[type="number"] {
-    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 /* Slider bar */
@@ -97,16 +99,17 @@
 }
 
 .emi-container input[type="range"] {
-    -webkit-appearance: none;
+    appearance: none;
     flex: 1;
     height: 9px;
     background: #a5a5a5;
+
     /* accent-color: red; */
     border-radius: 5px;
     cursor: pointer;
 }
 
-/*  changes for thumb*/
+/*  changes for thumb */
 
 /* Min/Max labels under slider */
 .emi-container .range-labels {
@@ -124,16 +127,19 @@
     color: white;
     padding: 30px 20px;
     border-radius: 10px;
+
     /* text-align: center; */
     display: flex;
     flex-direction: column;
+
     /* justify-content: center; */
+
     /* align-items: center; */
 }
 
 .emi-container .emi-output .emi-title {
     font-size: 32px;
-    font-family: "TSTAR-PRO-Bold";
+    font-family: TSTAR-PRO-Bold;
     font-weight: 700;
     color: #fff;
     line-height: 3rem;
@@ -142,7 +148,7 @@
 .emi-container .emi-output .emi-value {
     font-size: 52px;
     margin: 16px 0;
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: TSTAR-PRO-Heavy;
     font-weight: 900;
     color: #fff;
     line-height: 4rem;
@@ -152,10 +158,10 @@
     width: 50%;
     background-image: linear-gradient(160.69deg,
             #b50000 22.35%,
-            #ff0000 68.47%,
+            #f00 68.47%,
             #b50000 114.59%);
     color: white;
-    font-family: "TSTAR-PRO-Heavy";
+    font-family: TSTAR-PRO-Heavy;
     font-weight: 900;
     border: none;
     padding: 14px 30px;
@@ -176,7 +182,7 @@
     z-index: 2;
 }
 
-@media (max-width: 786px) {
+@media (width <= 786px) {
     .form-block>div:nth-child(4)>div:nth-child(6)>picture>img {
         top: 370px;
         width: 200px;
@@ -208,20 +214,20 @@
     .form-block-container>.default-content-wrapper>h2 {
         text-align: center;
         font-size: 28px;
-        padding: 0px;
+        padding: 0;
         letter-spacing: normal;
         line-height: 2.5rem;
     }
 
     .emi-container {
-        margin-top: 0px;
+        margin-top: 0;
         flex-direction: column;
         gap: 12px;
         flex-wrap: unset;
     }
 
     .section.form-block-container {
-        margin: 0px;
+        margin: 0;
     }
 
     .emi-container .label-input-row label {
@@ -233,7 +239,6 @@
     }
 
     .emi-container .range-labels {
-
         margin-top: 14px;
     }
 
@@ -244,15 +249,16 @@
 .emi-container input[type="range"]::-webkit-slider-runnable-track {
     height: 10px;
     border-radius: 16px;
+
     --bg-gradient-1: linear-gradient(160.69deg,
             #b50000 22.35%,
-            #ff0000 68.47%,
+            #f00 68.47%,
             #b50000 114.59%);
 
     background-image: var(--bg-gradient-1),
         linear-gradient(to right,
-            rgba(128, 128, 128, 0.3),
-            rgba(128, 128, 128, 0.3));
+            rgb(128 128 128 / 30%),
+            rgb(128 128 128 / 30%));
     background-repeat: no-repeat;
     background-size: var(--progress, 0%) 100%, 100% 100%;
     background-position: left center, left center;
@@ -262,13 +268,14 @@
 .emi-container input[type="range"]::-moz-range-track {
     height: 10px;
     border-radius: 16px;
-    background: linear-gradient(to right, #b50000 var(--progress, 0%), rgba(128, 128, 128, 0.3) var(--progress, 0%));
+    background: linear-gradient(to right, #b50000 var(--progress, 0%), rgb(128 128 128 / 30%) var(--progress, 0%));
 }
 
 .emi-container input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     height: 25px;
     width: 25px;
+
     /* background: red; */
     background: url("/icons/redbike.png"), linear-gradient(white, white);
     background-position: center, center;
@@ -281,7 +288,9 @@
     color: #a5a5a5;
     background-color: #a5a5a5;
     position: relative;
+
     /* border-radius: .625rem; */
+
     /* height: .375rem; */
 }
 
@@ -289,6 +298,7 @@
     appearance: none;
     height: 25px;
     width: 25px;
+
     /* background: red; */
     background: url("/icons/redbike.png"), linear-gradient(white, white);
     background-position: center, center;
@@ -301,7 +311,9 @@
     color: #a5a5a5;
     background-color: #a5a5a5;
     position: relative;
+
     /* border-radius: .625rem; */
+
     /* height: .375rem; */
 }
 
@@ -310,24 +322,24 @@
     width: 100%;
 }
 
-@media (max-width: 426px) {
+@media (width <= 426px) {
     .form-block>div:nth-child(4)>div:nth-child(6)>picture>img {
         top: 320px;
         width: 200px;
     }
 
     .emi-container .emi-controls {
-        padding: 0px;
+        padding: 0;
         gap: 25px;
     }
 
 }
 
-@media (max-width: 322px) {
+@media (width <= 322px) {
     .form-block>div:nth-child(4)>div:nth-child(6)>picture>img {
         top: 320px;
         width: 200px;
-        right: 0px;
+        right: 0;
     }
 
     .emi-container .emi-output button {
@@ -337,6 +349,6 @@
     }
 
     .emi-container {
-        padding: 0px;
+        padding: 0;
     }
 }

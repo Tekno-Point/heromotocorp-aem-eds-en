@@ -448,11 +448,11 @@ function decorateButtons(element) {
  */
 
 function decorateIcon(span, prefix = '', alt = '') {
-  let heroIcon = span.classList[1].split("-").includes("moon");
+  const heroIcon = span.classList[1].split('-').includes('moon');
   if (heroIcon) {
-    let heroIconName = span?.classList[1]?.slice(10, span.classList[1].length);
-    span.classList.add("icon", "hero-icon", heroIconName.trim());
-    return
+    const heroIconName = span?.classList[1]?.slice(10, span.classList[1].length);
+    span.classList.add('icon', 'hero-icon', heroIconName.trim());
+    return;
   }
   if (Array.from(span.classList)
     .find((c) => c.includes('icon-images'))) {
@@ -505,28 +505,25 @@ function decorateIcon(span, prefix = '', alt = '') {
 //   });
 // }
 
-
 /**
  * Add <img> for icons, prefixed with codeBasePath and optional prefix.
  * @param {Element} [element] Element containing icons
  * @param {string} [prefix] prefix to be added to icon the src
  */
 function decorateIcons(element, prefix = '') {
-
   const icons = element.querySelectorAll('span.icon');
   icons.forEach((span) => {
     decorateIcon(span, prefix);
 
-    //  this is check for target blanck 
+    //  this is check for target blanck
 
-if (span?.parentElement.tagName.toLowerCase() === 'a') {
-     span.parentElement.setAttribute('target', '_blank');
-} else {
-  // console.log('No, parent is not <a>');
-}
+    if (span?.parentElement.tagName.toLowerCase() === 'a') {
+      span.parentElement.setAttribute('target', '_blank');
+    } else {
+      // console.log('No, parent is not <a>');
+    }
 
     // end
-
   });
 }
 
@@ -745,7 +742,6 @@ async function loadSections(element) {
   }
 }
 
-
 /**
  * Gets placeholders object.
  * @param {string} [prefix] Location of placeholders
@@ -782,7 +778,6 @@ async function fetchPlaceholders(prefix = 'default') {
   }
   return window.placeholders[`${prefix}`];
 }
-
 
 init();
 

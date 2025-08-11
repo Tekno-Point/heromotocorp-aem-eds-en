@@ -1,7 +1,12 @@
-
-import createField from "./form-fields.js";
-import { div, ul, li, p, label, span, input as inputEl, img, input } from "../../scripts/dom-helpers.js";
-import { fetchBookARide, fetchOTP, useDataMapping, verifyOtp, getRandomId, debounce } from "../../scripts/common.js";
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-func-assign */
+import createField from './form-fields.js';
+import {
+  div, p, span, input as inputEl, img,
+} from '../../scripts/dom-helpers.js';
+import {
+  fetchBookARide, fetchOTP, useDataMapping, verifyOtp, getRandomId, debounce,
+} from '../../scripts/common.js';
 
 const nameRegex = /^[a-zA-Z\s]{1,50}$/;
 
@@ -14,10 +19,15 @@ let isStateOpen = false;
 let isCityOpen = false;
 
 function createDropdownInput(placeholder, name) {
-  const input = inputEl({ placeholder, class: 'react-select__input', autocomplete: 'off', name });
+  const input = inputEl({
+    placeholder, class: 'react-select__input', autocomplete: 'off', name,
+  });
   const clearBtn = span({ class: 'clear-btn' }, '×');
-  const dropdownBtn = span({ class: 'dropdown-btn' },
-    img({ src: '/icons/svgviewer-png-output.png', width: 16, height: 16, alt: 'Dropdown' })
+  const dropdownBtn = span(
+    { class: 'dropdown-btn' },
+    img({
+      src: '/icons/svgviewer-png-output.png', width: 16, height: 16, alt: 'Dropdown',
+    }),
   );
   const wrapper = div({ class: 'input-wrapper' }, input, clearBtn, dropdownBtn);
   const list = div({ class: 'custom-dropdown-list scrollable', style: 'display:none' });
@@ -30,7 +40,9 @@ function createDropdownInput(placeholder, name) {
     clearBtn.style.display = input.value ? 'block' : 'none';
   });
 
-  return { wrapper, input, clearBtn, dropdownBtn, list };
+  return {
+    wrapper, input, clearBtn, dropdownBtn, list,
+  };
 }
 
 let isEmptyInput = true;
@@ -38,21 +50,21 @@ let isEmptyInput = true;
 function populateList(input, list, data, onSelect) {
   list.innerHTML = '';
   const typedValue = (input.dataset.filter || '').trim().toLowerCase();
-  const filtered = data.filter(d => d.label.toLowerCase().includes(typedValue));
+  const filtered = data.filter((d) => d.label.toLowerCase().includes(typedValue));
   const currentValue = input.value.trim().toLowerCase();
   selectedEl = null;
 
   if (!filtered.length) {
     list.appendChild(div({ class: 'dropdown-item no-results' }, 'No results found'));
   } else {
-    filtered.forEach(item => {
+    filtered.forEach((item) => {
       const isSelected = item.label.toLowerCase() === currentValue;
       const itemEl = div(
         {
           class: `dropdown-item${isSelected ? ' selected' : ''}`,
-          style: isSelected ? 'background-color: #007aff;' : ''
+          style: isSelected ? 'background-color: #007aff;' : '',
         },
-        item.label
+        item.label,
       );
       itemEl.addEventListener('click', (e) => {
         isEmptyInput = false;
@@ -61,7 +73,7 @@ function populateList(input, list, data, onSelect) {
         if (input.id === 'state-input') isStateOpen = false;
         if (input.id === 'city-input') isCityOpen = false;
         onSelect(item);
-        e.currentTarget.closest(".field-wrapper").querySelector(".clear-btn").style.display = 'block'
+        e.currentTarget.closest('.field-wrapper').querySelector('.clear-btn').style.display = 'block';
       });
       list.appendChild(itemEl);
       if (isSelected) selectedEl = itemEl;
@@ -80,15 +92,15 @@ function populateList(input, list, data, onSelect) {
 }
 
 function errorField(message) {
-  return p({ class: "error-msg" }, message);
-};
+  return p({ class: 'error-msg' }, message);
+}
 
 function showError(field, msg) {
-  const msgEl = field.querySelector('.error-msg')
+  const msgEl = field.querySelector('.error-msg');
   if (!msg) {
     msgEl?.remove();
   } else if (msgEl) {
-    msgEl.textContent = msg
+    msgEl.textContent = msg;
   } else {
     field.appendChild(errorField(msg));
   }
@@ -97,25 +109,23 @@ function showError(field, msg) {
 function validateName(fieldWrapper, inpVal) {
   if (inpVal) {
     if (isValidName(inpVal)) {
-      showError(fieldWrapper, '')
-      return true
-    } else {
-      showError(fieldWrapper, 'Invalid Name')
-      return false
+      showError(fieldWrapper, '');
+      return true;
     }
-  } else {
-    showError(fieldWrapper, 'The Name is required')
-    return false
+    showError(fieldWrapper, 'Invalid Name');
+    return false;
   }
+  showError(fieldWrapper, 'The Name is required');
+  return false;
 }
 
 function validateOtp(fieldWrapper, mobile, otp) {
   const isValid = verifyOtp(mobile, otp);
-  showError(fieldWrapper, '')
+  showError(fieldWrapper, '');
   if (!otp) {
-    showError(fieldWrapper, 'The OTP is required')
+    showError(fieldWrapper, 'The OTP is required');
   } else if (!isValid) {
-    showError(fieldWrapper, 'Incorrect OTP')
+    showError(fieldWrapper, 'Incorrect OTP');
   }
   return isValid;
 }
@@ -125,26 +135,24 @@ function validateMobile(fieldWrapper, inpVal) {
     if (mobRegex.test(inpVal)) {
       showError(fieldWrapper, '');
       return true;
-    } else {
-      showError(fieldWrapper, 'Enter correct mobile number');
-      return false;
     }
-  } else {
-    showError(fieldWrapper, 'Please Enter a valid Mobile Number');
+    showError(fieldWrapper, 'Enter correct mobile number');
     return false;
   }
+  showError(fieldWrapper, 'Please Enter a valid Mobile Number');
+  return false;
 }
 
 function validateOtherFields(fieldWrapper, inpName, inpVal) {
   if (inpVal) {
-    showError(fieldWrapper, '')
-    return true
-  } else if (inpName == "state") {
-    showError(fieldWrapper, 'Select a state')
-  } else if (inpName == "city") {
-    showError(fieldWrapper, 'Select a city')
+    showError(fieldWrapper, '');
+    return true;
+  } if (inpName === 'state') {
+    showError(fieldWrapper, 'Select a state');
+  } else if (inpName === 'city') {
+    showError(fieldWrapper, 'Select a city');
   }
-  return false
+  return false;
 }
 
 function validateEmail(fieldWrapper, inpVal) {
@@ -152,14 +160,12 @@ function validateEmail(fieldWrapper, inpVal) {
     if (emailRegex.test(inpVal)) {
       showError(fieldWrapper, '');
       return true;
-    } else {
-      showError(fieldWrapper, 'Please enter correct email');
-      return false;
     }
-  } else {
-    showError(fieldWrapper, 'The Email is required');
+    showError(fieldWrapper, 'Please enter correct email');
     return false;
   }
+  showError(fieldWrapper, 'The Email is required');
+  return false;
 }
 
 async function createForm(formHref, submitHref) {
@@ -167,11 +173,11 @@ async function createForm(formHref, submitHref) {
   const resp = await fetch(pathname);
   const json = await resp.json();
 
-  const form = document.createElement("form");
+  const form = document.createElement('form');
   form.dataset.action = submitHref;
 
   const fields = await Promise.all(
-    json.data.map((fd) => createField(fd, form))
+    json.data.map((fd) => createField(fd, form)),
   );
   fields.forEach((field) => {
     if (field) {
@@ -179,7 +185,7 @@ async function createForm(formHref, submitHref) {
     }
   });
 
-  const fieldsets = form.querySelectorAll("fieldset");
+  const fieldsets = form.querySelectorAll('fieldset');
   fieldsets.forEach((fieldset) => {
     form
       .querySelectorAll(`[data-fieldset="${fieldset.name}"`)
@@ -191,36 +197,37 @@ async function createForm(formHref, submitHref) {
   return form;
 }
 
-function generatePayload(form) {
-  const payload = {};
+// function generatePayload(form) {
+//   const payload = {};
 
-  [...form.elements].forEach((field) => {
-    if (field.name && field.type !== "submit" && !field.disabled) {
-      if (field.type === "radio") {
-        if (field.checked) payload[field.name] = field.value;
-      } else if (field.type === "checkbox") {
-        if (field.checked)
-          payload[field.name] = payload[field.name]
-            ? `${payload[field.name]},${field.value}`
-            : field.value;
-      } else {
-        payload[field.name] = field.value;
-      }
-    }
-  });
-  return payload;
-}
+//   [...form.elements].forEach((field) => {
+//     if (field.name && field.type !== 'submit' && !field.disabled) {
+//       if (field.type === 'radio') {
+//         if (field.checked) payload[field.name] = field.value;
+//       } else if (field.type === 'checkbox') {
+//         if (field.checked) {
+//           payload[field.name] = payload[field.name]
+//             ? `${payload[field.name]},${field.value}`
+//             : field.value;
+//         }
+//       } else {
+//         payload[field.name] = field.value;
+//       }
+//     }
+//   });
+//   return payload;
+// }
 
 async function handleSubmit(form) {
-  if (form.getAttribute("data-submitting") === "true") return;
+  if (form.getAttribute('data-submitting') === 'true') return;
 
   const submit = form.querySelector('button[type="submit"]');
   try {
-    form.setAttribute("data-submitting", "true");
+    form.setAttribute('data-submitting', 'true');
     submit.disabled = true;
-    form.classList.add("dsp-none");
+    form.classList.add('dsp-none');
 
-    form.closest(".section").querySelector(".book-ride-thankyou-wrapper").classList.add("dsp-block");
+    form.closest('.section').querySelector('.book-ride-thankyou-wrapper').classList.add('dsp-block');
     const data = await fetchBookARide(
       form.name.value,
       form.mobile.value,
@@ -228,32 +235,32 @@ async function handleSubmit(form) {
       form.email.value,
       form.state.value,
       form.city.value,
-      getRandomId()
-    )
+      getRandomId(),
+    );
 
     if (data.ok) {
       form.parentElement.style.padding = '0';
-      form.closest(".section").querySelector(".book-ride-thankyou-wrapper .loader").classList.add("dsp-none");
-      form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").classList.add("dsp-block");
+      form.closest('.section').querySelector('.book-ride-thankyou-wrapper .loader').classList.add('dsp-none');
+      form.closest('.section').querySelector('.book-ride-thankyou-wrapper .succ-content').classList.add('dsp-block');
       // return
     } else {
-      form.classList.add("dsp-block");
-      form.closest(".section").querySelector(".book-ride-thankyou-wrapper").classList.add("dsp-none");
-      form.closest(".section").querySelector(".book-ride-thankyou-wrapper .succ-content").textContent = 'Error While Submitting';
+      form.classList.add('dsp-block');
+      form.closest('.section').querySelector('.book-ride-thankyou-wrapper').classList.add('dsp-none');
+      form.closest('.section').querySelector('.book-ride-thankyou-wrapper .succ-content').textContent = 'Error While Submitting';
     }
   } catch (e) {
     console.error(e);
   } finally {
-    form.setAttribute("data-submitting", "false");
+    form.setAttribute('data-submitting', 'false');
     submit.disabled = false;
   }
 }
 
 export default async function decorate(block) {
   const [dataMapping, setDataMapping] = await useDataMapping();
-  const links = [...block.querySelectorAll("a")].map((a) => a.href);
+  const links = [...block.querySelectorAll('a')].map((a) => a.href);
   const formLink = links.find(
-    (link) => link.startsWith(window.location.origin) && link.endsWith(".json")
+    (link) => link.startsWith(window.location.origin) && link.endsWith('.json'),
   );
   const submitLink = links.find((link) => link !== formLink);
   if (!formLink || !submitLink) return;
@@ -261,42 +268,54 @@ export default async function decorate(block) {
   const form = await createForm(formLink, submitLink);
   block.replaceChildren(form);
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const valid = checkValidity();
     if (!valid.includes(false)) {
       handleSubmit(form);
     } else {
-      const firstInvalidEl = form.querySelector(":invalid:not(fieldset)");
+      const firstInvalidEl = form.querySelector(':invalid:not(fieldset)');
       if (firstInvalidEl) {
         firstInvalidEl.focus();
-        firstInvalidEl.scrollIntoView({ behavior: "smooth" });
+        firstInvalidEl.scrollIntoView({ behavior: 'smooth' });
       }
     }
   });
 
-  const state_inp = form.state;
-  const state_field_wrapper = state_inp.closest(".field-wrapper");
-  const city_inp = form.city;
-  const city_field_wrapper = city_inp.closest(".field-wrapper");
+  const stateInp = form.state;
+  const stateFieldWrapper = stateInp.closest('.field-wrapper');
+  const cityInp = form.city;
+  const cityFieldWrapper = cityInp.closest('.field-wrapper');
 
-  const { wrapper: stateCustomWrapper, input: stateCustomInput, clearBtn: stateClearBtn, dropdownBtn: stateDropdownBtn, list: stateList } = createDropdownInput('Select State', 'state');
-  const { wrapper: cityCustomWrapper, input: cityCustomInput, clearBtn: cityClearBtn, dropdownBtn: cityDropdownBtn, list: cityList } = createDropdownInput('Select City', 'city');
+  const {
+    wrapper: stateCustomWrapper,
+    input: stateCustomInput,
+    clearBtn: stateClearBtn,
+    dropdownBtn: stateDropdownBtn,
+    list: stateList,
+  } = createDropdownInput('Select State', 'state');
+  const {
+    wrapper: cityCustomWrapper,
+    input: cityCustomInput,
+    clearBtn: cityClearBtn,
+    dropdownBtn: cityDropdownBtn,
+    list: cityList,
+  } = createDropdownInput('Select City', 'city');
 
   stateCustomInput.id = 'state-input';
   cityCustomInput.id = 'city-input';
 
-  state_inp.replaceWith(stateCustomWrapper);
-  state_field_wrapper.appendChild(stateList);
+  stateInp.replaceWith(stateCustomWrapper);
+  stateFieldWrapper.appendChild(stateList);
 
-  city_inp.replaceWith(cityCustomWrapper);
-  city_field_wrapper.appendChild(cityList);
+  cityInp.replaceWith(cityCustomWrapper);
+  cityFieldWrapper.appendChild(cityList);
 
-  block.querySelectorAll(".book-ride input").forEach((inp) => inp.setAttribute("autocomplete", "off"));
+  block.querySelectorAll('.book-ride input').forEach((inp) => inp.setAttribute('autocomplete', 'off'));
 
-  const mappedStates = dataMapping.state_city_master.state.map(stateLabel => ({
+  const mappedStates = dataMapping.state_city_master.state.map((stateLabel) => ({
     label: stateLabel,
-    cities: Object.values(dataMapping.state_city_master[stateLabel.toUpperCase()] || {})
+    cities: Object.values(dataMapping.state_city_master[stateLabel.toUpperCase()] || {}),
   }));
 
   let selectedStateData = null;
@@ -304,23 +323,26 @@ export default async function decorate(block) {
 
   const initialCurrentLocation = dataMapping.current_location || {};
   if (initialCurrentLocation.state) {
-    selectedStateData = mappedStates.find(s => s.label.toUpperCase() === initialCurrentLocation.state.toUpperCase());
+    selectedStateData = mappedStates
+      .find((s) => s.label.toUpperCase() === initialCurrentLocation.state.toUpperCase());
     if (selectedStateData) {
       stateCustomInput.value = selectedStateData.label;
       if (initialCurrentLocation.city) {
-        selectedCityData = selectedStateData.cities.find(c => c.code.toUpperCase() === initialCurrentLocation.city.toUpperCase());
+        selectedCityData = selectedStateData.cities
+          .find((c) => c.code.toUpperCase() === initialCurrentLocation.city.toUpperCase());
         if (selectedCityData) {
           cityCustomInput.value = selectedCityData.label;
         }
       }
     }
   } else {
+    // eslint-disable-next-line prefer-destructuring
     selectedStateData = mappedStates[0];
     stateCustomInput.value = selectedStateData ? selectedStateData.label : '';
   }
 
   stateCustomInput.addEventListener('focus', () => {
-  isEmptyInput = true;
+    isEmptyInput = true;
     stateCustomInput.dataset.filter = '';
     populateList(stateCustomInput, stateList, mappedStates, onStateSelect);
     stateList.style.display = 'block';
@@ -346,7 +368,7 @@ export default async function decorate(block) {
     }
   });
 
-  stateDropdownBtn.addEventListener('click', e => {
+  stateDropdownBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (isStateOpen) {
       stateList.style.display = 'none';
@@ -380,8 +402,8 @@ export default async function decorate(block) {
     selectedStateData = null;
     selectedCityData = null;
 
-    showError(state_field_wrapper, 'Select a state');
-    showError(city_field_wrapper, 'Select a city');
+    showError(stateFieldWrapper, 'Select a state');
+    showError(cityFieldWrapper, 'Select a city');
 
     dataMapping.current_location = { state: '', city: '' };
     setDataMapping(dataMapping);
@@ -423,7 +445,7 @@ export default async function decorate(block) {
     }
   });
 
-  cityDropdownBtn.addEventListener('click', e => {
+  cityDropdownBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (cityCustomInput.disabled) return;
     if (isCityOpen) {
@@ -450,18 +472,18 @@ export default async function decorate(block) {
     isCityOpen = false; // Reset city open flag
 
     selectedCityData = null;
-    showError(city_field_wrapper, 'Select a city');
+    showError(cityFieldWrapper, 'Select a city');
 
     dataMapping.current_location = { state: selectedStateData ? selectedStateData.label : '', city: '' };
     setDataMapping(dataMapping);
 
     const citiesForSelectedState = selectedStateData ? selectedStateData.cities : [];
-    populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect); // Repopulate and open
+    populateList(cityCustomInput, cityList, citiesForSelectedState, onCitySelect);
     cityList.style.display = 'block';
     isCityOpen = true;
   });
 
-  block.addEventListener('click', e => {
+  block.addEventListener('click', (e) => {
     if (!stateCustomWrapper.contains(e.target) && isStateOpen) {
       stateList.style.display = 'none';
       isStateOpen = false;
@@ -480,8 +502,8 @@ export default async function decorate(block) {
     cityList.style.display = 'none';
     isCityOpen = false;
 
-    showError(state_field_wrapper, '');
-    showError(city_field_wrapper, 'Select a city');
+    showError(stateFieldWrapper, '');
+    showError(cityFieldWrapper, 'Select a city');
 
     stateList.style.display = 'none';
     isStateOpen = false;
@@ -492,7 +514,7 @@ export default async function decorate(block) {
 
   async function onCitySelect(c) {
     selectedCityData = c;
-    showError(city_field_wrapper, '');
+    showError(cityFieldWrapper, '');
 
     cityList.style.display = 'none';
     isCityOpen = false;
@@ -509,12 +531,12 @@ export default async function decorate(block) {
     if (selectedCityData) {
       cityCustomInput.value = selectedCityData.label;
       cityClearBtn.style.display = 'block';
-      showError(state_field_wrapper, '');
-      showError(city_field_wrapper, '');
+      showError(stateFieldWrapper, '');
+      showError(cityFieldWrapper, '');
     } else {
       cityCustomInput.value = '';
       cityClearBtn.style.display = 'none';
-      showError(city_field_wrapper, 'Select a city');
+      showError(cityFieldWrapper, 'Select a city');
     }
   } else {
     cityCustomInput.disabled = true;
@@ -522,18 +544,18 @@ export default async function decorate(block) {
     stateClearBtn.style.display = 'none';
     cityCustomInput.value = '';
     cityClearBtn.style.display = 'none';
-    showError(state_field_wrapper, 'Select a state');
-    showError(city_field_wrapper, 'Select a city');
+    showError(stateFieldWrapper, 'Select a state');
+    showError(cityFieldWrapper, 'Select a city');
   }
 
   function toggleCityInputState() {
-    if (stateCustomInput.value.trim() === "") {
-      cityCustomInput.setAttribute("disabled", true);
-      cityCustomInput.style.cursor = "not-allowed";
-      cityCustomInput.value = "";
+    if (stateCustomInput.value.trim() === '') {
+      cityCustomInput.setAttribute('disabled', true);
+      cityCustomInput.style.cursor = 'not-allowed';
+      cityCustomInput.value = '';
       cityClearBtn.style.display = 'none';
     } else {
-      cityCustomInput.removeAttribute("disabled");
+      cityCustomInput.removeAttribute('disabled');
       // cityCustomInput.style.cursor = "unset";
     }
   }
@@ -542,8 +564,8 @@ export default async function decorate(block) {
   function sendOTPHandler() {
     // console.log("Hi Send otp");
     try {
-      block.querySelector(".sendOTP-btn").classList.add("dsp-none");
-      block.querySelector(".resendOTP-btn").classList.remove("dsp-none");
+      block.querySelector('.sendOTP-btn').classList.add('dsp-none');
+      block.querySelector('.resendOTP-btn').classList.remove('dsp-none');
       form.otp.disabled = false;
       form.otp.value = '';
       fetchOTP(form.mobile.value);
@@ -554,7 +576,7 @@ export default async function decorate(block) {
     }
   }
   sendOTPHandler = debounce(sendOTPHandler, 1000);
-  block.querySelector(".sendOTP-btn").addEventListener("click", sendOTPHandler);
+  block.querySelector('.sendOTP-btn').addEventListener('click', sendOTPHandler);
 
   function resendOTPHandler() {
     // console.log("Hi Resend otp");
@@ -567,74 +589,73 @@ export default async function decorate(block) {
     }
   }
   resendOTPHandler = debounce(resendOTPHandler, 1000);
-  block.querySelector(".resendOTP-btn").addEventListener("click", resendOTPHandler);
+  block.querySelector('.resendOTP-btn').addEventListener('click', resendOTPHandler);
 
   const nameInp = form.name;
-  const nameField = nameInp.closest(".text-wrapper");
-  nameInp.addEventListener("input", function () {
+  const nameField = nameInp.closest('.text-wrapper');
+  nameInp.addEventListener('input', function () {
     this.value = this.value.substr(0, 20);
     validateName(nameField, nameInp.value);
   });
 
   const mobInp = form.mobile;
-  const mobField = mobInp.closest(".tel-wrapper");
-  mobInp.addEventListener("input", function () {
+  const mobField = mobInp.closest('.tel-wrapper');
+  mobInp.addEventListener('input', function () {
     this.value = this.value.substr(0, 10);
-    block.querySelector(".sendOTP-btn").classList.add("dsp-none");
-    block.querySelector(".resendOTP-btn").classList.add("dsp-none");
+    block.querySelector('.sendOTP-btn').classList.add('dsp-none');
+    block.querySelector('.resendOTP-btn').classList.add('dsp-none');
 
     form.otp.disabled = true;
     form.otp.value = '';
     const valid = validateMobile(mobField, mobInp.value);
     if (valid) {
-      block.querySelector(".sendOTP-btn").classList.remove("dsp-none");
+      block.querySelector('.sendOTP-btn').classList.remove('dsp-none');
     }
   });
 
   const otpInp = form.otp;
-  const otpField = otpInp.closest(".field-wrapper");
-  otpInp.addEventListener("input", function () {
+  const otpField = otpInp.closest('.field-wrapper');
+  otpInp.addEventListener('input', function () {
     this.value = this.value.substr(0, 6);
     validateOtp(otpField, form.mobile.value, otpInp.value);
-  })
+  });
 
   const emailInp = form.email;
-  const emailField = emailInp.closest(".email-wrapper");
-  emailInp.addEventListener("input", function () {
+  const emailField = emailInp.closest('.email-wrapper');
+  emailInp.addEventListener('input', () => {
     validateEmail(emailField, emailInp.value);
   });
 
   function checkValidity() {
     const allInp = block.querySelectorAll("input[type='tel'],input[type='text'],input[type='email']");
     return [...allInp].map((inp) => {
-      const fieldWrapper = inp.closest(".field-wrapper");
+      const fieldWrapper = inp.closest('.field-wrapper');
       const inpVal = inp.value;
       const inpName = inp.name;
 
-      if (inpName === "state") {
-        return validateOtherFields(state_field_wrapper, inpName, stateCustomInput.value);
-      } else if (inpName === "city") {
-        return validateOtherFields(city_field_wrapper, inpName, cityCustomInput.value);
-      } else if (inpName == "name") {
+      if (inpName === 'state') {
+        return validateOtherFields(stateFieldWrapper, inpName, stateCustomInput.value);
+      } if (inpName === 'city') {
+        return validateOtherFields(cityFieldWrapper, inpName, cityCustomInput.value);
+      } if (inpName === 'name') {
         return validateName(fieldWrapper, inpVal);
-      } else if (inpName == "otp") {
+      } if (inpName === 'otp') {
         return validateOtp(otpField, form.mobile.value, otpInp.value);
-      } else if (inpName == "mobile") {
+      } if (inpName === 'mobile') {
         const isValid = validateMobile(mobField, inpVal);
         form.otp.disabled = true;
         if (isValid) {
           form.otp.disabled = false;
         }
         return isValid;
-      } else if (inpName == "email") {
+      } if (inpName === 'email') {
         return validateEmail(emailField, inpVal);
-      } else if (inpVal == "") {
+      } if (inpVal === '') {
         showError(fieldWrapper, 'This field is required');
         return false;
-      } else {
-        showError(fieldWrapper, '')
-        return true
       }
+      showError(fieldWrapper, '');
+      return true;
     });
-  };
+  }
 }
